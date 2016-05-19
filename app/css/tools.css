@@ -1,0 +1,46 @@
+/*工具*/
+.cy-nopadding {
+	padding: 0 !important;
+}
+.cy-nopadding-top {
+	padding-top: 0 !important;
+}
+.cy-nopadding-right {
+	padding-right: 0 !important;
+}
+.cy-nopadding-bottom {
+	padding-bottom: 0 !important;
+}
+.cy-nopadding-left {
+	padding-left: 0 !important;
+}
+.cy-nomargin {
+	margin: 0 !important;
+}
+.cy-nomargin-top {
+	margin-top: 0 !important;
+}
+.cy-nomargin-right {
+	margin-right: 0 !important;
+}
+.cy-nomargin-bottom {
+	margin-bottom: 0 !important;
+}
+.cy-nomargin-left {
+	margin-left: 0 !important;
+}
+.cy-noborder {
+	border: none !important;
+}
+.cy-noborder-top {
+	border-top: none !important;
+}
+.cy-noborder-right {
+	border-right: none !important;
+}
+.cy-noborder-bottom {
+	border-bottom: none !important;
+}
+.cy-noborder-left {
+	border-left: none !important;
+}

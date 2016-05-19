@@ -1,0 +1,48 @@
+.page-home{
+  .plan {
+    .plan-main {
+      .plan-main-left {
+        .list1box1 {
+          .plan-main-list {
+            height: 600px;
+          }
+        }
+        .plan-main-list {
+          height: 265px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+  .plan-title {
+    ul {
+      li {
+        span {
+          color: #777;
+        }
+      }
+    }
+  }
+  .plan-main-title {
+    .nav {
+      float: none;
+      li {
+        color: #333;
+        float: none;
+        a {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+  .plan-main-list>ul>li>p .label {
+    vertical-align:0;
+  }
+  .plan-main-title {
+    ul {
+      li {
+        color: #333;
+      }
+    }
+  }
+}

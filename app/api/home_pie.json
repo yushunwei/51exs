@@ -1,0 +1,131 @@
+{
+  "data": {
+    "totalList": [
+      {
+        "sentiment": "positive",
+        "sentimentName": "正面",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "sentimentName": "中性",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "sentimentName": "负面",
+        "value": 1
+      }
+    ],
+    "detailList": [
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "我的公司",
+        "value": 1
+      },
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "行业",
+        "value": 1
+      },
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "财务",
+        "value": 1
+      },
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "品牌形象",
+        "value": 1
+      },
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "方案一",
+        "value": 1
+      },
+      {
+        "sentiment": "positive",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "其他",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "我的公司",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "行业",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "财务",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "品牌形象",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "方案一",
+        "value": 1
+      },
+      {
+        "sentiment": "neutral",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "其他",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "我的公司",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "行业",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "财务",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "品牌形象",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "方案一",
+        "value": 1
+      },
+      {
+        "sentiment": "negative",
+        "planId": "4530924cface11e5bb6600188b839ae8",
+        "planTitle": "其他",
+        "value": 1
+      }
+    ]
+  }
+}

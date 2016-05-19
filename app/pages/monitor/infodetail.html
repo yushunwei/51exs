@@ -1,0 +1,90 @@
+<div class="page page-infodetail" data-page="infodetail">
+
+    <div class="cy-breadcrumb">
+        <a href="pages/home.html"><i class="fa fa-home"></i></a>
+        <img src="img/right_icon.png" alt="">
+        <a href="javascript:void(0)">原文内容</a>
+    </div>
+
+    <div class="main">
+        <div class="detail clearfix">
+            <div class="detail-left">
+              <script id="detail" type="text/x-handlebars-template">
+                <div class="recommended-reading">
+                    <h1>{{title}}</h1>
+                    <p class="recommended-information"><span>作者：<a href="#1">{{author}}</a></span><span>来源媒体：<a href="#1">{{media}}</a></span><span><a class="original" href="{{weburl}}"><img src="img/link_icon.png" alt="">原文链接</a></span><span>发布时间：{{pubTime}}</span></p>
+                    <p class="recommended-information"><span>舆情属性：{{#YQtype sentiment}}{{/YQtype}}</span><span><a href="javascript:void(0)" class="text-blue" data-toggle="modal" data-target=".alert-delete" data-dedupid="{{dedupId}}" data-docid="{{docId}}" >相似文章不再预警</a><i class="fa fa fa-trash-o"></i></span><span class="detail-share">分享到：<i class="fa fa-weibo"></i><i class="fa fa-wechat"></i><i class="fa fa-qq"></i></span></p>
+                    <p class="recommended-reading-content">
+                        {{content}}
+                    </p>
+                </div>
+              </script>
+            </div>
+
+            <div class="detail-right">
+
+                <div class="detail-data">
+                  <script id="detailright" type="text/x-handlebars-template">
+                    <div class="detail-data-item detail-data-item-margin info-clickcount {{#ishidden clickCount}}{{/ishidden}}">
+                        <h1>{{clickCount}}</h1>
+                        <p>总点击</p>
+                    </div>
+                    <div class="detail-data-item info-comment {{#ishidden commentCount}}{{/ishidden}}">
+                        <h1>{{commentCount}}</h1>
+                        <p>总评论</p>
+                    </div>
+                    <div class="detail-data-item info-forwardcount {{#ishidden forwardCount}}{{/ishidden}}">
+                        <h1>{{forwardCount}}</h1>
+                        <p>总转载</p>
+                    </div>
+                    <div class="detail-data-item detail-data-item-margin info-similarcount {{#ishidden similarCount}}{{/ishidden}}">
+                        <h1>{{similarCount}}</h1>
+                        <p>相似文章</p>
+                    </div>
+                    <div class="detail-data-item info-fanscount {{#ishidden fansCount}}{{/ishidden}}">
+                        <h1>{{fansCount}}</h1>
+                        <p>总粉丝</p>
+                    </div>
+                  </script>
+                </div>
+
+
+
+                <div class="related">
+                    <div class="noborder-panel">
+                        <div class="noborder-panel-title">
+                            相关舆情
+                        </div>
+                        <div class="noborder-panel-body">
+                            <div class="related-main">
+                              <script id="detailList" type="text/x-handlebars-template">
+                                {{#each this.data.array}}
+                                <p><a href="pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a></p>
+                                {{/each}}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+    <div class="modal fade bs-example-modal-sm cy-model alert-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="cy-model-content">确定取消该文章的相似文章预警？确定后一个月内将不会有该文章及其相似文章的预警。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-warning-delete">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

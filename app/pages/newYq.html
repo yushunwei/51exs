@@ -1,0 +1,181 @@
+<div class="page page-newYq" data-page="newYq">
+  <!-- 导航开始 -->
+  <div class="nav-bg">
+    <div class="nav-main">
+      <ul class="clearfix listbox">
+        <script id="userlistScript" type="text/x-handlebars-template">
+          <li class="list1"><a href="pages/home.html">首页</a></li>
+          {{#each this}}
+          <li data-id="{{this.id}}"><a href="pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
+            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="img/delete-icon.png" alt=""></i>
+          </li>
+          {{/each}}
+          <li class="active nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+        </script>
+      </ul>
+    </div>
+  </div>
+  <div class="main">
+    <div class="new">
+      <div class="modify-plan clearfix">
+        <div class="modify-plan-main">
+          <div class="modify-plan-video-title">
+            新建舆情
+          </div>
+          <div class="modify-plan-content">
+            <div class="modify-plan-item">
+              <div class="modify-plan-item-title">
+                <span class="must">*</span>监测方案名
+              </div>
+              <input class="form-control" id="myComplay" placeholder="如：我的公司">
+              <p class="tips">用来检测不同的监测方案，限<span>20</span>个字。</p>
+            </div>
+            <div class="modify-plan-item" id="key-word-group">
+              <div class="modify-plan-item-title">
+                监测关键词
+                <div class="modify-plan-item-title-tips">
+                  <img src="img/question_plan.png" alt="">
+                  <div class="new-tips">
+                    您想要监测信息的关键词。
+                  </div>
+                </div>
+              </div>
+              <div class="form-group key-group-1">
+                <label class="form-group-title"><span class="must">*</span><span class="must-title">词语一：</span></label>
+                <div class="group-input-warp key-word-warp">
+                  <div class="input-warp">
+                    <input type="text" maxlength="5" class="form-control">
+                    <span class="operation-box clear">
+                      <span class="add-btn glyphicon glyphicon-plus-sign"></span>
+                      <span class="with-next">+</span>
+                      <span class="close-btn">+</span>
+                    </span>
+                  </div>
+                </div>
+                <button class="add-line-btn">添加关键词组</button>
+              </div>
+
+            </div>
+            <div class="modify-plan-item modify-plan-item-box warning" id="warning">
+              <div class="modify-plan-item-title">
+                监测预警词
+                <div class="modify-plan-item-title-tips">
+                  <img src="img/question_plan.png" alt="">
+                  <div class="new-tips">
+                    您想要监测信息的预警词。
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="warning-list">
+                  <div class="group-input-warp">
+                    <input type="text" maxlength="5" class="form-control">
+                  <span class="operation-box clear">
+                    <span class="close-btn">+</span>
+                  </span>
+                  </div>
+                  <label class="form-group-title">或</label>
+                  <a href="#1" class="modify-plan-operation-btn add"><img src="img/plus_plan.png" alt=""></a>
+                </div>
+              </div>
+
+            </div>
+            <div class="modify-plan-item modify-plan-item-box no-border warning" id="exclude">
+              <div class="modify-plan-item-title">
+                监测排除词
+                <div class="modify-plan-item-title-tips">
+                  <img src="img/question_plan.png" alt="">
+                  <div class="new-tips">
+                    排除不想要的干扰信息
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="warning-list">
+                  <div class="group-input-warp">
+                    <input type="text" maxlength="5" class="form-control">
+                  <span class="operation-box clear">
+                    <span class="close-btn">+</span>
+                  </span>
+                  </div>
+                  <label class="form-group-title">或</label>
+                  <a href="#1" class="modify-plan-operation-btn add"><img src="img/plus_plan.png" alt=""></a>
+                </div>
+              </div>
+
+            </div>
+            <div class="modify-plan-item-btn">
+              <a href="#1" class="btn btn-info" data-toggle="modal" data-target=".alert-save">保存</a>
+              <a href="#1" class="btn btn-default">找客服帮忙</a>
+            </div>
+          </div>
+        </div>
+        <div class="modify-plan-video">
+          <div class="modify-plan-video-item video-item">
+            <div class="modify-plan-video-title">
+              <img class="eye-info" src="img/rideo-run.png"/>
+              视频教程
+            </div>
+            <div class="modify-plan-video-main">
+              <div class="video-box"></div>
+            </div>
+          </div>
+          <div class="modify-plan-video-item" id="keys-show-plan">
+            <div class="modify-plan-video-title">
+              <img class="eye-info" src="img/eye.png"/>
+              监测预警词预览
+            </div>
+            <div class="modify-plan-video-main">
+              <p>您设置的预警词共匹配<span class="yjcpp">0</span>种监测词组</p>
+              <div class="content-preview-list">
+
+              </div>
+            </div>
+          </div>
+          <div class="modify-plan-video-item" id="words-show-plan">
+            <div class="modify-plan-video-title">
+              <img class="eye-info" src="img/eye.png"/>
+              监测预警词预览
+            </div>
+            <div class="modify-plan-video-main">
+              <p>您设置的预警词共匹配<span class="yjcpp">0</span>种监测词组</p>
+              <div class="content-preview-list">
+
+              </div>
+            </div>
+          </div>
+          <div class="modify-plan-video-item jcfa-item">
+            <div class="modify-plan-video-title">
+              检测方案设置说明
+            </div>
+            <div class="modify-plan-video-main">
+              检测方案说明检测方案说明检测方案说明检测方案说明检测方案说明检测方案说明检测方案说明检测方案说明检测方案说明
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 正在生成结束 -->
+  <!-- 删除弹框 -->
+  <div class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog"
+       aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                            class="fa fa-times-circle"></span>
+          </button>
+          <h4 class="modal-title">温馨提示</h4>
+        </div>
+        <div class="modal-body">
+          <p class="cy-model-content">带<span class="text-danger">*</span>为必填，请完善后保存</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="submit btn btn-info">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

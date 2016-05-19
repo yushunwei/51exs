@@ -1,0 +1,36 @@
+.tabs-link-wrap {
+  width: auto;
+  background: rgba(255,255,255,.95);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  position: relative;
+  .tab-link {
+    line-height: 32px;
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    span {
+      display: inline-block;
+      font-size: 14px;
+      padding: 3px 14px;
+      color:#999999;
+    }
+    &.active span {
+      color: #E84444;
+      border-bottom: 2px solid #E84444;
+      display: inline-block;
+      padding: 0 14px;
+    }
+  }
+}
+
+.tabs {
+  overflow: hidden;
+  margin: 0;
+  .list-block{
+    margin: 0;
+  }
+}

@@ -1,0 +1,145 @@
+      <div class="page page-similarArticle" data-page="similarArticle">
+        <!-- 主体内容开始 -->
+        <div class="cy-breadcrumb">
+          <a href="pages/home.html">
+            <i class="fa fa-home"></i>
+          </a>
+          <img src="img/right_icon.png" alt="">
+          <a href="#1">相似文章</a>
+        </div>
+        <div class="main">
+          <div class="like-content">
+            <div class="full-view-table">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="col-md-8">舆情信息</th>
+                  <th class="col-md-2">采集自</th>
+                  <th class="col-md-2">发布时间</th>
+                </tr>
+                </thead>
+                <tbody class="list-yq">
+                <script id="listScript" type="text/x-handlebars-template">
+                  {{#each this.array}}
+                <tr>
+                  <td class="information">
+                    <h3 class="title"><span class="label label-danger">负面</span><a href="#1">【<span class="text-danger">{{region}}</span>】<span class="text-danger">房地产</span>{{title}}</a></h3>
+                    <p class="digest">摘要：<a href="{{url}}">{{summary}}</a></p>
+                    <div class="full-view-data-operation">
+                      <div class="share">
+                        <div class="share-box">
+                          <i class="fa fa-share-alt"></i>分享
+                          <div class="share-for">
+                            <ul>
+                              <li><a href="#1">微博</a></li>
+                              <li><a href="#1">Q Q</a></li>
+                              <li><a href="#1">微信</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="share-box email-send">
+                          <i class="fa fa-send"></i>邮件
+                          <div class="share-for">
+                            <ul>
+                              <li><a href="#1" data-toggle="modal" data-target=".add-email">邮件发送舆情信息</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a> | {{fansCount}}</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><a href="#1"><img src="img/weibo.png" alt=""><br>{{media}}</a></td>
+                  <td class="text-center table-time">{{pubTime}}</td>
+                </tr>
+                  {{/each}}
+                </script>
+                </tbody>
+              </table>
+              <div class="table-pagination clearfix">
+                <div class="pull-right pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 主体内容结束 -->
+        <div class="modal fade bs-example-modal-sm cy-model add-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                <h4 class="modal-title">邮件发送舆情信息</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-inline add-email-input" id="emailForm" action="">
+                  <div class="form-group">
+                    <label>添加新邮箱：</label>
+                    <input type="email" required class="form-control" name="email">
+                  </div>
+                  <button type="submit" class="btn btn-info" id="submit1">添加</button>
+                </form>
+                <div class="add-email-list">
+                  <p class="add-email-list-title">选择已有邮箱：<span class="text-danger pull-right">您最多选择5个邮箱</span></p>
+                  <ul class="clearfix add-email-ul">
+                    <script id="addemailScript" type="text/x-handlebars-template">
+                      {{#each this.data}}
+                      <li><label class="cy-checkbox"><input type="checkbox"><span></span></label>{{this}}</li>
+                      {{/each}}
+                    </script>
+                  </ul>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info send-email-btn">发送邮件</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 弹框结束 -->
+        <!-- 确定弹框 -->
+        <div class="modal fade bs-example-modal-sm cy-model alert-ok" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p class="cy-model-content">邮件发送成功，请至收件箱查看，谢谢!</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 确定弹框结束 -->
+        <!-- 未选择邮箱弹框 -->
+        <div class="modal fade bs-example-modal-sm cy-model nocheck-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p class="cy-model-content">对不起，您还未选择或添加接收邮箱！</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 未选择邮箱弹框结束 -->
+        <!-- 保存弹框 -->
+        <div id="alertModal" class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                <h4 class="modal-title">温馨提示</h4>
+              </div>
+              <div class="modal-body">
+                <p class="cy-model-content">带<span class="text-danger">*</span>为必填，请完善后保存</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
