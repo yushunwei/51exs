@@ -131,6 +131,7 @@ a:focus {
 }
 .header-user:hover .log-out {
 	display: block;
+	width: 90px;
 }
 .header-user img {
 	height: 40px;

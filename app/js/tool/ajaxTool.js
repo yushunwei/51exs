@@ -1,4 +1,4 @@
-define([], function () {
+define(["../../js/tool/Utils"], function (utils) {
     var linkUrl = 'api/home.json';
     var _param = {
         "data":{},
@@ -96,7 +96,7 @@ define([], function () {
             default : linkUrl ="";
                 break;
         }
-        var token = hx_save.getToken();
+        var token = utils.getToken();
         var _query = "?token="+token;
         var path;
         if(param.query){

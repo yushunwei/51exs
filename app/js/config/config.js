@@ -41,10 +41,10 @@ var hx_save = (function(){
 
     return {
         getToken : function(){
-            return localStorage.token ||"";
+            //return localStorage.token ||"";
         },
         setToken : function(){
-            localStorage.token =  arguments[0];
+           // localStorage.token =  arguments[0];
         },
         getController :_getController
     }
