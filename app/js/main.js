@@ -104,9 +104,9 @@ define([], function () {
       _laodPage("pages/rich.html");
     }else if(param[HX_config.nextPageKEY]){
         var link = document.location.href;
-        var index = link.indexOf("/?")< 0 ? link.indexOf("?") : link.indexOf("/?");
+        var index = link.indexOf("?");
         document.location.href = link.substring(0,index);
-       var path = HX_config.nextPageKEY+"="+param[HX_config.nextPageKEY]+"&"+link.substr(index+2);
+       var path = HX_config.nextPageKEY+"="+param[HX_config.nextPageKEY]+"&"+link.substr(index+1);
        _laodPage("index_temp.html?"+path);
     }else{
       _laodPage(url);

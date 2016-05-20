@@ -4,28 +4,28 @@
     background: #aac9d4;
     color: #fff; }
 
-.page-home .plan .plan-main .plan-main-left .list1box1 .plan-main-list {
+.page-index .plan .plan-main .plan-main-left .list1box1 .plan-main-list {
   height: 600px; }
 
-.page-home .plan .plan-main .plan-main-left .plan-main-list {
+.page-index .plan .plan-main .plan-main-left .plan-main-list {
   height: 265px;
   overflow-y: auto; }
 
-.page-home .plan-title ul li span {
+.page-index .plan-title ul li span {
   color: #777; }
 
-.page-home .plan-main-title .nav {
+.page-index .plan-main-title .nav {
   float: none; }
-  .page-home .plan-main-title .nav li {
+  .page-index .plan-main-title .nav li {
     color: #333;
     float: none; }
-    .page-home .plan-main-title .nav li a {
+    .page-index .plan-main-title .nav li a {
       border-radius: 0; }
 
-.page-home .plan-main-list > ul > li > p .label {
+.page-index .plan-main-list > ul > li > p .label {
   vertical-align: 0; }
 
-.page-home .plan-main-title ul li {
+.page-index .plan-main-title ul li {
   color: #333; }
 
 * {

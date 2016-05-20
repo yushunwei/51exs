@@ -2,116 +2,503 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>汇信</title>
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <meta charset="UTF-8">
+    <title>汇信</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <!-- Own Css -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/tools.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
-  <link href="js/pagination/pagination.css" rel="stylesheet">
+    <link href="js/pagination/pagination.css" rel="stylesheet">
     <script src="js/lib/jquery-1.12.3.min.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/lib/handlebars-1.0.0.js"></script>
     <script src="js/lib/Json.js"></script>
     <script src="js/config/config.js"></script>
-  <script src="js/pagination/jquery.pagination.js"></script>
-  <!-- laydate -->
-  <script src="js/laydate/laydate.js"></script>
+    <script src="js/pagination/jquery.pagination.js"></script>
+    <!-- laydate -->
+    <script src="js/laydate/laydate.js"></script>
+    <!-- laydate -->
 
 </head>
 
 <body>
-<div class="views theme-white">
-  <div class="header">
+<div class="header">
     <div class="header-content clearfix">
-      <a href="pages/home.html"><img src="img/logo.png"></a>
-      <div class="header-information pull-right">
-        <div class="header-input">
-          <div class="input-group">
-            <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
-                        <span class="input-group-btn">
-                            <a class="btn btn-default btn-search" href="pages/fullsearch/allSearch.html" type="button"><i class="fa fa-search"></i></a>
-                        </span>
-          </div>
-        </div>
-        <div class="header-notice">
-          <ul>
-            <li><a href="pages/checkReport.html"><img src="img/headnav_icon.png" alt=""><p>舆情报告</p></a></li>
-            <li><a href="pages/warnCenter.html"><img src="img/headnav_icon_2.png" alt=""><p>预警中心</p><span class="cy-badge hidden"></span></a></li>
-            <li><a href="#1"><img src="img/headnav_icon_3.png" alt=""><p>给我意见</p></a></li>
-          </ul>
-        </div>
-        <div class="header-user">
-          <img src="img/user.png" alt="">
-          <span>前端用户</span>
-          <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <aside></aside>
-  <div class="content">
-    <div class="pages">
-      <!-- 首页 -->
-      <div class="page page-index" data-page="index">
+        <a href="pages/home.html"><img src="img/logo.png"></a>
 
-      <!-- 主体内容结束 -->
-      </div>
+        <div class="header-information pull-right">
+            <div class="header-input">
+                <div class="input-group">
+                    <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
+                        <span class="input-group-btn">
+                            <a class="btn btn-default btn-search" href="pages/fullsearch/allSearch.html"
+                               type="button"><i class="fa fa-search"></i></a>
+                        </span>
+                </div>
+            </div>
+            <div class="header-notice">
+                <ul>
+                    <li><a href="pages/checkReport.html"><img src="img/headnav_icon.png" alt="">
+
+                        <p>舆情报告</p></a></li>
+                    <li><a href="pages/warnCenter.html"><img src="img/headnav_icon_2.png" alt="">
+
+                        <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
+                    <li><a href="#"><img src="img/headnav_icon_3.png" alt="">
+
+                        <p>给我意见</p></a></li>
+                </ul>
+            </div>
+            <div class="header-user">
+                <img src="img/user.png" alt="">
+                <span>前端用户</span>
+                <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- 底部开始 -->
-  <div class="footer">
+</div>
+
+<div class="page page-index" data-page="index">
+    <!-- 导航开始 -->
+    <div class="nav-bg">
+        <div class="nav-main">
+            <ul class="clearfix listbox">
+                <script id="userlistScript" type="text/x-handlebars-template">
+                    <li class="active list1"><a href="#">首页</a></li>
+                    {{#each this}}
+                    <li data-id="{{this.id}}"><a href="pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
+                            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img
+                            src="img/delete-icon.png" alt=""></i></li>
+                    {{/each}}
+                    <li class="nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+                </script>
+            </ul>
+        </div>
+    </div>
+    <!-- 导航结束 -->
+    <!-- 主体内容开始 -->
+    <div class="main">
+        <!------舆情------->
+        <div class="plan">
+            <div class="plan-title">
+                <h3><a href="#1">全部舆情方案</a></h3>
+
+                <div class="plan-data">
+                    <ul class="clearfix" id="yqfaTitle">
+                        <li>近一周</li>
+                        <li>总量：<span class="sumCnt"></span></li>
+                        <li>正面：<span class="text-blue positiveNum">4983</span></li>
+                        <li>负面：<span class="text-danger negativeNum">18726</span></li>
+                        <li>中性：<span class="text-middle neutralNum">4983</span></li>
+                        <li>负面占比：<span class="negativePercent">20.92%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a href="#list1-all" data-toggle="tab">全部</a></li>
+                            <li data-type="positive"><a href="#list1-p" data-toggle="tab">正面</a></li>
+                            <li data-type="neutral"><a href="#list1-z" data-toggle="tab">中性</a></li>
+                            <li data-type="negative"><a href="#list1-f" data-toggle="tab">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider in active list1box1" id="list1-all">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListAll">
+                                    <script id="yqfaListAllScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            <p><a class="plan-main-item"
+                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  data-pageturn="true">{{this.title}}</a>
+                                                {{#if this.sentiment}}
+                                                {{#compare this.sentiment 1}}
+                                                <span class="label label-info">正面</span>
+                                                {{else}}
+                                                {{#if this.sentiment}}
+                                                {{#compare this.sentiment -1}}
+                                                <span class="label label-danger">负面</span>
+                                                {{else}}
+                                                {{/compare}}
+                                                {{/if}}
+                                                {{/compare}}
+                                                {{/if}}
+
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{else}}
+
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-p">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListP">
+                                    <script id="yqfaListPScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment 1}}
+                                            <p><a class="plan-main-item" href="{{this.url}}">{{this.title}}</a>
+                                                <span class="label label-info">正面</span>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-z">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListZ">
+                                    <script id="yqfaListZScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment 0}}
+                                            <p><a class="plan-main-item"
+                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  data-pageTurn="true">{{this.title}}</a>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [<a
+                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane slider list1box1" id="list1-f">
+                            <div class="plan-main-list">
+                                <ul id="yqfaListF">
+                                    <script id="yqfaListFScript" type="text/x-handlebars-template">
+                                        {{#each objects}}
+                                        <li>
+                                            {{#if this.sentiment}}
+                                            {{#compare this.sentiment -1}}
+                                            <p><a class="plan-main-item" href="{{this.url}}">{{this.title}}</a>
+                                                <span class="label label-danger">负面</span>
+                                                {{#if this.isWarn}}
+                                                <span class="label label-danger">预警</span>
+                                                {{/if}}
+                                            </p>
+                                            <span class="plan-main-item-like">{{this.pubTime}} [ <a
+                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    data-pageturn="true"> 相似文章{{this.similarCount}} </a> ]</span>
+                                            <img src="img/list_icon.png" alt="">
+                                            {{else}}
+                                            {{/compare}}
+                                            {{/if}}
+                                        </li>
+                                        {{/each}}
+                                    </script>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------情感分布------->
+                <div class="plan-main-right">
+                    <div class="plan-main-title">
+                        <ul>
+                            <li>情感分布</li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置 -->
+                        <div id="chartPie"></div>
+                    </div>
+                    <div class="plan-main-title">
+                        <ul>
+                            <li>数据源舆情走势</li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置 -->
+                        <div id="chartLine"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 我的公司 -->
+        <div class="plan" planID=" ">
+            <div class="plan-title">
+                <h3></h3>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn1-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn1-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn1-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn1-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider active" id="listn1-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn1-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn1-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn1-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-title">
+                        <ul>
+                            <li><a href="#1">重点媒体情感偏向</a></li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-----行业------>
+        <div class="plan" planID=" ">
+            <div class="plan-title">
+                <h3></h3>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn2-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn2-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn2-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn2-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider active" id="listn2-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn2-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn2-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn2-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-title">
+                        <ul>
+                            <li><a href="#1">重点媒体情感偏向</a></li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plan" planID=" ">
+            <div class="plan-title">
+                <h3></h3>
+
+                <div class="plan-data">
+                    <ul class="clearfix">
+                        <li>近一周</li>
+                        <li>总量：<span class="totalAll">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>负面占比：<span class="negativePercent">50%</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plan-main clearfix">
+                <div class="plan-main-left">
+                    <div class="plan-main-title">
+                        <ul class="nav nav-tabs list-tabs">
+                            <li>最新舆情</li>
+                            <li class="active"><a data-toggle="tab" href="#listn1-all">全部</a></li>
+                            <li data-type="positive"><a data-toggle="tab" href="#listn3-p">正面</a></li>
+                            <li data-type="neutral"><a data-toggle="tab" href="#listn3-z">中性</a></li>
+                            <li data-type="negative"><a data-toggle="tab" href="#listn3-f">负面</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane slider active" id="listn3-all">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn3-p">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn3-z">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                        <div class="tab-pane slider" id="listn3-f">
+                            <div class="plan-main-list">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------我的公司右侧图表-------->
+                <div class="plan-main-right">
+                    <div class="plan-main-title">
+                        <ul>
+                            <li><a href="#1">重点媒体情感偏向</a></li>
+                        </ul>
+                    </div>
+                    <div class="plan-main-data">
+                        <!-- 图表数据位置2 -->
+                        <div id="chartBar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 主体内容结束 -->
+    <!-- 主体内容结束 -->
+</div>
+<div class="footer">
     © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
-  </div>
-  <!-- 底部结束 -->
-  <!-- 删除弹框 -->
-  <div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+</div>
+<!-- 底部结束 -->
+<!-- 删除弹框 -->
+<div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
-          <h4 class="modal-title">温馨提示</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="fa fa-times-circle"></span>
+                </button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info">确定</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- 弹框结束 -->
-  <!-- 删除弹框 -->
-  <div class="modal fade bs-example-modal-sm cy-model new-all-alert" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+</div>
+<!-- 弹框结束 -->
+<!-- 删除弹框 -->
+<div class="modal fade bs-example-modal-sm cy-model new-all-alert" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
-          <h4 class="modal-title">温馨提示</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="fa fa-times-circle"></span>
+                </button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <script data-main="js/app" src="js/lib/require.js"></script>
 <script src="js/echarts/echarts.js"></script>
-</div>
 </body>
 </html>

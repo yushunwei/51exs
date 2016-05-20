@@ -1,8 +1,18 @@
+var pageName = $(".page").data("page");
 
-require(['router','main'], function (Router,main) {
-    window.App = main;
-  Router.init();
-  //在这设置要进入的第一个页面
-//  main.laodPage("pages/home.html?id=1&type=333");
- main.parase();
+var controllerPath = hx_save.getController(pageName);
+require(['controllers/' + controllerPath +pageName+ 'Controller',"tool/Utils"], function (controller,utils) {
+//进入对应的控制器
+    var other = document.location.href;
+    var page = {
+        "query" : utils.getQuery(other),
+        "name"  : pageName
+    };
+    var index = other.indexOf("?");
+
+    var token = page.query.token;
+    token && hx_save.setToken(token);
+
+    controller.init(page);
 });
+

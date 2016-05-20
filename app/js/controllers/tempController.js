@@ -1,8 +1,8 @@
 define(["main","tool/ajaxTool"], function (m,ajax) {
   function init(page) {
-    setHeader();
     setToken(page);
-    arguments.length>0 && pageturn(page);
+      setHeader();
+      arguments.length>0 && pageturn(page);
     setWarn();
   }
   function setWarn(){

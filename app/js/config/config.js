@@ -16,11 +16,14 @@ var HX_config = {
 };
 
 var hx_save = (function(){
-    var token = "3b679f7cf55011e5bb6600188b839ae8";
+    localStorage.token = "3b679f7cf55011e5bb6600188b839ae8";
 
     function _getController (){
         var path = "";
         switch (arguments[0]){
+            case 'help':
+            case 'login' : path = 'login/' ;
+                break;
           //È«ÍøËÑË÷
           case 'allSeach' : path = 'fullsearch/' ;
                 break;
@@ -38,10 +41,10 @@ var hx_save = (function(){
 
     return {
         getToken : function(){
-            return token;
+            return localStorage.token ||"";
         },
         setToken : function(){
-            this.token =  arguments[0];
+            localStorage.token =  arguments[0];
         },
         getController :_getController
     }

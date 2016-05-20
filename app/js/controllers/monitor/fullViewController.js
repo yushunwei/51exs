@@ -1,4 +1,5 @@
-define(["tool/ajaxTool","view/monitor/fullViewView","view/monitor/fullViewChartView","view/monitor/fullViewYqView"], function (ajax,view,chartview,yqview) {
+
+define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView"], function (ajax,view,chartview,yqview) {
   var $tar = $("div.page-index");
   var indexUserPlans = {showCount:0};
   var result = [];

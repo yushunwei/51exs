@@ -1,3 +1,4 @@
+
 define(["tool/ajaxTool","echarts/echarts","echarts/chart/line","echarts/chart/bar","echarts/chart/map"], function (ajax,ec) {
   //选择条件事件
   function events(id){
