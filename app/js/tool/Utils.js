@@ -1,10 +1,11 @@
 require.config({
     paths: {
-        "jquery": ["../js/lib/jquery-1.12.3.min"],
         "jquery.cookie": ["../js/lib/cookie/jquery.cookie"]
     },
     skim: {
-        "jquery.cookie": ["jquery"]
+        "jquery.cookie": {
+            "exports": "_"
+        }
     }
 });
 define(["jquery.cookie"], function () {
@@ -96,6 +97,12 @@ define(["jquery.cookie"], function () {
         }, 1000)
     }
 
+    /***
+     * 获取url参数
+     * param url
+     * @type  "xxxx.html?token=1223&id=3"
+     * @return  json
+     * **/
     function _getQuery() {
         var url = arguments[0];
         var index = url.indexOf("?"); //获取url中"?"符后的字串
@@ -111,7 +118,6 @@ define(["jquery.cookie"], function () {
     }
 
     //设置token
-
     function _setToken() {
         var token = arguments[0];
         if (token == "")
@@ -121,8 +127,25 @@ define(["jquery.cookie"], function () {
         })
     }
 
+    // return token
     function _getToken() {
-        return $.cookie("token") || '';
+        return $.cookie("token") || '3b679f7cf55011e5bb6600188b839ae8';
+    }
+
+    function _addLoading() {
+        if ($(arguments[0]).length == 0)
+            return;
+        $.each($(arguments[0]),function(){
+            !$(this).hasClass("loadBox") && $(this).addClass("loadBox")
+                                             .append("<div class='loading'><img src='' /></div>");
+            $(this).find("div.loading").width($(this).width());
+            $(this).find("div.loading").height($(this).height());
+        })
+    }
+    function _removeLoading(){
+        if ($(arguments[0]).length == 0)
+            return;
+        $(arguments[0]).find("div.loading").remove();
     }
 
     return {
@@ -134,9 +157,16 @@ define(["jquery.cookie"], function () {
         rernderPage: _rernderPage,
         // 检查正则类型
         checkRagular: _checkRagular,
+        //提示框
         showTips: _showTips,
+        //获取url参数
         getQuery: _getQuery,
+        //获取token
         getToken: _getToken,
-        setToken: _setToken
+        //设置token
+        setToken: _setToken,
+        //add loading
+        addLoading: _addLoading,
+        removeLoading: _removeLoading
     };
 });

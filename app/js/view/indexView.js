@@ -1,5 +1,5 @@
 define([], function () {
-  //注册对比事件
+  //注册对比事件 v1 为后台传入的参数，v2为状态值
   Handlebars.registerHelper("compare", function (v1, v2, options) {
     var type = "";
     type = v2 == 1 ? "positive" : (v2 == 0 ? "neutral" : "negative");
