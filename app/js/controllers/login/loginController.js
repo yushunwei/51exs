@@ -1,4 +1,4 @@
-define(["../../tool/ajaxTool"], function (ajax) {
+define(["../../tool/ajaxTool","bootstrap"], function (ajax) {
   function init() {
     setImgPath();
     setBtnPath();
