@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>汇信</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
+
+  <link href="../../css/font-awesome.min.css" rel="stylesheet">
+  <!-- Own Css -->
+  <link href="../../css/style.css" rel="stylesheet">
+  <link href="../../css/tools.css" rel="stylesheet">
+  <link href="../../css/app.css" rel="stylesheet">
+  <script src="../../js/lib/jquery-1.12.3.min.js"></script>
+  <script src="../../js/lib/bootstrap.min.js"></script>
+  <script src="../../js/lib/handlebars-1.0.0.js"></script>
+  <script src="../../js/lib/Json.js"></script>
+  <script src="../../js/config/config.js"></script>
+
+</head>
+
+<body>
+<div class="header userBox">
+  <div class="header-content clearfix">
+    <a href="../../index.html"><img src="../../img/logo.png"></a>
+
+    <div class="header-information pull-right">
+      <div class="header-input">
+        <div class="input-group">
+          <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
+                        <span class="input-group-btn">
+                            <a class="btn btn-default btn-search" href="../../pages/fullsearch/allSearch.html"
+                               type="button"><i class="fa fa-search"></i></a>
+                        </span>
+        </div>
+      </div>
+      <div class="header-notice">
+        <ul>
+          <li><a href="checkReport.html"><img src="../../img/headnav_icon.png" alt="">
+
+            <p>舆情报告</p></a></li>
+          <li><a href="../../pages/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
+
+            <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
+          <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
+
+            <p>给我意见</p></a></li>
+        </ul>
+      </div>
+      <div class="header-user">
+        <img src="../../img/user.png" alt="">
+        <span>前端用户</span>
+        <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page page-checkReport" data-page="checkReport">
+  <!-- 主体内容开始 -->
+  <div class="cy-breadcrumb">
+    <a href="../../index.html">
+      <i class="fa fa-home"></i>
+    </a>
+    <img src="../../img/right_icon.png" alt="">
+    <a href="#1">舆情报告</a>
+  </div>
+  <div class="main">
+    <div class="company-week">
+      <div class="title">
+        <p>我的公司周报<span>2016-03-08至2016-03-15</span><a class="has-icon-btn cy-has-bg pull-right" href="#1">下载word</a></p>
+      </div>
+      <div class="company-week-main">
+        <div class="panel panel-default cy-panel">
+          <div class="panel-heading"><p>一、本周舆情导读</p></div>
+          <div class="panel-body">
+            <ul class="week-takeaway">
+              <li>1. 政策监管严控下  联网金问卡迎来行业大洗牌(本人原创，请勿转载！)<span>来源：<a href="#1" class="week-takeaway-from">鲁中论坛</a></span><span>作者：<a href="#1">王黎明</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：2016-03-08 18：11：20</span></li>
+              <li>2. 政策监管严控下  联网金问卡迎来行业大洗牌(本人原创，请勿转载！)<span>来源：<a href="#1" class="week-takeaway-from">鲁中论坛</a></span><span>作者：<a href="#1">王黎明</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：2016-03-08 18：11：20</span></li>
+              <li>3. 政策监管严控下  联网金问卡迎来行业大洗牌(本人原创，请勿转载！)<span>来源：<a href="#1" class="week-takeaway-from">鲁中论坛</a></span><span>作者：<a href="#1">王黎明</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：2016-03-08 18：11：20</span></li>
+              <li>4. 政策监管严控下  联网金问卡迎来行业大洗牌(本人原创，请勿转载！)<span>来源：<a href="#1" class="week-takeaway-from">鲁中论坛</a></span><span>作者：<a href="#1">王黎明</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：2016-03-08 18：11：20</span></li>
+              <li>5. 政策监管严控下  联网金问卡迎来行业大洗牌(本人原创，请勿转载！)<span>来源：<a href="#1" class="week-takeaway-from">鲁中论坛</a></span><span>作者：<a href="#1">王黎明</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：2016-03-08 18：11：20</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-default cy-panel">
+          <div class="panel-heading"><p>二、本周舆情图表</p></div>
+          <div class="panel-body">
+            <div class="week-charts">
+              <div class="week-charts-title">1.载体分布统计结果如下：</div>
+
+              <div id="reportChartPie"></div>
+            </div>
+            <div class="week-charts">
+              <div class="week-charts-title">2.媒体情感分布：</div>
+              <div class="media-table">
+                <table>
+                  <thead>
+                  <tr>
+                    <th>媒体</th>
+                    <th>相关舆情</th>
+                    <th>负面舆情</th>
+                    <th>正面舆情</th>
+                    <th>预警舆情</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>新闻</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>其他</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>微信</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>综合</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>博客</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>微博</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>论坛</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>总计</td>
+                    <td>40</td>
+                    <td>4</td>
+                    <td>26</td>
+                    <td>2</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="week-charts week-charts-left">
+              <div class="week-charts-title">3.前10<span class="text-danger">负面</span>信息媒体分布如下：</div>
+
+              <div id="reportChartBar1"></div>
+            </div>
+            <div class="week-charts week-charts-right">
+              <div class="week-charts-title">4.前10<span class="text-blue">正面</span>信息媒体分布如下：</div>
+
+              <div id="reportChartBar2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default cy-panel">
+          <div class="panel-heading"><p>三、推荐阅读</p></div>
+          <div class="panel-body">
+            <div class="recommended-reading">
+              <h1>关于老张店杂乱无章的回忆（本人原创，切勿转载）</h1>
+              <p class="recommended-information"><span>作者：<a href="#1">网联网银行那些事</a></span><span>来源媒体：<a href="#1">中新浪微博</a></span><span><a href="#1"><img src="../../img/link_icon.png" alt="">原文链接</a></span><span>发布时间：2016-02-19 16：44：36</span></p>
+              <p class="recommended-reading-content">
+                3月6日晚，停牌半个月的格力电器终于发布公告称，拟发行股份购买资产，标的公司为珠海银隆新能源有限公司。初步判断不构成重大资产重组，公司最晚将于2016年4月4日复牌，并在4月4日之前披露本次发行股份购买资产预案或者报告书。<br>
+                董姐的行事风格总是这么特立独行。海尔和美的争夺GE，买的还是家电。格力做手机和雷军没完没了，大家猜董姐会不会干脆买家手机厂，没想到董姐一边为手机代言，一边悄悄买了一家新能源汽车公司。<br>
+                家电企业多元化跨度越来越大，继创维黄宏生之后，格力也要做汽车了。看来空调的好日子到头了，连董姐都要另寻出路了。<br>
+                家电企业多元化跨度越来越大，继创维黄宏生之后，格力也要做汽车了。看来空调的好日子到头了，连董姐都要另寻出路了。
+              </p>
+              <div class="show-all-btnbox"><a href="#1">展开全部</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 主体内容结束 -->
+</div>
+
+<div class="showNoList hidden">
+  <div class="nav-bg">
+    <div class="nav-main">
+      <ul class="clearfix listbox">
+        <li class="active list1"><a href="#">首页</a></li>
+        <li class="nav-new"><a href="../../pages/newYq.html"><img src="../../img/plus.png" alt="">新建舆情</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="main">
+    <div class="index-none">
+      <p>对不起！暂无数据</p>
+      <a href="../../pages/newYq.html">新建舆情 — — 请点击这里！</a>
+      <img src="../../img/index_none.png" alt="">
+    </div>
+  </div>
+</div>
+<div class="footer">
+  © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
+</div>
+<!-- 底部结束 -->
+
+<script data-main="../../js/app" src="../../js/lib/require.js"></script>
+<script src="../../js/echarts/echarts.js"></script>
+</body>
+</html>
