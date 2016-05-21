@@ -1,12 +1,13 @@
-define(["../../tool/ajaxTool","bootstrap"], function (ajax) {
+define(["../../tool/ajaxTool"], function (ajax) {
   function init() {
+    //设置图片路径，并开始轮播
     setImgPath();
+    //加载登录按钮路径
     setBtnPath();
-  //  showSlide();
-    //加载注册url
-    loadregisterUrl();
-   // bindEvent();
+    //加载注册按钮url
+      loadregisterUrl();
   }
+  //设置图片路径，并开始轮播
   function setImgPath(){
     var $box = $(".page-login");
     var img = $box.find("#myCarousel").find("img");
@@ -18,47 +19,10 @@ define(["../../tool/ajaxTool","bootstrap"], function (ajax) {
       interval: 3000
     })
   }
+  //加载登录按钮路径
   function setBtnPath(){
-    var $box = $(".page-login");
     var loginBtn = $(".login-init");
     loginBtn.attr("href",HX_config.loginURL);
-  }
-  function showSlide(){
-    var img = $(".branding-inner div");
-    var nav = $(".navigator li");
-    var img_num = img.length;
-    var i = 0;
-    //显示当前项
-    function show() {
-      i++;
-      if(i > img_num -1) {
-        i = 0;
-      }
-      nav.removeClass("cur").eq(i).addClass("cur");
-      img.fadeOut("500").eq(i).fadeIn("500");
-    }
-    //定时器
-    var slide = null;
-    slide = setInterval(show,2000);
-    //鼠标经过停止播放，离开继续播放
-    $(".branding-inner").bind("mouseover",function() {
-      clearInterval(slide);
-    })
-    $(".branding-inner").bind("mouseout",function() {
-      slide = setInterval(show,2000);
-    })
-    //鼠标点击哪项即显示哪项，点击当前项不变
-    nav.click(function(){
-      clearInterval(slide);
-      var j = $(this).index();
-      if(i == j) {
-        return false;
-      }
-      else if(i != j ) {
-        i = j - 1;
-        show();
-      }
-    })
   }
   function loadregisterUrl(){
       var param = {
@@ -67,7 +31,6 @@ define(["../../tool/ajaxTool","bootstrap"], function (ajax) {
         }
       };
       ajax.load("register",param);
-    //$("#register-btn")
   }
   return {
     init: init
