@@ -59,6 +59,7 @@ define([], function () {
     var html2 = myTemplate2(data.list);
     $(".main .plan").eq(i+1).find(".tab-content .plan-main-list").eq(0).html(html2);
     $(".main .plan").eq(i+1).find(".plan-title h3").html(data.title);
+    $(".main .plan").eq(i+1).find(".plan-title a").attr("href","pages/monitor/full_view.html?id="+data.id);
     $(".main .plan").eq(i+1).find(".nav-tabs").attr("planID",data.id);
   }
   function _renderTabList(data,tabID){
