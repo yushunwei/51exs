@@ -1,16 +1,84 @@
-<div class="page page-newYq" data-page="newYq">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>汇信</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+
+  <link href="../css/font-awesome.min.css" rel="stylesheet">
+  <!-- Own Css -->
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/tools.css" rel="stylesheet">
+  <link href="../css/app.css" rel="stylesheet">
+  <link href="../js/lib/pagination/pagination.css" rel="stylesheet">
+  <script src="../js/lib/jquery-1.12.3.min.js"></script>
+  <script src="../js/lib/bootstrap.min.js"></script>
+  <script src="../js/lib/handlebars-1.0.0.js"></script>
+  <script src="../js/lib/Json.js"></script>
+  <script src="../js/config/config.js"></script>
+  <script src="../js/lib/pagination/jquery.pagination.js"></script>
+  <!-- laydate -->
+  <script src="../js/lib/laydate/laydate.js"></script>
+  <!-- laydate -->
+
+</head>
+
+<body>
+<div class="header">
+  <div class="header-content clearfix">
+    <a href="../../index.html"><img src="../../img/logo.png"></a>
+
+    <div class="header-information pull-right">
+      <div class="header-input">
+        <div class="input-group">
+          <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
+                        <span class="input-group-btn">
+                            <a class="btn btn-default btn-search" href="pages/fullsearch/allSearch.html"
+                               type="button"><i class="fa fa-search"></i></a>
+                        </span>
+        </div>
+      </div>
+      <div class="header-notice">
+        <ul>
+          <li><a href="pages/checkReport.html"><img src="../../img/headnav_icon.png" alt="">
+
+            <p>舆情报告</p></a></li>
+          <li><a href="pages/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
+
+            <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
+          <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
+
+            <p>给我意见</p></a></li>
+        </ul>
+      </div>
+      <div class="header-user">
+        <img src="../../img/user.png" alt="">
+        <span>前端用户</span>
+        <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page page-newYq" data-controller="newYq">
   <!-- 导航开始 -->
   <div class="nav-bg">
     <div class="nav-main">
       <ul class="clearfix listbox">
         <script id="userlistScript" type="text/x-handlebars-template">
-          <li class="list1"><a href="pages/home.html">首页</a></li>
+          <li class="list1"><a href="home.html">首页</a></li>
           {{#each this}}
-          <li data-id="{{this.id}}"><a href="pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
-            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="img/delete-icon.png" alt=""></i>
+          <li data-id="{{this.id}}"><a href="monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
+                  class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../img/delete-icon.png" alt=""></i>
           </li>
           {{/each}}
-          <li class="active nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+          <li class="active nav-new"><a href="newYq.html"><img src="../img/plus.png" alt="">新建舆情</a></li>
         </script>
       </ul>
     </div>
@@ -34,7 +102,7 @@
               <div class="modify-plan-item-title">
                 监测关键词
                 <div class="modify-plan-item-title-tips">
-                  <img src="img/question_plan.png" alt="">
+                  <img src="../img/question_plan.png" alt="">
                   <div class="new-tips">
                     您想要监测信息的关键词。
                   </div>
@@ -60,7 +128,7 @@
               <div class="modify-plan-item-title">
                 监测预警词
                 <div class="modify-plan-item-title-tips">
-                  <img src="img/question_plan.png" alt="">
+                  <img src="../img/question_plan.png" alt="">
                   <div class="new-tips">
                     您想要监测信息的预警词。
                   </div>
@@ -75,7 +143,7 @@
                   </span>
                   </div>
                   <label class="form-group-title">或</label>
-                  <a href="#1" class="modify-plan-operation-btn add"><img src="img/plus_plan.png" alt=""></a>
+                  <a href="#1" class="modify-plan-operation-btn add"><img src="../img/plus_plan.png" alt=""></a>
                 </div>
               </div>
 
@@ -84,7 +152,7 @@
               <div class="modify-plan-item-title">
                 监测排除词
                 <div class="modify-plan-item-title-tips">
-                  <img src="img/question_plan.png" alt="">
+                  <img src="../img/question_plan.png" alt="">
                   <div class="new-tips">
                     排除不想要的干扰信息
                   </div>
@@ -99,7 +167,7 @@
                   </span>
                   </div>
                   <label class="form-group-title">或</label>
-                  <a href="#1" class="modify-plan-operation-btn add"><img src="img/plus_plan.png" alt=""></a>
+                  <a href="#1" class="modify-plan-operation-btn add"><img src="../img/plus_plan.png" alt=""></a>
                 </div>
               </div>
 
@@ -113,7 +181,7 @@
         <div class="modify-plan-video">
           <div class="modify-plan-video-item video-item">
             <div class="modify-plan-video-title">
-              <img class="eye-info" src="img/rideo-run.png"/>
+              <img class="eye-info" src="../img/rideo-run.png"/>
               视频教程
             </div>
             <div class="modify-plan-video-main">
@@ -122,7 +190,7 @@
           </div>
           <div class="modify-plan-video-item" id="keys-show-plan">
             <div class="modify-plan-video-title">
-              <img class="eye-info" src="img/eye.png"/>
+              <img class="eye-info" src="../img/eye.png"/>
               监测预警词预览
             </div>
             <div class="modify-plan-video-main">
@@ -134,7 +202,7 @@
           </div>
           <div class="modify-plan-video-item" id="words-show-plan">
             <div class="modify-plan-video-title">
-              <img class="eye-info" src="img/eye.png"/>
+              <img class="eye-info" src="../img/eye.png"/>
               监测预警词预览
             </div>
             <div class="modify-plan-video-main">
@@ -179,3 +247,34 @@
     </div>
   </div>
 </div>
+<div class="footer">
+  © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
+</div>
+<!-- 底部结束 -->
+<!-- 删除弹框 -->
+<div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                          class="fa fa-times-circle"></span>
+        </button>
+        <h4 class="modal-title">温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 弹框结束 -->
+<!-- 删除弹框 -->
+<script data-main="../../js/app" src="../js/lib/require.js"></script>
+<script src="../js/echarts/echarts.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart/bar", "echarts/chart/map"], function (ajax, ec) {
+define(["tool/ajaxTool"], function (ajax) {
     function keyWordAdd() {
         $("#messages").on("click", ".add-btn", function () {
             var parents = $(this).parents(".input-warp");
@@ -26,8 +26,8 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
             }
             var groupDiv = '<div class="form-group key-group-' + (index + 1) + ' new-keyword-group"><label class="form-group-title"><span class="must">*</span><span class="must-title">' + labelC +
                 '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="5" class="form-control">' +
-                '<span class="operation-box clear"><span class="add-btn glyphicon glyphicon-plus-sign"></span><span class="with-next">+</span>' +
-                '<span class="close-btn">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
+                '<span class="operation-box clear"><span class="add-btn box-show glyphicon glyphicon-plus-sign"></span><span class="with-next box-hide">+</span>' +
+                '<span class="close-btn box-show">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
             $("#key-word-group").append(groupDiv);
         })
     }
@@ -49,7 +49,11 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
                 }
                 parents.remove();
             }
-
+            var keyWords = getkeyWords(),
+                warnWords = getwarnWords("warning"),
+                exWords = getwarnWords("exclude");
+            var newKeyWords = getNewKeyWords(keyWords);
+            rightPlanShow(newKeyWords, warnWords);
         })
     }
 
@@ -166,7 +170,6 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
             }
             newKeyWords.push(words);
         }
-        console.log(newKeyWords)
         return newKeyWords;
     }
 
@@ -194,9 +197,9 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
                 }
             }
             for (var h = 0; h < warnWords.length; h++) {
-                var w = {word: ""};
+                var w = {warnWord: ""};
                 if (warnWords[h] !== "") {
-                    w.word = warnWords[h];
+                    w.warnWord = warnWords[h];
                     submitData.userPlanWarnWords.push(w);
                 }
             }
@@ -208,12 +211,13 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
                 }
             }
             var param = {
-                data: submitData,
+                data: JSON.stringify(submitData),
                 type: "post",
+                contentType: 'application/json',
                 success: function (data) {
-
+                    console.log(data)
                 }
-            }
+            };
             ajax.load('newYq', param);
         });
     }
@@ -236,8 +240,102 @@ define(["tool/ajaxTool", "echarts/echarts", "echarts/chart/line", "echarts/chart
         return newArr;
     }
 
-    function _init() {
-        console.log(1)
+    function getData(id) {
+        var param = {
+            query: {
+                planId: id
+            },
+            success: function (data) {
+                senderYQ(data);
+            }
+        };
+        if(!$("#messages").hasClass("panlLoaded")){
+            ajax.load('xgYQ', param);
+        }
+    }
+
+    //初始化渲染数据
+    function senderYQ(data) {
+        console.log(data)
+        if(!data.data) return false;
+        $("#messages").addClass("panlLoaded");
+        $("#messages").find("#myComplay").val(data.data.title);
+        var userPlanWords = data.data.userPlanWords;
+        var newArr = [{"groupV":[]},{"groupV":[]},{"groupV":[]}];
+        for (var i = 0; i < (userPlanWords.length); i++) {
+            if (userPlanWords[i].groupNumber < 4 && userPlanWords[i].orderNumber < 4) {
+                if (userPlanWords[i].groupNumber == 1) {
+                    newArr[0].index = 1;
+                    newArr[0].groupN = "词语一：";
+                    newArr[0].groupV.push(userPlanWords[i]);
+                }
+                if (userPlanWords[i].groupNumber == 2) {
+                    newArr[1].index = 2;
+                    newArr[1].groupN = "词语二：";
+                    newArr[1].groupV.push(userPlanWords[i]);
+                }
+                if (userPlanWords[i].groupNumber == 3) {
+                    newArr[2].index = 3;
+                    newArr[2].groupN = "词语三：";
+                    newArr[2].groupV.push(userPlanWords[i]);
+                }
+            }
+        }
+        var myTemplate1 = Handlebars.compile($("#userPlanWords").html());
+        var html1 = myTemplate1(newArr);
+        $("#key-word-group").append(html1);
+        //显示最后一输入框的按钮
+        var groupTar = $("#key-word-group").find(".form-group");
+        for(var h=0;h<groupTar.length;h++){
+            groupTar.eq(h).find(".add-btn:last").show();
+            groupTar.eq(h).find(".with-next:last").hide();
+            groupTar.eq(h).find(".close-btn:last").show();
+        }
+
+        var newWarnWords = new Array();
+        if (data.data.userPlanWarnWords.length == 0) {
+            newWarnWords.push({warnword: ""});
+        }
+        for (var i = 0; i < data.data.userPlanWarnWords.length; i++) {
+            if (data.data.userPlanWarnWords[i].orderNumber < 3) {
+                newWarnWords[data.data.userPlanWarnWords[i].orderNumber] = {
+                    warnword: data.data.userPlanWarnWords[i].warnWord
+                };
+            }
+        }
+        var myTemplate2 = Handlebars.compile($("#userPlanWarnWords").html());
+        var html2 = myTemplate2(newWarnWords);
+        $("#warning").find(".form-group").append(html2);
+        $("#warning").find(".warning-list:last").find(".form-group-title").hide();
+        $("#warning").find(".warning-list:last").find(".add").show();
+
+        var newExWords = new Array();
+        if (data.data.userPlanExWords.length == 0) {
+            newExWords.push({exword: ""});
+        }
+        for (var i = 0; i < data.data.userPlanExWords.length; i++) {
+            if (data.data.userPlanExWords[i].orderNumber < 3) {
+                newExWords[data.data.userPlanExWords[i].orderNumber] = {
+                    exword: data.data.userPlanExWords[i].word
+                };
+            }
+        }
+        var myTemplate3 = Handlebars.compile($("#userPlanExWords").html());
+        var html3 = myTemplate3(newExWords);
+        $("#exclude").find(".form-group").append(html3);
+        $("#exclude").find(".warning-list:last").find(".form-group-title").hide();
+        $("#exclude").find(".warning-list:last").find(".add").show();
+
+        var keyWords = getkeyWords(),
+            warnWords = getwarnWords("warning"),
+            exWords = getwarnWords("exclude");
+        var newKeyWords = getNewKeyWords(keyWords);
+        rightPlanShow(newKeyWords, warnWords);
+    }
+
+    function _init(id) {
+        //获取该舆情数据
+        getData(id);
         //关键词新增方法
         keyWordAdd();
         //关键词新增组方法

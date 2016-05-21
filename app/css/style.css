@@ -432,6 +432,10 @@ a:focus {
 	padding: 20px;
 	background: #fff;
 }
+.full-view-main-content>.tab-pane:last-child {
+	padding: 0;
+	background: none;
+}
 .conditions-choice {
 	border: 1px solid #e6e6e6;
 	position: relative;
@@ -1707,14 +1711,14 @@ a:focus {
 	box-pack:center;
 	box-align:center;
 }
-.noDataBox img.noDataImg {
+.noDataBox .noDataShow {
 	background-image: url("../img/no_data.png");
 	width: 120px;
 	display: inline-block;
 	height: 59px;
 	background-repeat: no-repeat;
 }
-.noDataBox img.errorImg {
+.noDataBox .errorShow {
 	background-image: url("../img/failed_load.png");
 	width: 120px;
 	display: inline-block;
@@ -1737,5 +1741,11 @@ a:focus {
     width: 32px;
     height: 32px;
 }
-
+.modelLoding {
+	height: 300px;
+}
+.bottomLoading {
+	background-color: #fff;
+	padding: 30px 0;
+}
 

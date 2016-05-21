@@ -15,8 +15,8 @@ var HX_config = {
     "ivcode": "",
     //鏈嶅姟鍣ㄥ湴鍧�
     "serv_path": "http://115.238.48.66:1158",
-    "noDataHtml" : "<div class='noDataBox'><img class='noDataImg'  ></div>",
-    "errorHtml" : "<div class='noDataBox'><img class='errorImg'  ></div>"
+    "noDataHtml" : "<div class='noDataBox'><div class='noDataShow'></div></div>",
+    "errorHtml" : "<div class='noDataBox'><div class='errorShow '></div></div>"
 };
 //ajax path
 var HX_Ajax_Path = (function () {
@@ -72,8 +72,10 @@ var HX_Ajax_Path = (function () {
         "fullView_MediaDeg": HX_config.serv_path + '/monitor/statmonitor/getmediaattentionlist/v=1.0.0',
         //鍦板煙鍒嗗竷bar
         "fullView_Area": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
-        //鍦板煙鍒嗗竷Map
-        "fullView_AreaMap": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0'
+        //地域分布Map
+        "fullView_AreaMap": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
+        //修改舆情初始化数据
+        "xgYQ":HX_config.serv_path+'/plan/userplan/getuserplan/v=1.0.0'
     }
 })()
 
