@@ -9,9 +9,10 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
     function getuserplanlist() {
         var param = {
             "success": function (data) {
-                if (data.data.length === 0) {
+                if (data.data.length == 0) {
                     //用户方案为空，则直接跳转index_none页面
-                    location.href = './index_none.html';
+                   $(".page").hide();
+                    $(".showNoList").removeClass("hidden");
                     // showIndexNone();
                 } else {
                     indexUserPlans.userPlans = data.data;
@@ -29,10 +30,15 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
     function loadnewYQFA() {
         var param = {
             "success": function (data) {
+                //删除loading
+                $(".plan:first").removeClass("modelLoding").find(".noDataBox").remove();
+                $(".plan:first").children(".hidden").removeClass("hidden");
+
                 if (data.data.objects.length == 0) {
-                    $("#chartPie").html(HX_config.noDataHtml);
-                    $("#chartLine").html(HX_config.noDataHtml);
-                    $(".list1box1").html(HX_config.noDataHtml);
+                    $(".page .content").hide();
+                    $(".showNoData").removeClass("hidden");
+                    var planID = indexUserPlans.userPlans[0].id;
+                    $(".showNoData a").attr("href","pages/monitor/full_view.html?id="+planID+"&"+"turnTab=2");
                     return;
                 }
                 //渲染全部舆情方案列表项
@@ -43,6 +49,8 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 bindYqFAEvent();
                 //加载其他方案舆情
                 initFirst3NewPlan(0);
+                //显示底部loadding效果
+                $(".bottomLoading").removeClass("hidden");
             },
             "error" : function(){
                 $("#chartPie").html(HX_config.errorHtml);
@@ -50,7 +58,9 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 $(".list1box1").html(HX_config.errorHtml);
             }
         };
-        ajax.load("home_yqfa", param,'#list1-all,#chartPie,#chartLine');
+        //增加loading
+        $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>")
+        ajax.load("home_yqfa", param);
     }
     //绑定全部舆情方案 标签切换，发送请求
     function bindYqFAEvent() {
@@ -73,6 +83,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
     function initFirst3NewPlan(i) {
         // 方案个数达到上线或者达到3个终止递归
         if (i === indexUserPlans.userPlans.length || indexUserPlans.showCount === 3) {
+            $(".bottomLoading").addClass("hidden");
             return;
         }
         //获取对应的 Plan数据
@@ -100,7 +111,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 initFirst3NewPlan(i + 1);
             }
         };
-        ajax.load("home_list", param);
+            ajax.load("home_list", param);
     }
 //绑定对应的舆情事件，标签切换发送请求
     function bindListEvent(index) {

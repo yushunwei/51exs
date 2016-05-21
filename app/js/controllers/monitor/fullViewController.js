@@ -158,8 +158,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           chartview.init(titleID);
       })
       $('.page-fullView .main').find('.nav-tabs').find('.tab-plan').on('shown.bs.tab', function (e) {
-          console.log("ccc")
-          yqview.init();
+          yqview.init(titleID);
       })
   }
     //分页

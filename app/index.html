@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div class="header">
+<div class="header userBox">
     <div class="header-content clearfix">
         <a href="pages/home.html"><img src="img/logo.png"></a>
 
@@ -80,24 +80,24 @@
     </div>
     <!-- 导航结束 -->
     <!-- 主体内容开始 -->
-    <div class="main">
+    <div class="main content">
         <!------舆情------->
-        <div class="plan">
-            <div class="plan-title">
+        <div class="plan modelLoding">
+            <div class="hidden plan-title">
                 <h3><a href="#1">全部舆情方案</a></h3>
 
                 <div class="plan-data">
                     <ul class="clearfix" id="yqfaTitle">
                         <li>近一周</li>
                         <li>总量：<span class="sumCnt"></span></li>
-                        <li>正面：<span class="text-blue positiveNum">4983</span></li>
-                        <li>负面：<span class="text-danger negativeNum">18726</span></li>
-                        <li>中性：<span class="text-middle neutralNum">4983</span></li>
-                        <li>负面占比：<span class="negativePercent">20.92%</span></li>
+                        <li>正面：<span class="text-blue positiveNum"> </span></li>
+                        <li>负面：<span class="text-danger negativeNum"> </span></li>
+                        <li>中性：<span class="text-middle neutralNum"> </span></li>
+                        <li>负面占比：<span class="negativePercent"> </span></li>
                     </ul>
                 </div>
             </div>
-            <div class="plan-main clearfix">
+            <div class="hidden plan-main clearfix">
                 <div class="plan-main-left">
                     <div class="plan-main-title">
                         <ul class="nav nav-tabs list-tabs">
@@ -257,7 +257,7 @@
         <!-- 我的公司 -->
         <div class="plan hidden" planID=" ">
             <div class="plan-title">
-                <h3></h3>
+                <a><h3></h3></a>
 
                 <div class="plan-data">
                     <ul class="clearfix">
@@ -320,7 +320,7 @@
         <!-----行业------>
         <div class="plan hidden" planID=" ">
             <div class="plan-title">
-                <h3></h3>
+                <a><h3></h3></a>
 
                 <div class="plan-data">
                     <ul class="clearfix">
@@ -383,7 +383,7 @@
 
         <div class="plan hidden" planID=" ">
             <div class="plan-title">
-                <h3></h3>
+                <a><h3></h3></a>
 
                 <div class="plan-data">
                     <ul class="clearfix">
@@ -443,9 +443,39 @@
                 </div>
             </div>
         </div>
+        <div class="bottomLoading hidden" >
+            <div class='noDataBox'><img src='img/loading_32.gif' /></div>
+        </div>
+    </div>
+    <div class="showNoData hidden">
+        <div class="main">
+            <div class="index-none">
+                <p>对不起！暂无数据,建议您优化舆情方案的关键词设置</p>
+                <a href="pages/newYq.html">修改舆情 — — 请点击这里！</a>
+                <img src="img/index_none.png" alt="">
+            </div>
+        </div>
     </div>
     <!-- 主体内容结束 -->
+
     <!-- 主体内容结束 -->
+</div>
+<div class="showNoList hidden">
+    <div class="nav-bg">
+        <div class="nav-main">
+            <ul class="clearfix listbox">
+                <li class="active list1"><a href="#">首页</a></li>
+                <li class="nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="index-none">
+            <p>对不起！暂无数据</p>
+            <a href="pages/newYq.html">新建舆情 — — 请点击这里！</a>
+            <img src="img/index_none.png" alt="">
+        </div>
+    </div>
 </div>
 <div class="footer">
     © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
