@@ -249,13 +249,16 @@ define(["tool/ajaxTool"], function (ajax) {
         senderYQ(data);
       }
     };
-    ajax.load('xgYQ', param);
+    if(!$("#messages").hasClass("panlLoaded")){
+      ajax.load('xgYQ', param);
+    }
   }
 
   //初始化渲染数据
   function senderYQ(data) {
     console.log(data)
     if(!data.data) return false;
+    $("#messages").addClass("panlLoaded");
     $("#messages").find("#myComplay").val(data.data.title);
     var userPlanWords = data.data.userPlanWords;
     var newArr = [{"groupV":[]},{"groupV":[]},{"groupV":[]}];
