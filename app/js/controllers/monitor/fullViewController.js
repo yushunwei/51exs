@@ -3,7 +3,8 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
   var $tar = $("div.page-index");
   var indexUserPlans = {showCount:0};
   var result = [];
-  var titleID = "";
+  var titleID = "",
+      turnIndex = 0;
  var fullViewInit = {
      pageSize:20
  };
@@ -11,11 +12,14 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
     var keyword;
   function init(page) {
       titleID = page.query.id;
+      turnIndex = typeof page.query.turnTab =="undefined" ? 0: page.query.turnTab;
       getuserplanlist();
       //加载列表
       getMonitorInfoList(0,20);
       //绑定事件
       bindEvent();
+
+      $('#myTab li:eq('+turnIndex+') a').tab('show');
   }
     function _allSeach(page) {
         all = true;
@@ -158,6 +162,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           chartview.init(titleID);
       })
       $('.page-fullView .main').find('.nav-tabs').find('.tab-plan').on('shown.bs.tab', function (e) {
+
           yqview.init(titleID);
       })
   }
