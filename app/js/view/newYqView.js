@@ -24,9 +24,9 @@ define(["tool/ajaxTool"], function (ajax) {
       if(index == 1){labelC = "词语二：";}
       if(index == 2){labelC = "词语三：";}
       var groupDiv = '<div class="form-group key-group-'+(index+1)+' new-keyword-group"><label class="form-group-title"><span class="must">*</span><span class="must-title">'+labelC+
-        '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="5" class="form-control">'+
-        '<span class="operation-box clear"><span class="add-btn glyphicon glyphicon-plus-sign"></span><span class="with-next">+</span>'+
-        '<span class="close-btn">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
+          '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="5" class="form-control">'+
+          '<span class="operation-box clear"><span class="add-btn glyphicon glyphicon-plus-sign"></span><span class="with-next">+</span>'+
+          '<span class="close-btn">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
       $("#key-word-group").append(groupDiv);
     })
   }
@@ -157,16 +157,15 @@ define(["tool/ajaxTool"], function (ajax) {
       }
       newKeyWords.push(words);
     }
-    console.log(newKeyWords)
     return newKeyWords;
   }
   //点击保存
   function saveData(){
     $(".page-newYq").find(".modal-footer").on("click",".submit",function(){
       var keyWords = getkeyWords(),//[["1","2"],["3","4"]]
-        warnWords = getwarnWords("warning"),
-        exWords = getwarnWords("exclude"),
-        title = $("#myComplay").val();
+          warnWords = getwarnWords("warning"),
+          exWords = getwarnWords("exclude"),
+          title = $("#myComplay").val();
       var newKeys = removeNull(keyWords);
       var submitData = {
         "title":title,
@@ -184,9 +183,9 @@ define(["tool/ajaxTool"], function (ajax) {
         }
       }
       for(var h=0;h<warnWords.length;h++){
-        var w = {word:""};
+        var w = {warnWord:""};
         if(warnWords[h] !== ""){
-          w.word = warnWords[h];
+          w.warnWord = warnWords[h];
           submitData.userPlanWarnWords.push(w);
         }
       }
@@ -198,12 +197,13 @@ define(["tool/ajaxTool"], function (ajax) {
         }
       }
       var param = {
-        data:submitData,
+        data:JSON.stringify(submitData),
         type:"post",
+        contentType: 'application/json',
         success:function(data){
-
+          console.log(data)
         }
-      }
+      };
       ajax.load('newYq',param);
     });
   }

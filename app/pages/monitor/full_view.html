@@ -66,7 +66,7 @@
     </div>
 </div>
 
-<div class="page page-fullView" data-controlle="monitor/fullView">
+<div class="page page-fullView" data-controller="monitor/fullView">
     <!-- 导航开始 -->
     <div class="nav-bg">
         <div class="nav-main">
@@ -340,20 +340,28 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group key-group-1">
-                                                <label class="form-group-title"><span class="must">*</span><span class="must-title">词语一：</span></label>
-                                                <div class="group-input-warp key-word-warp">
-                                                    <div class="input-warp">
-                                                        <input type="text" maxlength="5" class="form-control">
+                                            <script id="userPlanWords" type="text/x-handlebars-template">
+                                                {{#each this}}
+                                                <div class="form-group key-group-{{index}}">
+                                                    <label class="form-group-title"><span class="must">*</span><span
+                                                            class="must-title">{{this.groupN}}</span></label>
+                                                    <div class="group-input-warp key-word-warp">
+                                                        {{#each this.groupV}}
+                                                        <div class="input-warp">
+                                                            <input type="text" maxlength="5" class="form-control" value="{{this.word}}">
                     <span class="operation-box clear">
                       <span class="add-btn glyphicon glyphicon-plus-sign"></span>
                       <span class="with-next">+</span>
                       <span class="close-btn">+</span>
                     </span>
+                                                        </div>
+                                                        {{/each}}
                                                     </div>
+                                                    <button class="add-line-btn">添加关键词组</button>
                                                 </div>
-                                                <button class="add-line-btn">添加关键词组</button>
-                                            </div>
+                                                {{/each}}
+                                            </script>
+
 
                                         </div>
                                         <div class="modify-plan-item modify-plan-item-box warning" id="warning">
@@ -367,16 +375,21 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="warning-list">
-                                                    <div class="group-input-warp">
-                                                        <input type="text" maxlength="5" class="form-control">
+                                                <script id="userPlanWarnWords" type="text/x-handlebars-template">
+                                                    {{#each this}}
+                                                    <div class="warning-list">
+                                                        <div class="group-input-warp">
+                                                            <input type="text" maxlength="5" class="form-control" value="{{this.warnword}}">
                   <span class="operation-box clear">
                     <span class="close-btn">+</span>
                   </span>
+                                                        </div>
+                                                        <label class="form-group-title">或</label>
+                                                        <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
                                                     </div>
-                                                    <label class="form-group-title">或</label>
-                                                    <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
-                                                </div>
+                                                    {{/each}}
+                                                </script>
+
                                             </div>
 
                                         </div>
@@ -391,16 +404,20 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="warning-list">
-                                                    <div class="group-input-warp">
-                                                        <input type="text" maxlength="5" class="form-control">
+                                                <script id="userPlanExWords" type="text/x-handlebars-template">
+                                                    {{#each this}}
+                                                    <div class="warning-list">
+                                                        <div class="group-input-warp">
+                                                            <input type="text" maxlength="5" class="form-control" value="{{this.exword}}">
                   <span class="operation-box clear">
                     <span class="close-btn">+</span>
                   </span>
+                                                        </div>
+                                                        <label class="form-group-title">或</label>
+                                                        <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
                                                     </div>
-                                                    <label class="form-group-title">或</label>
-                                                    <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
-                                                </div>
+                                                    {{/each}}
+                                                </script>
                                             </div>
 
                                         </div>
