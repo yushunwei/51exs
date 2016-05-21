@@ -3,7 +3,7 @@ define(["tool/ajaxTool","view/indexView","view/homeChartView"], function (ajax,v
   var indexUserPlans = {showCount:0};
   var result = [];
   function init(page) {
-    //用户方案
+    //鐢ㄦ埛鏂规
     indexUserPlans = {showCount:0};
       getuserplanlist();
   }
@@ -11,7 +11,7 @@ define(["tool/ajaxTool","view/indexView","view/homeChartView"], function (ajax,v
      var param = {
          "success":function(data){
              if (data.data.length === 0) {
-                 // 用户方案为空，则直接跳转index_none页面
+                 // 鐢ㄦ埛鏂规涓虹┖锛屽垯鐩存帴璺宠浆index_none椤甸潰
                 //location.href = './index_none.html';
                 // showIndexNone();
              } else {
@@ -25,7 +25,7 @@ define(["tool/ajaxTool","view/indexView","view/homeChartView"], function (ajax,v
      };
      ajax.load("userplanlist",param);
  }
-  //加载舆情方案
+  //鍔犺浇鑸嗘儏鏂规
   function loadnewYQFA(){
     var param = {
       "success":function(data){
@@ -52,7 +52,7 @@ define(["tool/ajaxTool","view/indexView","view/homeChartView"], function (ajax,v
         })
     }
   function initFirst3NewPlan(i){
-     // 方案个数达到上线或者达到3个终止递归
+     // 鏂规涓暟杈惧埌涓婄嚎鎴栬�呰揪鍒�3涓粓姝㈤�掑綊
     if(i === indexUserPlans.userPlans.length || indexUserPlans.showCount === 3){
       bindListEvent();
       return;
