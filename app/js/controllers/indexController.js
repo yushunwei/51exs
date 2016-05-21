@@ -1,17 +1,19 @@
 define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax, view, cv) {
     var indexUserPlans;
+
     function init(page) {
         indexUserPlans = {showCount: 0};
         //用户方案
         getuserplanlist();
     }
+
     //用户方案
     function getuserplanlist() {
         var param = {
             "success": function (data) {
                 if (data.data.length == 0) {
                     //用户方案为空，则直接跳转index_none页面
-                   $(".page").hide();
+                    $(".page").hide();
                     $(".showNoList").removeClass("hidden");
                     // showIndexNone();
                 } else {
@@ -38,7 +40,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     $(".page .content").hide();
                     $(".showNoData").removeClass("hidden");
                     var planID = indexUserPlans.userPlans[0].id;
-                    $(".showNoData a").attr("href","pages/monitor/full_view.html?id="+planID+"&"+"turnTab=2");
+                    $(".showNoData a").attr("href", "pages/monitor/full_view.html?id=" + planID + "&" + "turnTab=2");
                     return;
                 }
                 //渲染全部舆情方案列表项
@@ -52,7 +54,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 //显示底部loadding效果
                 $(".bottomLoading").removeClass("hidden");
             },
-            "error" : function(){
+            "error": function () {
                 $("#chartPie").html(HX_config.errorHtml);
                 $("#chartLine").html(HX_config.errorHtml);
                 $(".list1box1").html(HX_config.errorHtml);
@@ -62,6 +64,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
         $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>")
         ajax.load("home_yqfa", param);
     }
+
     //绑定全部舆情方案 标签切换，发送请求
     function bindYqFAEvent() {
         $(".plan").eq(0).on('click', ".list-tabs a", function () {
@@ -79,6 +82,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             ajax.load("home_yqfa", param);
         })
     }
+
     //加载其他方案舆情
     function initFirst3NewPlan(i) {
         // 方案个数达到上线或者达到3个终止递归
@@ -111,8 +115,9 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 initFirst3NewPlan(i + 1);
             }
         };
-            ajax.load("home_list", param);
+        ajax.load("home_list", param);
     }
+
 //绑定对应的舆情事件，标签切换发送请求
     function bindListEvent(index) {
         $(".plan").eq(index).on('click', ".list-tabs a", function () {
@@ -123,7 +128,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 "success": function (data) {
                     if (data.data.recordTotal != 0) {
                         view.renderTabList(data.data, tabID);
-                    }else{
+                    } else {
                         $(tabID).html(HX_config.noDataHtml);
                     }
                 },
