@@ -18,6 +18,7 @@
 	<link href="../../css/app.css" rel="stylesheet">
 	<script src="../../js/lib/jquery-1.12.3.min.js"></script>
 	<script src="../../js/lib/bootstrap.min.js"></script>
+	<script src="../../js/lib/validate/jquery.validate.min.js"></script>
 	<script src="../../js/config/config.js"></script>
 	<!-- laydate -->
 	<!-- laydate -->
@@ -38,64 +39,58 @@
     </div>
 </div>
 
-<div class="page page-open" data-page="open">
+<div class="page page-open" data-controller="appopen/open">
 	<div class="main enterprise-main">
 		<div class="information-main">
 			<h3 class="title">请填写您的企业信息，以便我们为您提供更好的服务</h3>
 			<form class="information-form" id="signupForm">
 				<div class="form-group invite-code">
 					<label><span>*</span>邀请码：</label>
-					<input id="invitecode" type="text" required oninvalid="setCustomValidity('邀请码不能为空，请输入！')" oninput="setCustomValidity('')" class="form-control" name="code" placeholder="请输入试用邀请码">
+					<input type="text" id="invitecode" name="code" class="form-control" placeholder="请输入试用邀请码">
 					<a href="#1">如何获得邀请码？</a>
 				</div>
 				<div class="form-group name">
 					<label><span>*</span>企业名称：</label>
-					<input id="companyname" type="text" required oninvalid="setCustomValidity('企业名称不能为空，请输入！')" oninput="setCustomValidity('')" class="form-control" name="name" placeholder="请输入企业名称">
+					<input type="text" class="form-control" id="companyname" name="name" placeholder="请输入企业名称" maxlength="50">
 				</div>
 				<div class="form-group open-hy">
 					<label><span>*</span>所属行业：</label>
 					<div id="industrys1" class="select-box">
-						<input class="select-content" name="industry" readonly>
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required index="1" required>
+						<select index="1" name="industry">
 						</select>
 					</div>
-					<div id="industrys2" class="select-box">
-						<input class="select-content" name="industry" readonly>
+					<div id="industrys2" class="select-box" style="display: none;">
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required index="2">
+						<select name="industry" index="2">
 						</select>
 					</div>
-					<div id="industrys3" class="select-box">
-						<input class="select-content" name="industry" readonly>
+					<div id="industrys3" class="select-box" style="display: none;">
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required>
+						<select name="industry">
 						</select>
 					</div>
 				</div>
 				<div class="form-group open-qy">
 					<label><span>*</span>企业所在地：</label>
 					<div id="areas1" class="select-box">
-						<input class="select-content" name="area" readonly>
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required index="1">
+						<select name="area" index="1">
 						</select>
 					</div>
-					<div id="areas2" class="select-box">
-						<input class="select-content" name="area" readonly>
+					<div id="areas2" class="select-box"  style="display: none;">
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required index="2">
+						<select name="area" index="2">
 						</select>
 					</div>
-					<div id="areas3" class="select-box">
-						<input class="select-content" name="area" readonly>
+					<div id="areas3" class="select-box" style="display: none;">
 						<span class="select-icon"><i class="fa fa-chevron-down"></i></span>
-						<select required>
+						<select name="area">
 						</select>
 					</div>
 				</div>
 				<div class="form-group agreement">
-					<input type="checkbox" required name="agree"> <a href="#myModal" data-toggle="modal" id="e-explan">《“e信使”使用协议》</a>
+					<input type="checkbox" name="agree" checked> <a href="#myModal" data-toggle="modal" id="e-explan">《“e信使”使用协议》</a>
 				</div>
 				<div class="agree-btn">
 					<button id="submitbutton" class="btn btn-info">同意使用协议并开通服务</button>

@@ -761,6 +761,7 @@ a:focus {
 	display: inline-block;
 	border-radius: 0;
 }
+.information-form .form-group{position:relative;}
 .information-form .form-group label {
 	min-width: 100px;
 	text-align: right;
@@ -778,6 +779,24 @@ a:focus {
 	font-size: 12px;
 	margin: 0;
 	padding-left: 104px;
+}
+.information-form .name input{
+	width: 500px;
+}
+.information-form .form-group input.error,.information-form .form-group select.error {
+	border-color:#ccc!important;
+}
+.information-form .form-group label.error {
+	position:absolute;
+	left:630px;
+	top:7px;
+	color:red;
+	border:none!important;
+	text-align:left;
+}
+.information-form .agreement label.error {
+	top:0;
+
 }
 .add-email-input .form-group .error-text {
 	color: #ff6600;
@@ -800,10 +819,8 @@ a:focus {
 	display: inline-block;
 	width: 164px;
 	height: 34px;
-	border: 1px solid #ccc;
 	vertical-align: middle;
-	padding: 6px 12px;
-	position: relative;
+	padding: 0;
 	white-space:nowrap;
 	overflow: hidden;
 }
@@ -823,6 +840,7 @@ a:focus {
 	right: 0;
 	top: 0;
 	padding-top: 5px;
+	display:none;
 }
 .select-box .select-content {
 	width: 100%;
@@ -830,17 +848,17 @@ a:focus {
 	border: none;
 	background: #fff;
 	outline: none;
+	visibility: hidden;
 }
 .select-box select {
-	position: absolute;
-	width: 100%;
+	width: 164px;
 	height: 32px;
-	left: 0;
-	top: 0;
-	opacity: 0;
+	opacity: 1;
 	cursor: pointer;
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+	border:1px solid #ccc;
 }
+.select-box label.error{left:600px;}
 .agreement input {
 	margin-left: 104px;
 	margin-top: 0;
