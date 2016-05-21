@@ -432,6 +432,10 @@ a:focus {
 	padding: 20px;
 	background: #fff;
 }
+.full-view-main-content>.tab-pane:last-child {
+	padding: 0;
+	background: none;
+}
 .conditions-choice {
 	border: 1px solid #e6e6e6;
 	position: relative;
