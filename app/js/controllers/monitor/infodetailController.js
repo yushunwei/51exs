@@ -1,69 +1,123 @@
 define(["view/monitor/infodetailView","tool/ajaxTool"], function (view,ajax) {
-    var page;
-    function init() {
-        page = arguments[0];
-        loadList();
-        loaddetail();
-        bindEvent();
+
+    var dedupId = "";
+
+    /**
+     * 事件绑定
+     * @private
+     */
+    function _bindEvent(){
+        $(document).on("click",".btn-cancel",function(){
+            // 相似文章ID赋值
+            dedupId = $(this).data("dedupid");
+            //弹出对话框
+            $('.alert-delete').modal('show');
+
+        });
+
+        $(".btn-warning-delete").click(function(){
+            cancelSimilarWarn(dedupId);
+        });
     }
-    function loadList(){
+
+    /**
+     * 取消相似预警
+     * @param dedupId 相似预警ID
+     */
+    function cancelSimilarWarn(dedupId){
         var param = {
-            "success":function(data){
-                if (data.data.length === 0) {
-                    // 用户方案为空，则直接跳转index_none页面
-                    //location.href = './index_none.html';
-                    // showIndexNone();
-                } else {
-                    view.renderList(data);
+            type: 'POST',
+            success: function(data){
+                $('.alert-delete').modal('hide');
+                if(data.status == 200){
+                    $(".btn-cancel").parent().remove();
+                }else {
+                    alert("操作失败，请重试！");
                 }
             },
-            "query" : {
-                "docId" : page.query.docID
+            error:function(){
+                $('.alert-delete').modal('hide');
+                alert("操作失败，请重试！");
+            },
+            data: {dedupids:[dedupId]}
+
+        };
+        ajax.load("delYJ",param);
+    }
+
+    /**
+     * 加载文章详情
+     * @param docId 文章ID
+     * @param isWarn 是否预警
+     * @private
+     */
+    function _loadInfoDetail(docId,isWarn){
+        var param = {
+            success:function(data){
+                if(data.status == 200){
+                    data.data.isWarn = isWarn;
+                    view.renderdetail(data);
+                    view.renderRight(data);
+                }else {
+                    $(".detail-left").html(HX_config.errorHtml);
+                    $(".detail-data").html(HX_config.errorHtml);
+                }
+            },
+            error:function(){
+                $(".detail-left").html(HX_config.errorHtml);
+                $(".detail-data").html(HX_config.errorHtml);
+            },
+            query:{
+                docId:docId
+            }
+        };
+
+        ajax.load("detail",param);
+    }
+
+    // 加载相关舆情
+    function _loadRelateInfoList(docId){
+        var param = {
+            success:function(data){
+                if(data.status == 200){
+                    if(data.data.length === 0){
+                        $(".related-main").html(HX_config.noDataHtml);
+                    }else{
+                        view.renderList(data);
+                    }
+                }else{
+                    $(".related-main").html(HX_config.errorHtml);
+                }
+            },
+            error:function(){
+                $(".related-main").html(HX_config.errorHtml);
+            },
+            query:{
+                docId:docId
             }
         };
         ajax.load("detailList",param);
     }
-    function loaddetail(){
-        var param = {
-            "success":function(data){
-                if (data.data.length === 0) {
-                    // 用户方案为空，则直接跳转index_none页面
-                    //location.href = './index_none.html';
-                    // showIndexNone();
-                } else {
-                    view.renderdetail(data);
-                    view.renderRight(data);
-                }
-            },
-            "query" : {
-                "docId" : page.query.docID
-            }
-        };
-        ajax.load("detail",param);
-    }
-    function bindEvent(){
-        $('.btn-warning-delete').click(function(){
-            var dedupids = $(".page-infodetail").find("a.original").data("docid");
-            if(dedupids!=''){
-                //调用删除方案预警邮箱的接口
-                var param = {
-                    type: 'POST',
-                    success: function(data){
-                        if(data.status == 200){
-                            $('.alert-delete').modal('hidden');
-                        }else{
-                            alert('删除失败！');
-                            $('.alert-delete').modal('hidden');
-                        }
-                    },
-                    data: dedupids
 
-                };
-                ajax.load("delYJ",param);
-            }
-        });
+    // 初始化
+    function init(page){
+        // 文章Id，是否预警
+        var docId = page.query.docID;
+            isWarn = page.query.isWarn;
+
+        if(!docId){
+            return;
+        }
+
+        // 事件绑定
+        _bindEvent();
+        // 加载文件详情
+        _loadInfoDetail(docId,isWarn);
+        // 加载相关舆情
+        _loadRelateInfoList(docId);
     }
+
     return {
-        init: init
-    }
+        init:init
+    };
 });

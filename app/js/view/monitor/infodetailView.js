@@ -17,6 +17,17 @@ define([], function () {
         }
         return "";
     });
+
+    /**
+     * 注册对比help
+     */
+    Handlebars.registerHelper("compare", function (v1,v2,options) {
+        if(v1 == v2){
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    });
+
     var dom = $(".page-infodetail");
     function _renderList(data) {
         var myTemplate = Handlebars.compile($("#detailList").html());

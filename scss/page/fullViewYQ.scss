@@ -40,6 +40,7 @@
             float: left;
             width: 135px;
             height: 40px;
+
           }
           input {
             display: inline-block;
@@ -63,14 +64,11 @@
             .add-btn {
               cursor: pointer;
               font-size: 16px;
-              &:nth-child(2) {
-                display: none;
-              }
+              display: none;
             }
             .with-next {
               font-size: 20px;
               color: #666;
-              display: none;
             }
             .close-btn {
               position: absolute;
@@ -80,11 +78,17 @@
               font-size: 20px;
               font-weight: 100;
               cursor: pointer;
-              display: block;
+              display: none;
               width: 15px;
               height: 15px;
               line-height: 15px;
               transform: rotate(45deg);
+            }
+            .box-show {
+              display: inline-block;
+            }
+            .box-hide {
+              display: none;
             }
           }
         }
@@ -128,6 +132,8 @@
         .form-group-title {
           width: 15px;
           margin-right: 15px;
+        }
+        .add {
           display: none;
         }
       }

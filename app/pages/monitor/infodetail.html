@@ -1,53 +1,158 @@
-<div class="page page-infodetail" data-page="infodetail">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>原文内容</title>
+
+    <!-- Bootstrap -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <!-- Own Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/tools.css" rel="stylesheet">
+    <script src="../../js/lib/jquery-1.12.3.min.js"></script>
+    <script src="../../js/lib/bootstrap.min.js"></script>
+    <script src="../../js/lib/handlebars-1.0.0.js"></script>
+    <script src="../../js/config/config.js"></script>
+
+</head>
+<body>
+<!-- 头部开始 -->
+<div class="header">
+    <div class="header-content clearfix">
+        <a class="icon-logo" href="#1"><img src="../../img/logo.png"></a>
+
+        <div class="header-information pull-right">
+            <div class="header-input">
+                <div class="input-group">
+                    <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-search" type="button"><i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="header-notice">
+                <ul>
+                    <li><a href="#1"><img src="../../img/headnav_icon.png" alt="">
+
+                        <p>舆情报告</p></a></li>
+                    <li><a href="#1"><img src="../../img/headnav_icon_2.png" alt="">
+
+                        <p>预警中心</p><span id="alertIcon" class="cy-badge"></span></a></li>
+                    <li><a href="#1"><img src="../../img/headnav_icon_4.png" alt="">
+
+                        <p>帮助中心</p></a></li>
+                    <li><a href="#1"><img src="../../img/headnav_icon_3.png" alt="">
+
+                        <p>给我意见</p></a></li>
+                </ul>
+            </div>
+            <div class="header-user">
+                <img src="../../img/user.png" alt="">
+                <span id="userName"><i class="fa fa-angle-down"></i></span>
+                <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 头部结束 -->
+<!-- 主体开始 -->
+<div class="page page-infodetail" data-controller="monitor/infodetail">
 
     <div class="cy-breadcrumb">
-        <a href="pages/home.html"><i class="fa fa-home"></i></a>
-        <img src="img/right_icon.png" alt="">
+        <a href="/index.html"><i class="fa fa-home"></i></a>
+        <img src="../../img/right_icon.png" alt="">
         <a href="javascript:void(0)">原文内容</a>
     </div>
 
     <div class="main">
         <div class="detail clearfix">
             <div class="detail-left">
-              <script id="detail" type="text/x-handlebars-template">
-                <div class="recommended-reading">
-                    <h1>{{title}}</h1>
-                    <p class="recommended-information"><span>作者：<a href="#1">{{author}}</a></span><span>来源媒体：<a href="#1">{{media}}</a></span><span><a class="original" href="{{weburl}}"><img src="img/link_icon.png" alt="">原文链接</a></span><span>发布时间：{{pubTime}}</span></p>
-                    <p class="recommended-information"><span>舆情属性：{{#YQtype sentiment}}{{/YQtype}}</span><span><a href="javascript:void(0)" class="text-blue" data-toggle="modal" data-target=".alert-delete" data-dedupid="{{dedupId}}" data-docid="{{docId}}" >相似文章不再预警</a><i class="fa fa fa-trash-o"></i></span><span class="detail-share">分享到：<i class="fa fa-weibo"></i><i class="fa fa-wechat"></i><i class="fa fa-qq"></i></span></p>
-                    <p class="recommended-reading-content">
-                        {{content}}
-                    </p>
+                <!-- 加载进度 -->
+                <div class="noDataBox text-center" style="height: 400px;">
+                    <img src="../../img/loading_48.gif"/>
                 </div>
-              </script>
+
+                <script id="detail" type="text/x-handlebars-template">
+                    <div class="recommended-reading">
+                        <h1>{{title}}</h1>
+
+                        <p class="recommended-information">
+                            <span>作者：<a href="#1">{{author}}</a></span>
+                            <span>来源媒体：<a href="#1">{{media}}</a></span>
+                            <span><a class="original" target="_blank" href="{{weburl}}">
+                                <img src="../../img/link_icon.png" alt="">原文链接</a>
+                            </span>
+                            <span>发布时间：{{pubTime}}</span>
+                        </p>
+
+                        <p class="recommended-information">
+                            <span>舆情属性：{{#YQtype sentiment}}{{/YQtype}}</span>
+                            <span>
+                                {{#compare isWarn "yes"}}
+                                    <a href="javascript:void(0)" class="text-blue btn-cancel"
+                                       data-dedupid="{{dedupId}}"
+                                       data-docid="{{docId}}">
+                                        相似文章不再预警
+                                    </a>
+                                    <i class="fa fa fa-trash-o"></i>
+                                {{/compare}}
+                            </span>
+                            <span class="detail-share">
+                                分享到：<i class="fa fa-weibo"></i>
+                                <i class="fa fa-wechat"></i>
+                                <i class="fa fa-qq"></i>
+                            </span>
+                        </p>
+
+                        <p class="recommended-reading-content">
+                            {{content}}
+                        </p>
+                    </div>
+                </script>
             </div>
 
             <div class="detail-right">
 
                 <div class="detail-data">
-                  <script id="detailright" type="text/x-handlebars-template">
-                    <div class="detail-data-item detail-data-item-margin info-clickcount {{#ishidden clickCount}}{{/ishidden}}">
-                        <h1>{{clickCount}}</h1>
-                        <p>总点击</p>
-                    </div>
-                    <div class="detail-data-item info-comment {{#ishidden commentCount}}{{/ishidden}}">
-                        <h1>{{commentCount}}</h1>
-                        <p>总评论</p>
-                    </div>
-                    <div class="detail-data-item info-forwardcount {{#ishidden forwardCount}}{{/ishidden}}">
-                        <h1>{{forwardCount}}</h1>
-                        <p>总转载</p>
-                    </div>
-                    <div class="detail-data-item detail-data-item-margin info-similarcount {{#ishidden similarCount}}{{/ishidden}}">
-                        <h1>{{similarCount}}</h1>
-                        <p>相似文章</p>
-                    </div>
-                    <div class="detail-data-item info-fanscount {{#ishidden fansCount}}{{/ishidden}}">
-                        <h1>{{fansCount}}</h1>
-                        <p>总粉丝</p>
-                    </div>
-                  </script>
-                </div>
 
+                    <!-- 加载进度 -->
+                    <div class="noDataBox text-center" style="height: 100px;">
+                        <img src="../../img/loading_16.gif"/>
+                    </div>
+
+                    <script id="detailright" type="text/x-handlebars-template">
+                        <div class="detail-data-item detail-data-item-margin info-clickcount {{#ishidden clickCount}}{{/ishidden}}">
+                            <h1>{{clickCount}}</h1>
+
+                            <p>总点击</p>
+                        </div>
+                        <div class="detail-data-item info-comment {{#ishidden commentCount}}{{/ishidden}}">
+                            <h1>{{commentCount}}</h1>
+
+                            <p>总评论</p>
+                        </div>
+                        <div class="detail-data-item info-forwardcount {{#ishidden forwardCount}}{{/ishidden}}">
+                            <h1>{{forwardCount}}</h1>
+
+                            <p>总转载</p>
+                        </div>
+                        <div class="detail-data-item detail-data-item-margin info-similarcount {{#ishidden similarCount}}{{/ishidden}}">
+                            <h1>{{similarCount}}</h1>
+
+                            <p>相似文章</p>
+                        </div>
+                        <div class="detail-data-item info-fanscount {{#ishidden fansCount}}{{/ishidden}}">
+                            <h1>{{fansCount}}</h1>
+
+                            <p>总粉丝</p>
+                        </div>
+                    </script>
+                </div>
 
 
                 <div class="related">
@@ -57,10 +162,11 @@
                         </div>
                         <div class="noborder-panel-body">
                             <div class="related-main">
-                              <script id="detailList" type="text/x-handlebars-template">
-                                {{#each this.data.array}}
-                                <p><a href="pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a></p>
-                                {{/each}}
+                                <script id="detailList" type="text/x-handlebars-template">
+                                    {{#each this.data.array}}
+                                    <p><a href="pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a>
+                                    </p>
+                                    {{/each}}
                                 </script>
                             </div>
                         </div>
@@ -70,11 +176,14 @@
         </div>
     </div>
     <!-- 主体内容结束 -->
-    <div class="modal fade bs-example-modal-sm cy-model alert-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model alert-delete" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">
@@ -88,3 +197,7 @@
         </div>
     </div>
 </div>
+<!-- 主体结束 -->
+<script data-main="../../js/app" src="../../js/lib/require.js"></script>
+</body>
+</html>
