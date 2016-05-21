@@ -70,7 +70,7 @@
                     <li class="active list1"><a href="#">首页</a></li>
                     {{#each this}}
                     <li data-id="{{this.id}}"><a href="pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
-                            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img
+                            class="nav-delete" id="nav-list{{@index}}" data-toggle="modal" data-target=".plan-delete"><img
                             src="img/delete-icon.png" alt=""></i></li>
                     {{/each}}
                     <li class="nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
@@ -496,7 +496,7 @@
                 <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info">确定</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" >确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
