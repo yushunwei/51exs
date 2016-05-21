@@ -15,8 +15,8 @@ var HX_config = {
     "ivcode": "",
     //服务器地址
     "serv_path": "http://115.238.48.66:1158",
-    "noDataHtml" : "<div class='noDataBox'><img class='noDataImg'  ></div>",
-    "errorHtml" : "<div class='noDataBox'><img class='errorImg'  ></div>"
+    "noDataHtml" : "<div class='noDataBox'><div class='noDataShow'></div></div>",
+    "errorHtml" : "<div class='noDataBox'><div class='errorShow '></div></div>"
 };
 //ajax path
 var HX_Ajax_Path = (function () {
