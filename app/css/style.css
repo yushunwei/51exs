@@ -166,7 +166,7 @@ a:focus {
 	display: block;
 	text-align: center;
 	color: #fff;
-	padding: 10px 0;
+	padding:9px 0;
 	font-size: 18px;
 	white-space: nowrap;
     text-overflow: ellipsis;
@@ -432,7 +432,7 @@ a:focus {
 	padding: 20px;
 	background: #fff;
 }
-.full-view-main-content>.tab-pane:last-child {
+.page-fullView .full-view-main-content>.tab-pane:last-child {
 	padding: 0;
 	background: none;
 }
@@ -1594,6 +1594,9 @@ a:focus {
 
 
 /*舆情报告*/
+.page-weeklyReportList .panel-default {
+	display: none;
+}
 .report .nav-tabs>li {
 	float: none;
 }
@@ -1609,8 +1612,8 @@ a:focus {
 	background-image: url(../img/report.png); 
 }
 .report-item {
-	width: 160px;
-	height: 140px;
+	width: 254px;
+	height: 130px;
 	padding: 10px;
 	background: #f7f7f7;
 	border: 1px solid #e7e7e7;
@@ -1618,11 +1621,11 @@ a:focus {
 	margin: 0 12px 20px 12px;
 }
 .report-box {
-	margin: 0 -13px;
+	margin: 0 -14px;
 }
 .report-item h1 {
-	font-size: 26px;
-	margin-top: 20px;
+	font-size: 18px;
+	margin-top: 10px;
 	margin-bottom: 0;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #afafaf;
@@ -1645,12 +1648,41 @@ a:focus {
 	color: #fff;
 	padding: 2px 8px;
 	border-radius: 0;
-	margin-left: 21px;
+	margin: 0 10px;
 }
 .report-item .report-download {
-	float: right;
 	font-size: 12px;
-	margin-top: 5px;
+	margin: 5px 10px 0 10px;
+}
+.report-item:hover {
+	background: #aac9d4;
+}
+.report-item:hover h1 {
+	color: #fff;
+	border-bottom-color: #fff;
+}
+.report-item:hover .report-date {
+	color: #fff;
+}
+.report-item:hover .report-btn {
+	background: #59c2e6;
+	color: #fff;
+}
+.report-none {
+	text-align: center;
+	display: none;
+}
+.report-none p {
+	font-size: 20px;
+	text-align: center;
+	color: #bbbbbb;
+}
+.report-none a {
+	display: block;
+	font-size: 20px;
+	color: #1ca8dd;
+	text-align: center;
+	margin-bottom: 20px;
 }
 .report .cy-panel .panel-body {
 	padding-bottom: 10px;

@@ -1,5 +1,5 @@
 
-define(["tool/ajaxTool","echarts/echarts","echarts/chart/line","echarts/chart/bar","echarts/chart/map"], function (ajax,ec) {
+define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
   //选择条件事件
   function events(id){
 //在时间段选择上绑定图表刷新事件
@@ -537,37 +537,35 @@ define(["tool/ajaxTool","echarts/echarts","echarts/chart/line","echarts/chart/ba
     ajax.load('fullView_AreaMap',param);
   }
   function senderAreaMapChart(data){
-    var optionMap =  {
-      tooltip : {
-        trigger: 'item',
-        formatter: '{b}'
-      },
-      legend: {
-        x : 'left',
-        y : 'top',
-        data:['舆情数']
-      },
-      color: ['#59C2E6'],
-      series : [
-        {
+    $.get('../../api/china.json',function(json){
+      ec.registerMap('china', json);
+      var chart = ec.init(document.getElementById('fullChartMap'));
+      chart.setOption({
+        tooltip : {
+          trigger: 'item',
+          formatter: '{b}'
+        },
+        legend: {
+          x : 'left',
+          y : 'top',
+          data:['舆情数']
+        },
+        color: ['#59C2E6'],
+        series: [{
           name: '舆情数',
           type: 'map',
-          mapType: 'china',
+          map: 'china',
           selectedMode : 'multiple',
           itemStyle:{
             normal:{color: '#C8F1FF'},
             emphasis:{color: '#59C2E6'}
           },
           data:[
-            {name:'广东',selected:false}
+            {name: '广东',selected:true }
           ]
-        }
-      ]
-    };
-    // 基于准备好的dom，初始化echarts图表
-    var myChartMap = ec.init(document.getElementById('fullChartMap'));
-    // 为echarts对象加载数据
-    myChartMap.setOption(optionMap);
+        }]
+      });
+    })
   }
   function _init(id){
     var timeRanges = 7;

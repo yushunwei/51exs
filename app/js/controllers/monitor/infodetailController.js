@@ -1,4 +1,4 @@
-define(["view/monitor/infodetailView","tool/ajaxTool"], function (view,ajax) {
+define(["view/monitor/infodetailView","tool/ajaxTool"], function (view,ajax,common) {
 
     var dedupId = "";
 
