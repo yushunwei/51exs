@@ -234,13 +234,13 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
         planId:planId
       },
       success:function(data){
-        senderBar(chartDom,data);
+        senderBar(planId,chartDom,data);
       }
     };
     ajax.load('home_bar',param);
   }
   //渲染bar
-  function senderBar(chartDom,obj){
+  function senderBar(planId,chartDom,obj){
     var optionBar = {
       tooltip : {trigger : 'item',formatter : "{b}<br/>{a}:{c}"},
       legend : {
@@ -306,8 +306,8 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     var negativeTotal = 0;
     for (j = 0; j < obj.data.array.length; j++) {
       mediaArray.push(obj.data.array[j].media);
-      positiveArray.push(obj.data.array[j].positive);
-      negativeArray.push(obj.data.array[j].negative);
+      positiveArray.push({"sentiment":"positive","value":obj.data.array[j].positive});
+      negativeArray.push({"sentiment":"negative","value":obj.data.array[j].negative});
       positiveTotal += obj.data.array[j].positive;
       negativeTotal += obj.data.array[j].negative;
     }
@@ -324,7 +324,7 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     parentD.find(".negativeTotal").text(negativeTotal);
     parentD.find(".negativePercent").text(negativePercent);
     myChartBar.on("click", function(param) {
-      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      var subData = {sentiment : param.data.sentiment,timeRanges:7,planId:planId};
       window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
     })
   }
