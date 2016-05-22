@@ -84,7 +84,11 @@ var HX_Ajax_Path = (function () {
         "warnInfo" :HX_config.serv_path + "/warn/warncenter/getwarninfolist/v=1.0.0",
         //emailList
         "planwarnemail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemaillist/v=1.0.0",
-        "warnmail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0"
+        "warnmail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0",
+        "cancelsimilarwarn" :HX_config.serv_path + "/warn/warncenter/cancelsimilarwarn/v=1.0.0",
+        "modifyplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/modifyplanwarnemail/v=1.0.0",
+        "deleteplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
+        "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0"
     }
 })()
 
