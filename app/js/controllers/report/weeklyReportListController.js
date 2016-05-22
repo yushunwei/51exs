@@ -1,4 +1,5 @@
 define(['tool/ajaxTool','../../view/report/weeklyReportListView'], function (ajax,view) {
+    var planHtml ;
     function getuserplanlist(){
         var param = {
             "success":function(data){
@@ -14,16 +15,14 @@ define(['tool/ajaxTool','../../view/report/weeklyReportListView'], function (aja
         ajax.load("userplanlist",param);
     }
     function getDataList(data){
-        console.log(data)
         if(data.length == 0){
 
         }else{
-            view.events();
+            planHtml = !planHtml?($("#panel-model").html()):planHtml;
+            var myTemplate1 = Handlebars.compile(planHtml);
+            var html1 = myTemplate1(data.data);
+            $(".page-weeklyReportList").find("#home").append(html1);
             $.each(data.data,function(i,n){
-                var parentsD = $(".page-weeklyReportList").find(".panel-default").eq(i);
-                var $titleTar = parentsD.find(".panel-heading").find("p")
-                $titleTar.text(n.title);
-                $(".page-weeklyReportList").find(".panel-default").eq(i).show();
                 var param = {
                     query:{
                         planId : n.id
@@ -32,7 +31,7 @@ define(['tool/ajaxTool','../../view/report/weeklyReportListView'], function (aja
                         if(!data){
                             return false;
                         }else{
-                            view.render(data,parentsD,i);
+                            view.render(data, n.id,i);
                         }
                     }
                 };

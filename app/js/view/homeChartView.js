@@ -65,21 +65,13 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     option.series[1].data = senderEmotionDetail(obj.data.detailList);
     var myChartPie = ec.init(document.getElementById('chartPie'));
     myChartPie.setOption(option);
-     var ecConfig = require('echarts/config');
-     myChartPie.on(ecConfig.EVENT.PIE_SELECTED, function(param) {
-       var selected = param.selected;
-       var serie;
-       for ( var idx in selected) {
-         serie = option.series[idx];
-         for (var i = 0, l = serie.data.length; i < l; i++) {
-           if (selected[idx][i] && serie.data[i].planId != undefined && serie.data[i].sentiment != undefined) {
-             window.open('all_plan.html?planId='+ serie.data[i].planId + '&sentiment='+ serie.data[i].sentiment);
-           }
-           if (selected[idx][i] && serie.data[i].planId == undefined && serie.data[i].sentiment != undefined) {
-             window.open('all_plan.html?sentiment='+ serie.data[i].sentiment);
-           }
+     myChartPie.on("click", function(param) {
+       console.log(param)
+       var subData = {sentiment : param.data.sentiment,timeRanges:7};
+         if(param.data.planId){
+             subData.planId = param.data.planId
          }
-       }
+         window.open('pages/monitor/allplan.html?'+ $.param(subData));
      })
   }
 

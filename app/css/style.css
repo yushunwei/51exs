@@ -1594,9 +1594,6 @@ a:focus {
 
 
 /*舆情报告*/
-.page-weeklyReportList .panel-default {
-	display: none;
-}
 .report .nav-tabs>li {
 	float: none;
 }
@@ -1670,7 +1667,6 @@ a:focus {
 }
 .report-none {
 	text-align: center;
-	display: none;
 }
 .report-none p {
 	font-size: 20px;

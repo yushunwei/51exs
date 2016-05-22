@@ -80,93 +80,41 @@
             </div>
             <div class="full-view-main-content tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>财务</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-0">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
-                                </div>
-                                <script id="report-item-0" type="text/x-handlebars-template">
-                                    {{#each this}}
-                                <div class="report-item">
-                                    <h1>{{newstart}}~{{newend}}</h1>
-                                    <p class="report-date">{{reportName}}</p>
-                                    <p class="report-btnbox" data-reportId="{{reportId}}" data-startDate="{{startDate}}"
-                                        data-endDate="{{endDate}}" data-path="{{path}}"
-                                    >
-                                        <a class="btn report-btn" href="#1">查看</a>
-                                        <a class="report-download" href="#1">下载</a>
-                                    </p>
-                                </div>
-                                    {{/each}}
-                                </script>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>财务</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-1">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
+                    <script id="panel-model" type="text/x-handlebars-template">
+                        {{#each this}}
+                        <div class="panel panel-default cy-panel">
+                            <div class="panel-heading"><p>{{title}}</p></div>
+                            <div class="panel-body">
+                                <div class="report-box" id="report-model-{{@index}}">
+                                    loading.......
+                                    loading.......
+                                    loading.......
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>财务</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-2">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
-                                </div>
-                            </div>
+                        {{/each}}
+                    </script>
+                    <script id="report-none" type="text/x-handlebars-template">
+                        <div class="report-none">
+                            <p>对不起，该方案本周暂无舆情报告，</p>
+                            <a href="?planId={{planId}}">查看舆情信息请点击这里！</a>
+                            <img src="../../img/report_none.png">
                         </div>
-                    </div>
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>财务</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-3">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
-                                </div>
-                            </div>
+                    </script>
+                    <script id="report-item-model" type="text/x-handlebars-template">
+                        {{#each this.dataArr}}
+                        <div class="report-item">
+                            <h1>{{newstart}}~{{newend}}</h1>
+                            <p class="report-date">{{reportName}}</p>
+                            <p class="report-btnbox" data-reportId="{{reportId}}" data-startDate="{{startDate}}"
+                               data-endDate="{{endDate}}" data-path="{{path}}"
+                            >
+                                <a class="btn report-btn" href="checkReport.html?{{showPagePath}}">查看</a>
+                                <a class="report-download" href="{{newPath}}">下载</a>
+                            </p>
                         </div>
-                    </div>
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>财务</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-4">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default cy-panel">
-                        <div class="panel-heading"><p>报税</p></div>
-                        <div class="panel-body">
-                            <div class="report-box" id="report-box-5">
-                                <div class="report-none">
-                                    <p>对不起，该方案本周暂无舆情报告，</p>
-                                    <a href="#1">查看舆情信息请点击这里！</a>
-                                    <img src="../../img/report_none.png">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {{/each}}
+                    </script>
                 </div>
             </div>
         </div>
@@ -178,6 +126,5 @@
     © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
 </div>
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
-<script src="../../js/echarts/echarts.js"></script>
 </body>
 </html>

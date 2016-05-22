@@ -82,7 +82,13 @@ var HX_Ajax_Path = (function () {
         //获取舆情方案周列表
         "weeklyReportList":'../../api/weeklyReportList.json',
         //下载周报
-        "weeklyReportDown":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0'
+        "downloadweeklyreport":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
+        //获取舆情导读列表信息
+        "weeklyReadGuidList":HX_config.serv_path+'/monitor/report/getweeklyreadguidelist/v=1.0.0',
+        //渲染载体分布统计
+        "weeklyCarrierdisList":HX_config.serv_path+'/monitor/report/getweeklycarrierdislist/v=1.0.0',
+        //获取top10情感信息媒体分布列表信息
+        "weeklyTop10SentmediadisList":HX_config.serv_path+'/monitor/report/getweeklytop10sentmediadislist/v=1.0.0'
     }
 })()
 
