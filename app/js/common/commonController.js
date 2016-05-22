@@ -12,6 +12,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         setCheckbox();
         //绑定方案删除事件
         $(".nav-bg .nav-main").length>0 && bindDel();
+        //绑定搜索面板 收起 打开事件
+        $(".conditions-choice").find(".conditions-shrinkage-btn").length!=0 && planCloseOpen();
+
     }
 
     /**
@@ -90,9 +93,16 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             if(checkbox.length==0) return false;
             if(span.hasClass("checked")){
                 span.removeClass("checked");
+                if($(this).parents("thead").length==1){
+                    $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").removeClass("checked");
+                }
             }else{
-                span.addClass("checked")
+                span.addClass("checked");
+                if($(this).parents("thead").length==1){
+                    $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").addClass("checked");
+                }
             }
+
         })
     }
     /**
@@ -139,6 +149,21 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             }
         };
         ajax.load("userplanlist",param);
+    }
+
+    function planCloseOpen(){
+        //绑定点击收起面板
+        $(".conditions-choice").find(".conditions-shrinkage-btn").on("click",function(){
+            if($(this).hasClass("chooseClosed")){
+                $(".conditions-choice").find(".conditions-box").not(":last").show();
+                $(this).removeClass("chooseClosed");
+                $(this).children("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }else{
+                $(".conditions-choice").find(".conditions-box").not(":last").hide();
+                $(this).addClass("chooseClosed");
+                $(this).children("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+        })
     }
     // 返回
     return {
