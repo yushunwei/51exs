@@ -66,12 +66,11 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     var myChartPie = ec.init(document.getElementById('chartPie'));
     myChartPie.setOption(option);
      myChartPie.on("click", function(param) {
-       console.log(param)
        var subData = {sentiment : param.data.sentiment,timeRanges:7};
          if(param.data.planId){
              subData.planId = param.data.planId
          }
-         window.open('pages/monitor/allplan.html?'+ $.param(subData));
+         window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
      })
   }
 
@@ -324,7 +323,10 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     parentD.find(".positiveTotal").text(positiveTotal);
     parentD.find(".negativeTotal").text(negativeTotal);
     parentD.find(".negativePercent").text(negativePercent);
-
+    myChartBar.on("click", function(param) {
+      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+    })
   }
   //图表初始化
   function _chartInit(planId,chartDom){

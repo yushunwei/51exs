@@ -368,6 +368,10 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     optionBar1.series[1].data=positiveArray;
     var myChartBar1 = ec.init(document.getElementById('fullChartBar1'));
     myChartBar1.setOption(optionBar1);
+    myChartBar1.on("click", function(param) {
+      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+    })
   }
   //媒体关注度
   function getMediaDegChart(query){
@@ -447,6 +451,10 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     optionBar2.series[0].data=valueArray;
     var myChartBar2 = ec.init(document.getElementById('fullChartBar2'));
     myChartBar2.setOption(optionBar2);
+    myChartBar2.on("click", function(param) {
+      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+    })
   }
   //地域分布Bar
   function getAreaChart(query){
@@ -525,6 +533,10 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     optionBar3.series[0].data=valueArray;
     var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
     myChartBar3.setOption(optionBar3);
+    myChartBar3.on("click", function(param) {
+      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+    })
   }
   //地域分布Map
   function getAreaMapChart(query){

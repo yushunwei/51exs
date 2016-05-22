@@ -73,7 +73,7 @@
     <div class="main">
         <div class="company-week">
             <div class="title">
-                <p><span id="reportName">我的公司</span>周报<span id="startDate">2016-03-08</span>至<span id="endDate">2016-03-15</span><a
+                <p><span id="reportName">我的公司</span>周报<span id="startDate">2016-03-08</span><span>至</span><span id="endDate">2016-03-15</span><a
                         class="has-icon-btn cy-has-bg pull-right"
                         id="downReport">下载word</a></p>
             </div>
@@ -86,14 +86,23 @@
                             <img src="../../img/loading_48.gif"/>
                         </div>
                         <script id="weeklyReadGuidList" type="text/x-handlebars-template">
-                        <ul class="week-takeaway">
+                            <ul class="week-takeaway">
                                 {{#each this}}
-                            <li>{{#math @index "+" 1}}{{/math}}. {{titles}}<span>来源：<a href={{url}}
-                                                                               class="week-takeaway-from">{{media}}</a></span><span>作者：<a
-                                    href="#1">{{author}}</a></span><span>相似文章：<a href="#1">0篇</a></span><span>时间：{{pubTime}}</span>
-                            </li>
+                                <li>
+                                    <div class="readGuidListTitle">{{#math @index "+" 1}}{{/math}}. {{titles}}</div>
+                                    <span class="readGuidListLy">来源：
+                                        <a href={{url}} class="week-takeaway-from">{{media}}</a>
+                                    </span>
+                                    <span class="readGuidListAuthor">作者：
+                                        <a href="#1">{{author}}</a>
+                                    </span>
+                                    <span class="readGuidListWz">相似文章：
+                                        <a href="#1">0篇</a>
+                                    </span>
+                                    <span>时间：{{pubTime}}</span>
+                                </li>
                                 {{/each}}
-                        </ul>
+                            </ul>
                         </script>
                     </div>
                 </div>
@@ -102,11 +111,17 @@
                     <div class="panel-body">
                         <div class="week-charts">
                             <div class="week-charts-title">1.载体分布统计结果如下：</div>
-                                <div id="reportChartPie"></div>
+                            <div id="reportChartPie">
+                                <!-- 加载进度 -->
+                                <div class="noDataBox text-center" style="height: 140px;">
+                                    <img src="../../img/loading_48.gif"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="week-charts">
                             <div class="week-charts-title">2.媒体情感分布：</div>
                             <div class="media-table weeklyCarrierdisList">
+
                                 <table>
                                     <thead>
                                     <tr>
@@ -120,13 +135,13 @@
                                     <tbody>
                                     <script id="weeklyCarrierdisList" type="text/x-handlebars-template">
                                         {{#each this}}
-                                    <tr>
-                                        <td>{{name}}</td>
-                                        <td>{{similarity}}</td>
-                                        <td>{{positive}}</td>
-                                        <td>{{negative}}</td>
-                                        <td>{{warn}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{name}}</td>
+                                            <td>{{similarity}}</td>
+                                            <td>{{positive}}</td>
+                                            <td>{{negative}}</td>
+                                            <td>{{warn}}</td>
+                                        </tr>
                                         {{/each}}
                                     </script>
                                     </tbody>
@@ -136,12 +151,22 @@
                         <div class="week-charts week-charts-left">
                             <div class="week-charts-title">3.前10<span class="text-danger">负面</span>信息媒体分布如下：</div>
 
-                            <div id="reportChartBar1"></div>
+                            <div id="reportChartBar1">
+
+                                <div class="noDataBox text-center" style="height: 140px;">
+                                    <img src="../../img/loading_48.gif"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="week-charts week-charts-right">
                             <div class="week-charts-title">4.前10<span class="text-blue">正面</span>信息媒体分布如下：</div>
 
-                            <div id="reportChartBar2"></div>
+                            <div id="reportChartBar2">
+
+                                <div class="noDataBox text-center" style="height: 140px;">
+                                    <img src="../../img/loading_48.gif"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

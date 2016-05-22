@@ -161,50 +161,54 @@ define(["tool/ajaxTool"], function (ajax) {
   }
   //点击保存
   function saveData(){
-    $(".page-newYq").find(".modal-footer").on("click",".submit",function(){
-      var keyWords = getkeyWords(),//[["1","2"],["3","4"]]
+    $(".page-newYq").on("click",".saveBtn",function(){
+      var keyWords = getkeyWords(),
           warnWords = getwarnWords("warning"),
           exWords = getwarnWords("exclude"),
           title = $("#myComplay").val();
       var newKeys = removeNull(keyWords);
-      var submitData = {
-        "title":title,
-        "userPlanWords":[],
-        "userPlanExWords":[],
-        "userPlanWarnWords":[]
-      };
-      for(var i=0;i<newKeys.length;i++){
-        for(var j=0;j<newKeys[i].length;j++){
-          var s = {word:"",groupNumber:"",orderNumber:""};
-          s.word = newKeys[i][j];
-          s.groupNumber = i+1;
-          s.orderNumber = j+1;
-          submitData.userPlanWords.push(s);
+      if(title == "" || newKeys.length==0){
+        $('#alertModal').modal('show');
+      }else{
+        var submitData = {
+          "title":title,
+          "userPlanWords":[],
+          "userPlanExWords":[],
+          "userPlanWarnWords":[]
+        };
+        for(var i=0;i<newKeys.length;i++){
+          for(var j=0;j<newKeys[i].length;j++){
+            var s = {word:"",groupNumber:"",orderNumber:""};
+            s.word = newKeys[i][j];
+            s.groupNumber = i+1;
+            s.orderNumber = j+1;
+            submitData.userPlanWords.push(s);
+          }
         }
+        for(var h=0;h<warnWords.length;h++){
+          var w = {warnWord:""};
+          if(warnWords[h] !== ""){
+            w.warnWord = warnWords[h];
+            submitData.userPlanWarnWords.push(w);
+          }
+        }
+        for(var k=0;k<exWords.length;k++){
+          var e = {word:""};
+          if(exWords[k] !== ""){
+            e.word = exWords[k];
+            submitData.userPlanExWords.push(e);
+          }
+        }
+        var param = {
+          data:JSON.stringify(submitData),
+          type:"post",
+          contentType: 'application/json',
+          success:function(data){
+            console.log(data)
+          }
+        };
+        ajax.load('newYq',param);
       }
-      for(var h=0;h<warnWords.length;h++){
-        var w = {warnWord:""};
-        if(warnWords[h] !== ""){
-          w.warnWord = warnWords[h];
-          submitData.userPlanWarnWords.push(w);
-        }
-      }
-      for(var k=0;k<exWords.length;k++){
-        var e = {word:""};
-        if(exWords[k] !== ""){
-          e.word = exWords[k];
-          submitData.userPlanExWords.push(e);
-        }
-      }
-      var param = {
-        data:JSON.stringify(submitData),
-        type:"post",
-        contentType: 'application/json',
-        success:function(data){
-          console.log(data)
-        }
-      };
-      ajax.load('newYq',param);
     });
   }
   //关键字数据去空

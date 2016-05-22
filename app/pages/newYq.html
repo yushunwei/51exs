@@ -173,7 +173,7 @@
 
             </div>
             <div class="modify-plan-item-btn">
-              <a href="#1" class="btn btn-info" data-toggle="modal" data-target=".alert-save">保存</a>
+              <a href="#1" class="btn btn-info saveBtn" data-toggle="modal">保存</a>
               <a href="#1" class="btn btn-default">找客服帮忙</a>
             </div>
           </div>
@@ -225,55 +225,28 @@
     </div>
   </div>
   <!-- 正在生成结束 -->
-  <!-- 删除弹框 -->
-  <div class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog"
-       aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                            class="fa fa-times-circle"></span>
-          </button>
-          <h4 class="modal-title">温馨提示</h4>
-        </div>
-        <div class="modal-body">
-          <p class="cy-model-content">带<span class="text-danger">*</span>为必填，请完善后保存</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="submit btn btn-info">确定</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="footer">
   © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
 </div>
 <!-- 底部结束 -->
-<!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog"
-     aria-labelledby="mySmallModalLabel">
+<!-- 保存弹框 -->
+<div id="alertModal" class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                          class="fa fa-times-circle"></span>
-        </button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
         <h4 class="modal-title">温馨提示</h4>
       </div>
       <div class="modal-body">
-        <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
+        <p class="cy-model-content">带<span class="text-danger">*</span>为必填，请完善后保存</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info">确定</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
       </div>
     </div>
   </div>
 </div>
 <!-- 弹框结束 -->
-<!-- 删除弹框 -->
 <script data-main="../../js/app" src="../js/lib/require.js"></script>
 </body>
 </html>
