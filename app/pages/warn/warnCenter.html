@@ -223,7 +223,7 @@
           <div class="warning-setting">
             <div class="warning-setting-title">
               预警方案
-              <a href="#1" data-toggle="modal" data-target=".warning-management"><i class="fa fa-folder-o"></i>管理预警邮箱</a>
+              <a href="#1" data-toggle="modal" data-target=".warning-management"><img style="margin-right: 7px" src="../../img/email_tips.png">管理预警邮箱</a>
             </div>
             <div class="warning-setting-main clearfix">
               <div class="panel hidden panel-default hidden cy-panel panel-planwarn">
@@ -232,7 +232,7 @@
                 <div class="panel-heading"><p>{{title}}<a class="warning-email" href="#1" data-id="{{id}}" data-title="{{title}}"><i class="fa fa-folder-open-o"></i>管理接收邮箱</a></p></div>
                 <div class="panel-body" data-planID="{{id}}">
                   {{#each warnEmails}}
-                  <p><a href="#1" data-emailID="{{emailid}}">{{email}}<img src="../../img/warning_delete.png" data-toggle="modal" data-target=".alert-delete"></a></p>
+                  <p><a href="#1" data-emailid="{{id}}">{{email}}<img src="../../img/warning_delete.png"></a></p>
                   {{/each}}
                 </div>
                 </script>
@@ -255,7 +255,7 @@
     </div>
   </div>
   <!-- 主体内容结束 -->
-  <div class="modal fade bs-example-modal-sm cy-model alert-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal fade bs-example-modal-sm cy-model alert-delete modal-email-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -294,7 +294,7 @@
             <ul class="clearfix add-email-ul">
               <script id="addemailScript" type="text/x-handlebars-template">
                 {{#each this.data}}
-                <li><label class="cy-checkbox"><input type="checkbox"><span></span></label>{{this}}</li>
+                <li><label class="cy-checkbox"><input type="checkbox"><span class="{{#isCheck checked}}{{/isCheck}}"></span></label><span class="info-email">{{this}}</span></li>
                 {{/each}}
               </script>
             </ul>
@@ -318,7 +318,7 @@
           <form class="form-inline add-email-input" id="emailForm2" action="">
             <div class="form-group">
               <label>添加新邮箱：</label>
-              <input type="email" required class="form-control" name="email">
+              <input type="email" required class="form-control input-add" name="email">
             </div>
             <button type="submit" class="btn btn-info" id="submit2">添加</button>
           </form>
@@ -327,14 +327,14 @@
             <ul class="clearfix add-email-ul">
               <script id="modalemailadd" type="text/x-handlebars-template">
                 {{#each this}}
-                <li><label class="cy-checkbox"><input type="checkbox"><span></span></label>{{email}}</li>
+                <li><label class="cy-checkbox"><input type="checkbox"><span class="{{#isCheck checked}}{{/isCheck}}"></span></label><span>{{email}}</span></li>
                 {{/each}}
               </script>
             </ul>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info send-email-btn">发送邮件</button>
+          <button type="button" class="btn btn-info send-email-btn btn-emails-confirm">发送邮件</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
       </div>
@@ -350,30 +350,21 @@
           <h4 class="modal-title">管理预警邮箱</h4>
         </div>
         <div class="modal-body">
-          <div class="form-inline add-email-input">
+          <form class="form-inline add-email-input" id="emailController" action="">
             <div class="form-group">
               <label>添加新邮箱：</label>
-              <input type="text" class="form-control">
+              <input type="email" required class="form-control" name="email">
             </div>
-            <button type="submit" class="btn btn-info">添加</button>
-          </div>
-          <div class="add-email-list">
+            <button type="submit" class="btn btn-info" id="submit3">添加</button>
+          </form>
+          <div class="add-email-list emaillist-all">
             <ul class="clearfix">
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
-              <li>wangyuqin@adtime.com<img src="img/warning_delete.png"></li>
+
             </ul>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info">确定</button>
+          <button type="button" class="btn btn-info btn-add-confirm">确定</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
       </div>
