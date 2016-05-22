@@ -22,6 +22,8 @@ var HX_config = {
 var HX_Ajax_Path = (function () {
 
     return {
+        //三十五.更新预警关注记录
+        "addwarnfocusrecord": HX_config.serv_path + '/warn/warncenter/addwarnfocusrecord/v=1.0.0',
         //娉ㄥ唽url
         "register": HX_config.serv_path + '/system/register/getregisterurl/v=1.0.0',
         //寮�閫氳涓�

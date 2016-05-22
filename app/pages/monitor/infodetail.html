@@ -37,18 +37,31 @@
             </div>
             <div class="header-notice">
                 <ul>
-                    <li><a href="#1"><img src="../../img/headnav_icon.png" alt="">
-
-                        <p>舆情报告</p></a></li>
-                    <li><a href="#1"><img src="../../img/headnav_icon_2.png" alt="">
-
-                        <p>预警中心</p><span id="alertIcon" class="cy-badge"></span></a></li>
-                    <li><a href="#1"><img src="../../img/headnav_icon_4.png" alt="">
-
-                        <p>帮助中心</p></a></li>
-                    <li><a href="#1"><img src="../../img/headnav_icon_3.png" alt="">
-
-                        <p>给我意见</p></a></li>
+                    <li>
+                        <a href="#1">
+                            <img src="../../img/headnav_icon.png" alt="">
+                            <p>舆情报告</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../../img/headnav_icon_2.png" alt="">
+                            <p>预警中心</p>
+                            <span id="alertIcon" class="cy-badge hidden"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#1">
+                            <img src="../../img/headnav_icon_4.png" alt="">
+                            <p>帮助中心</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../../img/headnav_icon_3.png" alt="">
+                            <p>给我意见</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="header-user">
@@ -83,9 +96,11 @@
 
                         <p class="recommended-information">
                             <span>作者：{{author}}</span>
-                            <span>来源媒体：<a href="{{weburl}}">{{media}}</a></span>
-                            <span><a class="original" target="_blank" href="{{url}}">
-                                <img src="../../img/link_icon.png" alt="">原文链接</a>
+                            <span>来源媒体：<a href="{{weburl}}" target="_blank">{{media}}</a></span>
+                            <span>
+                                <a class="original" target="_blank" href="{{url}}">
+                                    <img src="../../img/link_icon.png" alt="">原文链接
+                                </a>
                             </span>
                             <span>发布时间：{{pubTime}}</span>
                         </p>
