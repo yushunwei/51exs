@@ -1,4 +1,4 @@
-define(["../tool/ajaxTool"], function (ajax) {
+define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     /**
      * 初始化
      * @private
@@ -10,6 +10,8 @@ define(["../tool/ajaxTool"], function (ajax) {
         $("div.header .header-notice span.cy-badge").length !=0 && setWarnInfo();
         //设置checkbox
         setCheckbox();
+        //绑定方案删除事件
+        $(".nav-bg .nav-main").length>0 && bindDel();
     }
 
     /**
@@ -27,7 +29,7 @@ define(["../tool/ajaxTool"], function (ajax) {
             error:function(){
                 bindWarnCenterEvent(0);
             }
-        }
+        };
         ajax.load("warnNum",param);
     }
 
@@ -93,7 +95,46 @@ define(["../tool/ajaxTool"], function (ajax) {
             }
         })
     }
-
+    /**
+     * 设置方案删除事件
+     * **/
+    function bindDel(){
+        var planid;
+        var ajaxID;
+        $(document).on("click",".nav-bg .nav-main ul.listbox li i.nav-delete",function(){
+            planid = $(this).parent().data("id");
+        });
+        $('.plan-delete').find(".btn-info").on("click",function(){
+            var param = {
+                type:"POST",
+                data:{
+                    planId:planid
+                },
+                success:function(data){
+                    reLoadPlan();
+                }
+            };
+            ajax.load("deleteuserplan",param);
+        });
+    }
+    //重新加载方案list
+    function reLoadPlan(){
+        var planid = "";
+        var param = {
+            "success":function(data){
+                var url = '';
+                // 用户方案为空，则直接跳转页面
+                if (data.data.length === 0) {
+                    url = "/index.html";
+                } else {
+                    planid = data.data[0].id;
+                    url = "/pages/monitor/full_view.html?id="+planid;
+                }
+                window.location.href = url;
+            }
+        };
+        ajax.load("userplanlist",param);
+    }
     // 返回
     return {
         init:_init
