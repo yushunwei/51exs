@@ -115,6 +115,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 }
             };
             ajax.load("deleteuserplan",param);
+            $(this).attr("disabled",true);
+            $('.plan-delete').find(".modal-body p").html("方案删除中，请稍等。。。");
         });
     }
     //重新加载方案list
@@ -130,6 +132,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                     planid = data.data[0].id;
                     url = "/pages/monitor/full_view.html?id="+planid;
                 }
+                $('.plan-delete').modal("hide");
+                $('.plan-delete').find(".btn-info").removeAttr("disabled");
+                $('.plan-delete').find(".modal-body p").html("确定删除该方案吗？确定后该方案及相关数据将不存在");
                 window.location.href = url;
             }
         };
