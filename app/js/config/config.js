@@ -94,6 +94,7 @@ var HX_Ajax_Path = (function () {
     }
 })();
 
+//
 //char楗煎浘棰滆壊
 var pieColor = {
     "positiveColor": ['#3693B3', '#309BBF', '#29A3CC', '#21ABD9', '#17B2E6', '#0CB9F2', '#05C1FF'],
