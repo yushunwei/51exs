@@ -75,7 +75,16 @@ var HX_Ajax_Path = (function () {
         //地域分布Map
         "fullView_AreaMap": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
         //修改舆情初始化数据
-        "xgYQ":HX_config.serv_path+'/plan/userplan/getuserplan/v=1.0.0'
+        "xgYQ":HX_config.serv_path+'/plan/userplan/getuserplan/v=1.0.0',
+        //获取舆情方案周列表
+        "weeklyReportList":'../../api/weeklyReportList.json',
+        //下载周报
+        "weeklyReportDown":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
+        //warn
+        "warnInfo" :HX_config.serv_path + "/warn/warncenter/getwarninfolist/v=1.0.0",
+        //emailList
+        "planwarnemail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemaillist/v=1.0.0",
+        "warnmail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0"
     }
 })()
 
