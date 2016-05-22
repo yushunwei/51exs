@@ -14,6 +14,15 @@ define([], function () {
         }
         return span;
     });
+    Handlebars.registerHelper("isCheck", function (v1, v2, options) {
+        if(v1=="" || typeof v1=="undefined"){
+           return '';
+        }
+        if(v1){
+            return 'checked';
+        }
+        return '';
+    });
 
         function _renderList(data,i){
             listModel = listModel ? listModel : $("#listScript").html();
