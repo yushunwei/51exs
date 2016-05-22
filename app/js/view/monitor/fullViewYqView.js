@@ -174,7 +174,7 @@ define(["tool/ajaxTool"], function (ajax) {
     }
 
     //点击保存
-    function saveData() {
+    function saveData(id) {
         $("#messages").find(".modal-footer").on("click", ".submit", function () {
             var keyWords = getkeyWords(),//[["1","2"],["3","4"]]
                 warnWords = getwarnWords("warning"),
@@ -182,6 +182,7 @@ define(["tool/ajaxTool"], function (ajax) {
                 title = $("#myComplay").val();
             var newKeys = removeNull(keyWords);
             var submitData = {
+                "id":id,
                 "title": title,
                 "userPlanWords": [],
                 "userPlanExWords": [],
@@ -218,7 +219,7 @@ define(["tool/ajaxTool"], function (ajax) {
                     console.log(data)
                 }
             };
-            ajax.load('newYq', param);
+            ajax.load('modifyuserplan', param);
         });
     }
 
@@ -350,7 +351,7 @@ define(["tool/ajaxTool"], function (ajax) {
         //获取关键词，预警词和排除词
         getWords();
         //保存
-        saveData();
+        saveData(id);
     }
 
     return {
