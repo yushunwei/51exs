@@ -21,11 +21,11 @@ define(["../tool/ajaxTool"], function (ajax) {
                 if(d.status ==200){
                     bindWarnCenterEvent(d.data);
                 }else{
-                    bindWarnCenterEvent(null);
+                    bindWarnCenterEvent(0);
                 }
             },
             error:function(){
-                bindWarnCenterEvent(null);
+                bindWarnCenterEvent(0);
             }
         }
         ajax.load("warnNum",param);
@@ -37,7 +37,7 @@ define(["../tool/ajaxTool"], function (ajax) {
      */
     function bindWarnCenterEvent(warCount){
         var warnDom = $("div.header .header-notice span.cy-badge");
-        if(!warCount && warCount > 0){
+        if(warCount > 0){
             warnDom.removeClass("hidden");
             warnDom.parent().click(function(){
                 addWarnFocusRecord();
