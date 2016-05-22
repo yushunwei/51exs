@@ -82,9 +82,9 @@
                         <h1>{{title}}</h1>
 
                         <p class="recommended-information">
-                            <span>作者：<a href="#1">{{author}}</a></span>
-                            <span>来源媒体：<a href="#1">{{media}}</a></span>
-                            <span><a class="original" target="_blank" href="{{weburl}}">
+                            <span>作者：{{author}}</span>
+                            <span>来源媒体：<a href="{{weburl}}">{{media}}</a></span>
+                            <span><a class="original" target="_blank" href="{{url}}">
                                 <img src="../../img/link_icon.png" alt="">原文链接</a>
                             </span>
                             <span>发布时间：{{pubTime}}</span>
@@ -162,9 +162,13 @@
                         </div>
                         <div class="noborder-panel-body">
                             <div class="related-main">
+                                <!-- 加载进度 -->
+                                <div class="noDataBox text-center" style="height: 100px;">
+                                    <img src="../../img/loading_32.gif"/>
+                                </div>
                                 <script id="detailList" type="text/x-handlebars-template">
                                     {{#each this.data.array}}
-                                    <p><a href="pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a>
+                                    <p><a href="/pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a>
                                     </p>
                                     {{/each}}
                                 </script>
