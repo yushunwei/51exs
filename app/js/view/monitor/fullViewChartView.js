@@ -534,6 +534,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
     myChartBar3.setOption(optionBar3);
     myChartBar3.on("click", function(param) {
+      console.log(param)
       var subData = {sentiment : param.data.sentiment,timeRanges:7};
       window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
     })

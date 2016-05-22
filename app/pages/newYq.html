@@ -32,27 +32,27 @@
 <body>
 <div class="header">
   <div class="header-content clearfix">
-    <a href="../../index.html"><img src="../../img/logo.png"></a>
+    <a href="../index.html"><img src="../img/logo.png"></a>
 
     <div class="header-information pull-right">
       <div class="header-input">
         <div class="input-group">
           <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
                         <span class="input-group-btn">
-                            <a class="btn btn-default btn-search" href="pages/fullsearch/allSearch.html"
+                            <a class="btn btn-default btn-search" href="../pages/fullsearch/allSearch.html"
                                type="button"><i class="fa fa-search"></i></a>
                         </span>
         </div>
       </div>
       <div class="header-notice">
         <ul>
-          <li><a href="pages/checkReport.html"><img src="../../img/headnav_icon.png" alt="">
+          <li><a href="../pages/report/checkReport.html"><img src="../img/headnav_icon.png" alt="">
 
             <p>舆情报告</p></a></li>
-          <li><a href="pages/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
+          <li><a href="../pages/warn/warnCenter.html"><img src="../img/headnav_icon_2.png" alt="">
 
             <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
-          <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
+          <li><a href="#"><img src="../img/headnav_icon_3.png" alt="">
 
             <p>给我意见</p></a></li>
         </ul>
@@ -72,7 +72,7 @@
     <div class="nav-main">
       <ul class="clearfix listbox">
         <script id="userlistScript" type="text/x-handlebars-template">
-          <li class="list1"><a href="home.html">首页</a></li>
+          <li class="list1"><a href="../index.html">首页</a></li>
           {{#each this}}
           <li data-id="{{this.id}}"><a href="monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
                   class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../img/delete-icon.png" alt=""></i>
@@ -224,6 +224,7 @@
       </div>
     </div>
   </div>
+  </div>
   <!-- 正在生成结束 -->
 <div class="footer">
   © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
@@ -247,6 +248,6 @@
   </div>
 </div>
 <!-- 弹框结束 -->
-<script data-main="../../js/app" src="../js/lib/require.js"></script>
+<script data-main="../js/app" src="../js/lib/require.js"></script>
 </body>
 </html>
