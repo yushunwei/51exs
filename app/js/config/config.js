@@ -22,16 +22,18 @@ var HX_config = {
 var HX_Ajax_Path = (function () {
 
     return {
-        //娉ㄥ唽url
+        //
         "register": HX_config.serv_path + '/system/register/getregisterurl/v=1.0.0',
-        //寮�閫氳涓�
+        //
         "openHY": HX_config.serv_path + '/system/baseinfo/getindustrys/v=1.0.0',
-        //寮�閫氫紒涓�
+        //
         "openQY": HX_config.serv_path + '/system/baseinfo/getareas/v=1.0.0',
-        //寮�閫氱敵璇�
+        //
         "openapplication": HX_config.serv_path + '/system/user/openapplication/v=1.0.0',
         //user information
         "user": HX_config.serv_path + '/system/user/getuserinfo/v=1.0.0',
+        //删除方案
+        "deleteuserplan": HX_config.serv_path + '/plan/userplan/deleteuserplan/v=1.0.0',
         //棰勮鏁伴噺
         "warnNum": HX_config.serv_path + '/warn/warncenter/getlatestuserwarncount/v=1.0.0',
         //home椤甸潰鎰熸儏chart鏁版嵁
@@ -90,7 +92,7 @@ var HX_Ajax_Path = (function () {
         "deleteplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
         "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0"
     }
-})()
+})();
 
 //char楗煎浘棰滆壊
 var pieColor = {
