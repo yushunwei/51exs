@@ -25,6 +25,7 @@
     <script src="../../js/lib/pagination/jquery.pagination.js"></script>
     <!-- laydate -->
     <script src="../../js/lib/laydate/laydate.js"></script>
+    <script src="../../js/lib/layer/layer.js"></script>
     <!-- laydate -->
 
 </head>
@@ -74,9 +75,7 @@
                 <script id="userlistScript" type="text/x-handlebars-template">
                     <li class="list1"><a href="../../index.html">首页</a></li>
                     {{#each this}}
-                    <li data-id="{{this.id}}"><a href="full_view.html?id={{this.id}}">{{this.title}}</a><i
-                            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img
-                            src="../../img/delete-icon.png" alt=""></i></li>
+                    <li data-id="{{this.id}}"><a href="full_view.html?id={{this.id}}">{{this.title}}</a><i class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../../img/delete-icon.png" alt=""></i></li>
                     {{/each}}
                     <li class="nav-new"><a href="../newYq.html"><img src="../../img/plus.png" alt="">新建舆情</a></li>
                 </script>
@@ -89,12 +88,9 @@
         <div class="full-view-main">
             <div class="full-view-main-title">
                 <ul id="myTab" class="nav-tabs clearfix" role="tablist">
-                    <li role="presentation" class="active"><a class="tab-all-view" href="#home" aria-controls="home"
-                                                              role="tab" data-toggle="tab">全景</a></li>
-                    <li role="presentation"><a class="tab-chart" href="#profile" aria-controls="profile" role="tab"
-                                               data-toggle="tab">图表分析</a></li>
-                    <li role="presentation"><a class="tab-plan" href="#messages" aria-controls="messages" role="tab"
-                                               data-toggle="tab">修改方案</a></li>
+                    <li role="presentation" class="active"><a class="tab-all-view" href="#home" aria-controls="home" role="tab" data-toggle="tab">全景</a></li>
+                    <li role="presentation"><a class="tab-chart" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">图表分析</a></li>
+                    <li role="presentation"><a class="tab-plan" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">修改方案</a></li>
                 </ul>
             </div>
             <div class="full-view-main-content tab-content">
@@ -156,8 +152,7 @@
                                 <ul class="conditions-item type-isdedup">
                                     <li>显示设置：</li>
                                     <li><a href="javascript:void(0)" class="active digest-btn">显示摘要</a></li>
-                                    <li><a href="javascript:void(0)"
-                                           class="active mergelike-btn type-isdedup">合并相似舆情</a></li>
+                                    <li><a href="javascript:void(0)" class="active mergelike-btn type-isdedup">合并相似舆情</a></li>
                                 </ul>
                             </div>
                             <div class="conditions-box">
@@ -165,15 +160,13 @@
                                     <li>批量操作：</li>
                                     <li><a class="has-icon-btn cy-has-bg download-checked-btn" href="#1">下载选中项</a></li>
                                     <li><a class="has-icon-btn download-all-btn" href="#1">下载全部</a></li>
-                                    <li><a class="has-icon-btn download-all-btn cancel-alldanger-btn"
-                                           href="#1">批量取消预警</a></li>
+                                    <li><a class="has-icon-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
                                 </ul>
                                 <div class="conditions-searchbox">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="在结果中搜索">
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                                        </button>
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                                       </span>
                                     </div>
                                 </div>
@@ -186,8 +179,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="col-md-1"><label class="cy-checkbox"><input
-                                        type="checkbox"><span></span></label></th>
+                                <th class="col-md-1"><label class="cy-checkbox"><input type="checkbox"><span></span></label></th>
                                 <th class="col-md-8">舆情信息</th>
                                 <th class="col-md-1">相似文章</th>
                                 <th class="col-md-1">采集自</th>
@@ -197,20 +189,13 @@
                             <tbody class="list-yq">
                             <script id="listScript" type="text/x-handlebars-template">
                                 {{#each this.objects}}
-                                <tr>
-                                    <td class="text-center"><label class="cy-checkbox"><input
-                                            type="checkbox"><span></span></label></td>
+                                <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                                    data-source="{{source}}" data-author="{{author}}"
+                                    data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}">
+                                    <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                                     <td class="information">
-                                        <h3 class="title"><span class="label label-info">正面</span><span
-                                                class="label label-danger hidden">负面</span><span
-                                                class="label label-success hidden">中性</span><span
-                                                class="label label-warning hidden">预警</span><a
-                                                class="info-regionandtitle" href="{{url}}?docId={{docId}}"
-                                                target="_blank">【<span
-                                                class="text-danger">{{region}}</span>】{{title}}</a></h3>
-                                        <p class="digest">摘要：<a class="info-summary"
-                                                                href="infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8"
-                                                                target="_blank">{{summary}}</a></p>
+                                        <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
+                                        <p class="digest">摘要：<a class="info-summary" href="infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" target="_blank">{{summary}}</a></p>
                                         <div class="full-view-data-operation">
                                             <div class="share">
                                                 <div class="share-box">
@@ -227,24 +212,17 @@
                                                     <i class="fa fa-send"></i>邮件
                                                     <div class="share-for">
                                                         <ul>
-                                                            <li><a href="#1" data-toggle="modal"
-                                                                   data-target=".add-email">邮件发送舆情信息</a></li>
+                                                            <li><a href="#1" data-toggle="modal" data-target=".add-email">邮件发送舆情信息</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span
-                                                    class="info-fansCount"> | {{clickCount}}</span></div>
+                                            <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
                                         </div>
                                     </td>
-                                    <td class="text-center"><a
-                                            href="similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8"
-                                            class="info-similarcount" target="_blank">{{similarCount}}</a></td>
-                                    <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img
-                                            src="../../img/weibo.png" alt=""><br><span
-                                            class="info-media">{{media}}</span></a></td>
-                                    <td class="text-center table-time"><span class="info-date">{{createTime}}</span>
-                                    </td>
+                                    <td class="text-center"><a href="similar.html?pageNum=1&amp;pageSize=15&amp;dedupId={{dedupId}}" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
+                                    <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
+                                    <td class="text-center table-time"><span class="info-date">{{createTime}}</span></td>
                                 </tr>
                                 {{/each}}
                             </script>
