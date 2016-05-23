@@ -30,28 +30,27 @@
 <div class="header userBox">
     <div class="header-content clearfix">
         <a href="../../index.html"><img src="../../img/logo.png"></a>
-
         <div class="header-information pull-right">
-            <div class="header-input">
-                <div class="input-group">
-                    <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
-                        <span class="input-group-btn">
-                            <a class="btn btn-default btn-search" href="allSearch.html"
-                               type="button"><i class="fa fa-search"></i></a>
-                        </span>
-                </div>
-            </div>
             <div class="header-notice">
                 <ul>
-                    <li><a href="../report/weeklyreportlist.html"><img src="../../img/headnav_icon.png" alt="">
-
-                        <p>舆情报告</p></a></li>
-                    <li><a href="../warn/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
-
-                        <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
-                    <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
-
-                        <p>给我意见</p></a></li>
+                    <li>
+                        <a href="../report/weeklyreportlist.html"><img src="../../img/headnav_icon.png" alt="">
+                            <p>舆情报告</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../warn/warnCenter.html">
+                            <img src="../../img/headnav_icon_2.png" alt="">
+                            <p>预警中心</p>
+                            <span class="cy-badge hidden"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="../../img/headnav_icon_3.png" alt="">
+                            <p>给我意见</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="header-user">
@@ -69,7 +68,7 @@
             <h3>全网搜索</h3>
             <div class="conditions-searchbox">
                 <div class="input-group">
-                    <input type="text" class="form-control type-keywords">
+                    <input type="text" class="form-control type-keywords" placeholder="请输入搜索关键词">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                     </span>
@@ -198,7 +197,7 @@
                     <div class="pull-right pagination"></div>
                 </div>
                 <div class="index-none hidden">
-                    <p>对不起！暂无数据</p><a href="#1">新建舆情 — — 请点击这里！</a><img src="../../img/index_none.png" alt="">
+                    <p>对不起！没有您需要的数据</p><img src="../../img/index_none.png" alt="">
                 </div>
             </div>
         </div>
@@ -242,48 +241,6 @@
     © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
 </div>
 <!-- 底部结束 -->
-<!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog"
-     aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="fa fa-times-circle"></span>
-                </button>
-                <h4 class="modal-title">温馨提示</h4>
-            </div>
-            <div class="modal-body">
-                <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 弹框结束 -->
-<!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model new-all-alert" tabindex="-1" role="dialog"
-     aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="fa fa-times-circle"></span>
-                </button>
-                <h4 class="modal-title">温馨提示</h4>
-            </div>
-            <div class="modal-body">
-                <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
 </body>
 </html>
