@@ -14,7 +14,20 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".nav-bg .nav-main").length>0 && bindDel();
         //绑定搜索面板 收起 打开事件
         $(".conditions-choice").find(".conditions-shrinkage-btn").length!=0 && planCloseOpen();
+        //绑定全网搜索
+        $("div.header .header-input .input-keywords").length != 0 && bindFullSearch();
 
+    }
+
+    /**
+     * 绑定全网搜索
+     */
+    function bindFullSearch(){
+        $(".btn-search").click(function(){
+            var keyWords = $(".input-keywords").val().replace(/^\s+|\s+$/g,"");
+            $(this).attr("href","/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""))
+                .click();
+        });
     }
 
     /**

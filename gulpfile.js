@@ -23,10 +23,10 @@ gulp.task('serve', function () {
 
 gulp.task('sass', function () {
   return gulp.src('scss/app.scss')
-    .pipe(sourcemaps.init())
+  //  .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(sourcemaps.write('./'))
+  //  .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest("app/css"))
     .pipe(reload({stream: true}));
 });
