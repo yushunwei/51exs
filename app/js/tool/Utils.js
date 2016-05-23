@@ -130,7 +130,7 @@ define(["jquery.cookie"], function () {
     // return token
     function _getToken() {
         var token = $.cookie("exsToken");
-        return token != 'null' ? token : '3b679f7cf55011e5bb6600188b839ae8';
+        return token != 'null' && typeof token !="undefined" ? token : '3b679f7cf55011e5bb6600188b839ae8';
     }
 
     /**
