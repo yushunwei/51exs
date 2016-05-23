@@ -99,7 +99,7 @@
         <!------舆情------->
         <div class="plan modelLoding">
             <div class="hidden plan-title">
-                <h3><a href="pages/monitor/allplan.html">全部舆情方案</a></h3>
+                <h3><a href="pages/monitor/allplan.html" target="_blank">全部舆情方案</a></h3>
 
                 <div class="plan-data">
                     <ul class="clearfix" id="yqfaTitle">
@@ -131,15 +131,15 @@
                                         {{#each objects}}
                                         <li>
                                             <p><a class="plan-main-item"
-                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}" target="_blank"
                                                   data-pageturn="true">{{this.title}}</a>
                                                 {{#if this.sentiment}}
                                                 {{#compare this.sentiment 1}}
-                                                <span class="label label-info">正面</span>
+                                                <span class="label label-info label-ststus">正面</span>
                                                 {{else}}
                                                 {{#if this.sentiment}}
                                                 {{#compare this.sentiment -1}}
-                                                <span class="label label-danger">负面</span>
+                                                <span class="label label-danger label-ststus">负面</span>
                                                 {{else}}
                                                 {{/compare}}
                                                 {{/if}}
@@ -147,13 +147,13 @@
                                                 {{/if}}
 
                                                 {{#if this.isWarn}}
-                                                <span class="label label-danger">预警</span>
+                                                    {{#js_compare isWarn 'yes'}}
+                                                     <span class="label label-danger">预警</span>
                                                 {{else}}
-
+                                                     {{/js_compare}}
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [<a
-                                                    href="pages/similarArticle.html?docID={{this.docId}}"
                                                     data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
                                             <img src="img/list_icon.png" alt="">
                                         </li>
@@ -415,7 +415,7 @@
                     <div class="plan-main-title">
                         <ul class="nav nav-tabs list-tabs">
                             <li>最新舆情</li>
-                            <li class="active"><a data-toggle="tab" href="#listn1-all">全部</a></li>
+                            <li class="active"><a data-toggle="tab" href="#listn3-all">全部</a></li>
                             <li data-type="positive"><a data-toggle="tab" href="#listn3-p">正面</a></li>
                             <li data-type="neutral"><a data-toggle="tab" href="#listn3-z">中性</a></li>
                             <li data-type="negative"><a data-toggle="tab" href="#listn3-f">负面</a></li>

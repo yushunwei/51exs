@@ -70,9 +70,10 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
         $(".plan").eq(0).on('click', ".list-tabs a", function () {
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
+            var tabindex = $(this).parent().index();
             var param = {
                 "success": function (data) {
-                    view.renderYqfa(data.data, tabID);
+                    view.renderYqfa(data.data, tabID,tabindex);
                 },
                 //url 参数 类似 data
                 "query": {
@@ -124,10 +125,11 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
             var id = $(this).parent().parent().attr("planid");
+            var tabindex = $(this).parent().index();
             var param = {
                 "success": function (data) {
                     if (data.data.recordTotal != 0) {
-                        view.renderTabList(data.data, tabID);
+                        view.renderTabList(data.data, tabID,tabindex);
                     } else {
                         $(tabID).html(HX_config.noDataHtml);
                     }
