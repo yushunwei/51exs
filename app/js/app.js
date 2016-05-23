@@ -6,7 +6,7 @@ require(['controllers/' + controllerPath + 'Controller', "tool/Utils","common/co
     var other = document.location.href;
     var page = {
         "query": utils.getQuery(other),
-        "name": controllerPath.substr(index)
+        "name": controllerPath.substr(index+1)
     };
 
     var token = page.query.token;

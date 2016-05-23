@@ -24,7 +24,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView"], functio
             result = d;
             pagination(result,pageNum);
         };
-        ajax.load("getAllInfoList",param);
+        ajax.load("getMonitorInfoList",param);
     }
     function bindEvent(){
         var $dom = $(".page-monitorinfolist");
