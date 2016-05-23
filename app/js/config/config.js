@@ -102,7 +102,9 @@ var HX_Ajax_Path = (function () {
         //删除方案预警邮箱
         "deleteplanwarnemail": HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
         //更新预警邮箱
-        "modifywarnemail": HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0"
+        "modifywarnemail": HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0",
+        //获取单个方案的正负面数据
+        "getSentimentDistribute":HX_config.serv_path + "/monitor/statmonitor/getsentimentdistribute/v=1.0.0"
     }
 })();
 
