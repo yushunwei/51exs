@@ -1,116 +1,113 @@
-//鍏ㄥ眬閰嶇疆鍙傛暟
+// 配置文件
 var HX_config = {
-    //鐧诲綍骞荤伅鐗囪矾寰�
+    //登录页面轮播图片
     "ADIMG": [
         "img/banner_01.jpg",
         "img/banner_02.jpg",
         "img/banner_03.jpg"
     ],
-    //ajax
-    "registerURL": "http://uuser.idinfo.cn/jsp/client/uuuser/uuuserRegistStep.jsp?redirectUrl=http://www.51exs.com/login",
-    "loginURL": "https://oauth.idinfo.cn/login.jsp",
-    "consult": "https://www.baidu.com",
-    //鍒囨崲椤甸潰key鍊�
-    "nextPageKEY": "n",
-    "ivcode": "",
-    //鏈嶅姟鍣ㄥ湴鍧�
+    //服务器地址
     "serv_path": "http://115.238.48.66:1158",
-    "noDataHtml" : "<div class='noDataBox'><div class='noDataShow'></div></div>",
-    "errorHtml" : "<div class='noDataBox'><div class='errorShow '></div></div>"
+    "noDataHtml": "<div class='noDataBox'><div class='noDataShow'></div></div>",
+    "errorHtml": "<div class='noDataBox'><div class='errorShow '></div></div>"
 };
-//ajax path
-var HX_Ajax_Path = (function () {
 
+// 接口地址
+var HX_Ajax_Path = (function () {
     return {
         //更新预警关注记录
         "addwarnfocusrecord": HX_config.serv_path + '/warn/warncenter/addwarnfocusrecord/v=1.0.0',
-        //娉ㄥ唽url
+        //获取用户注册地址
         "register": HX_config.serv_path + '/system/register/getregisterurl/v=1.0.0',
-        //寮�閫氳涓�
+        //获取行业信息
         "openHY": HX_config.serv_path + '/system/baseinfo/getindustrys/v=1.0.0',
-        //寮�閫氫紒涓�
+        //获取地域信息
         "openQY": HX_config.serv_path + '/system/baseinfo/getareas/v=1.0.0',
-        //寮�閫氱敵璇�
+        //开通服务
         "openapplication": HX_config.serv_path + '/system/user/openapplication/v=1.0.0',
-        //user information
+        //获取用户信息
         "user": HX_config.serv_path + '/system/user/getuserinfo/v=1.0.0',
         //删除方案
         "deleteuserplan": HX_config.serv_path + '/plan/userplan/deleteuserplan/v=1.0.0',
-        //棰勮鏁伴噺
+        //获取最新预警数量
         "warnNum": HX_config.serv_path + '/warn/warncenter/getlatestuserwarncount/v=1.0.0',
-        //home椤甸潰鎰熸儏chart鏁版嵁
+        //全部舆情方案-情感分布
         "home_pie": HX_config.serv_path + '/monitor/statmonitor/getallnewsentimentdislist/v=1.0.0',
-        //home椤甸潰璧板娍鍥炬暟鎹�
+        //全部舆情方案-数据源舆情走势
         "home_line": HX_config.serv_path + '/monitor/statmonitor/getallnewsourceperformlist/v=1.0.0',
-        //home椤甸潰鏌辩姸鍥炬暟鎹�
+        //重点媒体情感偏向
         'home_bar': HX_config.serv_path + '/monitor/statmonitor/getkeymediasentimentlist/v=1.0.0',
-        //鍏ㄩ儴鑸嗘儏鏂规
+        //加载用户方案菜单
         "userplanlist": HX_config.serv_path + '/plan/userplan/getuserplanlist/v=1.0.0',
-        //鏈�鏂拌垎鎯呮柟妗�
+        //全部舆情方案-最新舆情
         "home_yqfa": HX_config.serv_path + '/monitor/contentmonitor/getallnewmonitorinfolist/v=1.0.0',
-        //鍏ㄩ儴鏂规
+        //单舆情方案-最新舆情
         "home_list": HX_config.serv_path + '/monitor/contentmonitor/getnewmonitorinfolist/v=1.0.0',
-        //鐩镐技鏂囩珷
+        //文章页-相关舆情
         "getlikeList": HX_config.serv_path + '/monitor/contentmonitor/getrelatedmonitorinfolist/v=1.0.0',
-        //鍏ㄩ儴鑸嗘儏鏂规鏂规
+        //全景-舆情信息列表
         "getMonitorInfoList": HX_config.serv_path + '/monitor/contentmonitor/getmonitorinfolist/v=1.0.0',
-        //鍏ㄩ儴鑸嗘儏鏂规鏂规
+        //获取预警邮箱
         "addEmail": HX_config.serv_path + '/warn/warnemail/getwarnemaillist/v=1.0.0',
-        //鍒涘缓鏂拌垎鎯呰姹�
+        //新建舆情方案
         "newYq": HX_config.serv_path + '/plan/userplan/adduserplan/v=1.0.0',
-        //鏂囩珷鍒楄〃
+        //文章页-相关舆情
         "detailList": HX_config.serv_path + '/monitor/contentmonitor/getrelatedmonitorinfolist/v=1.0.0',
-        //鏂囩珷璇︽儏
+        //文章页-舆情详情
         "detail": HX_config.serv_path + '/monitor/contentmonitor/getmonitorinfodetails/v=1.0.0',
-        //鏂囩珷璇︽儏
+        //取消相似预警
         "delYJ": HX_config.serv_path + '/warn/warncenter/cancelsimilarwarn/v=1.0.0',
-        //all search
-        "getAllInfoList": HX_config.serv_path + '/monitor/contentmonitor/fullwebsearch/v=1.0.0',
-        //fullView 鑸嗘儏璧板娍鍥�
+        //全网搜索
+        "fullwebsearch": HX_config.serv_path + '/monitor/contentmonitor/fullwebsearch/v=1.0.0',
+        //单舆情方案-数据源舆情走势
         "fullView_DataTrend": HX_config.serv_path + '/monitor/statmonitor/getsourceperformlist/v=1.0.0',
-        //fullView 鎯呮劅璧板娍鍥�
+        //每日情感走势
         "fullView_FeelTrend": HX_config.serv_path + '/monitor/statmonitor/getdailysentimentperformlist/v=1.0.0',
-        //fullView 濯掍綋鎯呮劅
+        //重点媒体情感偏向
         "fullView_MediaFeel": HX_config.serv_path + '/monitor/statmonitor/getkeymediasentimentlist/v=1.0.0',
-        //fullView 濯掍綋鍏虫敞搴�
+        //获取媒体关注度信息
         "fullView_MediaDeg": HX_config.serv_path + '/monitor/statmonitor/getmediaattentionlist/v=1.0.0',
-        //鍦板煙鍒嗗竷bar
+        //地域分布
         "fullView_Area": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
         //地域分布Map
         "fullView_AreaMap": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
-        //修改舆情初始化数据
-        "xgYQ":HX_config.serv_path+'/plan/userplan/getuserplan/v=1.0.0',
-        //修改舆情提交
-        "modifyuserplan":HX_config.serv_path+'/plan/userplan/modifyuserplan/v=1.0.0',
-        //HX_config.serv_path+'/monitor/report/getweeklyreportlist/v=1.0.0'
-        //获取舆情方案周列表
-        "weeklyReportList":'../../api/weeklyReportList.json',
-        //下载周报
-        "downloadweeklyreport":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
-        //获取舆情导读列表信息
-        "weeklyReadGuidList":HX_config.serv_path+'/monitor/report/getweeklyreadguidelist/v=1.0.0',
-        //渲染载体分布统计
-        "weeklyCarrierdisList":HX_config.serv_path+'/monitor/report/getweeklycarrierdislist/v=1.0.0',
-        //获取top10情感信息媒体分布列表信息
-        "weeklyTop10SentmediadisList":HX_config.serv_path+'/monitor/report/getweeklytop10sentmediadislist/v=1.0.0',
-        //下载周报
-        "weeklyReportDown":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
-        //warn
-        "warnInfo" :HX_config.serv_path + "/warn/warncenter/getwarninfolist/v=1.0.0",
-        //emailList
-        "planwarnemail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemaillist/v=1.0.0",
-        "warnmail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0",
-        "cancelsimilarwarn" :HX_config.serv_path + "/warn/warncenter/cancelsimilarwarn/v=1.0.0",
-        "modifyplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/modifyplanwarnemail/v=1.0.0",
-        "deleteplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
-        "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0",
-
+        //获取舆情方案
+        "xgYQ": HX_config.serv_path + '/plan/userplan/getuserplan/v=1.0.0',
+        //修改舆情方案
+        "modifyuserplan": HX_config.serv_path + '/plan/userplan/modifyuserplan/v=1.0.0',
+        //获取方案舆情周报列表
+        //"getweeklyreportlist":HX_config.serv_path+'/monitor/report/getweeklyreportlist/v=1.0.0'
+        //获取方案舆情周报列表
+        "weeklyReportList": '../../api/weeklyReportList.json',
+        //舆情周报下载
+        "downloadweeklyreport": HX_config.serv_path + '/monitor/report/downloadweeklyreport/v=1.0.0',
+        //获取舆情导读列表
+        "weeklyReadGuidList": HX_config.serv_path + '/monitor/report/getweeklyreadguidelist/v=1.0.0',
+        //获取载体分布统计
+        "weeklyCarrierdisList": HX_config.serv_path + '/monitor/report/getweeklycarrierdislist/v=1.0.0',
+        //获取top10情感信息媒体分布列表
+        "weeklyTop10SentmediadisList": HX_config.serv_path + '/monitor/report/getweeklytop10sentmediadislist/v=1.0.0',
+        //舆情周报下载
+        "weeklyReportDown": HX_config.serv_path + '/monitor/report/downloadweeklyreport/v=1.0.0',
+        //获取预警信息列表
+        "warnInfo": HX_config.serv_path + "/warn/warncenter/getwarninfolist/v=1.0.0",
+        //获取方案预警邮箱列表
+        "planwarnemail": HX_config.serv_path + "/warn/planwarnemail/getplanwarnemaillist/v=1.0.0",
+        //获取方案预警邮箱可选项
+        "warnmail": HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0",
+        //取消相似预警
+        "cancelsimilarwarn": HX_config.serv_path + "/warn/warncenter/cancelsimilarwarn/v=1.0.0",
+        //更新方案预警邮箱
+        "modifyplanwarnemail": HX_config.serv_path + "/warn/planwarnemail/modifyplanwarnemail/v=1.0.0",
+        //删除方案预警邮箱
+        "deleteplanwarnemail": HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
+        //更新预警邮箱
+        "modifywarnemail": HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0",
         //获取单个方案的正负面数据
         "getSentimentDistribute":HX_config.serv_path + "/monitor/statmonitor/getsentimentdistribute/v=1.0.0"
     }
-})()
+})();
 
-//
 //char楗煎浘棰滆壊
 var pieColor = {
     "positiveColor": ['#3693B3', '#309BBF', '#29A3CC', '#21ABD9', '#17B2E6', '#0CB9F2', '#05C1FF'],
