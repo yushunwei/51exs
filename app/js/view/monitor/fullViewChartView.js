@@ -296,6 +296,11 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       tooltip : {
 
       },
+      grid:{
+        show:true,
+        left:85,
+        borderColor:'#fff'
+      },
       legend: {
         x : 'left',
         y : 'top',

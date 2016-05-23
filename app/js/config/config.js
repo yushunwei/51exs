@@ -103,7 +103,10 @@ var HX_Ajax_Path = (function () {
         "cancelsimilarwarn" :HX_config.serv_path + "/warn/warncenter/cancelsimilarwarn/v=1.0.0",
         "modifyplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/modifyplanwarnemail/v=1.0.0",
         "deleteplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
-        "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0"
+        "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0",
+
+        //获取单个方案的正负面数据
+        "getSentimentDistribute":HX_config.serv_path + "/monitor/statmonitor/getsentimentdistribute/v=1.0.0"
     }
 })()
 
