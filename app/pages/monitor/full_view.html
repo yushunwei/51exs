@@ -74,7 +74,9 @@
                 <script id="userlistScript" type="text/x-handlebars-template">
                     <li class="list1"><a href="../../index.html">首页</a></li>
                     {{#each this}}
-                    <li data-id="{{this.id}}"><a href="full_view.html?id={{this.id}}">{{this.title}}</a><i class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../../img/delete-icon.png" alt=""></i></li>
+                    <li data-id="{{this.id}}"><a href="full_view.html?id={{this.id}}">{{this.title}}</a><i
+                            class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img
+                            src="../../img/delete-icon.png" alt=""></i></li>
                     {{/each}}
                     <li class="nav-new"><a href="../newYq.html"><img src="../../img/plus.png" alt="">新建舆情</a></li>
                 </script>
@@ -87,9 +89,12 @@
         <div class="full-view-main">
             <div class="full-view-main-title">
                 <ul id="myTab" class="nav-tabs clearfix" role="tablist">
-                    <li role="presentation" class="active"><a class="tab-all-view" href="#home" aria-controls="home" role="tab" data-toggle="tab">全景</a></li>
-                    <li role="presentation"><a class="tab-chart" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">图表分析</a></li>
-                    <li role="presentation"><a class="tab-plan" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">修改方案</a></li>
+                    <li role="presentation" class="active"><a class="tab-all-view" href="#home" aria-controls="home"
+                                                              role="tab" data-toggle="tab">全景</a></li>
+                    <li role="presentation"><a class="tab-chart" href="#profile" aria-controls="profile" role="tab"
+                                               data-toggle="tab">图表分析</a></li>
+                    <li role="presentation"><a class="tab-plan" href="#messages" aria-controls="messages" role="tab"
+                                               data-toggle="tab">修改方案</a></li>
                 </ul>
             </div>
             <div class="full-view-main-content tab-content">
@@ -151,7 +156,8 @@
                                 <ul class="conditions-item type-isdedup">
                                     <li>显示设置：</li>
                                     <li><a href="javascript:void(0)" class="active digest-btn">显示摘要</a></li>
-                                    <li><a href="javascript:void(0)" class="active mergelike-btn type-isdedup">合并相似舆情</a></li>
+                                    <li><a href="javascript:void(0)"
+                                           class="active mergelike-btn type-isdedup">合并相似舆情</a></li>
                                 </ul>
                             </div>
                             <div class="conditions-box">
@@ -159,13 +165,15 @@
                                     <li>批量操作：</li>
                                     <li><a class="has-icon-btn cy-has-bg download-checked-btn" href="#1">下载选中项</a></li>
                                     <li><a class="has-icon-btn download-all-btn" href="#1">下载全部</a></li>
-                                    <li><a class="has-icon-btn download-all-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
+                                    <li><a class="has-icon-btn download-all-btn cancel-alldanger-btn"
+                                           href="#1">批量取消预警</a></li>
                                 </ul>
                                 <div class="conditions-searchbox">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="在结果中搜索">
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                        </button>
                                       </span>
                                     </div>
                                 </div>
@@ -178,7 +186,8 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th class="col-md-1"><label class="cy-checkbox"><input type="checkbox"><span></span></label></th>
+                                <th class="col-md-1"><label class="cy-checkbox"><input
+                                        type="checkbox"><span></span></label></th>
                                 <th class="col-md-8">舆情信息</th>
                                 <th class="col-md-1">相似文章</th>
                                 <th class="col-md-1">采集自</th>
@@ -189,10 +198,19 @@
                             <script id="listScript" type="text/x-handlebars-template">
                                 {{#each this.objects}}
                                 <tr>
-                                    <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
+                                    <td class="text-center"><label class="cy-checkbox"><input
+                                            type="checkbox"><span></span></label></td>
                                     <td class="information">
-                                        <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
-                                        <p class="digest">摘要：<a class="info-summary" href="infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" target="_blank">{{summary}}</a></p>
+                                        <h3 class="title"><span class="label label-info">正面</span><span
+                                                class="label label-danger hidden">负面</span><span
+                                                class="label label-success hidden">中性</span><span
+                                                class="label label-warning hidden">预警</span><a
+                                                class="info-regionandtitle" href="{{url}}?docId={{docId}}"
+                                                target="_blank">【<span
+                                                class="text-danger">{{region}}</span>】{{title}}</a></h3>
+                                        <p class="digest">摘要：<a class="info-summary"
+                                                                href="infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8"
+                                                                target="_blank">{{summary}}</a></p>
                                         <div class="full-view-data-operation">
                                             <div class="share">
                                                 <div class="share-box">
@@ -209,17 +227,24 @@
                                                     <i class="fa fa-send"></i>邮件
                                                     <div class="share-for">
                                                         <ul>
-                                                            <li><a href="#1" data-toggle="modal" data-target=".add-email">邮件发送舆情信息</a></li>
+                                                            <li><a href="#1" data-toggle="modal"
+                                                                   data-target=".add-email">邮件发送舆情信息</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
+                                            <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span
+                                                    class="info-fansCount"> | {{clickCount}}</span></div>
                                         </div>
                                     </td>
-                                    <td class="text-center"><a href="similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
-                                    <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
-                                    <td class="text-center table-time"><span class="info-date">{{createTime}}</span></td>
+                                    <td class="text-center"><a
+                                            href="similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8"
+                                            class="info-similarcount" target="_blank">{{similarCount}}</a></td>
+                                    <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img
+                                            src="../../img/weibo.png" alt=""><br><span
+                                            class="info-media">{{media}}</span></a></td>
+                                    <td class="text-center table-time"><span class="info-date">{{createTime}}</span>
+                                    </td>
                                 </tr>
                                 {{/each}}
                             </script>
@@ -327,7 +352,8 @@
                                             <div class="modify-plan-item-title">
                                                 <span class="must">*</span>监测方案名
                                             </div>
-                                            <input class="form-control" id="myComplay" placeholder="如：我的公司" maxlength="40">
+                                            <input class="form-control" id="myComplay" placeholder="如：我的公司"
+                                                   maxlength="40">
                                             <p class="tips">用来检测不同的监测方案，限<span>20</span>个字。</p>
                                         </div>
                                         <div class="modify-plan-item" id="key-word-group">
@@ -348,7 +374,8 @@
                                                     <div class="group-input-warp key-word-warp">
                                                         {{#each this.groupV}}
                                                         <div class="input-warp">
-                                                            <input type="text" maxlength="5" class="form-control" value="{{this.word}}">
+                                                            <input type="text" maxlength="5" class="form-control"
+                                                                   value="{{this.word}}">
                     <span class="operation-box clear">
                       <span class="add-btn glyphicon glyphicon-plus-sign"></span>
                       <span class="with-next">+</span>
@@ -379,21 +406,25 @@
                                                     {{#each this}}
                                                     <div class="warning-list">
                                                         <div class="group-input-warp">
-                                                            <input type="text" maxlength="5" class="form-control" value="{{this.warnword}}">
+                                                            <input type="text" maxlength="5" class="form-control"
+                                                                   value="{{this.warnword}}">
                   <span class="operation-box clear">
                     <span class="close-btn">+</span>
                   </span>
                                                         </div>
                                                         <label class="form-group-title">或</label>
-                                                        <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
                                                     </div>
                                                     {{/each}}
+
+                                                    <a href="#1" class="modify-plan-operation-btn add warning"><img
+                                                            src="../../img/plus_plan.png" alt=""></a>
                                                 </script>
 
                                             </div>
 
                                         </div>
-                                        <div class="modify-plan-item modify-plan-item-box no-border warning" id="exclude">
+                                        <div class="modify-plan-item modify-plan-item-box no-border warning"
+                                             id="exclude">
                                             <div class="modify-plan-item-title">
                                                 监测排除词
                                                 <div class="modify-plan-item-title-tips">
@@ -408,15 +439,17 @@
                                                     {{#each this}}
                                                     <div class="warning-list">
                                                         <div class="group-input-warp">
-                                                            <input type="text" maxlength="5" class="form-control" value="{{this.exword}}">
+                                                            <input type="text" maxlength="5" class="form-control"
+                                                                   value="{{this.exword}}">
                   <span class="operation-box clear">
                     <span class="close-btn">+</span>
                   </span>
                                                         </div>
                                                         <label class="form-group-title">或</label>
-                                                        <a href="#1" class="modify-plan-operation-btn add"><img src="../../img/plus_plan.png" alt=""></a>
                                                     </div>
                                                     {{/each}}
+                                                    <a href="#1" class="modify-plan-operation-btn add exclude"><img
+                                                            src="../../img/plus_plan.png" alt=""></a>
                                                 </script>
                                             </div>
 
@@ -484,24 +517,29 @@
     </div>
     <!-- 底部结束 -->
     <!-- 未选择预警弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model cancel-danger-none" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model cancel-danger-none" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="cy-model-content"><div class="share-box share-box-other">
-                    <i class="fa fa-share-alt"></i>分享
-                    <div class="share-for">
-                        <ul>
-                            <li><a href="#1">微博</a></li>
-                            <li><a href="#1">Q Q</a></li>
-                            <li><a href="#1">微信</a></li>
-                        </ul>
+                    <p class="cy-model-content">
+                    <div class="share-box share-box-other">
+                        <i class="fa fa-share-alt"></i>分享
+                        <div class="share-for">
+                            <ul>
+                                <li><a href="#1">微博</a></li>
+                                <li><a href="#1">Q Q</a></li>
+                                <li><a href="#1">微信</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>请选择需要取消预警的舆情信息！</p>
+                    请选择需要取消预警的舆情信息！</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
@@ -511,11 +549,14 @@
     </div>
     <!-- 未选择预警弹框结束 -->
     <!-- 弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model cancel-danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model cancel-danger" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">
@@ -530,11 +571,14 @@
     </div>
     <!-- 弹框结束 -->
     <!-- 取消预警下一步弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model cancel-alldanger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model cancel-alldanger" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">
@@ -548,11 +592,14 @@
         </div>
     </div>
     <!-- 弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model download-all" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model download-all" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">
@@ -566,11 +613,14 @@
     </div>
     <!-- 弹框结束 -->
     <!-- 发送邮件弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model add-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model add-email" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">邮件发送舆情信息</h4>
                 </div>
                 <div class="modal-body">
@@ -601,7 +651,8 @@
     </div>
     <!-- 弹框结束 -->
     <!-- 确定弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model alert-ok" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model alert-ok" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
@@ -615,7 +666,8 @@
     </div>
     <!-- 确定弹框结束 -->
     <!-- 未选择邮箱弹框 -->
-    <div class="modal fade bs-example-modal-sm cy-model nocheck-email" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal fade bs-example-modal-sm cy-model nocheck-email" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body">
@@ -629,11 +681,14 @@
     </div>
     <!-- 未选择邮箱弹框结束 -->
     <!-- 保存弹框 -->
-    <div id="alertModal" class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div id="alertModal" class="modal fade bs-example-modal-sm cy-model alert-save" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times-circle"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                      class="fa fa-times-circle"></span>
+                    </button>
                     <h4 class="modal-title">温馨提示</h4>
                 </div>
                 <div class="modal-body">

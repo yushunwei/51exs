@@ -53,6 +53,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 initFirst3NewPlan(0);
                 //显示底部loadding效果
                 $(".bottomLoading").removeClass("hidden");
+
             },
             "error": function () {
                 $("#chartPie").html(HX_config.errorHtml);
@@ -89,6 +90,15 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             };
             $(tabID).find(".plan-main-list ul").html("<div class='noDataBox' style='height:60px'><img src='img/loading_32.gif' /></div>");
             ajax.load("home_yqfa", param);
+        });
+        $(".main").on("click","span.turnPageJcfa",function(){
+            var planId = $(this).parents(".plan").attr("planId");
+            var obj = {
+                planId : planId?planId:"",
+                sentiment:$(this).data("sentiment"),
+                timeRanges:7
+            };
+            window.open('pages/monitor/monitorinfolist.html?'+ $.param(obj));
         })
     }
 
@@ -97,6 +107,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
         // 方案个数达到上线或者达到3个终止递归
         if (i === indexUserPlans.userPlans.length || indexUserPlans.showCount === 3) {
             $(".bottomLoading").addClass("hidden");
+
             return;
         }
         //获取对应的 Plan数据
@@ -116,7 +127,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     //下一个舆情方案
                     indexUserPlans.showCount++;
                     //对应的舆情状态设置为显示
-                    $(".plan").eq(indexUserPlans.showCount).removeClass("hidden");
+                    $(".plan").eq(indexUserPlans.showCount).removeClass("hidden").attr("planId",userPlan.id);
                     //绑定对应的舆情事件，标签切换发送请求
                     bindListEvent(indexUserPlans.showCount);
                 }

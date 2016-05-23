@@ -324,8 +324,8 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     myChartBar.setOption(optionBar);
 
     myChartBar.on("click", function(param) {
-      var subData = {sentiment : param.data.sentiment,timeRanges:7,planId:planId};
-      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+      var subData = {sentiment : param.data.sentiment,timeRanges:7,planId:planId,media:(param.name)};
+      window.open('pages/monitor/monitorinfolist.html?'+ ($.param(subData)));
     })
   }
     function getSentimentDistribute(planId,chartDom){
