@@ -16,7 +16,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".conditions-choice").find(".conditions-shrinkage-btn").length!=0 && planCloseOpen();
         //绑定全网搜索
         $("div.header .header-input .input-keywords").length != 0 && bindFullSearch();
-
     }
 
     /**
@@ -88,11 +87,25 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function setUser() {
         var param = {
-            "success": function (d) {
+            success: function (d) {
                 $("div.header .header-user").find('span').html(d.data.nickName || d.data.mobile);
             }
         };
         ajax.load("user", param);
+
+        // 绑定退出登录操作
+        bindLogout();
+    }
+
+    /**
+     * 退出
+     */
+    function bindLogout(){
+        $(".header-user .log-out").click(function(){
+            var exsToken = utils.getToken();
+            utils.removeToken();
+            window.location.href = "/logout"+(exsToken?"?token="+exsToken:"");
+        });
     }
 
     /**

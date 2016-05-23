@@ -10,10 +10,10 @@ define(["tool/Utils"], function (utils) {
         "timeout": 3000
     };
     //默认的成功后的回调
-    var defaultSuccessFn = function (data,controller) {
+    var defaultSuccessFn = function (data, controller) {
         if (data.status == "100" && data.subStatus == "50001") {
             //清除所有ajax请求
-            $.each(ajaxMap,function(i,v){
+            $.each(ajaxMap, function (i, v) {
                 v.abort();
             });
             alert("登录超时，请重新登录");
@@ -38,7 +38,8 @@ define(["tool/Utils"], function (utils) {
         }
         _param.url = linkUrl + _query;
     }
-    function _load(obj, param,target) {
+
+    function _load(obj, param, target) {
         var name = typeof obj == "string" ? obj : obj.name;
         setUrl(name, param);
         if (typeof param != "object") return;
@@ -48,7 +49,7 @@ define(["tool/Utils"], function (utils) {
             var result = defaultSuccessFn(d);
             (result && $.isFunction(param.success)) && param.success(d);
         };
-        ajaxparam.error = function(d){
+        ajaxparam.error = function (d) {
             utils.removeLoading(target);
             defaultErrorFn(d);
             $.isFunction(param.error) && param.error(d);
