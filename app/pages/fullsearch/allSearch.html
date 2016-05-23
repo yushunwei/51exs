@@ -22,6 +22,7 @@
     <script src="../../js/lib/handlebars-1.0.0.js"></script>
     <script src="../../js/lib/Json.js"></script>
     <script src="../../js/lib/pagination/jquery.pagination.js"></script>
+    <script src="../../js/lib/laydate/laydate.js"></script>
     <script src="../../js/config/config.js"></script>
 
 </head>
@@ -70,7 +71,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control type-keywords" placeholder="请输入搜索关键词">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-search" type="button"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </div>
@@ -115,9 +116,9 @@
                                 <p>请选择起止时间（仅供3个月内数据搜索）：</p>
                                 <div class="time-group form-inline">
                                     <div class="form-group input-daterange">
-                                        <input type="text" class="form-control" id="start">
+                                        <input type="text" class="form-control" id="start" readonly>
                                         至
-                                        <input type="text" class="form-control" id="end">
+                                        <input type="text" class="form-control" id="end" readonly>
                                     </div>
                                     <a id="btnFind" href="#1" class="btn btn-info">查询</a>
                                 </div>
@@ -134,8 +135,8 @@
                     <div class="conditions-box">
                         <ul class="conditions-item operation">
                             <li>批量操作：</li>
-                            <li><a class="has-icon-btn cy-has-bg download-all-btn" href="#1">下载选中项</a></li>
-                            <li><a class="has-icon-btn download-all-btn" href="#1">下载全部</a></li>
+                            <li><a class="has-icon-btn cy-has-bg download-all-btn" href="javascript:;">下载选中项</a></li>
+                            <li><a class="has-icon-btn download-all-btn" href="javascript:;">下载全部</a></li>
                         </ul>
                     </div>
                 </div>
@@ -242,5 +243,30 @@
 </div>
 <!-- 底部结束 -->
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
+<script>
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(-90),
+        max: laydate.now(), //最大日期
+        isclear : false,
+        choose: function(datas){
+            end.min = datas; //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        isclear : false,
+        choose: function(datas){
+            start.max = datas; //结束日选好后，重置开始日的最大日期
+        }
+    };
+    laydate(start);
+    laydate(end);
+    $("#start").val(laydate.now());
+    $("#end").val(laydate.now());
+</script>
 </body>
 </html>
