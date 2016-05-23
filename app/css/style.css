@@ -1016,7 +1016,8 @@ a:focus {
 }
 .week-takeaway li span {
 	color: #bbbbbb;
-	margin-left: 40px;
+	display: inline-block;
+	overflow: hidden;
 }
 .week-takeaway li span a {
 	color: #bbbbbb;
@@ -1594,9 +1595,6 @@ a:focus {
 
 
 /*舆情报告*/
-.page-weeklyReportList .panel-default {
-	display: none;
-}
 .report .nav-tabs>li {
 	float: none;
 }
@@ -1670,7 +1668,6 @@ a:focus {
 }
 .report-none {
 	text-align: center;
-	display: none;
 }
 .report-none p {
 	font-size: 20px;
@@ -1692,6 +1689,25 @@ a:focus {
 }
 .plan-main-list {
 	height: 645px;
+}
+.readGuidListTitle {
+	display: inline-block;
+	width: 430px;
+	overflow: hidden;
+}
+.readGuidListLy {
+	width: 180px;
+}
+.readGuidListAuthor {
+	width: 150px;
+}
+.readGuidListWz {
+	width: 130px;
+ }
+#reportName {
+	font-size: 20px;
+	color: #59c2e6;
+	font-weight: normal;
 }
 
 

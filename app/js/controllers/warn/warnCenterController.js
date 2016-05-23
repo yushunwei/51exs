@@ -166,26 +166,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView"], function (ajax
         $dom.find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
             setTab2();
         });
-        //绑定checkbox change事件
-        $(".main thead").on("change", "tr:first .cy-checkbox", function () {
-            if ($(this).find("span").hasClass("checked")) {
-                $(".main tbody").find(".cy-checkbox").find("span").removeClass("checked");
-            } else {
-                $(".main tbody").find(".cy-checkbox").find("span").addClass("checked");
-            }
-        });
-        //点击收起面板
-        $(".conditions-choice").find(".conditions-shrinkage-btn").on("click", function () {
-            if ($(this).hasClass("chooseClosed")) {
-                $(".conditions-choice").find(".conditions-box").not(":last").show();
-                $(this).removeClass("chooseClosed");
-                $(this).children("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
-            } else {
-                $(".conditions-choice").find(".conditions-box").not(":last").hide();
-                $(this).addClass("chooseClosed");
-                $(this).children("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
-            }
-        })
+
     }
 
     //分页

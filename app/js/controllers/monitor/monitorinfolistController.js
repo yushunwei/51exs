@@ -1,18 +1,13 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/allplanView"], function (ajax,view) {
+define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView"], function (ajax,view) {
     var $tar = $("div.page-allplan");
-    var indexUserPlans = {showCount:0};
     var result = [];
-    var titleID = "",
-        turnIndex = 0;
     var fullViewInit = {
         pageSize:20
     };
-    var sentiment,planId;
-    var keyword,checkArrary =[];
+    var pageData = {};
     function init(page) {
-        titleID = page.query.id || "a5a3a9ca1f0911e6af1500188b839ae8";
-        sentiment = page.query.sentiment;
+        pageData = page.query;
         //加载列表
         getMonitorInfoList(0,20);
         //绑定事件
@@ -20,7 +15,10 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView"], function (ajax,
     }
 
     function getMonitorInfoList(pageNum,pageSize){
-        var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
+        pageData.pageNum = pageNum;
+        pageData.pageSize = pageSize;
+        pageData.keywords = $('.conditions-searchbox').find('input').val();
+        var param ={"query" :pageData};
         param.success = function(d){
             view.renderList(d);
             result = d;
@@ -28,54 +26,8 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView"], function (ajax,
         };
         ajax.load("getAllInfoList",param);
     }
-// 获取查询参数
-    function getFullViewQueryCondition(pageNum,pageSize){
-        var condition = {
-            pageNum:pageNum,
-            pageSize:pageSize,
-            planId:titleID || $('.main').find('.type-plan').find('li').find('.active').data('planId'),
-            sentiment:sentiment || $('.main').find('.type-sentiment').find('li').find('.active').data('sentiment'),
-            isWarn:$('.main').find('.type-iswarn').find('li').find('.active').data('iswarn'),
-            source:$('.main').find('.type-source').find('li').find('.active').data('source'),
-            startDate:$('#start').val(),
-            endDate:$('#end').val(),
-            isDedup:$('.main').find('.type-isdedup').find('li').find('.type-isdedup').hasClass('active')?true:false,
-            keywords:$('.conditions-searchbox').find('input').val(),
-            timeRanges:$('.main').find('.type-timeranges').find('li').find('.active').data('timeranges')
-        };
-
-        if(condition.startDate && condition.endDate){
-            condition.timeRanges = 0;
-        }
-        return condition;
-    }
     function bindEvent(){
-        var $dom = $(".page-allplan");
-        /*****
-         * 绑定查询条件
-         * ****/
-        $dom.find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges').click(function(){
-            if($(this).hasClass("digest-btn")){
-                if($(this).hasClass("active")){
-                    $(this).removeClass("active");
-                    $(".page-fullView tbody p.digest").addClass("hidden");
-                }else{
-                    $(this).addClass("active");
-                    $(".page-fullView tbody p.digest").removeClass("hidden");
-                }
-                return;
-            }else if($(this).hasClass("mergelike-btn")){
-                if($(this).hasClass("active")){
-                    $(this).removeClass("active");
-                }else{
-                    $(this).addClass("active");
-                }
-                return;
-            }
-            $(this).parent().parent().find("li a.active").removeClass("active");
-            $(this).addClass("active");
-            getMonitorInfoList(0,20);
-        });
+        var $dom = $(".page-monitorinfolist");
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function(){
             $('.input-daterange').find('input').val('');

@@ -38,17 +38,17 @@
                 <div class="input-group">
                     <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
                         <span class="input-group-btn">
-                            <a class="btn btn-default btn-search" href="pages/fullsearch/allSearch.html"
+                            <a class="btn btn-default btn-search" href="../fullsearch/allSearch.html"
                                type="button"><i class="fa fa-search"></i></a>
                         </span>
                 </div>
             </div>
             <div class="header-notice">
                 <ul>
-                    <li><a href="../report/checkReport.html"><img src="../../img/headnav_icon.png" alt="">
+                    <li><a href="../report/weeklyreportlist.html"><img src="../../img/headnav_icon.png" alt="">
 
                         <p>舆情报告</p></a></li>
-                    <li><a href="../warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
+                    <li><a href="../warn/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
 
                         <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
                     <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<div class="page page-allplan" data-controller="monitor/allplan">
+<div class="page page-monitorinfolist" data-controller="monitor/monitorinfolist">
     <div class="cy-breadcrumb">
         <a href="../../index.html"><i class="fa fa-home"></i></a>
         <img src="../../img/right_icon.png" alt="">
@@ -75,73 +75,6 @@
         <div class="all-plan">
             <div class="conditions-choice">
                 <div>
-                    <div class="conditions-box property-state clearfix">
-                        <ul class="conditions-item property radio-setting type-sentiment">
-                            <li>舆情属性：</li>
-                            <li><a data-sentiment="" href="javascript:void(0)" class="active">全部</a></li>
-                            <li><a data-sentiment="positive" href="javascript:void(0)">正面</a></li>
-                            <li><a data-sentiment="neutral" href="javascript:void(0)">中性</a></li>
-                            <li><a data-sentiment="negative" href="javascript:void(0)">负面</a></li>
-                        </ul>
-                        <ul class="conditions-item state radio-setting type-iswarn">
-                            <li>预警状态：</li>
-                            <li><a data-iswarn="" href="javascript:void(0)" class="active">全部</a></li>
-                            <li><a data-iswarn="yes" href="javascript:void(0)">预警</a></li>
-                        </ul>
-                    </div>
-                    <div class="conditions-box">
-                        <ul class="conditions-item radio-setting type-source">
-                            <li>信息来源：</li>
-                            <li><a data-source="" href="javascript:void(0)" class="active">全部</a></li>
-                            <li><a data-source="news" href="javascript:void(0)">新闻</a></li>
-                            <li><a data-source="bbs" href="javascript:void(0)">论坛</a></li>
-                            <li><a data-source="tieba" href="javascript:void(0)">贴吧</a></li>
-                            <li><a data-source="epub" href="javascript:void(0)">电子报</a></li>
-                            <li><a data-source="blog" href="javascript:void(0)">博客</a></li>
-                            <li><a data-source="weibo" href="javascript:void(0)">微博</a></li>
-                            <li><a data-source="wx_gzh" href="javascript:void(0)">微信</a></li>
-                            <li><a data-source="video" href="javascript:void(0)" class="not-open">视频</a></li>
-                            <li><a data-source="search" href="javascript:void(0)" class="not-open">搜索引擎</a></li>
-                        </ul>
-                    </div>
-                    <div class="conditions-box time-box clearfix">
-                        <ul class="conditions-item radio-setting type-timeranges">
-                            <li>监视时间：</li>
-                            <li><a data-timeranges="1" href="javascript:void(0)" class="active">今天</a></li>
-                            <li><a data-timeranges="7" href="javascript:void(0)">近一周</a></li>
-                            <li><a data-timeranges="30" href="javascript:void(0)">近一月</a></li>
-                        </ul>
-                        <div class="chart-analysis-title-other" href="#1">
-                            <span id="customdays" class="chart-analysis-title-other-btn">自定义</span>
-                            <div class="order-box">
-                                <p>请选择起止时间（仅供3个月内数据搜索）：</p>
-                                <div class="time-group form-inline">
-                                    <div class="form-group input-daterange">
-                                        <input type="text" class="form-control" id="start">
-                                        至
-                                        <input type="text" class="form-control" id="end">
-                                    </div>
-                                    <a id="btnFind" href="javascript:void(0)" class="btn btn-info">查询</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="conditions-box">
-                        <ul class="conditions-item type-isdedup">
-                            <li>显示设置：</li>
-                            <li><a href="javascript:void(0)" class="active digest-btn">显示摘要</a></li>
-                            <li><a href="javascript:void(0)" class="active mergelike-btn type-isdedup">合并相似舆情</a></li>
-                        </ul>
-                    </div>
-                    <div class="conditions-box">
-                        <ul class="conditions-item radio-setting type-plan">
-                            <li>輿情方案：</li>
-                            <li><a data-planid="ccb7e822047011e6bb6600188b839ae8" href="#1" class="active">全部</a></li>
-                            <li><a data-planid="ccb7e822047011e6bb6600188b839ae8" href="#1">我的公司</a></li>
-                            <li><a data-planid="ccb7e822047011e6bb6600188b839ae8" href="#1">行业</a></li>
-                            <li><a data-planid="ccb7e822047011e6bb6600188b839ae8" href="#1">业务</a></li>
-                        </ul>
-                    </div>
                     <div class="conditions-box">
 
                         <ul class="conditions-item operation">
@@ -159,7 +92,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="conditions-shrinkage-btn"><i class="fa fa-chevron-up"></i></div>
             </div>
             <div class="full-view-table">
 
