@@ -44,3 +44,11 @@
 .cy-noborder-left {
 	border-left: none !important;
 }
+.page-warnCenter .warning-setting-main .cy-panel .panel-body {
+	padding: 20px 40px 20px 40px;
+	height: 290px;
+}
+.page-warnCenter .full-view-main-content>.tab-pane {
+	padding: 20px;
+	background: #fff;
+}

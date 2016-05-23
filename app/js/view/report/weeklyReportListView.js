@@ -1,52 +1,46 @@
-define([], function () {
-    var scriptHtml;
-    function _render(data,parentsD,index){
-        if(!data){
+define(['tool/Utils'], function (util) {
+    var reportHtml,noReportHtml;
+
+    function _render(data, planId, index) {
+        if (!data) {
             return false;
         }
         if(data.data.length == 0){
-            parentsD.find(".report-none").show();
+            var planId = {"planId":planId};
+            noReportHtml = !noReportHtml?($("#report-none").html()):noReportHtml;
+            var noreportTemplate = Handlebars.compile(noReportHtml);
+            var norepHtml = noreportTemplate(planId);
+            $(".page-weeklyReportList").find("#report-model-"+index).html(norepHtml);
         }else{
-            parentsD.find(".report-none").hide();
-            var newArr = formatDate(data.data);
-            scriptHtml = !scriptHtml?($("#report-item-0").html()):scriptHtml;
-            var myTemplate1 = Handlebars.compile(scriptHtml);
-            var html1 = myTemplate1(newArr);
-            parentsD.find("#report-box-"+(index)).append(html1);
+            var obj = {
+                baseUrl: HX_Ajax_Path.downloadweeklyreport+"?token="+util.getToken(),
+                dataArr: data.data
+            };
+            var newArr = formatDate(obj.dataArr,obj.baseUrl);
+            obj.dataArr = newArr;
+            reportHtml = !reportHtml?($("#report-item-model").html()):reportHtml;
+            var reportTemplate = Handlebars.compile(reportHtml);
+            var repHtml = reportTemplate(obj);
+            $(".page-weeklyReportList").find("#report-model-"+index).html(repHtml);
         }
     }
+
     //格式化时间
-    function formatDate(arr){
-        for(var i=0;i<arr.length;i++){
+    function formatDate(arr,url) {
+        for (var i = 0; i < arr.length; i++) {
             arr[i].newstart = "";
             arr[i].newend = "";
-            arr[i].newstart = arr[i].startDate.split(" ")[0].replace(/-/g,"/");
-            arr[i].newend = arr[i].endDate.split(" ")[0].replace(/-/g,"/");
+            arr[i].newstart = arr[i].startDate.split(" ")[0].replace(/-/g, "/");
+            arr[i].newend = arr[i].endDate.split(" ")[0].replace(/-/g, "/");
+            arr[i].newPath = url+"&path="+arr[i].path+"&reportName="+arr[i].reportName+"&startDate="+arr[i].startDate+
+                            "&endDate="+arr[i].endDate;
+            arr[i].showPagePath = "path="+arr[i].path+"&reportName="+encodeURIComponent(arr[i].reportName)+"&startDate="+arr[i].startDate+
+                "&endDate="+arr[i].endDate+"&reportId="+arr[i].reportId;
         }
         return arr;
     }
-    function _events(){
-        $(".page-weeklyReportList").on("click","a.report-download",function(){
-            var param = {
-                query:{
-                    path:$(this).parent().data("path"),
-                    startDate:$(this).parent().data("startDate"),
-                    endDate:$(this).parent().data("endDate"),
-                    reportName:$(this).parent().prev(".report-date").text()
-                },
-                success:function(data){
-                    console.log(data)
-                }
-            };
-            ajax.load('weeklyReportDown',param);
-        })
-        $(".page-weeklyReportList").on("click","a.report-btn",function(){
-            var reportId = $(this).parent().data("reportid");
-            window.location.href = 'checkReport.html?reportid='+reportId;
-        })
+
+    return {
+        render: _render
     }
-  return {
-      render:_render,
-      events:_events
-  }
 });

@@ -22,6 +22,8 @@ var HX_config = {
 var HX_Ajax_Path = (function () {
 
     return {
+        //更新预警关注记录
+        "addwarnfocusrecord": HX_config.serv_path + '/warn/warncenter/addwarnfocusrecord/v=1.0.0',
         //娉ㄥ唽url
         "register": HX_config.serv_path + '/system/register/getregisterurl/v=1.0.0',
         //寮�閫氳涓�
@@ -32,6 +34,8 @@ var HX_Ajax_Path = (function () {
         "openapplication": HX_config.serv_path + '/system/user/openapplication/v=1.0.0',
         //user information
         "user": HX_config.serv_path + '/system/user/getuserinfo/v=1.0.0',
+        //删除方案
+        "deleteuserplan": HX_config.serv_path + '/plan/userplan/deleteuserplan/v=1.0.0',
         //棰勮鏁伴噺
         "warnNum": HX_config.serv_path + '/warn/warncenter/getlatestuserwarncount/v=1.0.0',
         //home椤甸潰鎰熸儏chart鏁版嵁
@@ -76,14 +80,34 @@ var HX_Ajax_Path = (function () {
         "fullView_AreaMap": HX_config.serv_path + '/monitor/statmonitor/getregiondistributelist/v=1.0.0',
         //修改舆情初始化数据
         "xgYQ":HX_config.serv_path+'/plan/userplan/getuserplan/v=1.0.0',
+        //修改舆情提交
+        "modifyuserplan":HX_config.serv_path+'/plan/userplan/modifyuserplan/v=1.0.0',
         //HX_config.serv_path+'/monitor/report/getweeklyreportlist/v=1.0.0'
         //获取舆情方案周列表
         "weeklyReportList":'../../api/weeklyReportList.json',
         //下载周报
-        "weeklyReportDown":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0'
+        "downloadweeklyreport":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
+        //获取舆情导读列表信息
+        "weeklyReadGuidList":HX_config.serv_path+'/monitor/report/getweeklyreadguidelist/v=1.0.0',
+        //渲染载体分布统计
+        "weeklyCarrierdisList":HX_config.serv_path+'/monitor/report/getweeklycarrierdislist/v=1.0.0',
+        //获取top10情感信息媒体分布列表信息
+        "weeklyTop10SentmediadisList":HX_config.serv_path+'/monitor/report/getweeklytop10sentmediadislist/v=1.0.0',
+        //下载周报
+        "weeklyReportDown":HX_config.serv_path+'/monitor/report/downloadweeklyreport/v=1.0.0',
+        //warn
+        "warnInfo" :HX_config.serv_path + "/warn/warncenter/getwarninfolist/v=1.0.0",
+        //emailList
+        "planwarnemail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemaillist/v=1.0.0",
+        "warnmail" :HX_config.serv_path + "/warn/planwarnemail/getplanwarnemailoptions/v=1.0.0",
+        "cancelsimilarwarn" :HX_config.serv_path + "/warn/warncenter/cancelsimilarwarn/v=1.0.0",
+        "modifyplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/modifyplanwarnemail/v=1.0.0",
+        "deleteplanwarnemail" :HX_config.serv_path + "/warn/planwarnemail/deleteplanwarnemail/v=1.0.0",
+        "modifywarnemail" :HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0"
     }
 })()
 
+//
 //char楗煎浘棰滆壊
 var pieColor = {
     "positiveColor": ['#3693B3', '#309BBF', '#29A3CC', '#21ABD9', '#17B2E6', '#0CB9F2', '#05C1FF'],
