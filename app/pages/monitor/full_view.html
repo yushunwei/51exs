@@ -25,6 +25,7 @@
     <script src="../../js/lib/pagination/jquery.pagination.js"></script>
     <!-- laydate -->
     <script src="../../js/lib/laydate/laydate.js"></script>
+    <script src="../../js/lib/layer/layer.js"></script>
     <!-- laydate -->
 
 </head>
@@ -159,7 +160,7 @@
                                     <li>批量操作：</li>
                                     <li><a class="has-icon-btn cy-has-bg download-checked-btn" href="#1">下载选中项</a></li>
                                     <li><a class="has-icon-btn download-all-btn" href="#1">下载全部</a></li>
-                                    <li><a class="has-icon-btn download-all-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
+                                    <li><a class="has-icon-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
                                 </ul>
                                 <div class="conditions-searchbox">
                                     <div class="input-group">
@@ -188,7 +189,9 @@
                             <tbody class="list-yq">
                             <script id="listScript" type="text/x-handlebars-template">
                                 {{#each this.objects}}
-                                <tr>
+                                <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                                    data-source="{{source}}" data-author="{{author}}"
+                                    data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}">
                                     <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                                     <td class="information">
                                         <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
@@ -217,7 +220,7 @@
                                             <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
                                         </div>
                                     </td>
-                                    <td class="text-center"><a href="similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
+                                    <td class="text-center"><a href="similar.html?pageNum=1&amp;pageSize=15&amp;dedupId={{dedupId}}" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
                                     <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
                                     <td class="text-center table-time"><span class="info-date">{{createTime}}</span></td>
                                 </tr>

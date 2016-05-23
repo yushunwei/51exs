@@ -127,30 +127,12 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           $('.type-timeranges').find('a').removeClass('active');
           getMonitorInfoList(0,fullViewInit.pageSize);
       });
-      //在批量取消预警页面上绑定事件，弹出对话框并绑定id
-      $('.cancel-alldanger-btn').click(function(){
-          //如果选中不为空，弹出确认对话框
-          if ($('.cy-checkbox input:checked').length != 0) {
-              var docIds = new Object();
-              docIds.dedupids=[];
-              //获取选中的checkbox上缓存的Id
-              $('.cy-checkbox input:checked').each(function(){
-                  docIds.dedupids.push($(this).parent().parent().data('docId'));
-              });
-              //将获取的多个Id绑定到对话框的缓存上
-              $('.cancel-alldanger').data('docIds',docIds);
-              //弹出对话框
-              $('.cancel-alldanger').modal('show');
-          }else{
-              $('.cancel-danger-none').modal('show');
-          }
-      });
       $dom.find(".table.table-bordered").on("click",".email-send a",function(){
           var param = {
               "success":function(d){
                   view.renderAddEmail(d);
               }
-          }
+          };
           ajax.load("addEmail",param);
       });
         //add email
