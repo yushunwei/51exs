@@ -23,7 +23,7 @@
 <!-- 头部开始 -->
 <div class="header">
     <div class="header-content clearfix">
-        <a class="icon-logo" href="#1"><img src="../../img/logo.png"></a>
+        <a class="icon-logo" href="../../index.html"><img src="../../img/logo.png"></a>
 
         <div class="header-information pull-right">
             <div class="header-input">
@@ -38,13 +38,13 @@
             <div class="header-notice">
                 <ul>
                     <li>
-                        <a href="#1">
+                        <a href="../report/weeklyreportlist.html">
                             <img src="../../img/headnav_icon.png" alt="">
                             <p>舆情报告</p>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">
+                        <a href="../warn/warnCenter.html">
                             <img src="../../img/headnav_icon_2.png" alt="">
                             <p>预警中心</p>
                             <span id="alertIcon" class="cy-badge hidden"></span>
@@ -77,7 +77,7 @@
 <div class="page page-infodetail" data-controller="monitor/infodetail">
 
     <div class="cy-breadcrumb">
-        <a href="/index.html"><i class="fa fa-home"></i></a>
+        <a href="../../index.html"><i class="fa fa-home"></i></a>
         <img src="../../img/right_icon.png" alt="">
         <a href="javascript:void(0)">原文内容</a>
     </div>
@@ -183,7 +183,7 @@
                                 </div>
                                 <script id="detailList" type="text/x-handlebars-template">
                                     {{#each this.data.array}}
-                                    <p><a href="/pages/monitor/infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a>
+                                    <p><a href="infodetail.html?docID={{docId}}" data-pageturn="true">{{title}}</a>
                                     </p>
                                     {{/each}}
                                 </script>
