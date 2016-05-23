@@ -13,5 +13,5 @@ require(['controllers/' + controllerPath + 'Controller', "tool/Utils","common/co
     token && utils.setToken(token);
     controller.init(page);
     //统一处理页面逻辑
-    common.init();
+    common.init(page);
 });
