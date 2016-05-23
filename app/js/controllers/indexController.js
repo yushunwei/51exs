@@ -61,7 +61,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             }
         };
         //增加loading
-        $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>")
+        $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>");
         ajax.load("home_yqfa", param);
     }
 
@@ -73,13 +73,21 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             var tabindex = $(this).parent().index();
             var param = {
                 "success": function (data) {
+                    if(data.data.length==0){
+                        $(tabID).find(".plan-main-list ul").html(HX_config.noDataHtml);
+                        return;
+                    }
                     view.renderYqfa(data.data, tabID,tabindex);
+                },
+                error:function(){
+                    $(tabID).find(".plan-main-list ul").html(HX_config.errorHtml);
                 },
                 //url 参数 类似 data
                 "query": {
                     "sentiment": type
                 }
             };
+            $(tabID).find(".plan-main-list ul").html("<div class='noDataBox' style='height:60px'><img src='img/loading_32.gif' /></div>");
             ajax.load("home_yqfa", param);
         })
     }
@@ -134,12 +142,16 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                         $(tabID).html(HX_config.noDataHtml);
                     }
                 },
+                error:function(){
+                    $(tabID).html(HX_config.errorHtml);
+                },
                 //get 请求参数，类似data
                 "query": {
                     "planId": id,
                     "sentiment": type
                 }
             };
+            $(tabID).find(".plan-main-list").html("<div class='noDataBox' style='height:60px'><img src='img/loading_32.gif' /></div>");
             ajax.load("home_list", param);
         })
     }
