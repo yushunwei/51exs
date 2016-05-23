@@ -234,7 +234,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 });
                 $("form.downLoadForm .download-content").append(inputHtml);
                 $("form.downLoadForm").attr("action",url);
-                $("form.downLoadForm").removeClass("hidden");
                 $("form.downLoadForm").submit();
             }
         })
@@ -261,7 +260,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                         dedupids:arr
                     },
                     success:function(d){
-                        console.log(d);
+
                     }
                 };
                 layer.confirm('确定取消选中文章的相似文章预警？确定后一个月内与选中文章相似的文章不再预警。', {
