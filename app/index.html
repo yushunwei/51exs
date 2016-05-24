@@ -41,21 +41,30 @@
             </div>
             <div class="header-notice">
                 <ul>
-                    <li><a href="pages/report/weeklyreportlist.html"><img src="img/headnav_icon.png" alt="">
-
-                        <p>舆情报告</p></a></li>
-                    <li><a href="pages/warn/warnCenter.html"><img src="img/headnav_icon_2.png" alt="">
-
-                        <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
-                    <li><a href="#"><img src="img/headnav_icon_3.png" alt="">
-
-                        <p>给我意见</p></a></li>
+                    <li>
+                        <a href="pages/report/weeklyreportlist.html">
+                            <img src="img/headnav_icon.png" alt="">
+                            <p>舆情报告</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages/warn/warnCenter.html">
+                            <img src="img/headnav_icon_2.png" alt="">
+                            <p>预警中心</p><span class="cy-badge hidden"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://wj.icinfo.cn/jq/7799156.aspx" target="_blank">
+                            <img src="img/headnav_icon_3.png" alt="">
+                            <p>给我意见</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="header-user">
                 <img src="img/user.png" alt="">
                 <span>前端用户</span>
-                <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+                <a href="javascript:void(0)" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
             </div>
         </div>
     </div>
@@ -84,15 +93,15 @@
         <!------舆情------->
         <div class="plan modelLoding">
             <div class="hidden plan-title">
-                <h3><a href="pages/monitor/allplan.html">全部舆情方案</a></h3>
+                <h3><a href="pages/monitor/allplan.html" target="_blank">全部舆情方案</a></h3>
 
                 <div class="plan-data">
                     <ul class="clearfix" id="yqfaTitle">
                         <li>近一周</li>
-                        <li>总量：<span class="sumCnt"></span></li>
-                        <li>正面：<span class="text-blue positiveNum"> </span></li>
-                        <li>负面：<span class="text-danger negativeNum"> </span></li>
-                        <li>中性：<span class="text-middle neutralNum"> </span></li>
+                        <li>总量：<span class="sumCnt turnPageJcfa" data-sentiment=""></span></li>
+                        <li>正面：<span class="text-blue positiveNum turnPageJcfa" data-sentiment="positive"> </span></li>
+                        <li>负面：<span class="text-danger negativeNum turnPageJcfa" data-sentiment="negative"> </span></li>
+                        <li>中性：<span class="text-middle neutralNum turnPageJcfa" data-sentiment="neutral"> </span></li>
                         <li>负面占比：<span class="negativePercent"> </span></li>
                     </ul>
                 </div>
@@ -116,15 +125,15 @@
                                         {{#each objects}}
                                         <li>
                                             <p><a class="plan-main-item"
-                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}" target="_blank"
                                                   data-pageturn="true">{{this.title}}</a>
                                                 {{#if this.sentiment}}
                                                 {{#compare this.sentiment 1}}
-                                                <span class="label label-info">正面</span>
+                                                <span class="label label-info label-ststus">正面</span>
                                                 {{else}}
                                                 {{#if this.sentiment}}
                                                 {{#compare this.sentiment -1}}
-                                                <span class="label label-danger">负面</span>
+                                                <span class="label label-danger label-ststus">负面</span>
                                                 {{else}}
                                                 {{/compare}}
                                                 {{/if}}
@@ -132,13 +141,13 @@
                                                 {{/if}}
 
                                                 {{#if this.isWarn}}
-                                                <span class="label label-danger">预警</span>
+                                                    {{#js_compare isWarn 'yes'}}
+                                                     <span class="label label-danger">预警</span>
                                                 {{else}}
-
+                                                     {{/js_compare}}
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [<a
-                                                    href="pages/similarArticle.html?docID={{this.docId}}"
                                                     data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
                                             <img src="img/list_icon.png" alt="">
                                         </li>
@@ -262,9 +271,9 @@
                 <div class="plan-data">
                     <ul class="clearfix">
                         <li>近一周</li>
-                        <li>总量：<span class="totalAll">6</span></li>
-                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
-                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
                         <li>负面占比：<span class="negativePercent">50%</span></li>
                     </ul>
                 </div>
@@ -305,11 +314,6 @@
                 </div>
                 <!------我的公司右侧图表-------->
                 <div class="plan-main-right">
-                    <div class="plan-main-title">
-                        <ul>
-                            <li><a href="#1">重点媒体情感偏向</a></li>
-                        </ul>
-                    </div>
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
                         <div id="chartBar1"></div>
@@ -325,9 +329,9 @@
                 <div class="plan-data">
                     <ul class="clearfix">
                         <li>近一周</li>
-                        <li>总量：<span class="totalAll">6</span></li>
-                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
-                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
                         <li>负面占比：<span class="negativePercent">50%</span></li>
                     </ul>
                 </div>
@@ -368,11 +372,6 @@
                 </div>
                 <!------我的公司右侧图表-------->
                 <div class="plan-main-right">
-                    <div class="plan-main-title">
-                        <ul>
-                            <li><a href="#1">重点媒体情感偏向</a></li>
-                        </ul>
-                    </div>
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
                         <div id="chartBar2"></div>
@@ -388,9 +387,9 @@
                 <div class="plan-data">
                     <ul class="clearfix">
                         <li>近一周</li>
-                        <li>总量：<span class="totalAll">6</span></li>
-                        <li>正面：<span class="text-blue positiveTotal">3</span></li>
-                        <li>负面：<span class="text-danger negativeTotal">3</span></li>
+                        <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                        <li>正面：<span class="text-blue positiveTotal turnPageJcfa" data-sentiment="positive">3</span></li>
+                        <li>负面：<span class="text-danger negativeTotal turnPageJcfa" data-sentiment="negative">3</span></li>
                         <li>负面占比：<span class="negativePercent">50%</span></li>
                     </ul>
                 </div>
@@ -400,7 +399,7 @@
                     <div class="plan-main-title">
                         <ul class="nav nav-tabs list-tabs">
                             <li>最新舆情</li>
-                            <li class="active"><a data-toggle="tab" href="#listn1-all">全部</a></li>
+                            <li class="active"><a data-toggle="tab" href="#listn3-all">全部</a></li>
                             <li data-type="positive"><a data-toggle="tab" href="#listn3-p">正面</a></li>
                             <li data-type="neutral"><a data-toggle="tab" href="#listn3-z">中性</a></li>
                             <li data-type="negative"><a data-toggle="tab" href="#listn3-f">负面</a></li>
@@ -431,11 +430,6 @@
                 </div>
                 <!------我的公司右侧图表-------->
                 <div class="plan-main-right">
-                    <div class="plan-main-title">
-                        <ul>
-                            <li><a href="#1">重点媒体情感偏向</a></li>
-                        </ul>
-                    </div>
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
                         <div id="chartBar3"></div>

@@ -3,7 +3,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * 初始化
      * @private
      */
-    function _init() {
+    function _init(page) {
         //设置用户信息
         $("div.header .header-user").length != 0 && setUser();
         //设置预警信息图表是否显示
@@ -16,7 +16,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".conditions-choice").find(".conditions-shrinkage-btn").length!=0 && planCloseOpen();
         //绑定全网搜索
         $("div.header .header-input .input-keywords").length != 0 && bindFullSearch();
-
+        //绑定 舆情下载
+        $(".conditions-choice").find("a.download-checked-btn").length!=0 && bindDownload(page);
+        //取消相似预警
+        $(".conditions-choice").find("a.cancel-alldanger-btn").length!=0 && bindCancel(page);
     }
 
     /**
@@ -88,11 +91,25 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function setUser() {
         var param = {
-            "success": function (d) {
+            success: function (d) {
                 $("div.header .header-user").find('span').html(d.data.nickName || d.data.mobile);
             }
         };
         ajax.load("user", param);
+
+        // 绑定退出登录操作
+        bindLogout();
+    }
+
+    /**
+     * 退出
+     */
+    function bindLogout(){
+        $(".header-user .log-out").click(function(){
+            var exsToken = utils.getToken();
+            utils.removeToken();
+            window.location.href = "/logout"+(exsToken?"?token="+exsToken:"");
+        });
     }
 
     /**
@@ -175,6 +192,86 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 $(".conditions-choice").find(".conditions-box").not(":last").hide();
                 $(this).addClass("chooseClosed");
                 $(this).children("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+        })
+    }
+    /***
+     * 绑定下载 事件
+     * **/
+    function bindDownload(page){
+        //绑定下载选中按钮 和下载全部事件
+        var btn = $(".conditions-choice").find("a.download-checked-btn,a.download-all-btn");
+        var span,tr;
+        var input = "<input class='form-control'/>";
+        var key,value;
+        var arr = ["title","summary","source","author","sentiment","similarCount","media","url","pubTime"];
+        var url = HX_config.serv_path+"/monitor/contentmonitor/downloadmonitorinfolist/v=1.0.0?token="+utils.getToken();
+        btn.on("click",function(e){
+            span =$(".full-view-table").find(".table-bordered tbody tr").find("td:first .cy-checkbox span.checked");
+            tr = span.parent().parent().parent();
+            // 下载全部
+            if($(this).hasClass("download-all-btn")){
+                tr = $(".full-view-table").find(".table-bordered tbody tr");
+            }
+            if(tr.length==0){
+                //TODO
+                return;
+            }else{
+                $("form.downLoadForm").length == 0 && $(".page").append("<form class='downLoadForm hidden' method='post'></form>");
+                $("form.downLoadForm").empty();
+                $("form.downLoadForm").append("<div class='form-group download-content'></div>");
+                var inputHtml="";
+                if(page.name=="warnCenter"){
+                    arr.push("warnConfigName");
+                    url = HX_config.serv_path+"/warn/warncenter/downloadwarninfolist/v=1.0.0?token="+utils.getToken();
+                }
+                $.each(tr,function(i,v){
+                    for(var index=0;index<arr.length;index++){
+                        key = "monitorInfos["+i+"]."+arr[index];
+                        value = $(this).data(arr[index].toLowerCase())||'';
+                        inputHtml += '<input class="form-control" name="'+key+'" value="'+value+'" />';
+                    }
+                });
+                $("form.downLoadForm .download-content").append(inputHtml);
+                $("form.downLoadForm").attr("action",url);
+                $("form.downLoadForm").submit();
+            }
+        })
+    }
+    /**
+     * 取消预警
+     * **/
+    function bindCancel(){
+        var span,tr,arr=[];
+        $(".conditions-choice").find("a.cancel-alldanger-btn").on("click",function(){
+            span =$(".full-view-table").find(".table-bordered tr").find("td:first .cy-checkbox span.checked");
+            tr = span.parent().parent().parent();
+            // 下载全部
+            if(tr.length==0){
+                //TODO
+                return;
+            }else{
+                $.each(tr,function(i,v){
+                    arr.push($(this).data("dedupid"));
+                });
+                var param = {
+                    type:"post",
+                    data : {
+                        dedupids:arr
+                    },
+                    success:function(d){
+
+                    }
+                };
+                layer.confirm('确定取消选中文章的相似文章预警？确定后一个月内与选中文章相似的文章不再预警。', {
+                    btn: ['确定','取消'] //按钮
+                }, function(index){
+                    ajax.load("cancelsimilarwarn",param);
+                    layer.close(index);
+                }, function(){
+
+                });
+                ajax.load("cancelsimilarwarn",param);
             }
         })
     }

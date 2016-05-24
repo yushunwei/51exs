@@ -53,6 +53,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 initFirst3NewPlan(0);
                 //显示底部loadding效果
                 $(".bottomLoading").removeClass("hidden");
+
             },
             "error": function () {
                 $("#chartPie").html(HX_config.errorHtml);
@@ -61,7 +62,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             }
         };
         //增加loading
-        $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>")
+        $(".plan:first").append("<div class='noDataBox' height='100%'><img src='img/loading_48.gif' /></div>");
         ajax.load("home_yqfa", param);
     }
 
@@ -70,16 +71,34 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
         $(".plan").eq(0).on('click', ".list-tabs a", function () {
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
+            var tabindex = $(this).parent().index();
             var param = {
                 "success": function (data) {
-                    view.renderYqfa(data.data, tabID);
+                    if(data.data.length==0){
+                        $(tabID).find(".plan-main-list ul").html(HX_config.noDataHtml);
+                        return;
+                    }
+                    view.renderYqfa(data.data, tabID,tabindex);
+                },
+                error:function(){
+                    $(tabID).find(".plan-main-list ul").html(HX_config.errorHtml);
                 },
                 //url 参数 类似 data
                 "query": {
                     "sentiment": type
                 }
             };
+            $(tabID).find(".plan-main-list ul").html("<div class='noDataBox' style='height:60px'><img src='img/loading_32.gif' /></div>");
             ajax.load("home_yqfa", param);
+        });
+        $(".main").on("click","span.turnPageJcfa",function(){
+            var planId = $(this).parents(".plan").attr("planId");
+            var obj = {
+                planId : planId?planId:"",
+                sentiment:$(this).data("sentiment"),
+                timeRanges:7
+            };
+            window.open('pages/monitor/monitorinfolist.html?'+ $.param(obj));
         })
     }
 
@@ -88,6 +107,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
         // 方案个数达到上线或者达到3个终止递归
         if (i === indexUserPlans.userPlans.length || indexUserPlans.showCount === 3) {
             $(".bottomLoading").addClass("hidden");
+
             return;
         }
         //获取对应的 Plan数据
@@ -107,7 +127,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     //下一个舆情方案
                     indexUserPlans.showCount++;
                     //对应的舆情状态设置为显示
-                    $(".plan").eq(indexUserPlans.showCount).removeClass("hidden");
+                    $(".plan").eq(indexUserPlans.showCount).removeClass("hidden").attr("planId",userPlan.id);
                     //绑定对应的舆情事件，标签切换发送请求
                     bindListEvent(indexUserPlans.showCount);
                 }
@@ -124,13 +144,17 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
             var type = $(this).parent().data("type") || ' ';
             var tabID = $(this).attr("href");
             var id = $(this).parent().parent().attr("planid");
+            var tabindex = $(this).parent().index();
             var param = {
                 "success": function (data) {
                     if (data.data.recordTotal != 0) {
-                        view.renderTabList(data.data, tabID);
+                        view.renderTabList(data.data, tabID,tabindex);
                     } else {
                         $(tabID).html(HX_config.noDataHtml);
                     }
+                },
+                error:function(){
+                    $(tabID).html(HX_config.errorHtml);
                 },
                 //get 请求参数，类似data
                 "query": {
@@ -138,6 +162,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     "sentiment": type
                 }
             };
+            $(tabID).find(".plan-main-list").html("<div class='noDataBox' style='height:60px'><img src='img/loading_32.gif' /></div>");
             ajax.load("home_list", param);
         })
     }

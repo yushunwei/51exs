@@ -46,9 +46,15 @@
 }
 .page-warnCenter .warning-setting-main .cy-panel .panel-body {
 	padding: 20px 40px 20px 40px;
-	height: 290px;
+	height: 280px;
 }
 .page-warnCenter .full-view-main-content>.tab-pane {
 	padding: 20px;
 	background: #fff;
+}
+.page-warnCenter .warning-setting-main .cy-panel {
+	overflow: hidden;
+}
+.page-warnCenter .add-email-input .btn {
+	padding: 6px 12px;
 }
