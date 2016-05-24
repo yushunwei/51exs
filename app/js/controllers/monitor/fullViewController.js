@@ -82,7 +82,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       /*****
        * 绑定查询条件
        * ****/
-      $dom.find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges').click(function(){
+      $dom.find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges,.not-open').click(function(){
               if($(this).hasClass("digest-btn")){
                   if($(this).hasClass("active")){
                       $(this).removeClass("active");
