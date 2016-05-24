@@ -24,6 +24,7 @@
   <script src="../../js/config/config.js"></script>
   <script src="../../js/lib/pagination/jquery.pagination.js"></script>
   <script src="../../js/lib/laydate/laydate.js"></script>
+  <script src="../../js/lib/layer/layer.js"></script>
 
 </head>
 
@@ -173,7 +174,9 @@
               <tbody class="list-yq">
               <script id="listScript" type="text/x-handlebars-template">
                 {{#each this.objects}}
-                <tr>
+                <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                    data-source="{{source}}" data-author="{{author}}"
+                    data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}"  data-docId="{{docId}}">
                   <td class="text-center" data-docId="{{docId}}"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                   <td class="text-center info-warnconfigname">{{warnConfigName}}</td>
                   <td class="information">
@@ -294,7 +297,7 @@
             <ul class="clearfix add-email-ul">
               <script id="addemailScript" type="text/x-handlebars-template">
                 {{#each this.data}}
-                <li><label class="cy-checkbox"><input type="checkbox"><span class="{{#isCheck checked}}{{/isCheck}}"></span></label><span class="info-email">{{this}}</span></li>
+                <li><label class="cy-checkbox"><input type="checkbox"><span class="{{#isCheck checked}}{{/isCheck}}"></span></label>{{this}}</li>
                 {{/each}}
               </script>
             </ul>
@@ -334,7 +337,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info send-email-btn btn-emails-confirm">发送邮件</button>
+          <button type="button" class="btn btn-info send-email-btn btn-emails-confirm">确认</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
       </div>
