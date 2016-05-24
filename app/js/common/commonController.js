@@ -344,7 +344,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 }
             }
         }
-        ajax.load("emailShare",param);
+        ajax.load("emailShare",param,"#sendEmailModal");
     }
     // 返回
     return {

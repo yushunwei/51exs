@@ -1811,6 +1811,7 @@ a:focus {
     left: 0;
 	text-align:center;
 }
+.loadBox .loading img{width:32px;height:32px;display:inline-block;}
 .modelLoding {
 	height: 300px;
 }
