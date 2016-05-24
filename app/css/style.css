@@ -1237,6 +1237,8 @@ a:focus {
 }
 .modify-plan-operation-btn {
 	margin-left: 10px;
+	position: relative;
+	top: 7px;
 }
 .modify-plan-item-btn .btn {
 	width: 280px;
@@ -1813,5 +1815,8 @@ a:focus {
 .bottomLoading {
 	background-color: #fff;
 	padding: 30px 0;
+}
+.turnPageJcfa {
+	cursor: pointer;
 }
 

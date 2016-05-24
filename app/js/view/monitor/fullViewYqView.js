@@ -29,6 +29,7 @@ define(["tool/ajaxTool"], function (ajax) {
                 '<span class="operation-box clear"><span class="add-btn box-show glyphicon glyphicon-plus-sign"></span><span class="with-next box-hide">+</span>' +
                 '<span class="close-btn box-show">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
             $("#key-word-group").append(groupDiv);
+            clickBtnShow();
         })
     }
 
@@ -54,37 +55,47 @@ define(["tool/ajaxTool"], function (ajax) {
                 exWords = getwarnWords("exclude");
             var newKeyWords = getNewKeyWords(keyWords);
             rightPlanShow(newKeyWords, warnWords);
+            clickBtnShow();
         })
     }
-
-    function warningAdd() {
-        $("#warning,#exclude").on("click", "a", function () {
-            var input = $(this).parent();
-            var index = input.index();
-            if (index > 1) {
-                return false;
-            }
+    function warningAdd(){
+        $(document).on("click","a.warning", function () {
+            var input = $(this).prev();
             var inputHtml = input[0].outerHTML;
+            $(this).prev().find(".form-group-title").show();
             input.after(inputHtml);
-            $(this).prev(".form-group-title").show();
-            $(this).hide();
+            $(this).parent().find("input").eq($(this).parent().find("input").length-1).val("");
+            clickWarningExShow($(this));
         })
     }
-
-    function warningClose() {
-        $("#warning,#exclude").on("click", ".close-btn", function () {
-            var parents = $(this).parents(".warning-list");
-            var parentPrev = parents.prev();
-            if (parents.find("a").css("display") == "none") {
-                parents.remove();
-            } else {
-                if (parentPrev.length > 0) {
-                    parentPrev.find("a").show();
-                    parentPrev.find(".form-group-title").hide();
-                    parents.remove();
-                }
-            }
+    function exAdd(){
+        $(document).on("click","a.exclude", function () {
+            var input = $(this).prev();
+            var inputHtml = input[0].outerHTML;
+            $(this).prev().find(".form-group-title").show();
+            input.after(inputHtml);
+            $(this).parent().find("input").eq($(this).parent().find("input").length-1).val("");
+            clickWarningExShow($(this));
         })
+    }
+    function warningClose(){
+        $("#warning").on("click",".close-btn", function () {
+            var parents = $(this).parents(".warning-list");
+            if(parents.parent().find(".warning-list").length !== 1){
+                parents.remove();
+            }
+            clickWarningExShow($("a.warning"));
+        });
+    }
+    function exClose(){
+        $("#exclude").on("click",".close-btn", function () {
+            var parents = $(this).parents(".warning-list");
+
+            if(parents.parent().find(".warning-list").length !== 1){
+                parents.remove();
+            }
+            clickWarningExShow($("a.exclude"));
+        });
     }
 
     function getWords() {
@@ -175,58 +186,63 @@ define(["tool/ajaxTool"], function (ajax) {
 
     //点击保存
     function saveData(id) {
-        $("#messages").on("click", ".saveBtn", function () {
-            var keyWords = getkeyWords(),//[["1","2"],["3","4"]]
-                warnWords = getwarnWords("warning"),
-                exWords = getwarnWords("exclude"),
-                title = $("#myComplay").val();
-            var newKeys = removeNull(keyWords);
-            if(title == "" || newKeys.length==0){
+        $(".page-newYq").on("click",".saveBtn",function(){
+            var title = $("#myComplay").val();
+            var submitData = dataReform();
+            if(title == "" || submitData.userPlanWords.length==0){
                 $('#alertModal').modal('show');
             }else{
-                var submitData = {
-                    "id":id,
-                    "title": title,
-                    "userPlanWords": [],
-                    "userPlanExWords": [],
-                    "userPlanWarnWords": []
-                };
-                for (var i = 0; i < newKeys.length; i++) {
-                    for (var j = 0; j < newKeys[i].length; j++) {
-                        var s = {word: "", groupNumber: "", orderNumber: ""};
-                        s.word = newKeys[i][j];
-                        s.groupNumber = i + 1;
-                        s.orderNumber = j + 1;
-                        submitData.userPlanWords.push(s);
-                    }
-                }
-                for (var h = 0; h < warnWords.length; h++) {
-                    var w = {warnWord: ""};
-                    if (warnWords[h] !== "") {
-                        w.warnWord = warnWords[h];
-                        submitData.userPlanWarnWords.push(w);
-                    }
-                }
-                for (var k = 0; k < exWords.length; k++) {
-                    var e = {word: ""};
-                    if (exWords[k] !== "") {
-                        e.word = exWords[k];
-                        submitData.userPlanExWords.push(e);
-                    }
-                }
+
                 var param = {
-                    data: JSON.stringify(submitData),
-                    type: "post",
+                    data:JSON.stringify(submitData),
+                    type:"post",
                     contentType: 'application/json',
-                    success: function (data) {
+                    success:function(data){
                         console.log(data)
                     }
                 };
-                ajax.load('modifyuserplan', param);
+                ajax.load('newYq',param);
             }
         });
     }
-
+//组合提交数据
+    function dataReform(){
+        var submitData = {
+            "title":title,
+            "userPlanWords":[],
+            "userPlanExWords":[],
+            "userPlanWarnWords":[]
+        };
+        var keyWords = getkeyWords(),
+            warnWords = getwarnWords("warning"),
+            exWords = getwarnWords("exclude"),
+            title = $("#myComplay").val();
+        var newKeys = removeNull(keyWords);
+        for(var i=0;i<newKeys.length;i++){
+            for(var j=0;j<newKeys[i].length;j++){
+                var s = {word:"",groupNumber:"",orderNumber:""};
+                s.word = newKeys[i][j];
+                s.groupNumber = i+1;
+                s.orderNumber = j+1;
+                submitData.userPlanWords.push(s);
+            }
+        }
+        for(var h=0;h<warnWords.length;h++){
+            var w = {warnWord:""};
+            if(warnWords[h] !== ""){
+                w.warnWord = warnWords[h];
+                submitData.userPlanWarnWords.push(w);
+            }
+        }
+        for(var k=0;k<exWords.length;k++){
+            var e = {word:""};
+            if(exWords[k] !== ""){
+                e.word = exWords[k];
+                submitData.userPlanExWords.push(e);
+            }
+        }
+        return submitData;
+    }
     //关键字数据去空
     function removeNull(arr) {
         var newArr = arr;
@@ -266,29 +282,27 @@ define(["tool/ajaxTool"], function (ajax) {
         $("#messages").addClass("panlLoaded");
         $("#messages").find("#myComplay").val(data.data.title);
         var userPlanWords = data.data.userPlanWords;
-        var newArr = [{"groupV":[]},{"groupV":[]},{"groupV":[]}];
+        var newArr = [];
+        var wordLabels = {
+            1:"词语一：",
+            2:"词语二：",
+            3:"词语三："
+        };
+        // [{},{},{}]
         for (var i = 0; i < (userPlanWords.length); i++) {
-            if (userPlanWords[i].groupNumber < 4 && userPlanWords[i].orderNumber < 4) {
-                if (userPlanWords[i].groupNumber == 1) {
-                    newArr[0].index = 1;
-                    newArr[0].groupN = "词语一：";
-                    newArr[0].groupV.push(userPlanWords[i]);
-                }
-                if (userPlanWords[i].groupNumber == 2) {
-                    newArr[1].index = 2;
-                    newArr[1].groupN = "词语二：";
-                    newArr[1].groupV.push(userPlanWords[i]);
-                }
-                if (userPlanWords[i].groupNumber == 3) {
-                    newArr[2].index = 3;
-                    newArr[2].groupN = "词语三：";
-                    newArr[2].groupV.push(userPlanWords[i]);
-                }
+            var groupNumber = userPlanWords[i].groupNumber;
+            if(!newArr[groupNumber-1]){
+                newArr[groupNumber-1] = {index:groupNumber,
+                                         groupN:wordLabels[groupNumber],
+                                         groupV:[userPlanWords[i]]};
+            }else{
+                newArr[groupNumber-1].groupV.push(userPlanWords[i]);
             }
         }
         var myTemplate1 = Handlebars.compile($("#userPlanWords").html());
         var html1 = myTemplate1(newArr);
         $("#key-word-group").append(html1);
+        clickBtnShow();
         //显示最后一输入框的按钮
         var groupTar = $("#key-word-group").find(".form-group");
         for(var h=0;h<groupTar.length;h++){
@@ -337,7 +351,21 @@ define(["tool/ajaxTool"], function (ajax) {
         var newKeyWords = getNewKeyWords(keyWords);
         rightPlanShow(newKeyWords, warnWords);
     }
-
+    //控制keyword按钮显示
+    function clickBtnShow(){
+        $(".add-line-btn").hide();
+        var addLinBtnLen = $(".add-line-btn").length;
+        if(addLinBtnLen<3){
+            $(".add-line-btn").eq(addLinBtnLen-1).show();
+        }
+    }
+    //控制warning 和 ex 按钮显示
+    function clickWarningExShow(dom){
+        var btn = dom;
+        dom.parent().find(".group-input-warp").length === 3?btn.hide():btn.show();
+        var orBtn = dom.parent().find(".form-group-title");
+        $(".add-line-btn").eq(orBtn-1).show();
+    }
     function _init(id) {
         //获取该舆情数据
         getData(id);
@@ -347,11 +375,14 @@ define(["tool/ajaxTool"], function (ajax) {
         keyWordGroupAdd();
         //关闭单个关键词语
         keyWordClose();
-        //预警词,排除词
-        //点击增加
+        //点击预警增加
         warningAdd();
-        //点击删除
+        //点击排除词增加
+        exAdd();
+        //点击warning删除
         warningClose();
+        //点击ex删除
+        exClose();
         //获取关键词，预警词和排除词
         getWords();
         //保存

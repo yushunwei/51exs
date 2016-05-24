@@ -28,6 +28,7 @@ define(["tool/ajaxTool"], function (ajax) {
           '<span class="operation-box clear"><span class="add-btn glyphicon glyphicon-plus-sign"></span><span class="with-next">+</span>'+
           '<span class="close-btn">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
       $("#key-word-group").append(groupDiv);
+      clickBtnShow();
     })
   }
   function keyWordClose(){
@@ -47,45 +48,66 @@ define(["tool/ajaxTool"], function (ajax) {
         }
         parents.remove();
       }
-
+        var keyWords = getkeyWords(),
+            warnWords = getwarnWords("warning"),
+            exWords = getwarnWords("exclude");
+        var newKeyWords = getNewKeyWords(keyWords);
+        rightPlanShow(newKeyWords, warnWords);
+      clickBtnShow();
     })
   }
   function warningAdd(){
-    $("#warning,#exclude").on("click","a", function () {
-      var input = $(this).parent();
-      var index = input.index();
-      if(index>1){
-        return false;
-      }
-      var inputHtml = input[0].outerHTML;
-      input.after(inputHtml);
-      $(this).prev(".form-group-title").show();
-      $(this).hide();
-    })
-  }
+        $("a.warning").on("click", function () {
+            var input = $(this).prev();
+            var index = input.index();
+            if(index>1){
+                return false;
+            }
+            var inputHtml = input[0].outerHTML;
+            $(this).prev().find(".form-group-title").show();
+            input.after(inputHtml);
+            clickWarningExShow($(this));
+        })
+    }
+    function exAdd(){
+        $("a.exclude").on("click", function () {
+            var input = $(this).prev();
+            var index = input.index();
+            if(index>1){
+                return false;
+            }
+            var inputHtml = input[0].outerHTML;
+            $(this).prev().find(".form-group-title").show();
+            input.after(inputHtml);
+            clickWarningExShow($(this));
+        })
+    }
   function warningClose(){
-    $("#warning,#exclude").on("click",".close-btn", function () {
+    $("#warning").on("click",".close-btn", function () {
       var parents = $(this).parents(".warning-list");
-      var parentPrev = parents.prev();
-      if(parents.find("a").css("display") == "none"){
+      if(parents.parent().find(".warning-list").length !== 1){
         parents.remove();
-      }else{
-        if(parentPrev.length>0){
-          parentPrev.find("a").show();
-          parentPrev.find(".form-group-title").hide();
-          parents.remove();
-        }
       }
-    })
+      clickWarningExShow($("a.warning"));
+    });
+  }
+  function exClose(){
+    $("#exclude").on("click",".close-btn", function () {
+      var parents = $(this).parents(".warning-list");
+
+      if(parents.parent().find(".warning-list").length !== 1){
+        parents.remove();
+      }
+      clickWarningExShow($("a.exclude"));
+    });
   }
   function getWords(){
     $(".page-newYq").on("blur","input:not('#myComplay')",function(){
-      //关键词
-      var keyWords = getkeyWords(),
-          warnWords = getwarnWords("warning"),
-          exWords = getwarnWords("exclude");
-      var newKeyWords = getNewKeyWords(keyWords);
-      rightPlanShow(newKeyWords,warnWords);
+        var keyWords = getkeyWords(),
+            warnWords = getwarnWords("warning"),
+            exWords = getwarnWords("exclude");
+        var newKeyWords = getNewKeyWords(keyWords);
+        rightPlanShow(newKeyWords, warnWords);
     })
   }
   //获取所有关键词组数据
@@ -114,33 +136,33 @@ define(["tool/ajaxTool"], function (ajax) {
     return warnWords;
   }
   //右边板块显示方法
-  function rightPlanShow(newKeyWords,warnWords){
-    if(newKeyWords.length == 0 && warnWords.length == 0){
-      return false;
-    }
-    var contain = $("#words-show-plan").find(".content-preview-list");
-    var keysContain = $("#keys-show-plan").find(".content-preview-list");
-    contain.empty();
-    keysContain.empty();
-    var showHtml = '',keysHtml='';
-    var count = 0,keysCount=0;
-    for(var h=0;h<warnWords.length;h++){
-      for(var k=0;k<newKeyWords.length;k++){
-        if((newKeyWords[k]+warnWords[h]) !== ""){
-          showHtml = '<div class="content-preview">'+newKeyWords[k]+"+"+warnWords[h]+'</div>';
-          contain.append(showHtml);
-          count += 1;
+    function rightPlanShow(newKeyWords, warnWords) {
+        if (newKeyWords.length == 0 && warnWords.length == 0) {
+            return false;
         }
-      }
+        var contain = $("#words-show-plan").find(".content-preview-list");
+        var keysContain = $("#keys-show-plan").find(".content-preview-list");
+        contain.empty();
+        keysContain.empty();
+        var showHtml = '', keysHtml = '';
+        var count = 0, keysCount = 0;
+        for (var h = 0; h < warnWords.length; h++) {
+            for (var k = 0; k < newKeyWords.length; k++) {
+                if ((newKeyWords[k] + warnWords[h]) !== "") {
+                    showHtml = '<div class="content-preview">' + newKeyWords[k] + "+" + warnWords[h] + '</div>';
+                    contain.append(showHtml);
+                    count += 1;
+                }
+            }
+        }
+        for (var z = 0; z < newKeyWords.length; z++) {
+            keysHtml = '<div class="content-preview">' + newKeyWords[z] + '</div>';
+            keysContain.append(keysHtml);
+            keysCount += 1;
+        }
+        $("#words-show-plan").find(".yjcpp").text(count);
+        $("#keys-show-plan").find(".yjcpp").text(keysCount);
     }
-    for(var z=0;z<newKeyWords.length;z++){
-      keysHtml = '<div class="content-preview">'+newKeyWords[z]+'</div>';
-      keysContain.append(keysHtml);
-      keysCount += 1;
-    }
-    $("#words-show-plan").find(".yjcpp").text(count);
-    $("#keys-show-plan").find(".yjcpp").text(keysCount);
-  }
   //为了右侧显示组合词语，重新整合关键词组
   function getNewKeyWords(keyWords){
     var newKeyWords = [];
@@ -162,43 +184,12 @@ define(["tool/ajaxTool"], function (ajax) {
   //点击保存
   function saveData(){
     $(".page-newYq").on("click",".saveBtn",function(){
-      var keyWords = getkeyWords(),
-          warnWords = getwarnWords("warning"),
-          exWords = getwarnWords("exclude"),
-          title = $("#myComplay").val();
-      var newKeys = removeNull(keyWords);
-      if(title == "" || newKeys.length==0){
+        var title = $("#myComplay").val();
+      var submitData = dataReform();
+      if(title == "" || submitData.userPlanWords.length==0){
         $('#alertModal').modal('show');
       }else{
-        var submitData = {
-          "title":title,
-          "userPlanWords":[],
-          "userPlanExWords":[],
-          "userPlanWarnWords":[]
-        };
-        for(var i=0;i<newKeys.length;i++){
-          for(var j=0;j<newKeys[i].length;j++){
-            var s = {word:"",groupNumber:"",orderNumber:""};
-            s.word = newKeys[i][j];
-            s.groupNumber = i+1;
-            s.orderNumber = j+1;
-            submitData.userPlanWords.push(s);
-          }
-        }
-        for(var h=0;h<warnWords.length;h++){
-          var w = {warnWord:""};
-          if(warnWords[h] !== ""){
-            w.warnWord = warnWords[h];
-            submitData.userPlanWarnWords.push(w);
-          }
-        }
-        for(var k=0;k<exWords.length;k++){
-          var e = {word:""};
-          if(exWords[k] !== ""){
-            e.word = exWords[k];
-            submitData.userPlanExWords.push(e);
-          }
-        }
+
         var param = {
           data:JSON.stringify(submitData),
           type:"post",
@@ -211,6 +202,44 @@ define(["tool/ajaxTool"], function (ajax) {
       }
     });
   }
+    //组合提交数据
+    function dataReform(){
+        var submitData = {
+            "title":title,
+            "userPlanWords":[],
+            "userPlanExWords":[],
+            "userPlanWarnWords":[]
+        };
+        var keyWords = getkeyWords(),
+            warnWords = getwarnWords("warning"),
+            exWords = getwarnWords("exclude"),
+            title = $("#myComplay").val();
+        var newKeys = removeNull(keyWords);
+        for(var i=0;i<newKeys.length;i++){
+            for(var j=0;j<newKeys[i].length;j++){
+                var s = {word:"",groupNumber:"",orderNumber:""};
+                s.word = newKeys[i][j];
+                s.groupNumber = i+1;
+                s.orderNumber = j+1;
+                submitData.userPlanWords.push(s);
+            }
+        }
+        for(var h=0;h<warnWords.length;h++){
+            var w = {warnWord:""};
+            if(warnWords[h] !== ""){
+                w.warnWord = warnWords[h];
+                submitData.userPlanWarnWords.push(w);
+            }
+        }
+        for(var k=0;k<exWords.length;k++){
+            var e = {word:""};
+            if(exWords[k] !== ""){
+                e.word = exWords[k];
+                submitData.userPlanExWords.push(e);
+            }
+        }
+        return submitData;
+    }
   //关键字数据去空
   function removeNull(arr){
     var newArr = arr;
@@ -228,6 +257,21 @@ define(["tool/ajaxTool"], function (ajax) {
     }
     return newArr;
   }
+  //控制keyword按钮显示
+  function clickBtnShow(){
+    $(".add-line-btn").hide();
+    var addLinBtnLen = $(".add-line-btn").length;
+    if(addLinBtnLen<3){
+      $(".add-line-btn").eq(addLinBtnLen-1).show();
+    }
+  }
+  //控制warning 和 ex 按钮显示
+  function clickWarningExShow(dom){
+    var btn = dom;
+    dom.parent().find(".group-input-warp").length === 3?btn.hide():btn.show();
+    var orBtn = dom.parent().find(".form-group-title");
+      $(".add-line-btn").eq(orBtn-1).show();
+  }
   function _events(){
     //关键词新增方法
     keyWordAdd();
@@ -235,11 +279,14 @@ define(["tool/ajaxTool"], function (ajax) {
     keyWordGroupAdd();
     //关闭单个关键词语
     keyWordClose();
-    //预警词,排除词
-    //点击增加
+    //点击预警增加
     warningAdd();
-    //点击删除
+      //点击排除词增加
+     exAdd();
+    //点击warning删除
     warningClose();
+    //点击ex删除
+    exClose();
     //获取关键词，预警词和排除词
     getWords();
     //保存
