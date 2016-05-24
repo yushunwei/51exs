@@ -1,8 +1,5 @@
-/**
- * Created by Administrator on 2016/5/24.
- */
 define([], function () {
-    //¶Ô±È
+    //æ³¨å†Œåˆ¤æ–­å™¨
     Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
         switch (operator) {
             case '!=':
@@ -37,7 +34,7 @@ define([], function () {
                 break;
         }
     });
-    //ÊýÑ§¼ÆËã
+    //æ³¨å†Œè®¡ç®—å™¨
     Handlebars.registerHelper("math", function(v1, operator, v2){
         if(operator == "+"){	return v1+v2;}
         if(operator == "-"){	return v1-v2;}
