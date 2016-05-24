@@ -27,9 +27,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function bindFullSearch(){
         $(".btn-search").click(function(){
-            var keyWords = $(".input-keywords").val().replace(/^\s+|\s+$/g,"");
-            $(this).attr("href","/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""))
-                .click();
+            var keyWords = encodeURIComponent($(".input-keywords").val().replace(/^\s+|\s+$/g,""));
+            window.open("/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""));
         });
     }
 
@@ -282,6 +281,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var myTemplate = Handlebars.compile(emailModel);
         var html = myTemplate(d);
         $(".add-email .add-email-ul").html(html);
+        $("#emailForm input[type=email]").val("");
+        $(".add-email-list").find(".text-danger").text("您最多可选择5个邮箱");
     }
     //邮件弹框
     function _handleEmail(){
@@ -344,7 +345,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 }
             }
         }
-        ajax.load("emailShare",param);
+        ajax.load("emailShare",param,"#sendEmailModal");
     }
     // 返回
     return {

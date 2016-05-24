@@ -10,7 +10,7 @@ define([], function () {
         };
 
         var result = sentiments[type];
-        return result?result:"正面";
+        return result?result:"中性";
     });
 
     /**
