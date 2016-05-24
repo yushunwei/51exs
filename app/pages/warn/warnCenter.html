@@ -104,10 +104,8 @@
                   <li><a data-source="tieba" href="javascript:void(0)">贴吧</a></li>
                   <li><a data-source="epub" href="javascript:void(0)">电子报</a></li>
                   <li><a data-source="blog" href="javascript:void(0)">博客</a></li>
-                  <li><a data-source="weibo" href="javascript:void(0)">微博</a></li>
-                  <li><a data-source="wx_gzh" href="javascript:void(0)">微信</a></li>
-                  <li><a data-source="video" href="javascript:void(0)" class="not-open">视频</a></li>
-                  <li><a data-source="search" href="javascript:void(0)" class="not-open">搜索引擎</a></li>
+                  <li><a data-source="weibo" href="javascript:void(0)" class="not-open">微博</a></li>
+                  <li><a data-source="wx_gzh" href="javascript:void(0)" class="not-open">微信</a></li>
                 </ul>
               </div>
               <div class="conditions-box time-box clearfix">
@@ -180,8 +178,14 @@
                   <td class="text-center" data-docId="{{docId}}"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                   <td class="text-center info-warnconfigname">{{warnConfigName}}</td>
                   <td class="information">
-                    <h3 class="title">{{#campareSentiment sentiment}}{{/campareSentiment}}<span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">  {{title}}</a></h3>
-                    <p class="digest">摘要：<a class="info-summary" href="../monitor/infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" target="_blank">{{summary}}</a></p>
+                    <h3 class="title">
+                      {{#campareSentiment sentiment}}{{/campareSentiment}}
+                      <span class="label label-warning hidden">预警</span>
+                      <a class="info-regionandtitle" href="/pages/monitor/infodetail.html?docID={{docId}}&amp;isWarn=yes" target="_blank">{{title}}</a>
+                    </h3>
+                    <p class="digest">摘要：
+                      <a class="info-summary" href="/pages/monitor/infodetail.html?docID={{docId}}&amp;isWarn=yes" target="_blank">{{summary}}</a>
+                    </p>
                     <div class="full-view-data-operation">
                       <div class="share">
                         <div class="share-box">
@@ -203,12 +207,17 @@
                           </div>
                         </div>
                       </div>
-                      <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
                     </div>
                   </td>
-                  <td class="text-center"><a href="../monitor/similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
-                  <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
-                  <td class="text-center table-time"><span class="info-date">{{createTime}}</span><br><span class="info-time">23:12</span></td>
+                  <td class="text-center">
+                    {{#ifCond similarCount "==" 0}}
+                      <a href="javascript:;">{{similarCount}}</a>
+                    {{else}}
+                    <a href="/pages/monitor/similar.html?dedupId={{dedupid}}" class="info-similarcount" target="_blank">{{similarCount}}</a>
+                    {{/ifCond}}
+                  </td>
+                  <td class="text-center"><a href="{{url}}" target="_blank"><span class="info-media">{{media}}</span></a></td>
+                  <td class="text-center table-time"><span class="info-date">{{createTime}}</span></td>
                 </tr>
                 {{/each}}
               </script>
@@ -492,6 +501,31 @@
 <!-- 底部结束 -->
 
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
+<script>
+  var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD',
+    min: laydate.now(-90),
+    max: laydate.now(), //最大日期
+    isclear : false,
+    choose: function(datas){
+      end.min = datas; //将结束日的初始值设定为开始日
+    }
+  };
+  var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD',
+    max: laydate.now(),
+    isclear : false,
+    choose: function(datas){
+      start.max = datas; //结束日选好后，重置开始日的最大日期
+    }
+  };
+  laydate(start);
+  laydate(end);
+  $("#start").val(laydate.now());
+  $("#end").val(laydate.now());
+</script>
 </body>
 </html>
 
