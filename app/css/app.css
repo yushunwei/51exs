@@ -374,75 +374,75 @@ ul {
   height: 40px;
   padding: 0 12px; }
 
-.page-newYq .modify-plan-main .modify-plan-content .form-group .form-group-title, .page-newYq .modify-plan-main .modify-plan-content .form-group .cy-checkbox {
-  color: #333; }
-
-.page-newYq .modify-plan-main .modify-plan-content .form-group .form-group-title {
-  display: inline-block;
-  float: left;
-  line-height: 40px; }
-
-.page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp {
-  position: relative;
-  display: inline-block;
-  background: #fff;
-  border: solid 1px #b1b1b1;
-  margin-right: 5px;
-  float: left; }
-  .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .input-warp {
+.page-newYq .modify-plan-main .modify-plan-content .form-group {
+  height: 44px; }
+  .page-newYq .modify-plan-main .modify-plan-content .form-group .form-group-title, .page-newYq .modify-plan-main .modify-plan-content .form-group .cy-checkbox {
+    color: #333; }
+  .page-newYq .modify-plan-main .modify-plan-content .form-group .form-group-title {
     display: inline-block;
     float: left;
-    width: 135px;
-    height: 40px; }
-  .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp input {
-    display: inline-block;
-    width: 100px;
-    height: 38px;
-    border: 0;
-    background: #fff;
-    color: #59c2e6;
-    padding: 0;
-    text-indent: 10px;
-    box-shadow: none; }
-  .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box {
-    color: #bcbcbc;
-    display: inline-block;
-    width: 30px;
-    height: 100%;
-    float: right;
-    position: relative;
     line-height: 40px; }
-    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn {
-      cursor: pointer;
-      font-size: 16px; }
-      .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn:nth-child(2) {
+  .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border: solid 1px #b1b1b1;
+    margin-right: 5px;
+    float: left; }
+    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .input-warp {
+      display: inline-block;
+      float: left;
+      width: 135px;
+      height: 40px; }
+    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp input {
+      display: inline-block;
+      width: 100px;
+      height: 38px;
+      border: 0;
+      background: #fff;
+      color: #59c2e6;
+      padding: 0;
+      text-indent: 10px;
+      box-shadow: none;
+      line-height: 43px; }
+    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box {
+      color: #bcbcbc;
+      display: inline-block;
+      width: 30px;
+      height: 100%;
+      float: right;
+      position: relative;
+      line-height: 40px; }
+      .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn {
+        cursor: pointer;
+        font-size: 16px; }
+        .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn:nth-child(2) {
+          display: none; }
+      .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .with-next {
+        font-size: 20px;
+        color: #666;
         display: none; }
-    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .with-next {
-      font-size: 20px;
-      color: #666;
-      display: none; }
-    .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .close-btn {
-      position: absolute;
-      top: -2px;
-      right: -3px;
-      color: #666;
-      font-size: 20px;
-      font-weight: 100;
-      cursor: pointer;
-      display: block;
-      width: 15px;
-      height: 15px;
-      line-height: 15px;
-      -webkit-transform: rotate(45deg);
-              transform: rotate(45deg); }
-
-.page-newYq .modify-plan-main .modify-plan-content .form-group .add-line-btn {
-  width: 100px;
-  height: 40px;
-  background: #59c2e6;
-  border: 0;
-  font-size: 14px;
-  color: #fff; }
+      .page-newYq .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .close-btn {
+        position: absolute;
+        top: -2px;
+        right: -3px;
+        color: #666;
+        font-size: 20px;
+        font-weight: 100;
+        cursor: pointer;
+        display: block;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg); }
+  .page-newYq .modify-plan-main .modify-plan-content .form-group .add-line-btn {
+    width: 100px;
+    height: 40px;
+    background: #59c2e6;
+    border: 0;
+    font-size: 14px;
+    color: #fff; }
 
 .page-newYq .modify-plan-main .modify-plan-content .warning .form-group {
   height: 40px; }
@@ -532,77 +532,77 @@ ul {
   height: 40px;
   padding: 0 12px; }
 
-.page-fullView .modify-plan-main .modify-plan-content .form-group .form-group-title, .page-fullView .modify-plan-main .modify-plan-content .form-group .cy-checkbox {
-  color: #333; }
-
-.page-fullView .modify-plan-main .modify-plan-content .form-group .form-group-title {
-  display: inline-block;
-  float: left;
-  line-height: 40px; }
-
-.page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp {
-  position: relative;
-  display: inline-block;
-  background: #fff;
-  border: solid 1px #b1b1b1;
-  margin-right: 5px;
-  float: left; }
-  .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .input-warp {
+.page-fullView .modify-plan-main .modify-plan-content .form-group {
+  height: 44px; }
+  .page-fullView .modify-plan-main .modify-plan-content .form-group .form-group-title, .page-fullView .modify-plan-main .modify-plan-content .form-group .cy-checkbox {
+    color: #333; }
+  .page-fullView .modify-plan-main .modify-plan-content .form-group .form-group-title {
     display: inline-block;
     float: left;
-    width: 135px;
-    height: 40px; }
-  .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp input {
-    display: inline-block;
-    width: 100px;
-    height: 38px;
-    border: 0;
-    background: #fff;
-    color: #59c2e6;
-    padding: 0;
-    text-indent: 10px;
-    box-shadow: none; }
-  .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box {
-    color: #bcbcbc;
-    display: inline-block;
-    width: 30px;
-    height: 100%;
-    float: right;
-    position: relative;
     line-height: 40px; }
-    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn {
-      cursor: pointer;
-      font-size: 16px;
-      display: none; }
-    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .with-next {
-      font-size: 20px;
-      color: #666; }
-    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .close-btn {
-      position: absolute;
-      top: -2px;
-      right: -3px;
-      color: #666;
-      font-size: 20px;
-      font-weight: 100;
-      cursor: pointer;
-      display: none;
-      width: 15px;
-      height: 15px;
-      line-height: 15px;
-      -webkit-transform: rotate(45deg);
-              transform: rotate(45deg); }
-    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .box-show {
-      display: inline-block; }
-    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .box-hide {
-      display: none; }
-
-.page-fullView .modify-plan-main .modify-plan-content .form-group .add-line-btn {
-  width: 100px;
-  height: 40px;
-  background: #59c2e6;
-  border: 0;
-  font-size: 14px;
-  color: #fff; }
+  .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border: solid 1px #b1b1b1;
+    margin-right: 5px;
+    float: left; }
+    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .input-warp {
+      display: inline-block;
+      float: left;
+      width: 135px;
+      height: 40px; }
+    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp input {
+      display: inline-block;
+      width: 100px;
+      height: 38px;
+      border: 0;
+      background: #fff;
+      color: #59c2e6;
+      padding: 0;
+      text-indent: 10px;
+      box-shadow: none;
+      line-height: 43px; }
+    .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box {
+      color: #bcbcbc;
+      display: inline-block;
+      width: 30px;
+      height: 100%;
+      float: right;
+      position: relative;
+      line-height: 40px; }
+      .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .add-btn {
+        cursor: pointer;
+        font-size: 16px;
+        display: none; }
+      .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .with-next {
+        font-size: 20px;
+        color: #666; }
+      .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .close-btn {
+        position: absolute;
+        top: -2px;
+        right: -3px;
+        color: #666;
+        font-size: 20px;
+        font-weight: 100;
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg); }
+      .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .box-show {
+        display: inline-block; }
+      .page-fullView .modify-plan-main .modify-plan-content .form-group .group-input-warp .operation-box .box-hide {
+        display: none; }
+  .page-fullView .modify-plan-main .modify-plan-content .form-group .add-line-btn {
+    width: 100px;
+    height: 40px;
+    background: #59c2e6;
+    border: 0;
+    font-size: 14px;
+    color: #fff;
+    display: none; }
 
 .page-fullView .modify-plan-main .modify-plan-content .warning .form-group {
   height: 40px; }
@@ -630,9 +630,6 @@ ul {
 .page-fullView .modify-plan-main .modify-plan-content .warning .form-group-title {
   width: 15px;
   margin-right: 15px; }
-
-.page-fullView .modify-plan-main .modify-plan-content .warning .add {
-  display: none; }
 
 .page-fullView .modify-plan-video .modify-plan-video-item {
   padding-bottom: 30px; }
@@ -677,5 +674,3 @@ ul {
 
 .page-fullView .cy-model-content {
   color: #333; }
-
-/*# sourceMappingURL=app.css.map */

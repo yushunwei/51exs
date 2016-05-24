@@ -242,10 +242,20 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
   //渲染bar
   function senderBar(planId,chartDom,obj){
     var optionBar = {
+      title:{
+        show:true,
+          text:"重点媒体情感偏向",
+          top:10
+      },
+        grid:{
+            show:true,
+            left:85,
+            borderColor:'#fff'
+        },
       tooltip : {trigger : 'item',formatter : "{b}<br/>{a}:{c}"},
       legend : {
-        x : '200px',
-        y : 'top',
+       top:15,
+          left:180,
         data : [ '负面','正面' ],
         textStyle : {
           color : '#999'
@@ -302,37 +312,55 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     var mediaArray = [];
     var positiveArray = [];
     var negativeArray = [];
-    var positiveTotal = 0;
-    var negativeTotal = 0;
     for (j = 0; j < obj.data.array.length; j++) {
       mediaArray.push(obj.data.array[j].media);
       positiveArray.push({"sentiment":"positive","value":obj.data.array[j].positive});
       negativeArray.push({"sentiment":"negative","value":obj.data.array[j].negative});
-      positiveTotal += obj.data.array[j].positive;
-      negativeTotal += obj.data.array[j].negative;
     }
-    var totalAll = positiveTotal + negativeTotal;
-    var negativePercent = (totalAll === 0?0:Math.round(negativeTotal / totalAll * 10000)/ 100.00) + "%";
     optionBar.yAxis[0].data = mediaArray;
     optionBar.series[0].data = negativeArray;
     optionBar.series[1].data = positiveArray;
     var myChartBar = ec.init(document.getElementById(chartDom));
     myChartBar.setOption(optionBar);
-    var parentD = $("#"+chartDom).parent().parent().parent().prev();
-    parentD.find(".totalAll").text(totalAll);
-    parentD.find(".positiveTotal").text(positiveTotal);
-    parentD.find(".negativeTotal").text(negativeTotal);
-    parentD.find(".negativePercent").text(negativePercent);
+
     myChartBar.on("click", function(param) {
-      var subData = {sentiment : param.data.sentiment,timeRanges:7,planId:planId};
-      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+      var subData = {sentiment : param.data.sentiment,timeRanges:7,planId:planId,media:(param.name)};
+      window.open('pages/monitor/monitorinfolist.html?'+ ($.param(subData)));
     })
   }
+    function getSentimentDistribute(planId,chartDom){
+        var param = {
+          query:{
+              timeRanges : 7,
+              planId :planId
+          },
+            success:function(data){
+                if(data){
+                    senderSentimentDistribute(data,chartDom);
+                }
+            }
+        };
+        ajax.load('getSentimentDistribute',param);
+    }
+    function senderSentimentDistribute(data,chartDom){
+        if(data.data){
+            var positiveNum = data.data.positive,
+                negativeNum = data.data.negative;
+            var total = positiveNum+negativeNum;
+            var negativePercent = (total === 0?0:Math.round(negativeNum / total * 10000)/ 100.00) + "%";
+            parentD = $("#"+chartDom).parent().parent().parent().prev();
+            parentD.find(".totalAll").text(total);
+            parentD.find(".positiveTotal").text(positiveNum);
+            parentD.find(".negativeTotal").text(negativeNum);
+            parentD.find(".negativePercent").text(negativePercent);
+        }
+    }
   //图表初始化
   function _chartInit(planId,chartDom){
     if(planId){
       //渲染柱形图
       _getBarData(planId,chartDom);
+        getSentimentDistribute(planId,chartDom);
     }else {
       //渲染饼图
       _senderPie();

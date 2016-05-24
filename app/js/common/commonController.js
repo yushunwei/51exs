@@ -3,33 +3,49 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * 初始化
      * @private
      */
-    function _init(){
+    function _init(page) {
         //设置用户信息
-        $("div.header .header-user").length !=0 && setUser();
+        $("div.header .header-user").length != 0 && setUser();
         //设置预警信息图表是否显示
-        $("div.header .header-notice span.cy-badge").length !=0 && setWarnInfo();
+        $("div.header .header-notice span.cy-badge").length != 0 && setWarnInfo();
         //设置checkbox
         setCheckbox();
         //绑定方案删除事件
         $(".nav-bg .nav-main").length>0 && bindDel();
         //绑定搜索面板 收起 打开事件
         $(".conditions-choice").find(".conditions-shrinkage-btn").length!=0 && planCloseOpen();
+        //绑定全网搜索
+        $("div.header .header-input .input-keywords").length != 0 && bindFullSearch();
+        //绑定 舆情下载
+        $(".conditions-choice").find("a.download-checked-btn").length!=0 && bindDownload(page);
+        //取消相似预警
+        $(".conditions-choice").find("a.cancel-alldanger-btn").length!=0 && bindCancel(page);
+    }
 
+    /**
+     * 绑定全网搜索
+     */
+    function bindFullSearch(){
+        $(".btn-search").click(function(){
+            var keyWords = $(".input-keywords").val().replace(/^\s+|\s+$/g,"");
+            $(this).attr("href","/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""))
+                .click();
+        });
     }
 
     /**
      * 设置预警信息
      */
-    function setWarnInfo(){
+    function setWarnInfo() {
         var param = {
             success: function (d) {
-                if(d.status ==200){
+                if (d.status == 200) {
                     bindWarnCenterEvent(d.data);
-                }else{
+                } else {
                     bindWarnCenterEvent(0);
                 }
             },
-            error:function(){
+            error: function () {
                 bindWarnCenterEvent(0);
             }
         };
@@ -40,15 +56,15 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * 绑定预警中心图标点击事件
      * @param warCount
      */
-    function bindWarnCenterEvent(warCount){
+    function bindWarnCenterEvent(warCount) {
         var warnDom = $("div.header .header-notice span.cy-badge");
-        if(warCount > 0){
+        if (warCount > 0) {
             warnDom.removeClass("hidden");
-            warnDom.parent().click(function(){
+            warnDom.parent().click(function () {
                 addWarnFocusRecord();
             });
-        }else{
-            warnDom.parent().click(function(){
+        } else {
+            warnDom.parent().click(function () {
                 window.location.href = "/pages/warnCenter.html";
             });
         }
@@ -57,41 +73,55 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     /**
      * 添加用户预警关注记录
      */
-    function addWarnFocusRecord(){
+    function addWarnFocusRecord() {
         var param = {
-            type:"post",
-            success:function(){
+            type: "post",
+            success: function () {
                 window.location.href = "/pages/warnCenter.html";
             },
-            error:function(){
+            error: function () {
                 window.location.href = "/pages/warnCenter.html";
             }
         };
-        ajax.load("addwarnfocusrecord",param);
+        ajax.load("addwarnfocusrecord", param);
     }
 
     /**
      * 设置用户
      */
-    function setUser(){
+    function setUser() {
         var param = {
-            "success":function(d){
+            success: function (d) {
                 $("div.header .header-user").find('span').html(d.data.nickName || d.data.mobile);
             }
         };
-        ajax.load("user",param);
+        ajax.load("user", param);
+
+        // 绑定退出登录操作
+        bindLogout();
+    }
+
+    /**
+     * 退出
+     */
+    function bindLogout(){
+        $(".header-user .log-out").click(function(){
+            var exsToken = utils.getToken();
+            utils.removeToken();
+            window.location.href = "/logout"+(exsToken?"?token="+exsToken:"");
+        });
     }
 
     /**
      * 设置checkbox事件
      */
-    function setCheckbox(){
-        var checkbox,span;
-        $(document).on("change",".cy-checkbox",function(){
-            checkbox  = $(this).find("input[type=checkbox]");
+    function setCheckbox() {
+        var checkbox, span;
+        $(document).on("change", ".cy-checkbox", function () {
+            checkbox = $(this).find("input[type=checkbox]");
             span = $(this).find("span");
-            if(checkbox.length==0) return false;
-            if(span.hasClass("checked")){
+            if (checkbox.length == 0) return false;
+            if (span.hasClass("checked")) {
                 span.removeClass("checked");
                 if($(this).parents("thead").length==1){
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").removeClass("checked");
@@ -165,9 +195,89 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             }
         })
     }
+    /***
+     * 绑定下载 事件
+     * **/
+    function bindDownload(page){
+        //绑定下载选中按钮 和下载全部事件
+        var btn = $(".conditions-choice").find("a.download-checked-btn,a.download-all-btn");
+        var span,tr;
+        var input = "<input class='form-control'/>";
+        var key,value;
+        var arr = ["title","summary","source","author","sentiment","similarCount","media","url","pubTime"];
+        var url = HX_config.serv_path+"/monitor/contentmonitor/downloadmonitorinfolist/v=1.0.0?token="+utils.getToken();
+        btn.on("click",function(e){
+            span =$(".full-view-table").find(".table-bordered tbody tr").find("td:first .cy-checkbox span.checked");
+            tr = span.parent().parent().parent();
+            // 下载全部
+            if($(this).hasClass("download-all-btn")){
+                tr = $(".full-view-table").find(".table-bordered tbody tr");
+            }
+            if(tr.length==0){
+                //TODO
+                return;
+            }else{
+                $("form.downLoadForm").length == 0 && $(".page").append("<form class='downLoadForm hidden' method='post'></form>");
+                $("form.downLoadForm").empty();
+                $("form.downLoadForm").append("<div class='form-group download-content'></div>");
+                var inputHtml="";
+                if(page.name=="warnCenter"){
+                    arr.push("warnConfigName");
+                    url = HX_config.serv_path+"/warn/warncenter/downloadwarninfolist/v=1.0.0?token="+utils.getToken();
+                }
+                $.each(tr,function(i,v){
+                    for(var index=0;index<arr.length;index++){
+                        key = "monitorInfos["+i+"]."+arr[index];
+                        value = $(this).data(arr[index].toLowerCase())||'';
+                        inputHtml += '<input class="form-control" name="'+key+'" value="'+value+'" />';
+                    }
+                });
+                $("form.downLoadForm .download-content").append(inputHtml);
+                $("form.downLoadForm").attr("action",url);
+                $("form.downLoadForm").submit();
+            }
+        })
+    }
+    /**
+     * 取消预警
+     * **/
+    function bindCancel(){
+        var span,tr,arr=[];
+        $(".conditions-choice").find("a.cancel-alldanger-btn").on("click",function(){
+            span =$(".full-view-table").find(".table-bordered tr").find("td:first .cy-checkbox span.checked");
+            tr = span.parent().parent().parent();
+            // 下载全部
+            if(tr.length==0){
+                //TODO
+                return;
+            }else{
+                $.each(tr,function(i,v){
+                    arr.push($(this).data("dedupid"));
+                });
+                var param = {
+                    type:"post",
+                    data : {
+                        dedupids:arr
+                    },
+                    success:function(d){
+
+                    }
+                };
+                layer.confirm('确定取消选中文章的相似文章预警？确定后一个月内与选中文章相似的文章不再预警。', {
+                    btn: ['确定','取消'] //按钮
+                }, function(index){
+                    ajax.load("cancelsimilarwarn",param);
+                    layer.close(index);
+                }, function(){
+
+                });
+                ajax.load("cancelsimilarwarn",param);
+            }
+        })
+    }
     // 返回
     return {
-        init:_init
+        init: _init
 
     }
 });

@@ -6,12 +6,12 @@ require(['controllers/' + controllerPath + 'Controller', "tool/Utils","common/co
     var other = document.location.href;
     var page = {
         "query": utils.getQuery(other),
-        "name": controllerPath.substr(index)
+        "name": controllerPath.substr(index+1)
     };
 
     var token = page.query.token;
     token && utils.setToken(token);
     controller.init(page);
     //统一处理页面逻辑
-    common.init();
+    common.init(page);
 });
