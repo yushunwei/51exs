@@ -5,9 +5,13 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
     function getMonitorInfoList(pageNum,pageSize){
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
         param.success = function(d){
-            view.renderList(d);
-            result = d;
-            pagination(result,pageNum);
+            if(d.status == 200){
+                view.renderList(d);
+                result = d;
+                pagination(result,pageNum);
+            }else{
+                layer.alert(d.subMsg, {icon: 2});
+            }
         };
         ajax.load("fullwebsearch",param,".full-view-table");
     }
