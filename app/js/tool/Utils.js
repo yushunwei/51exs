@@ -122,14 +122,23 @@ define(["jquery.cookie"], function () {
         var token = arguments[0];
         if (token == "")
             return;
-        $.cookie("token", token, {
+        $.cookie("exsToken", token, {
             path: "/", expiress: 7
         })
     }
 
     // return token
     function _getToken() {
-        return $.cookie("token") || '3b679f7cf55011e5bb6600188b839ae8';
+        var token = $.cookie("exsToken");
+        return token != 'null' && typeof token !="undefined" ? token : '3b679f7cf55011e5bb6600188b839ae8';
+    }
+
+    /**
+     * 删除Token
+     * @private
+     */
+    function _removeToken() {
+        $.cookie('exsToken', null, {path: "/"});
     }
 
     function _addLoading() {
