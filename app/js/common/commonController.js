@@ -3,7 +3,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * 初始化
      * @private
      */
-    function _init() {
+    function _init(page) {
         //设置用户信息
         $("div.header .header-user").length != 0 && setUser();
         //设置预警信息图表是否显示

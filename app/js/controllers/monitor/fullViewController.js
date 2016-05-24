@@ -122,6 +122,16 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       $dom.find('.conditions-searchbox').find('button').click(function(){
           getMonitorInfoList(0,20);
       });
+      // 自定义日期弹出框
+      $('.chart-analysis-title-other-btn').click(function(e){
+          $('.chart-analysis-title-other-btn').toggleClass("active");
+          $('.type-timeranges').find('a').removeClass("active");
+          $('.order-box').toggle();
+          $(document).on('click', function(e){
+              $('.order-box').hide();
+          });
+          e.stopPropagation();
+      });
 
       $("#btnFind").click(function(){
           $('#customdays').addClass('active');
@@ -130,9 +140,11 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       });
       $('.page-fullView .main').find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
           chartview.init(titleID);
+          $("span#customdays1").removeClass("active");
+          $("#profile .tab-timeranges").removeClass("active");
+          $("#profile .tab-timeranges:first").addClass("active");
       })
       $('.page-fullView .main').find('.nav-tabs').find('.tab-plan').on('shown.bs.tab', function (e) {
-
           yqview.init(titleID);
       })
   }

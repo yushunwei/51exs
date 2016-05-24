@@ -139,11 +139,11 @@
                                         <p>请选择起止时间（仅供3个月内数据搜索）：</p>
                                         <div class="time-group form-inline">
                                             <div class="form-group input-daterange">
-                                                <input type="text" class="form-control" id="start">
+                                                <input type="text" class="form-control" id="start" readonly>
                                                 至
-                                                <input type="text" class="form-control" id="end">
+                                                <input type="text" class="form-control" id="end" readonly>
                                             </div>
-                                            <a id="btnFind" href="javascript:void(0)" class="btn btn-info">查询</a>
+                                            <a id="btnFind" href="#1" class="btn btn-info">查询</a>
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
                             <li><a data-timeranges="15" href="#1" class="tab-timeranges">15天</a></li>
                             <li><a data-timeranges="30" href="#1" class="tab-timeranges">30天</a></li>
                         </ul>
-                        <div class="chart-analysis-title-other" href="#1">
+                        <div class="chart-analysis-title-other" href="#1" style="margin-top: 0">
                             <span id="customdays1" class="chart-analysis-title-other-btn">其他</span>
                             <div class="order-box">
                                 <p>请选择起止时间（仅供3个月内数据搜索）：</p>
@@ -728,5 +728,53 @@
     </div>
 </div>
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
+<script>
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(-90),
+        max: laydate.now(), //最大日期
+        isclear : false,
+        choose: function(datas){
+            end.min = datas; //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        isclear : false,
+        choose: function(datas){
+            start.max = datas; //结束日选好后，重置开始日的最大日期
+        }
+    };
+    laydate(start);
+    laydate(end);
+    $("#start").val(laydate.now());
+    $("#end").val(laydate.now());
+    var start1 = {
+        elem: '#start1',
+        format: 'YYYY-MM-DD',
+        min: laydate.now(-90),
+        max: laydate.now(), //最大日期
+        isclear : false,
+        choose: function(datas){
+            end1.min = datas; //将结束日的初始值设定为开始日
+        }
+    };
+    var end1 = {
+        elem: '#end1',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        isclear : false,
+        choose: function(datas){
+            start1.max = datas; //结束日选好后，重置开始日的最大日期
+        }
+    };
+    laydate(start1);
+    laydate(end1);
+    $("#start1").val(laydate.now());
+    $("#end1").val(laydate.now());
+</script>
 </body>
 </html>
