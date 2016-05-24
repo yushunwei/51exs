@@ -69,10 +69,10 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
             if($(this).hasClass("digest-btn")){
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
-                    $(".page-fullView tbody p.digest").addClass("hidden");
+                    $(".page-allSeach tbody p.digest").addClass("hidden");
                 }else{
                     $(this).addClass("active");
-                    $(".page-fullView tbody p.digest").removeClass("hidden");
+                    $(".page-allSeach tbody p.digest").removeClass("hidden");
                 }
                 return;
             }else if($(this).hasClass("mergelike-btn")){
@@ -81,6 +81,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
                 }else{
                     $(this).addClass("active");
                 }
+                allSearch();
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
