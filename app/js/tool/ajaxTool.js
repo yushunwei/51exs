@@ -6,8 +6,7 @@ define(["tool/Utils"], function (utils) {
     var _param = {
         "data": {},
         "url": linkUrl,
-        "dataType": "json",
-        "timeout": 3000
+        "dataType": "json"
     };
     //默认的成功后的回调
     var defaultSuccessFn = function (data, controller) {

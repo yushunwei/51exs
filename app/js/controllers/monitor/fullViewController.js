@@ -1,5 +1,5 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView"], function (ajax,view,chartview,yqview) {
+define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView","common/commonController"], function (ajax,view,chartview,yqview,common) {
   var $tar = $("div.page-index");
   var indexUserPlans = {showCount:0};
   var result = [];
@@ -20,6 +20,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       bindEvent();
 
       $('#myTab li:eq('+turnIndex+') a').tab('show');
+      common.handleEmail();
   }
     function _allSeach(page) {
         all = true;
@@ -126,19 +127,6 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           $('#customdays').addClass('active');
           $('.type-timeranges').find('a').removeClass('active');
           getMonitorInfoList(0,fullViewInit.pageSize);
-      });
-      $dom.find(".table.table-bordered").on("click",".email-send a",function(){
-          var param = {
-              "success":function(d){
-                  view.renderAddEmail(d);
-              }
-          };
-          ajax.load("addEmail",param);
-      });
-        //add email
-      $("form").on("submit",function(){
-          $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>'+$(this).find("input[type=email]").val()+'</li>')
-          return false;
       });
       $('.page-fullView .main').find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
           chartview.init(titleID);

@@ -122,37 +122,27 @@ define(["jquery.cookie"], function () {
         var token = arguments[0];
         if (token == "")
             return;
-        $.cookie("exsToken", token, {
+        $.cookie("token", token, {
             path: "/", expiress: 7
         })
     }
 
     // return token
     function _getToken() {
-        var token = $.cookie("exsToken");
-        return token != 'null' && typeof token !="undefined" ? token : '3b679f7cf55011e5bb6600188b839ae8';
-    }
-
-    /**
-     * 删除Token
-     * @private
-     */
-    function _removeToken() {
-        $.cookie('exsToken', null, {path: "/"});
+        return $.cookie("token") || '3b679f7cf55011e5bb6600188b839ae8';
     }
 
     function _addLoading() {
         if ($(arguments[0]).length == 0)
             return;
-        $.each($(arguments[0]), function () {
+        $.each($(arguments[0]),function(){
             !$(this).hasClass("loadBox") && $(this).addClass("loadBox")
-                .append("<div class='loading'><img src='' /></div>");
+                                             .append("<div class='loading'><img src='/img/loading_48.gif' /></div>");
             $(this).find("div.loading").width($(this).width());
             $(this).find("div.loading").height($(this).height());
         })
     }
-
-    function _removeLoading() {
+    function _removeLoading(){
         if ($(arguments[0]).length == 0)
             return;
         $(arguments[0]).find("div.loading").remove();
@@ -175,8 +165,6 @@ define(["jquery.cookie"], function () {
         getToken: _getToken,
         //设置token
         setToken: _setToken,
-        //删除Token
-        removeToken: _removeToken,
         //add loading
         addLoading: _addLoading,
         removeLoading: _removeLoading
