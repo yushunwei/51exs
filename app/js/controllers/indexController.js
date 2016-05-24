@@ -150,11 +150,11 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     if (data.data.recordTotal != 0) {
                         view.renderTabList(data.data, tabID,tabindex);
                     } else {
-                        $(tabID).html(HX_config.noDataHtml);
+                        $(tabID).find(".plan-main-list").html(HX_config.noDataHtml);
                     }
                 },
                 error:function(){
-                    $(tabID).html(HX_config.errorHtml);
+                    $(tabID).find(".plan-main-list").html(HX_config.errorHtml);
                 },
                 //get 请求参数，类似data
                 "query": {

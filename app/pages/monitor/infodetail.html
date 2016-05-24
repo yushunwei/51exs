@@ -106,16 +106,16 @@
                         </p>
 
                         <p class="recommended-information">
-                            <span>舆情属性：{{#YQtype sentiment}}{{/YQtype}}</span>
+                            <span>舆情属性：{{sentimentType sentiment}}</span>
                             <span>
-                                {{#compare isWarn "yes"}}
+                                {{#ifCond isWarn "==" "yes"}}
                                     <a href="javascript:void(0)" class="text-blue btn-cancel"
                                        data-dedupid="{{dedupId}}"
                                        data-docid="{{docId}}">
                                         相似文章不再预警
                                     </a>
                                     <i class="fa fa fa-trash-o"></i>
-                                {{/compare}}
+                                {{/ifCond}}
                             </span>
                             <span class="detail-share">
                                 分享到：<i class="fa fa-weibo"></i>
@@ -141,40 +141,43 @@
                     </div>
 
                     <script id="detailright" type="text/x-handlebars-template">
-                        <div class="detail-data-item detail-data-item-margin info-clickcount {{#ishidden clickCount}}{{/ishidden}}">
-                            <h1>{{clickCount}}</h1>
-
-                            <p>总点击</p>
-                        </div>
-                        <div class="detail-data-item info-comment {{#ishidden commentCount}}{{/ishidden}}">
+                        {{#ifCond clickCount "!=" 0}}
+                            <div class="detail-data-item detail-data-item-margin info-clickcount">
+                                <h1>{{clickCount}}</h1>
+                                <p>总点击</p>
+                            </div>
+                        {{/ifCond}}
+                        {{#ifCond commentCount "!=" 0}}
+                        <div class="detail-data-item info-comment">
                             <h1>{{commentCount}}</h1>
-
                             <p>总评论</p>
                         </div>
-                        <div class="detail-data-item info-forwardcount {{#ishidden forwardCount}}{{/ishidden}}">
+                        {{/ifCond}}
+                        {{#ifCond forwardCount "!=" 0}}
+                        <div class="detail-data-item info-forwardcount">
                             <h1>{{forwardCount}}</h1>
-
                             <p>总转载</p>
                         </div>
-                        <div class="detail-data-item detail-data-item-margin info-similarcount {{#ishidden similarCount}}{{/ishidden}}">
+                        {{/ifCond}}
+                        {{#ifCond similarCount "!=" 0}}
+                        <div class="detail-data-item detail-data-item-margin info-similarcount">
                             <h1>{{similarCount}}</h1>
-
                             <p>相似文章</p>
                         </div>
-                        <div class="detail-data-item info-fanscount {{#ishidden fansCount}}{{/ishidden}}">
+                        {{/ifCond}}
+                        {{#ifCond fansCount "!=" 0}}
+                        <div class="detail-data-item info-fanscount">
                             <h1>{{fansCount}}</h1>
-
                             <p>总粉丝</p>
                         </div>
+                        {{/ifCond}}
                     </script>
                 </div>
 
 
                 <div class="related">
                     <div class="noborder-panel">
-                        <div class="noborder-panel-title">
-                            相关舆情
-                        </div>
+                        <div class="noborder-panel-title">相关舆情</div>
                         <div class="noborder-panel-body">
                             <div class="related-main">
                                 <!-- 加载进度 -->

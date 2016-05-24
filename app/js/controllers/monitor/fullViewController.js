@@ -1,5 +1,5 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView"], function (ajax,view,chartview,yqview) {
+define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView","common/commonController"], function (ajax,view,chartview,yqview,common) {
   var $tar = $("div.page-index");
   var indexUserPlans = {showCount:0};
   var result = [];
@@ -20,6 +20,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       bindEvent();
 
       $('#myTab li:eq('+turnIndex+') a').tab('show');
+      common.handleEmail();
   }
     function _allSeach(page) {
         all = true;
@@ -121,30 +122,29 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       $dom.find('.conditions-searchbox').find('button').click(function(){
           getMonitorInfoList(0,20);
       });
+      // 自定义日期弹出框
+      $('.chart-analysis-title-other-btn').click(function(e){
+          $('.chart-analysis-title-other-btn').toggleClass("active");
+          $('.type-timeranges').find('a').removeClass("active");
+          $('.order-box').toggle();
+          $(document).on('click', function(e){
+              $('.order-box').hide();
+          });
+          e.stopPropagation();
+      });
 
       $("#btnFind").click(function(){
           $('#customdays').addClass('active');
           $('.type-timeranges').find('a').removeClass('active');
           getMonitorInfoList(0,fullViewInit.pageSize);
       });
-      $dom.find(".table.table-bordered").on("click",".email-send a",function(){
-          var param = {
-              "success":function(d){
-                  view.renderAddEmail(d);
-              }
-          };
-          ajax.load("addEmail",param);
-      });
-        //add email
-      $("form").on("submit",function(){
-          $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>'+$(this).find("input[type=email]").val()+'</li>')
-          return false;
-      });
       $('.page-fullView .main').find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
           chartview.init(titleID);
+          $("span#customdays1").removeClass("active");
+          $("#profile .tab-timeranges").removeClass("active");
+          $("#profile .tab-timeranges:first").addClass("active");
       })
       $('.page-fullView .main').find('.nav-tabs').find('.tab-plan').on('shown.bs.tab', function (e) {
-
           yqview.init(titleID);
       })
   }

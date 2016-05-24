@@ -6,15 +6,14 @@ define(["tool/Utils"], function (utils) {
     var _param = {
         "data": {},
         "url": linkUrl,
-        "dataType": "json",
-        "timeout": 3000
+        "dataType": "json"
     };
     //默认的成功后的回调
     var defaultSuccessFn = function (data, controller) {
         if (data.status == "100" && data.subStatus == "50001") {
             //清除所有ajax请求
             $.each(ajaxMap, function (i, v) {
-                v.abort();
+               v.abort();
             });
             alert("登录超时，请重新登录");
             window.open("login.html", "_self");

@@ -275,9 +275,80 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             }
         })
     }
+    //渲染已有的邮件列表
+    var emailModel;
+    emailModel = emailModel ? emailModel : $(".add-email").find("#addemailScript").html();
+    function _renderAddEmail(d){
+        var myTemplate = Handlebars.compile(emailModel);
+        var html = myTemplate(d);
+        $(".add-email .add-email-ul").html(html);
+    }
+    //邮件弹框
+    function _handleEmail(){
+        var emailObj = {};
+        var docId;
+        $(".table.table-bordered").on("click",".email-send a",function(){
+            docId = $(this).parents("tr").attr("data-docId");
+            var param = {
+                "success":function(d){
+                    _renderAddEmail(d);
+                    for(var i = 0; i < d.data.length;i++){
+                        emailObj[d.data[i]] = d.data[i];
+                    }
+                }
+            }
+            ajax.load("addEmail",param);
+        });
+        //add email
+        $("#emailForm").on("submit",function(){
+            var emailStr = $(this).find("input[type=email]").val();
+            if(!emailObj[emailStr]) {
+                emailObj[emailStr] = emailStr;
+                $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
+                $(this).find("input[type=email]").val("");
+                $(this).find(".text-danger").text("您最多可选择5个邮箱");
+            }else{
+                $(".add-email-list").find(".text-danger").text(emailStr + "已存在，请勿重复添加");
+            }
+            return false;
+        });
+        $(".send-email-btn").on("click",function(){
+            var checkedLength = $(".add-email-list :checked").length;
+            var shareEmailList = [];
+            var otherEmailList = [];
+            if(checkedLength <= 5 && checkedLength > 0){
+                $(".add-email-list :checkbox").each(function(){
+                    var emailStr = $(this).parents("li").text();
+                    if($(this).is(":checked")){
+                        shareEmailList.push(emailStr);
+                    }else{
+                        otherEmailList.push(emailStr);
+                    }
+                });
+                _sendEmail(docId,shareEmailList,otherEmailList);
+            }else{
+                $(this).find(".text-danger").text("您最多可选择5个邮箱");
+            }
+        });
+    }
+    //发送邮件
+    function _sendEmail(docId,shareEmailList,otherEmailList){
+        var param = {
+            "data" : {"docId" : docId,"shareEmails":shareEmailList,"otherEmails":otherEmailList},
+            "type":'post',
+            "success":function(d){
+                if(d.status == 200) {
+                    $(".close").trigger("click");
+                }else{
+                    layer.alert(d.subMsg, {icon: 2});
+                }
+            }
+        }
+        ajax.load("emailShare",param);
+    }
     // 返回
     return {
-        init: _init
-
+        init: _init,
+        handleEmail : _handleEmail
     }
 });
