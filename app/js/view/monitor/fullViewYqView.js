@@ -10,6 +10,8 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             $(this).hide();
             $(this).next().next().hide();
             $(this).next().show();
+            parents.next().find("input").val("");
+
         })
     }
 
@@ -24,8 +26,8 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             if (index == 2) {
                 labelC = "词语三：";
             }
-            var groupDiv = '<div class="form-group key-group-' + (index + 1) + ' new-keyword-group"><label class="form-group-title"><span class="must">*</span><span class="must-title">' + labelC +
-                '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="5" class="form-control">' +
+            var groupDiv = '<div class="form-group key-group-' + (index + 1) + ' new-keyword-group"><label class="form-group-title"><span class="must"></span><span class="must-title">' + labelC +
+                '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="30" class="form-control">' +
                 '<span class="operation-box clear"><span class="add-btn box-show glyphicon glyphicon-plus-sign"></span><span class="with-next box-hide">+</span>' +
                 '<span class="close-btn box-show">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
             $("#key-word-group").append(groupDiv);
@@ -82,13 +84,14 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
         $("#warning").on("click",".close-btn", function () {
             var parents = $(this).parents(".warning-list");
             if(parents.parent().find(".warning-list").length !== 1){
-                parents.prev().find(".form-group-title").hide();
+                parents.prev().not(parents.parent().find(".warning-list").eq(0)).find(".form-group-title").hide();
                 parents.remove();
             }
             if($("#warning .warning-list").length==1){
                 $("#warning .warning-list").eq(0).find(".form-group-title").hide();
             }
             clickWarningExShow($("a.warning"));
+            $("#warning .warning-list").eq(0).find("input").trigger("blur");
         });
     }
     function exClose(){
@@ -96,7 +99,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             var parents = $(this).parents(".warning-list");
 
             if(parents.parent().find(".warning-list").length !== 1){
-                parents.prev().find(".form-group-title").hide();
+                parents.prev().not(parents.parent().find(".warning-list").eq(0)).find(".form-group-title").hide();
                 parents.remove();
             }
             if($("#exclude .warning-list").length==1){
@@ -114,6 +117,9 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
                 exWords = getwarnWords("exclude");
             var newKeyWords = getNewKeyWords(keyWords);
             rightPlanShow(newKeyWords, warnWords);
+        });
+        $("#messages").on("focus","input",function(){
+            $(this).select();
         })
     }
 
@@ -159,14 +165,14 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
         for (var h = 0; h < warnWords.length; h++) {
             for (var k = 0; k < newKeyWords.length; k++) {
                 if ((newKeyWords[k] + warnWords[h]) !== "") {
-                    showHtml = '<div class="content-preview">' + newKeyWords[k] + "+" + warnWords[h] + '</div>';
+                    showHtml = '<div class="content-preview" title="' + newKeyWords[k] + "+" + warnWords[h] + '">' + newKeyWords[k] + "+" + warnWords[h] + '</div>';
                     contain.append(showHtml);
                     count += 1;
                 }
             }
         }
         for (var z = 0; z < newKeyWords.length; z++) {
-            keysHtml = '<div class="content-preview">' + newKeyWords[z] + '</div>';
+            keysHtml = '<div class="content-preview" title="' + newKeyWords[z] + '">' + newKeyWords[z] + '</div>';
             keysContain.append(keysHtml);
             keysCount += 1;
         }
@@ -189,7 +195,8 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
 
     //点击保存
     function saveData(id) {
-        $(".page-newYq").on("click",".saveBtn",function(){
+        var layerindex;
+        $("#messages").on("click",".saveBtn",function(){
             var title = $("#myComplay").val();
             var submitData = dataReform();
             if(title == "" || submitData.userPlanWords.length==0){
@@ -201,25 +208,38 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
                     type:"post",
                     contentType: 'application/json',
                     success:function(data){
-                        console.log(data)
+                        if(data.status==200){
+                            var id = data.data;
+                            layer.close(layerindex);
+                            window.open("monitor/full_view.html?id="+id);
+                        }else{
+                            layer.close(layerindex);
+                            layer.alert(data.subMsg);
+                        }
+                    },
+                    error:function(data){
+                        layer.close(layerindex);
+                        layer.alert("网络异常，请重新修改。");
                     }
                 };
-                ajax.load('newYq',param);
+                ajax.load('modifyuserplan',param);
+                layerindex =layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
             }
         });
     }
 //组合提交数据
     function dataReform(){
         var submitData = {
-            "title":title,
+            "title":$("#myComplay").val(),
             "userPlanWords":[],
             "userPlanExWords":[],
             "userPlanWarnWords":[]
         };
         var keyWords = getkeyWords(),
             warnWords = getwarnWords("warning"),
-            exWords = getwarnWords("exclude"),
-            title = $("#myComplay").val();
+            exWords = getwarnWords("exclude");
         var newKeys = removeNull(keyWords);
         for(var i=0;i<newKeys.length;i++){
             for(var j=0;j<newKeys[i].length;j++){

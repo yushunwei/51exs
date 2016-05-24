@@ -58,3 +58,11 @@
 .page-warnCenter .add-email-input .btn {
 	padding: 6px 12px;
 }
+.page-newYq .modify-plan-video .modify-plan-video-item .modify-plan-video-main .content-preview-list{
+	overflow-x: hidden;
+	white-space: nowrap;
+}
+.page-fullView .modify-plan-video .modify-plan-video-item .modify-plan-video-main .content-preview {
+	overflow-x: hidden;
+	white-space: nowrap;
+}
