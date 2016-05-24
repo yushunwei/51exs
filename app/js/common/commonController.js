@@ -27,9 +27,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function bindFullSearch(){
         $(".btn-search").click(function(){
-            var keyWords = $(".input-keywords").val().replace(/^\s+|\s+$/g,"");
-            $(this).attr("href","/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""))
-                .click();
+            var keyWords = encodeURIComponent($(".input-keywords").val().replace(/^\s+|\s+$/g,""));
+            window.open("/pages/fullsearch/allSearch.html"+(keyWords?"?keyWords="+keyWords:""));
         });
     }
 

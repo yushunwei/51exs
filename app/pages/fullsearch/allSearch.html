@@ -98,10 +98,8 @@
                             <li><a data-source="tieba" href="javascript:void(0)">贴吧</a></li>
                             <li><a data-source="epub" href="javascript:void(0)">电子报</a></li>
                             <li><a data-source="blog" href="javascript:void(0)">博客</a></li>
-                            <li><a data-source="weibo" href="javascript:void(0)">微博</a></li>
-                            <li><a data-source="wx_gzh" href="javascript:void(0)">微信</a></li>
-                            <li><a data-source="video" href="javascript:void(0)" class="not-open">视频</a></li>
-                            <li><a data-source="search" href="javascript:void(0)" class="not-open">搜索引擎</a></li>
+                            <li><a data-source="weibo" href="javascript:void(0)" class="not-open">微博</a></li>
+                            <li><a data-source="wx_gzh" href="javascript:void(0)" class="not-open">微信</a></li>
                         </ul>
                     </div>
                     <div class="conditions-box time-box clearfix">
@@ -161,7 +159,18 @@
                         <tr data-docId="{{docId}}">
                             <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                             <td class="information">
-                                <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
+                                <h3 class="title">
+                                    {{#ifCond sentiment "==" "positive"}}
+                                    <span class="label label-info">正面</span>
+                                    {{/ifCond}}
+                                    {{#ifCond sentiment "==" "negative"}}
+                                    <span class="label label-danger">负面</span>
+                                    {{/ifCond}}
+                                    {{#ifCond sentiment "==" "neutral"}}
+                                    <span class="label label-success">中性</span>
+                                    {{/ifCond}}
+                                    <a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a>
+                                </h3>
                                 <p class="digest">摘要：<a class="info-summary" href="../monitor/infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" target="_blank">{{summary}}</a></p>
                                 <div class="full-view-data-operation">
                                     <div class="share">

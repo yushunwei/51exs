@@ -1,14 +1,11 @@
 
 define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView","common/commonController"], function (ajax,view,chartview,yqview,common) {
-  var $tar = $("div.page-index");
-  var indexUserPlans = {showCount:0};
   var result = [];
   var titleID = "",
       turnIndex = 0;
  var fullViewInit = {
      pageSize:20
  };
-    var all = "";
     var keyword;
   function init(page) {
       titleID = page.query.id;
@@ -21,13 +18,6 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
 
       $('#myTab li:eq('+turnIndex+') a').tab('show');
       common.handleEmail();
-  }
-    function _allSeach(page) {
-        all = true;
-      //加载列表
-      getMonitorInfoList(0,20);
-      //绑定事件
-      bindEvent();
   }
  function getuserplanlist(){
      var param = {
@@ -53,15 +43,15 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
  function getMonitorInfoList(pageNum,pageSize){
      var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
      param.success = function(d){
-         view.renderList(d);
-         result = d;
-         pagination(result,pageNum);
+         if(d.status == 200){
+             view.renderList(d);
+             result = d;
+             pagination(result,pageNum);
+         }else{
+             layer.alert(d.subMsg, {icon: 2});
+         }
      };
-     if(all){
-         ajax.load("getAllInfoList",param);
-     }else{
-         ajax.load("getMonitorInfoList",param);
-     }
+     ajax.load("getMonitorInfoList",param);
  }
 // 获取查询参数
   function getFullViewQueryCondition(pageNum,pageSize){
@@ -79,13 +69,16 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
             timeRanges:$('.main').find('.type-timeranges').find('li').find('.active').data('timeranges')
         };
 
-        if(condition.startDate && condition.endDate){
-            condition.timeRanges = 0;
-        }
-        return condition;
+      if($("#customdays").hasClass("active")){
+          condition.timeRanges = 0;
+      }else{
+          delete condition.startDate;
+          delete condition.endDate;
+      }
+      return condition;
     }
   function bindEvent(){
-      var $dom = all ? $(".page-allSeach") : $(".page-fullView");
+      var $dom = $(".page-fullView");
       /*****
        * 绑定查询条件
        * ****/
@@ -105,12 +98,23 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
                   }else{
                       $(this).addClass("active");
                   }
+                  getMonitorInfoList(0,20);
                   return;
               }
               $(this).parent().parent().find("li a.active").removeClass("active");
               $(this).addClass("active");
               getMonitorInfoList(0,20);
           });
+      //未开通的信息来源不可搜索，并给出提示
+      $('.conditions-item li a.not-open').mouseover(function(){
+          var content = '<div class="not-open-tip">即将开通,敬请期待！</div>';
+          var x = $(this).innerWidth();
+          var width = 56 - x/2;
+          $(this).append(content);
+          $('.not-open-tip').css('left', -width);
+      }).mouseout(function(){
+          $('.not-open-tip').remove();
+      });
       // 时间范围选择时清空日期选择框
       $('.type-timeranges').find('a').click(function(){
           $('.input-daterange').find('input').val('');
@@ -166,7 +170,6 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
     }
   return {
-    init: init,
-    allSeach:_allSeach
+    init: init
   }
 });
