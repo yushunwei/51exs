@@ -1,46 +1,90 @@
 define([], function () {
-    //YQtype ishidden
-    Handlebars.registerHelper("YQtype", function (v1, v2, options) {
-        var result;
-       if(v1=="positive"){
-           result = "正面";
-       }else if(v1=="negative"){
-           result = "负面";
-       }else{
-           result = "中性";
-       }
-        return result;
-    });
-    Handlebars.registerHelper("ishidden", function (v1, v2, options) {
-        if(v1==0){
-            return hidden;
-        }
-        return "";
+
+    /**
+     * 获取情感属性值
+     */
+    Handlebars.registerHelper("sentimentType", function (type) {
+        var sentiments = {
+            positive:"正面",
+            negative:"负面"
+        };
+
+        var result = sentiments[type];
+        return result?result:"正面";
     });
 
     /**
-     * 注册对比help
+     * 注册对比helper
      */
-    Handlebars.registerHelper("compare", function (v1,v2,options) {
-        if(v1 == v2){
-            return options.fn(this);
+    Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+        switch (operator) {
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                break;
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                break;
+            default:
+                return options.inverse(this);
+                break;
         }
-        return options.inverse(this);
     });
 
     var dom = $(".page-infodetail");
+
+    /**
+     * 渲染相关舆情
+     *
+     * @param data
+     * @private
+     */
     function _renderList(data) {
         var myTemplate = Handlebars.compile($("#detailList").html());
         dom.find(".detail-right .related .related-main").html(myTemplate(data));
     }
+
+    /**
+     * 渲染详情信息
+     * @param data
+     * @private
+     */
     function _renderdetail(data) {
         var myTemplate = Handlebars.compile($("#detail").html());
         dom.find(".detail-left").html(myTemplate(data.data));
     }
+
+    /**
+     * 渲染右部统计信息
+     * @param data
+     * @private
+     */
     function _renderRight(data) {
         var myTemplate = Handlebars.compile($("#detailright").html());
         dom.find(".detail-right .detail-data").html(myTemplate(data.data));
     }
+
+    // 返回
     return {
         renderList: _renderList,
         renderdetail: _renderdetail,
