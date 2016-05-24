@@ -176,7 +176,9 @@
                     <tbody class="list-yq">
                     <script id="listScript" type="text/x-handlebars-template">
                         {{#each this.objects}}
-                        <tr>
+                        <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                            data-source="{{source}}" data-author="{{author}}"
+                            data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}"  data-docId="{{docId}}">
                             <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                             <td class="information">
                                 <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
