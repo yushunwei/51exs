@@ -5,10 +5,13 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
     function getMonitorInfoList(pageNum,pageSize){
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
         param.success = function(d){
-            console.log(param);
-            view.renderList(d);
-            result = d;
-            pagination(result,pageNum);
+            if(d.status == 200){
+                view.renderList(d);
+                result = d;
+                pagination(result,pageNum);
+            }else{
+                layer.alert(d.subMsg, {icon: 2});
+            }
         };
         ajax.load("fullwebsearch",param,".full-view-table");
     }
@@ -52,7 +55,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
     }
     function allSearch(){
-        searchKey = searchKey ? searchKey : $(".type-keywords").val();
+        searchKey = $(".type-keywords").val();
         if(searchKey) {
             //加载列表
             getMonitorInfoList(0, 20,searchKey);
@@ -66,17 +69,14 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
                allSearch();
            }
         });
-        $(".btn-search").on("click",function(){
-            allSearch();
-        });
-        $(".page-allSeach").find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges').click(function(){
+        $(".page-allSeach").find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges,.not-open').click(function(){
             if($(this).hasClass("digest-btn")){
                 if($(this).hasClass("active")){
                     $(this).removeClass("active");
-                    $(".page-fullView tbody p.digest").addClass("hidden");
+                    $(".page-allSeach tbody p.digest").addClass("hidden");
                 }else{
                     $(this).addClass("active");
-                    $(".page-fullView tbody p.digest").removeClass("hidden");
+                    $(".page-allSeach tbody p.digest").removeClass("hidden");
                 }
                 return;
             }else if($(this).hasClass("mergelike-btn")){
@@ -85,11 +85,22 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
                 }else{
                     $(this).addClass("active");
                 }
+                allSearch();
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
             allSearch();
+        });
+        //未开通的信息来源不可搜索，并给出提示
+        $('.conditions-item li a.not-open').mouseover(function(){
+            var content = '<div class="not-open-tip">即将开通,敬请期待！</div>';
+            var x = $(this).innerWidth();
+            var width = 56 - x/2;
+            $(this).append(content);
+            $('.not-open-tip').css('left', -width);
+        }).mouseout(function(){
+            $('.not-open-tip').remove();
         });
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function(){
@@ -119,7 +130,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         });
     }
     function init(page) {
-        searchKey = page.query.keyWords;
+        searchKey = page.query.keyWords ? decodeURIComponent(page.query.keyWords) : "";
         $(".type-keywords").val(searchKey);
         allSearch();
         bindEvents();

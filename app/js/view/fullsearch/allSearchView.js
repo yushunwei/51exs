@@ -1,4 +1,4 @@
-define([], function () {
+define(["common/commonView"], function () {
   //注册对比事件
   Handlebars.registerHelper("compare", function (v1, v2, options) {
     var type = "";
@@ -38,9 +38,10 @@ define([], function () {
         "</ul>"
     return dom;
   });
-  var listModel = "";
+
+    var listModel = "";
   function _renderList(data,i){
-    $(".full-view-table table").removeClass("hidden");
+      $(".full-view-table table").removeClass("hidden");
     $(".full-view-table .table-pagination").removeClass("hidden");
     $(".full-view-table .index-none").addClass("hidden");
     listModel = listModel ? listModel : $("#listScript").html();
