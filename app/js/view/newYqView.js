@@ -1,8 +1,4 @@
-define(["tool/ajaxTool"], function (ajax) {
-
-
-
-
+define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
   function keyWordAdd(){
     $(".page-newYq").on("click",".add-btn",function(){
       var parents = $(this).parents(".input-warp");
@@ -86,7 +82,11 @@ define(["tool/ajaxTool"], function (ajax) {
     $("#warning").on("click",".close-btn", function () {
       var parents = $(this).parents(".warning-list");
       if(parents.parent().find(".warning-list").length !== 1){
+        parents.prev().find(".form-group-title").hide();
         parents.remove();
+      }
+      if($("#warning .warning-list").length==1){
+          $("#warning .warning-list").eq(0).find(".form-group-title").hide();
       }
       clickWarningExShow($("a.warning"));
     });
@@ -96,8 +96,12 @@ define(["tool/ajaxTool"], function (ajax) {
       var parents = $(this).parents(".warning-list");
 
       if(parents.parent().find(".warning-list").length !== 1){
+        parents.prev().find(".form-group-title").hide();
         parents.remove();
       }
+        if($("#exclude .warning-list").length==1){
+            $("#exclude .warning-list").eq(0).find(".form-group-title").hide();
+        }
       clickWarningExShow($("a.exclude"));
     });
   }
@@ -119,6 +123,7 @@ define(["tool/ajaxTool"], function (ajax) {
       var keyWordSingleGroup = [];
       for(var j=0;j<singleGroupInputs;j++){
         var inputValue = $("#key-word-group").find(".key-group-"+(i+1)).find("input").eq(j).val();
+          inputValue = inputValue.toString().replace(/ /g,"");
         keyWordSingleGroup.push(inputValue);
       }
       keyWords.push(keyWordSingleGroup);
@@ -136,7 +141,9 @@ define(["tool/ajaxTool"], function (ajax) {
     return warnWords;
   }
   //右边板块显示方法
-    function rightPlanShow(newKeyWords, warnWords) {
+    function rightPlanShow(_newKeyWords, _warnWords) {
+        var newKeyWords = utils.trims(_newKeyWords);
+        var warnWords =utils.trims(_warnWords);
         if (newKeyWords.length == 0 && warnWords.length == 0) {
             return false;
         }
@@ -165,21 +172,15 @@ define(["tool/ajaxTool"], function (ajax) {
     }
   //为了右侧显示组合词语，重新整合关键词组
   function getNewKeyWords(keyWords){
-    var newKeyWords = [];
-    for(var i=0;i<keyWords.length;i++){
-      var words = "";
-      for(var j=0;j<keyWords[i].length;j++){
-        if(keyWords[i][j] !== ""){
-          if((j+1) == keyWords[i].length){
-            words += keyWords[i][j];
-          }else{
-            words += keyWords[i][j]+"+";
-          }
-        }
-      }
-      newKeyWords.push(words);
-    }
-    return newKeyWords;
+      var result=[];
+      var ele,
+          arr;
+      $.each(keyWords,function(i,v){
+          arr = utils.trims(v);
+          ele = arr.join("+");
+          result.push(ele);
+      });
+    return result;
   }
   //点击保存
   function saveData(){
