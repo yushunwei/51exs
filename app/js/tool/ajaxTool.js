@@ -14,7 +14,7 @@ define(["tool/Utils"], function (utils) {
         if (data.status == "100" && data.subStatus == "50001") {
             //清除所有ajax请求
             $.each(ajaxMap, function (i, v) {
-                v.abort();
+               v.abort();
             });
             alert("登录超时，请重新登录");
             window.open("login.html", "_self");
