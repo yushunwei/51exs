@@ -184,6 +184,15 @@ define(["jquery.cookie"], function () {
         }
         return string
     }
+    function _trims(){
+        var newArr=[];
+        var ele;
+        $.each(arguments[0],function(i,v){
+            ele = v.replace(/ /g,"");
+            ele != "" && newArr.push(ele);
+        })
+        return newArr;
+    }
 
     return {
         //判断是否空的json
@@ -206,6 +215,7 @@ define(["jquery.cookie"], function () {
         addLoading: _addLoading,
         removeLoading: _removeLoading,
         //base64位编码
-        base64Encode:_base64Encode
+        base64Encode:_base64Encode,
+        trims :_trims
     };
 });
