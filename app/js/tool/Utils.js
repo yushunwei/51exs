@@ -140,6 +140,7 @@ define(["jquery.cookie"], function () {
                                              .append("<div class='loading'><img src='/img/loading_48.gif' /></div>");
             $(this).find("div.loading").width($(this).width());
             $(this).find("div.loading").height($(this).height());
+            $(this).find("div.loading").css("line-height",$(this).height()+"px");
         })
     }
     function _removeLoading(){
