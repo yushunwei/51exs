@@ -183,27 +183,39 @@ define(["tool/ajaxTool"], function (ajax) {
   }
   //点击保存
   function saveData(){
+      var layerindex;
     $(".page-newYq").on("click",".saveBtn",function(){
-        var title = $("#myComplay").val();
       var submitData = dataReform();
-      if(title == "" || submitData.userPlanWords.length==0){
+      if($("#myComplay").val() == "" || submitData.userPlanWords.length==0){
         $('#alertModal').modal('show');
       }else{
-
         var param = {
           data:JSON.stringify(submitData),
           type:"post",
           contentType: 'application/json',
           success:function(data){
-            console.log(data)
+           if(data.status==200){
+               var id = data.data;
+               layer.close(layerindex);
+               window.open("monitor/full_view.html?id="+id);
+           }else{
+               layer.alert(data.subMsg);
+           }
+          },
+          error :function(data){
+              layer.alert(data.subMsg);
           }
         };
         ajax.load('newYq',param);
+          layerindex =layer.load(1, {
+              shade: [0.1,'#fff'] //0.1透明度的白色背景
+          });
       }
     });
   }
     //组合提交数据
     function dataReform(){
+        var title = $("#myComplay").val();
         var submitData = {
             "title":title,
             "userPlanWords":[],
@@ -212,8 +224,7 @@ define(["tool/ajaxTool"], function (ajax) {
         };
         var keyWords = getkeyWords(),
             warnWords = getwarnWords("warning"),
-            exWords = getwarnWords("exclude"),
-            title = $("#myComplay").val();
+            exWords = getwarnWords("exclude");
         var newKeys = removeNull(keyWords);
         for(var i=0;i<newKeys.length;i++){
             for(var j=0;j<newKeys[i].length;j++){
