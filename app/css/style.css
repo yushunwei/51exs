@@ -611,6 +611,7 @@ a:focus {
 }
 .full-view-table .table>tbody>tr>td {
 	background: #fff;
+	word-break: break-all;
 }
 .full-view-table .table>tbody>tr>td .title {
 	font-size: 16px;
@@ -1822,4 +1823,4 @@ a:focus {
 .turnPageJcfa {
 	cursor: pointer;
 }
-
+word-break: break-all;
