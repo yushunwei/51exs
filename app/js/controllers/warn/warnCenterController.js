@@ -1,4 +1,4 @@
-define(["../../tool/ajaxTool", "../../view/warn/warnCenterView"], function (ajax, view) {
+define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/commonController"], function (ajax, view,com) {
     var $tar = $("div.page-warnCenter");
     var indexUserPlans = {showCount: 0};
     var result = [];
@@ -98,37 +98,9 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView"], function (ajax
             $('.type-timeranges').find('a').removeClass('active');
             getMonitorInfoList(0, fullViewInit.pageSize);
         });
-        //在批量取消预警页面上绑定事件，弹出对话框并绑定id
-        $('.cancel-alldanger-btn').click(function () {
-            //如果选中不为空，弹出确认对话框
-            if ($('.cy-checkbox input:checked').length != 0) {
-                var docIds = new Object();
-                docIds.dedupids = [];
-                //获取选中的checkbox上缓存的Id
-                $('.cy-checkbox input:checked').each(function () {
-                    docIds.dedupids.push($(this).parent().parent().data('docId'));
-                });
-                //将获取的多个Id绑定到对话框的缓存上
-                $('.cancel-alldanger').data('docIds', docIds);
-                //弹出对话框
-                $('.cancel-alldanger').modal('show');
-            } else {
-                $('.cancel-danger-none').modal('show');
-            }
-        });
-        $dom.find(".table.table-bordered").on("click", ".email-send a", function () {
-            var param = {
-                "success": function (d) {
-                    view.renderAddEmail(d);
-                }
-            }
-            ajax.load("addEmail", param);
-        });
+
         //add email
-        $("form").on("submit", function () {
-            $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + $(this).find("input[type=email]").val() + '</li>')
-            return false;
-        });
+        com.handleEmail();
         //在批量取消预警页面上绑定事件，弹出对话框并绑定id
         $('.cancel-alldanger-btn').click(function () {
             //如果选中不为空，弹出确认对话框
@@ -202,11 +174,15 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView"], function (ajax
     }
 
     //绑定面板【管理接收邮箱】按钮上绑定弹出框事件
+    var emailObj = {};
+    var docId;
     function bindPlanWarnClick() {
         //在每个方案面板的【管理接收邮箱】按钮上绑定弹出框事件
         $('.warning-setting-main').find('.panel-planwarn').find('.warning-email').click(function () {
             var planid = $(this).data('id');
+            docId = planid;
             var title = $(this).data('title');
+            emailObj = {};
             //为对话框缓存赋值为方案id
             var param = {
                 "success": function (d) {
@@ -214,42 +190,67 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView"], function (ajax
                     view.renderEmailController(d);
                     $('#modal-email-add').data("planid",planid);
                     $('#modal-email-add').modal('show');
+                    for(var i = 0; i < d.data.length;i++){
+                        emailObj[d.data[i].email] = d.data[i].email;
+                    }
                 },
                 "query": {
                     planId: planid
                 }
-            }
+            };
             ajax.load("warnmail", param);
         });
-    };
-
+    }
+    $("#modal-email-add form").on("submit",function(){
+        var emailStr = $(this).find("input[type=email]").val();
+        if(!emailObj[emailStr]) {
+            emailObj[emailStr] = emailStr;
+            $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
+            $(this).find("input[type=email]").val("");
+            $(this).next().find(".text-danger").text("您最多可选择5个邮箱");
+        }else{
+            $(this).next().find(".text-danger").text(emailStr + "已存在，请勿重复添加");
+        }
+        return false;
+    });
     //绑定【管理接收邮箱】弹出对话框的确认方法
     $('#modal-email-add').find('.btn-emails-confirm').click(function () {
-        //初始化对象
-        var temp = {};
-        temp.emails = [];
-        $('#modal-email-add').find('.add-email-list').find('span.checked').each(function () {
-            temp.emails.push($(this).parent().next('span').text());
-        });
-        var param = {
-            type: 'POST',
-            query:{
-                planId : $('#modal-email-add').data('planid')
-            },
-            data:temp,
-            success: function (data) {
-                if (data.status == 200) {
-                    //清空新增输入框
-                    $('#modal-email-add').find('.input-add').val('');
-                    //关闭对话框
-                    $('#modal-email-add').modal('hide');
-                    //重新绑定方案面板列表
-                    setTab2();
-                }
-            }
+        var checkedLength = $("#modal-email-add .add-email-list span.checked").length;
+        var shareEmailList = [];
+        var otherEmailList = [];
+        if(checkedLength <= 5 && checkedLength > 0){
+            $("#modal-email-add .add-email-list span.checked").each(function(){
+                var emailStr = $(this).parents("li").text();
+                    shareEmailList.push(emailStr);
+            });
+            _sendEmail(docId,shareEmailList);
+        }else if(checkedLength==0){
+            $("#modal-email-add .text-danger").text("请选择至少一个邮箱");
+        }else{
+            $("#modal-email-add .text-danger").text("您最多可选择5个邮箱");
         }
-        ajax.load("modifyplanwarnemail",param);
     });
+    //发送邮件
+    function _sendEmail(_docId,shareEmailList){
+        var param = {
+            "data" : {"planId" : _docId,"emails":shareEmailList},
+            "type":'post',
+            "success":function(d){
+                $("#modal-email-add .send-email-btn").removeAttr("disabled");
+                if(d.status == 200) {
+                    $(".close").trigger("click");
+                    setTab2();
+                }else{
+                    layer.alert(d.subMsg, {icon: 2});
+                }
+            },
+            error:function(){
+                $("#modal-email-add .send-email-btn").removeAttr("disabled");
+            }
+        };
+        ajax.load("modifyplanwarnemail",param);
+        $("#modal-email-add .send-email-btn").attr("disabled",true);
+    }
     //地址的删除按钮上绑定事件（弹出对话框）
     function bindDeleteIconClick(){
         //地址的删除按钮上绑定事件

@@ -105,7 +105,8 @@ var HX_Ajax_Path = (function () {
         "modifywarnemail": HX_config.serv_path + "/warn/warnemail/modifywarnemail/v=1.0.0",
         //获取单个方案的正负面数据
         "getSentimentDistribute":HX_config.serv_path + "/monitor/statmonitor/getsentimentdistribute/v=1.0.0",
-        "emailShare" : HX_config.serv_path + "/monitor/contentmonitor/monitorinfoemailshare/v=1.0.0"
+        "emailShare" : HX_config.serv_path + "/monitor/contentmonitor/monitorinfoemailshare/v=1.0.0",
+        "canaddnewuserplan" : HX_config.serv_path + "/plan/userplan/canaddnewuserplan/v=1.0.0"
     }
 })();
 

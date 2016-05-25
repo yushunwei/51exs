@@ -3,6 +3,25 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * 初始化
      * @private
      */
+    var ifnewModal = '<div class="modal fade bs-example-modal-sm cy-model new-all-alert modal-ifnew" tabindex="-1" role="dialog"'+
+                        'aria-labelledby="mySmallModalLabel">'+
+                        '<div class="modal-dialog modal-sm">'+
+                        '<div class="modal-content">'+
+                        '<div class="modal-header">'+
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"'+
+                            'class="fa fa-times-circle"></span>'+
+                        '</button>'+
+                        '<h4 class="modal-title">温馨提示</h4>'+
+                        '</div>'+
+                        '<div class="modal-body">'+
+                        ' <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>'+
+                        '</div>'+
+                        '<div class="modal-footer">'+
+                        '<button type="button" class="btn btn-info" data-dismiss="modal">确定</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
     function _init(page) {
         //设置用户信息
         $("div.header .header-user").length != 0 && setUser();
@@ -20,6 +39,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".conditions-choice").find("a.download-checked-btn").length!=0 && bindDownload(page);
         //取消相似预警
         $(".conditions-choice").find("a.cancel-alldanger-btn").length!=0 && bindCancel(page);
+        //新建舆情判断 大于6个不进入页面
+        ifNew();
     }
 
     /**
@@ -297,28 +318,31 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                         emailObj[d.data[i]] = d.data[i];
                     }
                 }
-            }
+            };
             ajax.load("addEmail",param);
         });
         //add email
+        $(".add-email").on('hide.bs.modal',function(){
+            $(".add-email").find(".text-danger").text("您最多可选择5个邮箱");
+        });
         $("#emailForm").on("submit",function(){
             var emailStr = $(this).find("input[type=email]").val();
             if(!emailObj[emailStr]) {
                 emailObj[emailStr] = emailStr;
                 $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
                 $(this).find("input[type=email]").val("");
-                $(this).find(".text-danger").text("您最多可选择5个邮箱");
+                $(this).next().find(".text-danger").text("您最多可选择5个邮箱");
             }else{
-                $(".add-email-list").find(".text-danger").text(emailStr + "已存在，请勿重复添加");
+                $(this).next().find(".text-danger").text(emailStr + "已存在，请勿重复添加");
             }
             return false;
         });
-        $(".send-email-btn").on("click",function(){
+        $(".add-email .send-email-btn").on("click",function(){
             var checkedLength = $(".add-email-list :checked").length;
             var shareEmailList = [];
             var otherEmailList = [];
             if(checkedLength <= 5 && checkedLength > 0){
-                $(".add-email-list :checkbox").each(function(){
+                $(".add-email .add-email-list :checkbox").each(function(){
                     var emailStr = $(this).parents("li").text();
                     if($(this).is(":checked")){
                         shareEmailList.push(emailStr);
@@ -327,8 +351,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                     }
                 });
                 _sendEmail(docId,shareEmailList,otherEmailList);
+            }else if(checkedLength==0){
+                $(".add-email .text-danger").text("请选择至少一个邮箱");
             }else{
-                $(this).find(".text-danger").text("您最多可选择5个邮箱");
+                $(".add-email .text-danger").text("您最多可选择5个邮箱");
             }
         });
     }
@@ -338,14 +364,41 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             "data" : {"docId" : docId,"shareEmails":shareEmailList,"otherEmails":otherEmailList},
             "type":'post',
             "success":function(d){
+                $(".add-email .send-email-btn").removeAttr("disabled");
                 if(d.status == 200) {
                     $(".close").trigger("click");
                 }else{
                     layer.alert(d.subMsg, {icon: 2});
                 }
+            },
+            error:function(){
+                $(".add-email .send-email-btn").removeAttr("disabled");
             }
-        }
+        };
         ajax.load("emailShare",param,"#sendEmailModal");
+        $(".add-email .send-email-btn").attr("disabled",true);
+    }
+
+    function ifNew(){
+        var url = "pages/newYq.html";
+        $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
+            $(this).attr("href","#");
+            var param = {
+                success:function(data){
+                    if(data.data){
+                        window.open(url,"_self");
+                    }else{
+                        $(".modal-ifnew").length==0 && $("body").append(ifnewModal);
+                        $(".modal-ifnew").modal("show");
+                    }
+                },
+                error :function(){
+
+                }
+            };
+            ajax.load("canaddnewuserplan",param);
+        });
+
     }
     // 返回
     return {

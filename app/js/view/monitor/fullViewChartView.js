@@ -48,6 +48,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderDataTrendChart(data);
+      },
+      error:function(){
+        $("#fullChartLine1").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_DataTrend',param);
@@ -102,7 +105,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     var dateArray = [];
     var curDate;
     for(i=0; i<data.data.news.length; i++){
-      if(curDate!=data.data.news[i].publicTime){
+      if(curDate !=data.data.news[i].publicTime){
         curDate = data.data.news[i].publicTime;
         dateArray.push(String(curDate));
       }
@@ -164,9 +167,17 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
         data:wxData
       }
     ];
-    // 为echarts对象加载数据
-    var myChartLine1 = ec.init(document.getElementById('fullChartLine1'));
-    myChartLine1.setOption(optionLine1);
+    var dataLen = 0;
+    $.each(optionLine1.series,function(i,n){
+      dataLen += n.data.length;
+    });
+    if(dataLen == 0){
+      $("#fullChartLine1").html(HX_config.noDataHtml);
+    }else{
+      // 为echarts对象加载数据
+      var myChartLine1 = ec.init(document.getElementById('fullChartLine1'));
+      myChartLine1.setOption(optionLine1);
+    }
   }
   //情感走势图
   function getFeelTrendChart(query){
@@ -174,6 +185,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderFeelTrendChart(data);
+      },
+      error:function(){
+        $("#fullChartLine2").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_FeelTrend',param);
@@ -276,10 +290,20 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
         data:negativeData
       }
     ];
-    // 基于准备好的dom，初始化echarts图表
-    var myChartLine2 = ec.init(document.getElementById('fullChartLine2'));
-    // 为echarts对象加载数据
-    myChartLine2.setOption(optionLine2);
+    //假如数据为空，显示无数据
+    var dataLen = 0;
+    $.each(optionLine2.series,function(i,n){
+      dataLen += n.data.length;
+    });
+    if(dataLen == 0){
+      $("#fullChartLine2").html(HX_config.noDataHtml);
+      return;
+    }else{
+      // 基于准备好的dom，初始化echarts图表
+      var myChartLine2 = ec.init(document.getElementById('fullChartLine2'));
+      // 为echarts对象加载数据
+      myChartLine2.setOption(optionLine2);
+    }
   }
   //媒体情感
   function getMediaFeelChart(query){
@@ -287,6 +311,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderMediaFeelChart(data);
+      },
+      error:function(){
+        $("#fullChartBar1").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_MediaFeel',param);
@@ -371,12 +398,16 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     optionBar1.yAxis[0].data=mediaArray;
     optionBar1.series[0].data=negativeArray;
     optionBar1.series[1].data=positiveArray;
-    var myChartBar1 = ec.init(document.getElementById('fullChartBar1'));
-    myChartBar1.setOption(optionBar1);
-    myChartBar1.on("click", function(param) {
-      var subData = {sentiment : param.data.sentiment,timeRanges:7};
-      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
-    })
+    if((negativeArray.length+positiveArray.length) == 0){
+      $("#fullChartBar1").html(HX_config.noDataHtml);
+    }else{
+      var myChartBar1 = ec.init(document.getElementById('fullChartBar1'));
+      myChartBar1.setOption(optionBar1);
+      myChartBar1.on("click", function(param) {
+        var subData = {sentiment : param.data.sentiment,timeRanges:7};
+        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+      })
+    }
   }
   //媒体关注度
   function getMediaDegChart(query){
@@ -384,6 +415,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderMediaDegChart(data);
+      },
+      error:function(){
+        $("#fullChartBar2").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_MediaDeg',param);
@@ -454,12 +488,16 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     }
     optionBar2.xAxis[0].data=mediaArray;
     optionBar2.series[0].data=valueArray;
-    var myChartBar2 = ec.init(document.getElementById('fullChartBar2'));
-    myChartBar2.setOption(optionBar2);
-    myChartBar2.on("click", function(param) {
-      var subData = {sentiment : param.data.sentiment,timeRanges:7};
-      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
-    })
+    if(valueArray.length == 0){
+      $("#fullChartBar2").html(HX_config.noDataHtml);
+    }else {
+      var myChartBar2 = ec.init(document.getElementById('fullChartBar2'));
+      myChartBar2.setOption(optionBar2);
+      myChartBar2.on("click", function(param) {
+        var subData = {sentiment : param.data.sentiment,timeRanges:7};
+        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+      })
+    }
   }
   //地域分布Bar
   function getAreaChart(query){
@@ -467,6 +505,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderAreaChart(data);
+      },
+      error:function(){
+        $("#fullChartBar3").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_Area',param);
@@ -536,13 +577,16 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     }
     optionBar3.yAxis[0].data=regionArray;
     optionBar3.series[0].data=valueArray;
-    var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
-    myChartBar3.setOption(optionBar3);
-    myChartBar3.on("click", function(param) {
-      console.log(param)
-      var subData = {sentiment : param.data.sentiment,timeRanges:7};
-      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
-    })
+    if(valueArray.length == 0){
+      $("#fullChartBar3").html(HX_config.noDataHtml);
+    }else{
+      var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
+      myChartBar3.setOption(optionBar3);
+      myChartBar3.on("click", function(param) {
+        var subData = {sentiment : param.data.sentiment,timeRanges:7};
+        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+      })
+    }
   }
   //地域分布Map
   function getAreaMapChart(query){
@@ -550,11 +594,29 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       query:query,
       success:function(data){
         senderAreaMapChart(data);
+      },
+      error:function(){
+        $("#fullChartMap").html(HX_config.errorHtml);
       }
     };
     ajax.load('fullView_AreaMap',param);
   }
   function senderAreaMapChart(data){
+    var max = 0;
+    var mapData = [];
+    if(data.data.array.length == 0){
+      $("#fullChartMap").html(HX_config.noDataHtml);
+      return;
+    }
+    $.each(data.data.array,function(i,n){
+      if(max < n.count){
+        max = n.count;
+      }
+      mapData.push({
+        name: n.region.replace("省",""),
+        value: n.count
+      })
+    });
     $.get('../../api/china.json',function(json){
       ec.registerMap('china', json);
       var chart = ec.init(document.getElementById('fullChartMap'));
@@ -568,6 +630,16 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
           y : 'top',
           data:['舆情数']
         },
+        visualMap: {
+          min: 0,
+          max: max,
+          left: 'left',
+          top: 'bottom',
+          text: ['高','低'],           // 文本，默认为数值文本
+          calculable: true,
+          itemWidth:10,
+          itemHeight:80
+        },
         color: ['#59C2E6'],
         series: [{
           name: '舆情数',
@@ -578,9 +650,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
             normal:{color: '#C8F1FF'},
             emphasis:{color: '#59C2E6'}
           },
-          data:[
-            {name: '广东',selected:true }
-          ]
+          data:mapData
         }]
       });
     })
@@ -591,14 +661,14 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     var endTime = '';
     var query = {
       timeRanges:timeRanges,
-        startTime:startTime,
-        endTime:endTime,
-        planId:id
+      startTime:startTime,
+      endTime:endTime,
+      planId:id
     };
     events(id);
     chartSender(query);
   }
   return {
-   init:_init
+    init:_init
   }
 });

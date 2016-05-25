@@ -1,4 +1,4 @@
-define([], function () {
+define(["common/commonView"], function () {
   //注册对比事件
   Handlebars.registerHelper("compare", function (v1, v2, options) {
     var type = "";
@@ -38,40 +38,6 @@ define([], function () {
         "</ul>"
     return dom;
   });
-    Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-        switch (operator) {
-            case '!=':
-                return (v1 != v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '==':
-                return (v1 == v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '===':
-                return (v1 === v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '<':
-                return (v1 < v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '<=':
-                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '>':
-                return (v1 > v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '>=':
-                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '&&':
-                return (v1 && v2) ? options.fn(this) : options.inverse(this);
-                break;
-            case '||':
-                return (v1 || v2) ? options.fn(this) : options.inverse(this);
-                break;
-            default:
-                return options.inverse(this);
-                break;
-        }
-    });
 
     var listModel = "";
   function _renderList(data,i){

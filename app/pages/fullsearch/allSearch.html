@@ -156,7 +156,9 @@
                     <tbody class="list-yq">
                     <script id="listScript" type="text/x-handlebars-template">
                         {{#each this.objects}}
-                        <tr data-docId="{{docId}}">
+                        <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                            data-source="{{source}}" data-author="{{author}}"
+                            data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}"  data-docId="{{docId}}">
                             <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                             <td class="information">
                                 <h3 class="title">

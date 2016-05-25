@@ -20,10 +20,9 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
         var baseUrl = HX_Ajax_Path.downloadweeklyreport+"?token="+util.getToken()+"&path="+decodeURIComponent(data.path)+
             "&reportName="+decodeURIComponent(data.reportName)+"&startDate="+decodeURIComponent(data.startDate)+
             "&endDate="+decodeURIComponent(data.endDate);
-       $("#downReport").attr("href",baseUrl);
+        $("#downReport").attr("href",baseUrl);
     }
     function _renderWeeklyCarrierdisList(data){
-        console.log(data)
         var newData = reform(data);
         var optionPie = {
             tooltip : {
@@ -93,7 +92,7 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
                 negative: n.negative,
                 positive: n.positive,
                 warn: n.warn
-            })
+            });
             total.similarity += n.similarity-0;
             total.negative += n.negative-0;
             total.positive += n.positive-0;
@@ -104,6 +103,11 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
     }
     function _renderWeeklyTop10SentmediadisList(data,isPositive){
         var newData = top10Reform(data);
+        var barDom = isPositive?"reportChartBar1":"reportChartBar2";
+        if(newData.valueList.length == 0){
+            $("#"+barDom).html(HX_config.noDataHtml);
+            return;
+        }
         var optionBar =  {
             tooltip : {
                 trigger: 'item',
@@ -159,7 +163,7 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
                 }
             ]
         };
-        var myChartBar = ec.init(document.getElementById(isPositive?"reportChartBar1":"reportChartBar2"));
+        var myChartBar = ec.init(document.getElementById(barDom));
         myChartBar.setOption(optionBar);
 
     }
@@ -173,12 +177,12 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
         $.each(data,function(i,n){
             obj.nameList.push(n.name);
             obj.valueList.push(n.value);
-        })
+        });
         return obj;
     }
     return {
         //初始化渲染
-       renderPage:_renderPage,
+        renderPage:_renderPage,
         //渲染导读列表数据
         renderWeeklyReadGuideList:_renderWeeklyReadGuideList,
         //渲染载体分布统计

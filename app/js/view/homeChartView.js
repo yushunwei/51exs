@@ -49,6 +49,9 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
       success: function (data) {
         setChartData(optionPie, data);
         titleSender(data);
+      },
+      error:function(){
+        $("#chartPie").html(HX_config.errorHtml);
       }
     };
     ajax.load('home_pie', param);
@@ -61,17 +64,22 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
 
   //设置chart数据
   function setChartData(option, obj) {
+
     option.series[0].data = senderTotal(obj.data.totalList);
     option.series[1].data = senderEmotionDetail(obj.data.detailList);
+    if((option.series[0].data.length+option.series[1].data.length) == 0){
+      $("#chartPie").html(HX_config.noDataHtml);
+      return;
+    }
     var myChartPie = ec.init(document.getElementById('chartPie'));
     myChartPie.setOption(option);
-     myChartPie.on("click", function(param) {
-       var subData = {sentiment : param.data.sentiment,timeRanges:7};
-         if(param.data.planId){
-             subData.planId = param.data.planId
-         }
-         window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
-     })
+    myChartPie.on("click", function(param) {
+      var subData = {sentiment : param.data.sentiment,timeRanges:7};
+      if(param.data.planId){
+        subData.planId = param.data.planId
+      }
+      window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+    })
   }
 
   //渲染汇总
@@ -196,6 +204,9 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     var param = {
       success: function (data) {
         setLineData(sourceObj,optionLine, data);
+      },
+      error:function(){
+        $("#chartLine").html(HX_config.errorHtml);
       }
     };
     ajax.load('home_line', param);
@@ -210,7 +221,10 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
         valueArray.push(media[m].count == null?0:media[m].count);
         xAxis[media[m].publicTime] = '';
       }
-
+      if(valueArray.length == 0){
+        $("#chartLine").html(HX_config.noDataHtml);
+        return;
+      }
       optionLine.series.push({
         name : sourceObj.get(i).title,
         type : 'line',
@@ -235,6 +249,9 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
       },
       success:function(data){
         senderBar(planId,chartDom,data);
+      },
+      error:function(){
+        $("#"+chartDom).html(HX_config.errorHtml);
       }
     };
     ajax.load('home_bar',param);
@@ -244,18 +261,18 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     var optionBar = {
       title:{
         show:true,
-          text:"重点媒体情感偏向",
-          top:10
+        text:"重点媒体情感偏向",
+        top:10
       },
-        grid:{
-            show:true,
-            left:85,
-            borderColor:'#fff'
-        },
+      grid:{
+        show:true,
+        left:85,
+        borderColor:'#fff'
+      },
       tooltip : {trigger : 'item',formatter : "{b}<br/>{a}:{c}"},
       legend : {
-       top:15,
-          left:180,
+        top:15,
+        left:180,
         data : [ '负面','正面' ],
         textStyle : {
           color : '#999'
@@ -320,6 +337,10 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
     optionBar.yAxis[0].data = mediaArray;
     optionBar.series[0].data = negativeArray;
     optionBar.series[1].data = positiveArray;
+    if((negativeArray.length+positiveArray.length) == 0){
+      $("#"+chartDom).html(HX_config.noDataHtml);
+      return;
+    }
     var myChartBar = ec.init(document.getElementById(chartDom));
     myChartBar.setOption(optionBar);
 
@@ -328,39 +349,39 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
       window.open('pages/monitor/monitorinfolist.html?'+ ($.param(subData)));
     })
   }
-    function getSentimentDistribute(planId,chartDom){
-        var param = {
-          query:{
-              timeRanges : 7,
-              planId :planId
-          },
-            success:function(data){
-                if(data){
-                    senderSentimentDistribute(data,chartDom);
-                }
-            }
-        };
-        ajax.load('getSentimentDistribute',param);
-    }
-    function senderSentimentDistribute(data,chartDom){
-        if(data.data){
-            var positiveNum = data.data.positive,
-                negativeNum = data.data.negative;
-            var total = positiveNum+negativeNum;
-            var negativePercent = (total === 0?0:Math.round(negativeNum / total * 10000)/ 100.00) + "%";
-            parentD = $("#"+chartDom).parent().parent().parent().prev();
-            parentD.find(".totalAll").text(total);
-            parentD.find(".positiveTotal").text(positiveNum);
-            parentD.find(".negativeTotal").text(negativeNum);
-            parentD.find(".negativePercent").text(negativePercent);
+  function getSentimentDistribute(planId,chartDom){
+    var param = {
+      query:{
+        timeRanges : 7,
+        planId :planId
+      },
+      success:function(data){
+        if(data){
+          senderSentimentDistribute(data,chartDom);
         }
+      }
+    };
+    ajax.load('getSentimentDistribute',param);
+  }
+  function senderSentimentDistribute(data,chartDom){
+    if(data.data){
+      var positiveNum = data.data.positive,
+          negativeNum = data.data.negative;
+      var total = positiveNum+negativeNum;
+      var negativePercent = (total === 0?0:Math.round(negativeNum / total * 10000)/ 100.00) + "%";
+      parentD = $("#"+chartDom).parent().parent().parent().prev();
+      parentD.find(".totalAll").text(total);
+      parentD.find(".positiveTotal").text(positiveNum);
+      parentD.find(".negativeTotal").text(negativeNum);
+      parentD.find(".negativePercent").text(negativePercent);
     }
+  }
   //图表初始化
   function _chartInit(planId,chartDom){
     if(planId){
       //渲染柱形图
       _getBarData(planId,chartDom);
-        getSentimentDistribute(planId,chartDom);
+      getSentimentDistribute(planId,chartDom);
     }else {
       //渲染饼图
       _senderPie();

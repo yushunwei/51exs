@@ -1,8 +1,4 @@
-define(["tool/ajaxTool"], function (ajax) {
-
-
-
-
+define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
   function keyWordAdd(){
     $(".page-newYq").on("click",".add-btn",function(){
       var parents = $(this).parents(".input-warp");
@@ -23,8 +19,8 @@ define(["tool/ajaxTool"], function (ajax) {
       if(index > 2) return;
       if(index == 1){labelC = "词语二：";}
       if(index == 2){labelC = "词语三：";}
-      var groupDiv = '<div class="form-group key-group-'+(index+1)+' new-keyword-group"><label class="form-group-title"><span class="must">*</span><span class="must-title">'+labelC+
-          '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="5" class="form-control">'+
+      var groupDiv = '<div class="form-group key-group-'+(index+1)+' new-keyword-group"><label class="form-group-title"><span class="must"></span><span class="must-title">'+labelC+
+          '</span></label><div class="group-input-warp key-word-warp"><div class="input-warp"><input type="text" maxlength="30" class="form-control">'+
           '<span class="operation-box clear"><span class="add-btn glyphicon glyphicon-plus-sign"></span><span class="with-next">+</span>'+
           '<span class="close-btn">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
       $("#key-word-group").append(groupDiv);
@@ -86,9 +82,14 @@ define(["tool/ajaxTool"], function (ajax) {
     $("#warning").on("click",".close-btn", function () {
       var parents = $(this).parents(".warning-list");
       if(parents.parent().find(".warning-list").length !== 1){
+        parents.prev().not(parents.parent().find(".warning-list").eq(0)).find(".form-group-title").hide();
         parents.remove();
       }
+      if($("#warning .warning-list").length==1){
+          $("#warning .warning-list").eq(0).find(".form-group-title").hide();
+      }
       clickWarningExShow($("a.warning"));
+        $("#warning .warning-list").eq(0).find("input").trigger("blur");
     });
   }
   function exClose(){
@@ -96,8 +97,12 @@ define(["tool/ajaxTool"], function (ajax) {
       var parents = $(this).parents(".warning-list");
 
       if(parents.parent().find(".warning-list").length !== 1){
+        parents.prev().not(parents.parent().find(".warning-list").eq(0)).find(".form-group-title").hide();
         parents.remove();
       }
+        if($("#exclude .warning-list").length==1){
+            $("#exclude .warning-list").eq(0).find(".form-group-title").hide();
+        }
       clickWarningExShow($("a.exclude"));
     });
   }
@@ -109,6 +114,9 @@ define(["tool/ajaxTool"], function (ajax) {
         var newKeyWords = getNewKeyWords(keyWords);
         rightPlanShow(newKeyWords, warnWords);
     })
+      $(".page-newYq").on("focus","input",function(){
+         $(this).select();
+      })
   }
   //获取所有关键词组数据
   function getkeyWords(){
@@ -119,6 +127,7 @@ define(["tool/ajaxTool"], function (ajax) {
       var keyWordSingleGroup = [];
       for(var j=0;j<singleGroupInputs;j++){
         var inputValue = $("#key-word-group").find(".key-group-"+(i+1)).find("input").eq(j).val();
+          inputValue = inputValue.toString().replace(/ /g,"");
         keyWordSingleGroup.push(inputValue);
       }
       keyWords.push(keyWordSingleGroup);
@@ -136,7 +145,9 @@ define(["tool/ajaxTool"], function (ajax) {
     return warnWords;
   }
   //右边板块显示方法
-    function rightPlanShow(newKeyWords, warnWords) {
+    function rightPlanShow(_newKeyWords, _warnWords) {
+        var newKeyWords = utils.trims(_newKeyWords);
+        var warnWords =utils.trims(_warnWords);
         if (newKeyWords.length == 0 && warnWords.length == 0) {
             return false;
         }
@@ -149,14 +160,14 @@ define(["tool/ajaxTool"], function (ajax) {
         for (var h = 0; h < warnWords.length; h++) {
             for (var k = 0; k < newKeyWords.length; k++) {
                 if ((newKeyWords[k] + warnWords[h]) !== "") {
-                    showHtml = '<div class="content-preview">' + newKeyWords[k] + "+" + warnWords[h] + '</div>';
+                    showHtml = '<div class="content-preview" title="' + newKeyWords[k] + "+" + warnWords[h] + '">' + newKeyWords[k] + "+" + warnWords[h] + '</div>';
                     contain.append(showHtml);
                     count += 1;
                 }
             }
         }
         for (var z = 0; z < newKeyWords.length; z++) {
-            keysHtml = '<div class="content-preview">' + newKeyWords[z] + '</div>';
+            keysHtml = '<div class="content-preview" title="' + newKeyWords[z] + '">' + newKeyWords[z] + '</div>';
             keysContain.append(keysHtml);
             keysCount += 1;
         }
@@ -165,45 +176,51 @@ define(["tool/ajaxTool"], function (ajax) {
     }
   //为了右侧显示组合词语，重新整合关键词组
   function getNewKeyWords(keyWords){
-    var newKeyWords = [];
-    for(var i=0;i<keyWords.length;i++){
-      var words = "";
-      for(var j=0;j<keyWords[i].length;j++){
-        if(keyWords[i][j] !== ""){
-          if((j+1) == keyWords[i].length){
-            words += keyWords[i][j];
-          }else{
-            words += keyWords[i][j]+"+";
-          }
-        }
-      }
-      newKeyWords.push(words);
-    }
-    return newKeyWords;
+      var result=[];
+      var ele,
+          arr;
+      $.each(keyWords,function(i,v){
+          arr = utils.trims(v);
+          ele = arr.join("+");
+          result.push(ele);
+      });
+    return result;
   }
   //点击保存
   function saveData(){
+      var layerindex;
     $(".page-newYq").on("click",".saveBtn",function(){
-        var title = $("#myComplay").val();
       var submitData = dataReform();
-      if(title == "" || submitData.userPlanWords.length==0){
+      if($("#myComplay").val() == "" || submitData.userPlanWords.length==0){
         $('#alertModal').modal('show');
       }else{
-
         var param = {
           data:JSON.stringify(submitData),
           type:"post",
           contentType: 'application/json',
           success:function(data){
-            console.log(data)
+           if(data.status==200){
+               var id = data.data;
+               layer.close(layerindex);
+               window.open("monitor/full_view.html?id="+id);
+           }else{
+               layer.alert(data.subMsg);
+           }
+          },
+          error :function(data){
+              layer.alert(data.subMsg);
           }
         };
         ajax.load('newYq',param);
+          layerindex =layer.load(1, {
+              shade: [0.1,'#fff'] //0.1透明度的白色背景
+          });
       }
     });
   }
     //组合提交数据
     function dataReform(){
+        var title = $("#myComplay").val();
         var submitData = {
             "title":title,
             "userPlanWords":[],
@@ -212,8 +229,7 @@ define(["tool/ajaxTool"], function (ajax) {
         };
         var keyWords = getkeyWords(),
             warnWords = getwarnWords("warning"),
-            exWords = getwarnWords("exclude"),
-            title = $("#myComplay").val();
+            exWords = getwarnWords("exclude");
         var newKeys = removeNull(keyWords);
         for(var i=0;i<newKeys.length;i++){
             for(var j=0;j<newKeys[i].length;j++){

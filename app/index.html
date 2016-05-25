@@ -147,10 +147,10 @@
                                                 {{/if}}
 
                                                 {{#if this.isWarn}}
-                                                    {{#js_compare isWarn 'yes'}}
-                                                     <span class="label label-danger">预警</span>
+                                                {{#js_compare isWarn 'yes'}}
+                                                <span class="label label-danger">预警</span>
                                                 {{else}}
-                                                     {{/js_compare}}
+                                                {{/js_compare}}
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [<a
@@ -255,7 +255,11 @@
                     </div>
                     <div class="plan-main-data">
                         <!-- 图表数据位置 -->
-                        <div id="chartPie"></div>
+                        <div id="chartPie">
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
                     </div>
                     <div class="plan-main-title">
                         <ul>
@@ -264,7 +268,12 @@
                     </div>
                     <div class="plan-main-data">
                         <!-- 图表数据位置 -->
-                        <div id="chartLine"></div>
+                        <div id="chartLine">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -322,7 +331,12 @@
                 <div class="plan-main-right">
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
-                        <div id="chartBar1"></div>
+                        <div id="chartBar1">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,7 +394,12 @@
                 <div class="plan-main-right">
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
-                        <div id="chartBar2"></div>
+                        <div id="chartBar2">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -438,7 +457,12 @@
                 <div class="plan-main-right">
                     <div class="plan-main-data">
                         <!-- 图表数据位置2 -->
-                        <div id="chartBar3"></div>
+                        <div id="chartBar3">
+                            <!-- 加载进度 -->
+                            <div class="noDataBox text-center" style="height: 140px;">
+                                <img src="img/loading_48.gif"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -504,7 +528,7 @@
 </div>
 <!-- 弹框结束 -->
 <!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model new-all-alert" tabindex="-1" role="dialog"
+<div class="modal fade bs-example-modal-sm cy-model new-all-alert modal-ifnew" tabindex="-1" role="dialog"
      aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
