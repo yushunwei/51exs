@@ -26,14 +26,14 @@
 <body>
 <div class="header userBox">
     <div class="header-content clearfix">
-        <a href="index.html"><img src="img/logo.png"></a>
+        <a href="/index.html"><img src="img/logo.png"></a>
 
         <div class="header-information pull-right">
             <div class="header-input">
                 <div class="input-group">
                     <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
                     <span class="input-group-btn">
-                        <a class="btn btn-default btn-search" target="_blank" href="#1" type="button">
+                        <a class="btn btn-default btn-search"  type="button">
                             <i class="fa fa-search"></i>
                         </a>
                     </span>
@@ -42,20 +42,20 @@
             <div class="header-notice">
                 <ul>
                     <li>
-                        <a href="pages/report/weeklyreportlist.html">
+                        <a href="/pages/report/weeklyreportlist.html">
                             <img src="img/headnav_icon.png" alt="">
                             <p>舆情报告</p>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/warn/warnCenter.html">
+                        <a href="/pages/warn/warnCenter.html">
                             <img src="img/headnav_icon_2.png" alt="">
                             <p>预警中心</p><span class="cy-badge hidden"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="help.html">
-                            <img src="img/headnav_icon_4.png" alt="">
+                        <a href="/help.html" target="_blank">
+                            <img src="img/headnav_icon_4.png" alt="" />
                             <p>帮助中心</p>
                         </a>
                     </li>
@@ -84,11 +84,11 @@
                 <script id="userlistScript" type="text/x-handlebars-template">
                     <li class="active list1"><a href="#">首页</a></li>
                     {{#each this}}
-                    <li data-id="{{this.id}}"><a href="pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
+                    <li data-id="{{this.id}}"><a href="/pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i
                             class="nav-delete" id="nav-list{{@index}}" data-toggle="modal" data-target=".plan-delete"><img
                             src="img/delete-icon.png" alt=""></i></li>
                     {{/each}}
-                    <li class="nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+                    <li class="nav-new"><a href="/pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
                 </script>
             </ul>
         </div>
@@ -99,7 +99,7 @@
         <!------舆情------->
         <div class="plan modelLoding">
             <div class="hidden plan-title">
-                <h3><a href="pages/monitor/allplan.html" target="_blank">全部舆情方案</a></h3>
+                <h3><a href="/pages/monitor/allplan.html" target="_blank">全部舆情方案</a></h3>
 
                 <div class="plan-data">
                     <ul class="clearfix" id="yqfaTitle">
@@ -131,7 +131,7 @@
                                         {{#each objects}}
                                         <li>
                                             <p><a class="plan-main-item"
-                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}" target="_blank"
+                                                  href="/pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}" target="_blank"
                                                   data-pageturn="true">{{this.title}}</a>
                                                 {{#if this.sentiment}}
                                                 {{#compare this.sentiment 1}}
@@ -177,7 +177,7 @@
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [<a
-                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
                                                     data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
                                             <img src="img/list_icon.png" alt="">
                                             {{else}}
@@ -198,14 +198,14 @@
                                             {{#if this.sentiment}}
                                             {{#compare this.sentiment 0}}
                                             <p><a class="plan-main-item"
-                                                  href="pages/monitor/infodetail.html?docID={{this.docId}}"
+                                                  href="/pages/monitor/infodetail.html?docID={{this.docId}}"
                                                   data-pageTurn="true">{{this.title}}</a>
                                                 {{#if this.isWarn}}
                                                 <span class="label label-danger">预警</span>
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [<a
-                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
                                                     data-pageturn="true"> 相似文章{{this.similarCount}} </a>]</span>
                                             <img src="img/list_icon.png" alt="">
                                             {{else}}
@@ -232,7 +232,7 @@
                                                 {{/if}}
                                             </p>
                                             <span class="plan-main-item-like">{{this.pubTime}} [ <a
-                                                    href="pages/similarArticle.html?docID={{this.docId}}"
+                                                    href="/pages/similarArticle.html?docID={{this.docId}}"
                                                     data-pageturn="true"> 相似文章{{this.similarCount}} </a> ]</span>
                                             <img src="img/list_icon.png" alt="">
                                             {{else}}
@@ -475,7 +475,7 @@
         <div class="main">
             <div class="index-none">
                 <p>对不起！暂无数据,建议您优化舆情方案的关键词设置</p>
-                <a href="pages/newYq.html">修改舆情 — — 请点击这里！</a>
+                <a href="/pages/newYq.html">修改舆情 — — 请点击这里！</a>
                 <img src="img/index_none.png" alt="">
             </div>
         </div>
@@ -489,14 +489,14 @@
         <div class="nav-main">
             <ul class="clearfix listbox">
                 <li class="active list1"><a href="#">首页</a></li>
-                <li class="nav-new"><a href="pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
+                <li class="nav-new"><a href="/pages/newYq.html"><img src="img/plus.png" alt="">新建舆情</a></li>
             </ul>
         </div>
     </div>
     <div class="main">
         <div class="index-none">
             <p>对不起！暂无数据</p>
-            <a href="pages/newYq.html">新建舆情 — — 请点击这里！</a>
+            <a href="/pages/newYq.html">新建舆情 — — 请点击这里！</a>
             <img src="img/index_none.png" alt="">
         </div>
     </div>

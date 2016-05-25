@@ -390,7 +390,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     }
 
     function ifNew(){
-        var url = "pages/newYq.html";
+        var url = "/pages/newYq.html";
         $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
             $(this).attr("href","#");
             var param = {

@@ -21,7 +21,7 @@ define([], function () {
     var dom = "<ul>"+
         "{{#each objects}}"+
         "<li>"+
-        "<p><a class='plan-main-item' href='pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}' target='_blank' data-pageturn='true'>{{this.title}}</a>"+
+        "<p><a class='plan-main-item' href='/pages/monitor/infodetail.html?docID={{this.docId}}&isWarn={{isWarn}}' target='_blank' data-pageturn='true'>{{this.title}}</a>"+
         "{{#if this.sentiment}}"+
         "{{#compare this.sentiment 1}}"+
         "<span class='label label-info label-ststus'>正面</span>"+
@@ -72,7 +72,7 @@ define([], function () {
     var html2 = myTemplate2(data.list);
     $(".main .plan").eq(i+1).find(".tab-content .plan-main-list").eq(0).html(html2);
     $(".main .plan").eq(i+1).find(".plan-title h3").html(data.title);
-    $(".main .plan").eq(i+1).find(".plan-title a").attr("href","pages/monitor/full_view.html?id="+data.id);
+    $(".main .plan").eq(i+1).find(".plan-title a").attr("href","/pages/monitor/full_view.html?id="+data.id);
     $(".main .plan").eq(i+1).find(".plan-title a").attr("target","_blank");
     $(".main .plan").eq(i+1).find(".nav-tabs").attr("planID",data.id);
   }

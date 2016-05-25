@@ -31,7 +31,7 @@ define([], function () {
         "{{else}}"+
         "{{/if}}"+
         "</p>"+
-        "<span class='plan-main-item-like'>{{this.pubTime}} [<a href='pages/similarArticle.html'> 相似文章{{this.similarCount}} </a>]</span>"+
+        "<span class='plan-main-item-like'>{{this.pubTime}} [<a href='/pages/similarArticle.html'> 相似文章{{this.similarCount}} </a>]</span>"+
         "<img src='img/list_icon.png'>"+
         "</li>"+
         "{{/each}}"+

@@ -405,7 +405,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       myChartBar1.setOption(optionBar1);
       myChartBar1.on("click", function(param) {
         var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
       })
     }
   }
@@ -495,7 +495,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       myChartBar2.setOption(optionBar2);
       myChartBar2.on("click", function(param) {
         var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
       })
     }
   }
@@ -584,7 +584,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       myChartBar3.setOption(optionBar3);
       myChartBar3.on("click", function(param) {
         var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.open('pages/monitor/monitorinfolist.html?'+ $.param(subData));
+        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
       })
     }
   }

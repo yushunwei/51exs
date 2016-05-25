@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>汇信</title>
+    <title>方案监测页</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,37 +31,53 @@
 </head>
 
 <body>
-<div class="header">
+<div class="header userBox">
     <div class="header-content clearfix">
-        <a href="../../index.html"><img src="../../img/logo.png"></a>
+        <a href="/index.html"><img src="../../img/logo.png"></a>
 
         <div class="header-information pull-right">
             <div class="header-input">
                 <div class="input-group">
                     <input type="text" class="form-control input-keywords" placeholder="请输入关键字">
-                        <span class="input-group-btn">
-                            <a class="btn btn-default btn-search" href="../fullsearch/allSearch.html"
-                               type="button"><i class="fa fa-search"></i></a>
-                        </span>
+                    <span class="input-group-btn">
+                        <a class="btn btn-default btn-search"  type="button">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </span>
                 </div>
             </div>
             <div class="header-notice">
                 <ul>
-                    <li><a href="../report/weeklyreportlist.html"><img src="../../img/headnav_icon.png" alt="">
-
-                        <p>舆情报告</p></a></li>
-                    <li><a href="../warn/warnCenter.html"><img src="../../img/headnav_icon_2.png" alt="">
-
-                        <p>预警中心</p><span class="cy-badge hidden"></span></a></li>
-                    <li><a href="#"><img src="../../img/headnav_icon_3.png" alt="">
-
-                        <p>给我意见</p></a></li>
+                    <li>
+                        <a href="/pages/report/weeklyreportlist.html">
+                            <img src="../../img/headnav_icon.png" alt="">
+                            <p>舆情报告</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/warn/warnCenter.html">
+                            <img src="../../img/headnav_icon_2.png" alt="">
+                            <p>预警中心</p><span class="cy-badge hidden"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/help.html" target="_blank">
+                            <img src="../../img/headnav_icon_4.png" alt="" />
+                            <p>帮助中心</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://wj.icinfo.cn/jq/7799156.aspx" target="_blank">
+                            <img src="../../img/headnav_icon_3.png" alt="">
+                            <p>给我意见</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="header-user">
                 <img src="../../img/user.png" alt="">
                 <span>前端用户</span>
-                <a href="#1" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
+                <a href="javascript:void(0)" class="log-out"><i class="fa fa-power-off"></i>退出登录</a>
             </div>
         </div>
     </div>
@@ -73,11 +89,11 @@
         <div class="nav-main">
             <ul class="clearfix listbox">
                 <script id="userlistScript" type="text/x-handlebars-template">
-                    <li class="list1"><a href="../../index.html">首页</a></li>
+                    <li class="list1"><a href="/index.html">首页</a></li>
                     {{#each this}}
-                    <li data-id="{{this.id}}"><a href="full_view.html?id={{this.id}}">{{this.title}}</a><i class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../../img/delete-icon.png" alt=""></i></li>
+                    <li data-id="{{this.id}}"><a href="/pages/monitor/full_view.html?id={{this.id}}">{{this.title}}</a><i class="nav-delete" data-toggle="modal" data-target=".plan-delete"><img src="../../img/delete-icon.png" alt=""></i></li>
                     {{/each}}
-                    <li class="nav-new"><a href="../newYq.html"><img src="../../img/plus.png" alt="">新建舆情</a></li>
+                    <li class="nav-new"><a href="/pages/newYq.html"><img src="../../img/plus.png" alt="">新建舆情</a></li>
                 </script>
             </ul>
         </div>
