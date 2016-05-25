@@ -24,7 +24,6 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
          "success":function(data){
              if (data.data.length === 0) {
                  // 用户方案为空，则直接跳转index_none页面
-                //location.href = './index_none.html';
                 // showIndexNone();
              } else {
                  view.renderUserplanlist(data);
