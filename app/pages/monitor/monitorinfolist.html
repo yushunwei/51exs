@@ -17,14 +17,12 @@
     <link href="../../css/tools.css" rel="stylesheet">
     <link href="../../js/lib/pagination/pagination.css" rel="stylesheet">
     <link href="../../css/app.css" rel="stylesheet">
-    <link href="../../js/lib/laydate/need/laydate.css" rel="stylesheet">
     <script src="../../js/lib/jquery-1.12.3.min.js"></script>
     <script src="../../js/lib/bootstrap.min.js"></script>
     <script src="../../js/lib/handlebars-1.0.0.js"></script>
     <script src="../../js/lib/Json.js"></script>
     <script src="../../js/lib/pagination/jquery.pagination.js"></script>
     <script src="../../js/config/config.js"></script>
-    <script src="../../js/lib/laydate/laydate.js"></script>
 
 </head>
 
@@ -113,7 +111,15 @@
                             data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}"  data-docId="{{docId}}">
                             <td class="text-center"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>
                             <td class="information">
-                                <h3 class="title"><span class="label label-info">正面</span><span class="label label-danger hidden">负面</span><span class="label label-success hidden">中性</span><span class="label label-warning hidden">预警</span><a class="info-regionandtitle" href="{{url}}?docId={{docId}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a></h3>
+                                <h3 class="title">
+                                    {{#campareSentiment sentiment}}{{/campareSentiment}}
+                                    {{#ifCond isWarn "==" "yes"}}
+                                    <span class="label label-warning">预警</span>
+                                    {{else}}
+                                    <span class="label label-warning hidden">预警</span>
+                                    {{/ifCond}}
+                                    <a class="info-regionandtitle" href="/pages/monitor/infodetail.html?docID={{docId}}&amp;isWarn={{isWarn}}" target="_blank">【<span class="text-danger">{{region}}</span>】{{title}}</a>
+                                </h3>
                                 <p class="digest">摘要：<a class="info-summary" href="infodetail.html?docID=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" target="_blank">{{summary}}</a></p>
                                 <div class="full-view-data-operation">
                                     <div class="share">
@@ -136,12 +142,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
                                 </div>
                             </td>
-                            <td class="text-center"><a href="similar.html?pageNum=1&amp;pageSize=15&amp;planId=16a81d62158d11e6af1500188b839ae8&amp;dedupId=91584a13c5c917b2f8a14a8c8ab47c0aabbbdc8" class="info-similarcount" target="_blank">{{similarCount}}</a></td>
-                            <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
-                            <td class="text-center table-time"><span class="info-date">{{createTime}}</span><br><span class="info-time">23:12</span></td>
+                            <td class="text-center">
+                                {{#ifCond similarCount "==" 0}}
+                                <a href="javascript:;">{{similarCount}}</a>
+                                {{else}}
+                                <a href="/pages/monitor/similar.html?dedupId={{dedupId}}" class="info-similarcount" target="_blank">{{similarCount}}</a>
+                                {{/ifCond}}
+                            </td>
+                            <td class="text-center"><a href="http://news.esnai.com" target="_blank"><span class="info-media">{{media}}</span></a></td>
+                            <td class="text-center table-time"><span class="info-date">{{createTime}}</span></td>
                         </tr>
                         {{/each}}
                     </script>
@@ -151,7 +162,7 @@
                     <div class="pull-right pagination"></div>
                 </div>
                 <div class="index-none hidden">
-                    <p>对不起！暂无数据</p><a href="#1">新建舆情 — — 请点击这里！</a><img src="../../img/index_none.png" alt="">
+                    <p>对不起！暂无数据</p><img src="../../img/index_none.png" alt="">
                 </div>
             </div>
         </div>
