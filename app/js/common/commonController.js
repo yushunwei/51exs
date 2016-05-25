@@ -23,6 +23,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                         '</div>'+
                         '</div>';
     function _init(page) {
+        //设置底部信息
+        setFooter();
         //设置用户信息
         $("div.header .header-user").length != 0 && setUser();
         //设置预警信息图表是否显示
@@ -41,8 +43,13 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".conditions-choice").find("a.cancel-alldanger-btn").length!=0 && bindCancel(page);
         //新建舆情判断 大于6个不进入页面
         ifNew();
+
     }
 
+    function setFooter(){
+        $(".footer").filter(":gt(0)").remove();
+        $(".footer").html("浙ICP备：浙B2-20070198");
+    }
     /**
      * 绑定全网搜索
      */
@@ -234,7 +241,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 tr = $(".full-view-table").find(".table-bordered tbody tr");
             }
             if(tr.length==0){
-                //TODO
+                typeof layer !="undefined" && layer.alert("请选择需要下载的舆情信息！")
                 return;
             }else{
                 $("form.downLoadForm").length == 0 && $(".page").append("<form class='downLoadForm hidden' method='post'></form>");
@@ -268,7 +275,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             tr = span.parent().parent().parent();
             // 下载全部
             if(tr.length==0){
-                //TODO
+                typeof layer !="undefined" && layer.alert("请选择需要取消预警的舆情信息!");
                 return;
             }else{
                 $.each(tr,function(i,v){
@@ -280,7 +287,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                         dedupids:arr
                     },
                     success:function(d){
-
+                        typeof layer !="undefined" && layer.alert(d.msg+'<br/>'+ (d.subMsg||''));
+                    },
+                    error:function(d){
+                        typeof layer !="undefined" && layer.alert(d.msg+'<br/>'+ d.subMsg);
                     }
                 };
                 layer.confirm('确定取消选中文章的相似文章预警？确定后一个月内与选中文章相似的文章不再预警。', {
@@ -291,7 +301,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 }, function(){
 
                 });
-                ajax.load("cancelsimilarwarn",param);
             }
         })
     }
@@ -367,6 +376,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 $(".add-email .send-email-btn").removeAttr("disabled");
                 if(d.status == 200) {
                     $(".close").trigger("click");
+                    layer.alert("邮件发送成功，请至收件箱查看，谢谢!",{icon:1});
                 }else{
                     layer.alert(d.subMsg, {icon: 2});
                 }

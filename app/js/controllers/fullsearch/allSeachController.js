@@ -1,4 +1,4 @@
-define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController"], function (view,ajax,common) {
+define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController","common/commonView"], function (view,ajax,common,commonView) {
     var fullViewInit = {
         pageSize:20
     };

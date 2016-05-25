@@ -1,5 +1,5 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView"], function (ajax,view) {
+define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/commonController","common/commonView"], function (ajax,view,common,commonView) {
     var $tar = $("div.page-allplan");
     var result = [];
     var fullViewInit = {
@@ -12,6 +12,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView"], functio
         getMonitorInfoList(0,20);
         //绑定事件
         bindEvent();
+        common.handleEmail();
     }
 
     function getMonitorInfoList(pageNum,pageSize){
