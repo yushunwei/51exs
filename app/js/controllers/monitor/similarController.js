@@ -1,5 +1,5 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/similarView"], function (ajax,view) {
+define(["../../tool/ajaxTool","../../view/monitor/similarView","../../common/commonView"], function (ajax,view,commonView) {
     var $tar = $("div.page-allplan");
     var result = [];
     var fullViewInit = {

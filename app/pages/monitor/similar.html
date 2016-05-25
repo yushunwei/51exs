@@ -24,7 +24,6 @@
     <script src="../../js/lib/Json.js"></script>
     <script src="../../js/lib/pagination/jquery.pagination.js"></script>
     <script src="../../js/config/config.js"></script>
-    <script src="../../js/lib/laydate/laydate.js"></script>
 
 </head>
 
@@ -111,7 +110,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="like"><a href="#1"><i class="fa fa-heart-o"></i>喜欢</a><span class="info-fansCount"> | {{clickCount}}</span></div>
                                 </div>
                             </td>
                             <td class="text-center"><a href="http://news.esnai.com" target="_blank"><img src="../../img/weibo.png" alt=""><br><span class="info-media">{{media}}</span></a></td>
@@ -169,48 +167,6 @@
     © 2014 浙江汇信科技有限公司　www.icinfo.cn　增值电信业务经营许可证：浙B2-20070198
 </div>
 <!-- 底部结束 -->
-<!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model plan-delete" tabindex="-1" role="dialog"
-     aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="fa fa-times-circle"></span>
-                </button>
-                <h4 class="modal-title">温馨提示</h4>
-            </div>
-            <div class="modal-body">
-                <p class="cy-model-content">确定删除该方案吗？确定后该方案及相关数据将不存在</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 弹框结束 -->
-<!-- 删除弹框 -->
-<div class="modal fade bs-example-modal-sm cy-model new-all-alert" tabindex="-1" role="dialog"
-     aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="fa fa-times-circle"></span>
-                </button>
-                <h4 class="modal-title">温馨提示</h4>
-            </div>
-            <div class="modal-body">
-                <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script data-main="../../js/app" src="../../js/lib/require.js"></script>
 </body>
 </html>
