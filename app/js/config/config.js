@@ -1,11 +1,5 @@
 // 配置文件
 var HX_config = {
-    //登录页面轮播图片
-    "ADIMG": [
-        "img/banner_01.jpg",
-        "img/banner_02.jpg",
-        "img/banner_03.jpg"
-    ],
     //服务器地址
     "serv_path": "http://115.238.48.66:1158",
     "noDataHtml": "<div class='noDataBox'><div class='noDataShow'></div></div>",

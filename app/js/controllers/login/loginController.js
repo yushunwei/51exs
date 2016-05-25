@@ -1,30 +1,24 @@
 define(["../../tool/ajaxTool"], function (ajax) {
   function init() {
-    //设置图片路径，并开始轮播
-    setImgPath();
-    //加载登录按钮路径
-    setBtnPath();
+    // 初始化轮播
+    initCarousel();
     //加载注册按钮url
-      loadregisterUrl();
+    loadRegisterUrl();
   }
-  //设置图片路径，并开始轮播
-  function setImgPath(){
-    var $box = $(".page-login");
-    var img = $box.find("#myCarousel").find("img");
-    $.each(img,function(i,v){
-      $(this).attr("src",HX_config.ADIMG[i]);
-      $(this).css("width","100%");
-    });
+
+  /**
+   * 初始化轮播
+   */
+  function initCarousel(){
     $('#myCarousel').carousel({
       interval: 3000
     })
   }
-  //加载登录按钮路径
-  function setBtnPath(){
-    var loginBtn = $(".login-init");
-    loginBtn.attr("href",HX_config.loginURL);
-  }
-  function loadregisterUrl(){
+
+  /**
+   * 加载注册地址
+   */
+  function loadRegisterUrl(){
       var param = {
         "success":function(data){
             $("#register-btn").attr("href",data.data);
@@ -32,6 +26,8 @@ define(["../../tool/ajaxTool"], function (ajax) {
       };
       ajax.load("register",param);
   }
+
+  //返回
   return {
     init: init
   }
