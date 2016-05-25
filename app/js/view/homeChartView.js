@@ -169,7 +169,7 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
       }
     };
     var optionLine = {
-      tooltip : {},
+      tooltip : {trigger : 'item',formatter:'{b}<br>{a}：{c}'},
       legend : {
         x : 'center',
         y : 'top',
@@ -269,7 +269,7 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
         left:85,
         borderColor:'#fff'
       },
-      tooltip : {trigger : 'item',formatter : "{b}<br/>{a}:{c}"},
+      tooltip : {trigger : 'item',formatter : "{b}<br/>{a}：{c}"},
       legend : {
         top:15,
         left:180,

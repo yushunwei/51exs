@@ -376,6 +376,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 $(".add-email .send-email-btn").removeAttr("disabled");
                 if(d.status == 200) {
                     $(".close").trigger("click");
+                    layer.alert("邮件发送成功，请至收件箱查看，谢谢!",{icon:1});
                 }else{
                     layer.alert(d.subMsg, {icon: 2});
                 }
