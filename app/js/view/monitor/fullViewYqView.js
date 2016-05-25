@@ -195,10 +195,9 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
 
     //点击保存
     function saveData(id) {
-        var layerindex;
         $("#messages").on("click",".saveBtn",function(){
             var title = $("#myComplay").val();
-            var submitData = dataReform();
+            var submitData = dataReform(id);
             if(title == "" || submitData.userPlanWords.length==0){
                 $('#alertModal').modal('show');
             }else{
@@ -209,29 +208,25 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
                     contentType: 'application/json',
                     success:function(data){
                         if(data.status==200){
-                            var id = data.data;
-                            layer.close(layerindex);
-                            window.open("monitor/full_view.html?id="+id);
+                            window.location.href="/pages/monitor/full_view.html?id="+id;
                         }else{
-                            layer.close(layerindex);
                             layer.alert(data.subMsg);
                         }
                     },
                     error:function(data){
-                        layer.close(layerindex);
-                        layer.alert("网络异常，请重新修改。");
+                        layer.alert("操作失败，请重试！");
                     }
                 };
                 ajax.load('modifyuserplan',param);
-                layerindex =layer.load(1, {
-                    shade: [0.1,'#fff'] //0.1透明度的白色背景
-                });
+                layer.msg('处理中，请稍后', {icon: 16,time:-1,shade:[0.4,'#CCC']});
             }
         });
     }
 //组合提交数据
-    function dataReform(){
+    function dataReform(id){
         var submitData = {
+            // 方案ID
+            "id":id,
             "title":$("#myComplay").val(),
             "userPlanWords":[],
             "userPlanExWords":[],

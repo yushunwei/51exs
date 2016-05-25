@@ -188,7 +188,6 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
   }
   //点击保存
   function saveData(){
-      var layerindex;
     $(".page-newYq").on("click",".saveBtn",function(){
       var submitData = dataReform();
       if($("#myComplay").val() == "" || submitData.userPlanWords.length==0){
@@ -201,20 +200,17 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
           success:function(data){
            if(data.status==200){
                var id = data.data;
-               layer.close(layerindex);
                window.location.href="/pages/monitor/full_view.html?id="+id;
            }else{
                layer.alert(data.subMsg);
            }
           },
           error :function(data){
-              layer.alert(data.subMsg);
+              layer.alert("操作失败，请重试！");
           }
         };
         ajax.load('newYq',param);
-          layerindex =layer.load(1, {
-              shade: [0.1,'#fff'] //0.1透明度的白色背景
-          });
+        layer.msg('处理中，请稍后', {icon: 16,time:-1,shade:[0.4,'#CCC']});
       }
     });
   }

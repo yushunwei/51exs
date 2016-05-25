@@ -43,7 +43,7 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                     $(".page .content").hide();
                     $(".showNoData").removeClass("hidden");
                     var planID = indexUserPlans.userPlans[0].id;
-                    $(".showNoData a").attr("href", "pages/monitor/full_view.html?id=" + planID + "&" + "turnTab=2");
+                    $(".showNoData a").attr("href", "/pages/monitor/full_view.html?id=" + planID + "&" + "turnTab=2");
                     return;
                 }
                 //渲染全部舆情方案列表项

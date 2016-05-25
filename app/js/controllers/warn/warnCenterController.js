@@ -41,9 +41,9 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             pageSize: pageSize,
             sentiment: $('.main').find('.type-sentiment').find('li').find('.active').data('sentiment') || '',
             isWarn: 'yes',
-            source: $('.main').find('.type-source').find('li').find('.active').data('source') || '',
-            startDate: $('#start').val() || '',
-            endDate: $('#end').val() || '',
+            "sourceArray[]": $('.main').find('.type-source').find('li').find('.active').data('source') || '',
+            startTime: $('#start').val() || '',
+            endTime: $('#end').val() || '',
             isDedup: $('.main').find('.type-isdedup').find('li').find('.type-isdedup').hasClass('active') ? true : false,
             keywords: $('.conditions-searchbox').find('input').val() || '',
             timeRanges: $('.main').find('.type-timeranges').find('li').find('.active').data('timeranges') || ''

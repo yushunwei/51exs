@@ -16,7 +16,7 @@ define(["tool/Utils"], function (utils) {
                v.abort();
             });
             alert("登录超时，请重新登录");
-            window.open("login.html", "_self");
+            window.location.href = "/login.html";
             return false
         }
         return true;
