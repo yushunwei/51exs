@@ -43,9 +43,9 @@ define([], function () {
 
     function _renderUserplanlist(data) {
         var myTemplate = Handlebars.compile($("#userlistScript").html());
-        $('.nav-main .listbox').html(myTemplate(data.data));
-        var length = data.data.length+2;
-        $('.nav-main .listbox li').css("width",100/length+"%");
+        $('.type-plan').html(myTemplate(data.data));
+//        var length = data.data.length+2;
+//        $('.nav-main .listbox li').css("width",100/length+"%");
     }
     function _renderYqfa(data) {
         var myTemplate = Handlebars.compile($("#yqfaListAllScript").html());
