@@ -516,6 +516,12 @@ ul {
 .page-newYq .cy-model-content {
   color: #333; }
 
+.page-fullView #profile #totalShow li span {
+  cursor: pointer; }
+
+.page-fullView #profile #totalShow li:last-child span {
+  cursor: default; }
+
 .page-fullView .clear {
   clear: both; }
 
