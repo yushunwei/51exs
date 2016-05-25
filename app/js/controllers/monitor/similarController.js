@@ -18,7 +18,6 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
     function getMonitorInfoList(pageNum,pageSize){
         pageData.pageNum = pageNum;
         pageData.pageSize = pageSize;
-        pageData.keywords = $('.conditions-searchbox').find('input').val();
         var param ={"query" :pageData};
         param.success = function(d){
             if(d.status == 200) {
