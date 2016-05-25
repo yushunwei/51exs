@@ -35,7 +35,10 @@ define(["tool/ajaxTool", "view/indexView", "view/homeChartView"], function (ajax
                 //删除loading
                 $(".plan:first").removeClass("modelLoding").find(".noDataBox").remove();
                 $(".plan:first").children(".hidden").removeClass("hidden");
-
+                if (data.status !=200) {
+                    typeof layer !="undefined" && layer.alert(data.msg);
+                    return;
+                }
                 if (data.data.objects.length == 0) {
                     $(".page .content").hide();
                     $(".showNoData").removeClass("hidden");
