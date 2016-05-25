@@ -3,17 +3,6 @@ define([], function () {
     var listModel = "",
         emailModel,
         listEmail;
-    Handlebars.registerHelper("campareSentiment", function (v1, v2, options) {
-        var span = "";
-        if(v1=="positive"){
-            span = '<span class="label label-info">正面</span>';
-        }else if(v1=="negative"){
-            span = '<span class="label label-danger">负面</span>';
-        }else{
-            span = '<span class="label label-success">中性</span>'
-        }
-        return span;
-    });
     Handlebars.registerHelper("isCheck", function (v1, v2, options) {
         if(v1=="" || typeof v1=="undefined"){
            return '';
