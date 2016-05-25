@@ -2,8 +2,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     var $tar = $("div.page-warnCenter");
     var indexUserPlans = {showCount: 0};
     var result = [];
-    var titleID = "",
-        turnIndex = 0;
+    var turnIndex = 0;
     var fullViewInit = {
         pageSize: 20
     };
@@ -11,7 +10,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     var keyword;
 
     function init(page) {
-        titleID = page.query.id || "a5a3a9ca1f0911e6af1500188b839ae8";
         turnIndex = typeof page.query.turnTab == "undefined" ? 0 : page.query.turnTab;
         //加载列表
         getMonitorInfoList(0, 20);
@@ -24,9 +22,13 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     function getMonitorInfoList(pageNum, pageSize) {
         var param = {"query": getFullViewQueryCondition(pageNum + 1, pageSize)}
         param.success = function (d) {
-            view.renderList(d);
-            result = d;
-            pagination(result, pageNum);
+            if(d.status == 200) {
+                view.renderList(d);
+                result = d;
+                pagination(result, pageNum);
+            }else{
+                layer.alert(d.subMsg, {icon: 2});
+            }
         };
         ajax.load("warnInfo", param);
         // ajax.load("getMonitorInfoList",param);
@@ -37,9 +39,8 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         var condition = {
             pageNum: pageNum,
             pageSize: pageSize,
-            planId: titleID || '',
             sentiment: $('.main').find('.type-sentiment').find('li').find('.active').data('sentiment') || '',
-            isWarn: $('.main').find('.type-iswarn').find('li').find('.active').data('iswarn') || '',
+            isWarn: 'yes',
             source: $('.main').find('.type-source').find('li').find('.active').data('source') || '',
             startDate: $('#start').val() || '',
             endDate: $('#end').val() || '',
@@ -47,9 +48,11 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             keywords: $('.conditions-searchbox').find('input').val() || '',
             timeRanges: $('.main').find('.type-timeranges').find('li').find('.active').data('timeranges') || ''
         };
-
-        if (condition.startDate && condition.endDate) {
+        if($("#customdays").hasClass("active")){
             condition.timeRanges = 0;
+        }else{
+            delete condition.startDate;
+            delete condition.endDate;
         }
         return condition;
     }
@@ -59,7 +62,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         /*****
          * 绑定查询条件
          * ****/
-        $dom.find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges').click(function () {
+        $dom.find('.main').find('.conditions-item').not('.operation,.type-timeranges').find('li').find('a').not('.tab-timeranges,.not-open').click(function () {
             if ($(this).hasClass("digest-btn")) {
                 if ($(this).hasClass("active")) {
                     $(this).removeClass("active");
@@ -75,11 +78,22 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
                 } else {
                     $(this).addClass("active");
                 }
+                getMonitorInfoList(0, 20);
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
             getMonitorInfoList(0, 20);
+        });
+        //未开通的信息来源不可搜索，并给出提示
+        $('.conditions-item li a.not-open').mouseover(function(){
+            var content = '<div class="not-open-tip">即将开通,敬请期待！</div>';
+            var x = $(this).innerWidth();
+            var width = 56 - x/2;
+            $(this).append(content);
+            $('.not-open-tip').css('left', -width);
+        }).mouseout(function(){
+            $('.not-open-tip').remove();
         });
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function () {
@@ -92,7 +106,19 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         $dom.find('.conditions-searchbox').find('button').click(function () {
             getMonitorInfoList(0, 20);
         });
-
+// 自定义日期弹出框
+        $('.chart-analysis-title-other-btn').click(function(e){
+            $('.chart-analysis-title-other-btn').toggleClass("active");
+            $('.type-timeranges').find('a').removeClass("active");
+            $('.order-box').toggle();
+            $(document).on('click', function(e){
+                $('.order-box').hide();
+            });
+            e.stopPropagation();
+        });
+        $('.order-box').click(function(e){
+            e.stopPropagation();
+        });
         $("#btnFind").click(function () {
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
