@@ -28,6 +28,9 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
+        param.error = function(d){
+            layer.alert("加载失败",{icon:2});
+        };
         ajax.load("getMonitorInfoList",param);
     }
     function bindEvent(){

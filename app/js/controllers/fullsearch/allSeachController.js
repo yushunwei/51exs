@@ -13,6 +13,9 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
+        param.error = function(d){
+            layer.alert("加载失败",{icon:2});
+        };
         ajax.load("fullwebsearch",param,".full-view-table");
     }
     // 获取查询参数

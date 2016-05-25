@@ -21,9 +21,16 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
         pageData.keywords = $('.conditions-searchbox').find('input').val();
         var param ={"query" :pageData};
         param.success = function(d){
-            view.renderList(d);
-            result = d;
-            pagination(result,pageNum);
+            if(d.status == 200) {
+                view.renderList(d);
+                result = d;
+                pagination(result, pageNum);
+            }else{
+                layer.alert(d.subMsg,{icon:2});
+            }
+        };
+        param.error = function(d){
+            layer.alert("加载失败",{icon:2});
         };
         ajax.load("getMonitorInfoList",param);
     }

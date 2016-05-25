@@ -46,6 +46,9 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
+        param.error = function(d){
+            layer.alert("加载失败",{icon:2});
+        };
         ajax.load("getMonitorInfoList",param);
     }
 // 获取查询参数
