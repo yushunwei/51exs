@@ -202,7 +202,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
            if(data.status==200){
                var id = data.data;
                layer.close(layerindex);
-               window.open("monitor/full_view.html?id="+id);
+               window.location.href="/pages/monitor/full_view.html?id="+id;
            }else{
                layer.alert(data.subMsg);
            }
