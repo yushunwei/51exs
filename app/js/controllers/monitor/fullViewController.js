@@ -1,5 +1,5 @@
 
-define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView","common/commonController"], function (ajax,view,chartview,yqview,common) {
+define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/monitor/fullViewChartView","../../view/monitor/fullViewYqView","common/commonController","../../common/commonView"], function (ajax,view,chartview,yqview,common,commonView) {
   var result = [];
   var titleID = "",
       turnIndex = 0;

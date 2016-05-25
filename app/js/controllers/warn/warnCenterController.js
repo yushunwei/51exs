@@ -1,4 +1,4 @@
-define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/commonController"], function (ajax, view,com) {
+define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/commonController","../../common/commonView"], function (ajax, view,com,commonView) {
     var $tar = $("div.page-warnCenter");
     var indexUserPlans = {showCount: 0};
     var result = [];
