@@ -141,14 +141,6 @@ define(["jquery.cookie"], function () {
         $.cookie('exsToken', null, {path: "/"});
     }
 
-    /**
-     * 删除Token
-     * @private
-     */
-    function _removeToken() {
-        $.cookie('exsToken', null, {path: "/"});
-    }
-
     function _addLoading() {
         if ($(arguments[0]).length == 0)
             return;
