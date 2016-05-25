@@ -229,19 +229,24 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         //绑定下载选中按钮 和下载全部事件
         var btn = $(".conditions-choice").find("a.download-checked-btn,a.download-all-btn");
         var span,tr;
+        var tipsContent = "请选择需要下载的舆情信息！";
         var input = "<input class='form-control'/>";
         var key,value;
+        var listtype = "monitorInfos";
         var arr = ["title","summary","source","author","sentiment","similarCount","media","url","pubTime"];
         var url = HX_config.serv_path+"/monitor/contentmonitor/downloadmonitorinfolist/v=1.0.0?token="+utils.getToken();
         btn.on("click",function(e){
             span =$(".full-view-table").find(".table-bordered tbody tr").find("td:first .cy-checkbox span.checked");
             tr = span.parent().parent().parent();
             // 下载全部
+            if(page.name=="warnCenter"){
+                tipsContent = "请选择需要下载的预警信息！"
+            }
             if($(this).hasClass("download-all-btn")){
                 tr = $(".full-view-table").find(".table-bordered tbody tr");
             }
             if(tr.length==0){
-                typeof layer !="undefined" && layer.alert("请选择需要下载的舆情信息！")
+                typeof layer !="undefined" && layer.alert(tipsContent);
                 return;
             }else{
                 $("form.downLoadForm").length == 0 && $(".page").append("<form class='downLoadForm hidden' method='post'></form>");
@@ -251,11 +256,15 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 if(page.name=="warnCenter"){
                     arr.push("warnConfigName");
                     url = HX_config.serv_path+"/warn/warncenter/downloadwarninfolist/v=1.0.0?token="+utils.getToken();
+                    listtype="warnInfos";
                 }
                 $.each(tr,function(i,v){
                     for(var index=0;index<arr.length;index++){
-                        key = "monitorInfos["+i+"]."+arr[index];
-                        value = $(this).data(arr[index].toLowerCase())||'';
+                        key = listtype+"["+i+"]."+arr[index];
+                        value = $(this).data(arr[index].toLowerCase());
+                        if(typeof value=="undefined"){
+                            value = "";
+                        }
                         inputHtml += '<input class="form-control" name="'+key+'" value="'+value+'" />';
                     }
                 });

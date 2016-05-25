@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>预警信息</title>
+  <title>预警中心</title>
   <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,7 +158,7 @@
                   <li>批量操作：</li>
                   <li><a class="has-icon-btn cy-has-bg download-checked-btn" href="#1">下载选中项</a></li>
                   <li><a class="has-icon-btn download-all-btn" href="#1">下载全部</a></li>
-                  <li><a class="has-icon-btn download-all-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
+                  <li><a class="has-icon-btn cancel-alldanger-btn" href="#1">批量取消预警</a></li>
                 </ul>
                 <div class="conditions-searchbox">
                   <div class="input-group">
@@ -188,7 +188,7 @@
               <tbody class="list-yq">
               <script id="listScript" type="text/x-handlebars-template">
                 {{#each this.objects}}
-                <tr data-dedupId={{dedupId}} data-title="{{title}}" data-summary="{{summary}}"
+                <tr data-dedupId="{{dedupId}}" data-title="{{title}}" data-summary="{{summary}}"
                     data-source="{{source}}" data-author="{{author}}"
                     data-sentiment="{{sentiment}}" data-similarCount="{{similarCount}}" data-media="{{media}}" data-url="{{url}}" data-pubTime="{{pubTime}}"  data-warnConfigName="{{warnConfigName}}" data-docId="{{docId}}">
                   <td class="text-center" data-docId="{{docId}}"><label class="cy-checkbox"><input type="checkbox"><span></span></label></td>

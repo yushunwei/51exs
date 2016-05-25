@@ -127,40 +127,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
 
         //add email
         com.handleEmail();
-        //在批量取消预警页面上绑定事件，弹出对话框并绑定id
-        $('.cancel-alldanger-btn').click(function () {
-            //如果选中不为空，弹出确认对话框
-            if ($('.cy-checkbox span.checked').length != 0) {
-                var docIds = new Object();
-                docIds.dedupids = [];
-                //获取选中的checkbox上缓存的Id
-                $('.cy-checkbox span.checked').each(function () {
-                    docIds.dedupids.push($(this).parent().parent().data('docId'));
-                });
-                //将获取的多个Id绑定到对话框的缓存上
-                $('.cancel-alldanger').data('docIds', docIds);
-                //弹出对话框
-                $('.cancel-alldanger').modal('show');
-            } else {
-                $('.cancel-danger-none').modal('show');
-            }
-        });
-        //在确认批量取消预警的按钮上绑定事件 TODO
-        $('.btn-batchwarning-delete').click(function () {
-            var dedupids = $(this).parents('.cancel-alldanger').data('docIds');
-            if (dedupids != '') {
-                //调用删除方案预警邮箱的接口
-                var param = {
-                    type: 'POST',
-                    "success": function (data) {
-                        if (data.status == 200)
-                            alert('删除成功！');
-                    },
-                    data: dedupids
-                };
-                ajax.load("cancelsimilarwarn", param);
-            }
-        });
         $dom.find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
             setTab2();
         });
