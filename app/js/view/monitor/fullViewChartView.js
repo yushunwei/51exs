@@ -1,9 +1,13 @@
 
 define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
+  var curTimeranges = 0,curStartTime="",curEndTime="";
   //选择条件事件
   function events(id){
 //在时间段选择上绑定图表刷新事件
     $("#profile").find('.tab-timeranges').click(function(){
+      curTimeranges = $(this).data('timeranges');
+      curEndTime = "";
+      endTime = "";
       var query = {
         timeRanges:$(this).data('timeranges'),
         startTime:'',
@@ -24,6 +28,9 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     $("#btnFind1").click(function(){
       var startTime = $('#start1').val();
       var endTime = $('#end1').val();
+      curStartTime = startTime;
+      curEndTime = endTime
+      curTimeranges = 0;
       var query = {
         timeRanges:0,
         startTime:startTime,
@@ -41,6 +48,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     getMediaDegChart(query);
     getAreaChart(query);
     getAreaMapChart(query);
+    getSentimentDistribute(query);
   }
   //数据源舆情走势图
   function getDataTrendChart(query){
@@ -259,19 +267,6 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       positiveData.push(data.data.positive[i]==null?0:data.data.positive[i].count);
       neutralData.push(data.data.neutral[i]==null?0:data.data.neutral[i].count);
       negativeData.push(data.data.negative[i]==null?0:data.data.negative[i].count);
-      //如果是第一天，则绑定页面上的每日情感走势信息
-      if(i==0){
-        //绑定图表标题栏的总量信息
-        var positiveCnt=data.data.positive[i].count;
-        var neutralCnt=data.data.neutral[i].count;
-        var negativeCnt=data.data.negative[i].count;
-        var sumCnt = positiveCnt+neutralCnt+negativeCnt;
-        var negativePercent = Math.round(negativeCnt / sumCnt * 10000) / 100.00 + "%";
-        $('.main').find('.plan-data').find('.type-sum-count').text(sumCnt);
-        $('.main').find('.plan-data').find('.type-positive-count').text(positiveCnt);
-        $('.main').find('.plan-data').find('.type-negative-count').text(negativeCnt);
-        $('.main').find('.plan-data').find('.type-negative-percent').text(negativePercent);
-      }
     }
     optionLine2.series=[
       {
@@ -655,6 +650,46 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       });
     })
   }
+  function getSentimentDistribute(query){
+
+    var param = {
+      query:query,
+      success:function(data){
+        if(data){
+          senderSentimentDistribute(data);
+        }
+      }
+    };
+    ajax.load('getSentimentDistribute',param);
+  }
+  function senderSentimentDistribute(data){
+    if(data.data){
+      var positiveNum = data.data.positive,
+          negativeNum = data.data.negative,
+          neutralNum = data.data.neutral;
+      var total = positiveNum+negativeNum;
+      var negativePercent = (total === 0?0:Math.round(negativeNum / total * 10000)/ 100.00) + "%";
+      var parentD = $("#profile");
+      parentD.find(".totalAll").text(total);
+      parentD.find(".positiveTotal").text(positiveNum);
+      parentD.find(".negativeTotal").text(negativeNum);
+      parentD.find(".neutralTotal").text(neutralNum);
+      parentD.find(".negativePercent").text(negativePercent);
+    }
+  }
+  //点击头部汇总跳转
+  function pageTurn(planId){
+    $(".main").on("click","span.turnPageJcfa",function(){
+      var obj = {
+        planId : planId?planId:"",
+        sentiment:$(this).data("sentiment"),
+        timeRanges:curTimeranges,
+        startTime:curStartTime,
+        endTime:curEndTime
+      };
+      window.open('/pages/monitor/monitorinfolist.html?'+ $.param(obj));
+    })
+  }
   function _init(id){
     var timeRanges = 7;
     var startTime = '';
@@ -665,8 +700,10 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       endTime:endTime,
       planId:id
     };
+    curTimeranges = timeRanges;
     events(id);
     chartSender(query);
+    pageTurn(id);
   }
   return {
     init:_init

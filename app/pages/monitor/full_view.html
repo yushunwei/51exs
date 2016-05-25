@@ -243,9 +243,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{#ifCond similarCount "==" 0}}
-                                            <a href="javascript:;">{{similarCount}}</a>
+                                        <a href="javascript:;">{{similarCount}}</a>
                                         {{else}}
-                                            <a href="/pages/monitor/similar.html?dedupId={{dedupId}}" class="info-similarcount" target="_blank">{{similarCount}}</a>
+                                        <a href="/pages/monitor/similar.html?dedupId={{dedupId}}" class="info-similarcount" target="_blank">{{similarCount}}</a>
                                         {{/ifCond}}
                                     </td>
                                     <td class="text-center"><a href="{{weburl}}" target="_blank"><span class="info-media">{{media}}</span></a></td>
@@ -287,13 +287,13 @@
                             </div>
                         </div>
                         <div class="plan-data">
-                            <ul class="clearfix">
+                            <ul class="clearfix" id="totalShow">
                                 <li></li>
-                                <li>总量：<span class="type-sum-count">6</span></li>
-                                <li>正面：<span class="type-positive-count text-blue">3</span></li>
-                                <li>负面：<span class="type-negative-count text-danger">3</span></li>
-                                <li>中性：<span class="text-middle">50</span></li>
-                                <li>负面占比：<span class="type-negative-percent">50%</span></li>
+                                <li>总量：<span class="totalAll turnPageJcfa" data-sentiment="">6</span></li>
+                                <li>正面：<span class="positiveTotal text-blue turnPageJcfa" data-sentiment="positive">3</span></li>
+                                <li>负面：<span class="negativeTotal text-danger turnPageJcfa" data-sentiment="negative">3</span></li>
+                                <li>中性：<span class="neutralTotal text-middle turnPageJcfa" data-sentiment="neutral">50</span></li>
+                                <li>负面占比：<span class="negativePercent">50%</span></li>
                             </ul>
                         </div>
                     </div>

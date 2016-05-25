@@ -1,4 +1,18 @@
 .page-fullView {
+  #profile {
+    #totalShow {
+      li {
+        span {
+          cursor: pointer;
+        }
+        &:last-child {
+          span {
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
   .clear {
     clear: both;
   }
