@@ -220,6 +220,8 @@ define(["jquery.cookie"], function () {
         getToken: _getToken,
         //设置token
         setToken: _setToken,
+        //删除token
+        removeToken:_removeToken,
         //add loading
         addLoading: _addLoading,
         removeLoading: _removeLoading,
