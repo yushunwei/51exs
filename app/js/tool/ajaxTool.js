@@ -44,17 +44,13 @@ define(["tool/Utils"], function (utils) {
         if (typeof param != "object") return;
         var ajaxparam = $.extend({}, _param, param);
         ajaxparam.success = function (d) {
-            utils.removeLoading(target);
             var result = defaultSuccessFn(d);
             (result && $.isFunction(param.success)) && param.success(d);
         };
         ajaxparam.error = function (d) {
-            utils.removeLoading(target);
             defaultErrorFn(d);
             $.isFunction(param.error) && param.error(d);
         };
-        //增加loading效果
-        utils.addLoading(target);
         var quene = $.ajax(ajaxparam);
         ajaxMap.push(quene);
     }

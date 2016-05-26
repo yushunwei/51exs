@@ -21,14 +21,25 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
 
     function getMonitorInfoList(pageNum, pageSize) {
         var param = {"query": getFullViewQueryCondition(pageNum + 1, pageSize)}
-        param.success = function (d) {
-            if(d.status == 200) {
+        var loadingLayer;
+        param.success = function(d){
+            layer.close(loadingLayer);
+            if(d.status == 200){
                 view.renderList(d);
                 result = d;
-                pagination(result, pageNum);
+                pagination(result,pageNum);
+
             }else{
                 layer.alert(d.subMsg, {icon: 2});
             }
+        };
+        param.error = function(d){
+            layer.close(loadingLayer);
+            layer.alert("加载失败",{icon:2});
+        };
+        //增加loading效果
+        param.beforeSend = function(){
+            loadingLayer = layer.msg('加载中...', {icon: 16});
         };
         ajax.load("warnInfo", param);
         // ajax.load("getMonitorInfoList",param);

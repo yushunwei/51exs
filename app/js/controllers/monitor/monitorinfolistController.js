@@ -20,17 +20,25 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
         pageData.pageSize = pageSize;
         pageData.keywords = $('.conditions-searchbox').find('input').val();
         var param ={"query" :pageData};
+        var loadingLayer;
         param.success = function(d){
-            if(d.status == 200) {
+            layer.close(loadingLayer);
+            if(d.status == 200){
                 view.renderList(d);
                 result = d;
-                pagination(result, pageNum);
+                pagination(result,pageNum);
+
             }else{
-                layer.alert(d.subMsg,{icon:2});
+                layer.alert(d.subMsg, {icon: 2});
             }
         };
         param.error = function(d){
+            layer.close(loadingLayer);
             layer.alert("加载失败",{icon:2});
+        };
+        //增加loading效果
+        param.beforeSend = function(){
+            loadingLayer = layer.msg('加载中...', {icon: 16});
         };
         ajax.load("getMonitorInfoList",param);
     }
