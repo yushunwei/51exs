@@ -41,9 +41,16 @@ define(["common/commonView"], function () {
 
     var listModel = "";
   function _renderList(data,i){
-      $(".full-view-table table").removeClass("hidden");
-    $(".full-view-table .table-pagination").removeClass("hidden");
-    $(".full-view-table .index-none").addClass("hidden");
+      if(data.length == 0 || data.data.recordTotal == 0){
+          $(".full-view-table table").addClass("hidden");
+          $(".full-view-table .table-pagination").addClass("hidden");
+          $(".full-view-table .index-none").removeClass("hidden");
+          return;
+      }else{
+          $(".full-view-table table").removeClass("hidden");
+          $(".full-view-table .table-pagination").removeClass("hidden");
+          $(".full-view-table .index-none").addClass("hidden");
+      }
     listModel = listModel ? listModel : $("#listScript").html();
     var myTemplate = Handlebars.compile(listModel);
     var html = myTemplate(data.data);
@@ -53,14 +60,8 @@ define(["common/commonView"], function () {
     //$(".main .plan").eq(i+1).find(".plan-title h3").html(data.title);
     $('tbody.list-yq').html(html);
   }
-  function _renderEmpty(){
-    $(".full-view-table table").addClass("hidden");
-    $(".full-view-table .table-pagination").addClass("hidden");
-    $(".full-view-table .index-none").removeClass("hidden");
-  }
   return {
     //用户方案
-    renderList :_renderList,
-    renderEmpty : _renderEmpty
+    renderList :_renderList
   }
 });

@@ -3,20 +3,28 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         pageSize:20
     };
     function getMonitorInfoList(pageNum,pageSize){
+        var loadingLayer;
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
         param.success = function(d){
+            layer.close(loadingLayer);
             if(d.status == 200){
                 view.renderList(d);
                 result = d;
                 pagination(result,pageNum);
+
             }else{
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
         param.error = function(d){
+            layer.close(loadingLayer);
             layer.alert("加载失败",{icon:2});
         };
-        ajax.load("fullwebsearch",param,".full-view-table");
+        //增加loading效果
+        param.beforeSend = function(){
+            loadingLayer = layer.msg('加载中...', {icon: 16});
+        };
+        ajax.load("fullwebsearch",param);
     }
     // 获取查询参数
     function getFullViewQueryCondition(pageNum,pageSize){
@@ -42,6 +50,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
     }
     //分页
     function pagination(data,index){
+        if(data.length == 0) return;
         $(".pagination").pagination(data.data.recordTotal, {
             callback: pageSelectCallback,
             prev_text: '上一页',
@@ -63,7 +72,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
             //加载列表
             getMonitorInfoList(0, 20,searchKey);
         }else{
-            view.renderEmpty();
+            view.renderList([]);
         }
     }
     function bindEvents(){
