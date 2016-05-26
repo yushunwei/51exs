@@ -144,6 +144,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function setCheckbox() {
         var checkbox, span;
+        var i = 0;
+        var len = $(".table .list-yq tr").length;
         $(document).on("change", ".cy-checkbox", function () {
             checkbox = $(this).find("input[type=checkbox]");
             span = $(this).find("span");
@@ -151,15 +153,25 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             if (span.hasClass("checked")) {
                 span.removeClass("checked");
                 if($(this).parents("thead").length==1){
+                    i = 0;
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").removeClass("checked");
+                }
+                i--;
+                if (i < len) {
+                    $(".table thead .checked").removeClass("checked");
                 }
             }else{
                 span.addClass("checked");
                 if($(this).parents("thead").length==1){
+                    i = len;
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").addClass("checked");
+                }else {
+                    i++;
+                    if(i == len) {
+                        $(".table thead .cy-checkbox span").addClass("checked");
+                    }
                 }
             }
-
         })
     }
     /**
@@ -280,6 +292,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     function bindCancel(){
         var span,tr,arr=[];
         $(".conditions-choice").find("a.cancel-alldanger-btn").on("click",function(){
+            arr=[];
             span =$(".full-view-table").find(".table-bordered tr").find("td:first .cy-checkbox span.checked");
             tr = span.parent().parent().parent();
             // 下载全部
@@ -328,6 +341,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var emailObj = {};
         var docId;
         $(".table.table-bordered").on("click",".email-send a",function(){
+            emailObj = {};
             docId = $(this).parents("tr").attr("data-docId");
             var param = {
                 "success":function(d){
@@ -404,6 +418,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     function ifNew(){
         var url = "/pages/newYq.html";
         $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
+            url = "/pages/newYq.html";
             $(this).attr("href","#");
             var param = {
                 success:function(data){
@@ -420,7 +435,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             };
             ajax.load("canaddnewuserplan",param);
         });
-
     }
     // 返回
     return {

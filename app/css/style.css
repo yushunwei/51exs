@@ -161,7 +161,7 @@ a:focus {
 	float: left; 
 	position: relative;
 	width: 20%;
-	padding-right: 30px;
+	padding-right: 0px;
 }
 .nav-main ul>li>a {
 	display: block;
@@ -172,6 +172,8 @@ a:focus {
 	white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 .nav-main>ul>li.active>a {
 	color: #56d4ff;
