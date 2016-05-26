@@ -280,6 +280,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     function bindCancel(){
         var span,tr,arr=[];
         $(".conditions-choice").find("a.cancel-alldanger-btn").on("click",function(){
+            arr=[];
             span =$(".full-view-table").find(".table-bordered tr").find("td:first .cy-checkbox span.checked");
             tr = span.parent().parent().parent();
             // 下载全部
@@ -328,6 +329,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var emailObj = {};
         var docId;
         $(".table.table-bordered").on("click",".email-send a",function(){
+            emailObj = {};
             docId = $(this).parents("tr").attr("data-docId");
             var param = {
                 "success":function(d){
@@ -401,6 +403,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     function ifNew(){
         var url = "/pages/newYq.html";
         $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
+            url = "/pages/newYq.html";
             $(this).attr("href","#");
             var param = {
                 success:function(data){
@@ -417,7 +420,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             };
             ajax.load("canaddnewuserplan",param);
         });
-
     }
     // 返回
     return {
