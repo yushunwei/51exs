@@ -495,9 +495,6 @@ a:focus {
 	border-right: 1px solid #e6e6e6;
 	padding: 8px 0 8px 0;
 }
-.property-state .property li a.active {
-	background: #7d8d9c;
-}
 .property-state .state {
 	float: right;
 	width: 50%;
@@ -1746,7 +1743,7 @@ a:focus {
 }
 .chart-analysis-title-other {
 	float: left;
-	margin-left: 20px;
+	margin-left: 0;
 	margin-top:7px;
 	color: #777;
 	position: relative;

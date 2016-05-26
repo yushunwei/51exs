@@ -35,18 +35,26 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         ajax.load("userplanlist",param);
     }
     function getMonitorInfoList(pageNum,pageSize){
+        var loadingLayer;
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
         param.success = function(d){
+            layer.close(loadingLayer);
             if(d.status == 200){
                 view.renderList(d);
                 result = d;
                 pagination(result,pageNum);
+
             }else{
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
         param.error = function(d){
+            layer.close(loadingLayer);
             layer.alert("加载失败",{icon:2});
+        };
+        //增加loading效果
+        param.beforeSend = function(){
+            loadingLayer = layer.msg('加载中...', {icon: 16});
         };
         ajax.load("getMonitorInfoList",param);
     }
@@ -114,7 +122,6 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         });
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function(){
-            $('.input-daterange').find('input').val('');
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
