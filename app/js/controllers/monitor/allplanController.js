@@ -6,7 +6,8 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
     var titleID = "",
         turnIndex = 0;
     var fullViewInit = {
-        pageSize:20
+        pageSize:20,
+        num:0
     };
     var sentiment,planId;
     var keyword,checkArrary =[];
@@ -103,12 +104,12 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
                 }else{
                     $(this).addClass("active");
                 }
-                getMonitorInfoList(0,20);
+                getMonitorInfoList(fullViewInit.num,20);
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(0,20);
+            getMonitorInfoList(fullViewInit.num,20);
         });
         //未开通的信息来源不可搜索，并给出提示
         $('.conditions-item li a.not-open').mouseover(function(){
@@ -125,10 +126,10 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(0,fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
         });
         $dom.find('.conditions-searchbox').find('button').click(function(){
-            getMonitorInfoList(0,20);
+            getMonitorInfoList(fullViewInit.num,20);
         });
         // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
@@ -143,7 +144,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         $("#btnFind").click(function(){
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
-            getMonitorInfoList(0,fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
         });
         //在批量取消预警页面上绑定事件，弹出对话框并绑定id
         $('.cancel-alldanger-btn').click(function(){
@@ -163,6 +164,20 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
                 $('.cancel-danger-none').modal('show');
             }
         });
+        //点击相似页带入参数
+        var _url;
+        $('.page-allplan .main').on("click",".info-similarcount",function(){
+            if(!_url){
+                _url = $(this).attr("href");
+            }
+            var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+            var url = _url;
+            for(var key in param){
+                url+="&"+key+"="+param[key];
+            }
+            $(this).attr("href",url);
+            // return false;
+        })
     }
     //分页
     function pagination(data,index){
@@ -179,7 +194,9 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         });
     }
     function pageSelectCallback(pageNum, jq) {
+        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
+        $("body").scrollTop(200);
     }
     return {
         init: init

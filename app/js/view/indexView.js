@@ -30,6 +30,7 @@ define([], function () {
         "{{#compare this.sentiment -1}}"+
         "<span class='label label-danger label-ststus'>负面</span>"+
         "{{else}}"+
+        "<span class='label label-success label-ststus'>中性</span>"+
         "{{/compare}}"+
         "{{/if}}"+
         "{{/compare}}"+

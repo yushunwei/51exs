@@ -1,10 +1,11 @@
 define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController","common/commonView"], function (view,ajax,common,commonView) {
     var fullViewInit = {
-        pageSize:20
+        pageSize:20,
+        num:0
     };
     function getMonitorInfoList(pageNum,pageSize){
         var loadingLayer;
-        var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
+        var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)};
         param.success = function(d){
             layer.close(loadingLayer);
             if(d.status == 200){
@@ -64,13 +65,15 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         });
     }
     function pageSelectCallback(pageNum, jq) {
+        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
+        $("body").scrollTop(200);
     }
     function allSearch(){
         searchKey = $(".type-keywords").val();
         if(searchKey) {
             //加载列表
-            getMonitorInfoList(0, 20,searchKey);
+            getMonitorInfoList(fullViewInit.num, 20,searchKey);
         }else{
             view.renderList([]);
         }
@@ -140,6 +143,19 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         $("#btnFind").click(function(){
             allSearch();
         });
+        //点击相似页带入参数
+        var _url;
+        $(".page-allSeach").on("click",".info-similarcount",function(){
+            if(!_url){
+                _url = $(this).attr("href");
+            }
+            var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+            var url = _url;
+            for(var key in param){
+                url+="&"+key+"="+param[key];
+            }
+            $(this).attr("href",url);
+        })
     }
     function init(page) {
         searchKey = page.query.keyWords ? decodeURIComponent(page.query.keyWords) : "";
