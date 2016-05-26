@@ -92,7 +92,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             });
         } else {
             warnDom.parent().click(function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             });
         }
     }

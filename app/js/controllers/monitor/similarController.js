@@ -16,7 +16,7 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
     }
 
     function getMonitorInfoList(pageNum,pageSize){
-        pageData.pageNum = pageNum;
+        pageData.pageNum = pageNum + 1;
         pageData.pageSize = pageSize;
         var param ={"query" :pageData};
         var loadingLayer;
