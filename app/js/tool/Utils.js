@@ -73,12 +73,15 @@ define(["jquery.cookie"], function () {
             case 'phone' :
                 rgx = '^[1][358][0-9]{9}$';
                 break;
+            case 'ifSpecial':
+                rgx = '^[a-zA-Z0-9\u4e00-\u9fa5]+$';
+                break;
             default :
                 rgx = "";
                 break;
         }
         ragular = new RegExp(rgx);
-        return ragular.test(rgx);
+        return ragular.test(data);
     }
 
     function _showTips() {
@@ -146,7 +149,7 @@ define(["jquery.cookie"], function () {
             return;
         $.each($(arguments[0]),function(){
             !$(this).hasClass("loadBox") && $(this).addClass("loadBox")
-                                             .append("<div class='loading'><img src='/img/loading_48.gif' /></div>");
+                .append("<div class='loading'><img src='/img/loading_48.gif' /></div>");
             $(this).find("div.loading").width($(this).width());
             $(this).find("div.loading").height($(this).height());
             $(this).find("div.loading").css("line-height",$(this).height()+"px");

@@ -8,6 +8,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
 
@@ -227,7 +228,7 @@
                   </td>
                   <td class="text-center">
                     {{#ifCond similarCount "==" 0}}
-                      <a href="javascript:;">{{similarCount}}</a>
+                    <a href="javascript:;">{{similarCount}}</a>
                     {{else}}
                     <a href="/pages/monitor/similar.html?dedupId={{dedupid}}" class="info-similarcount" target="_blank">{{similarCount}}</a>
                     {{/ifCond}}
@@ -257,14 +258,13 @@
               <div class="panel hidden panel-default hidden cy-panel panel-planwarn">
 
                 <script id="emailListScript" type="text/x-handlebars-template">
-                <div class="panel-heading"><p>{{title}}<a class="warning-email" href="#1" data-id="{{id}}" data-title="{{title}}"><i class="fa fa-folder-open-o"></i>管理接收邮箱</a></p></div>
-                <div class="panel-body" data-planID="{{id}}">
-                  {{#each warnEmails}}
-                  <p><a href="#1" data-emailid="{{id}}">{{email}}<img src="../../img/warning_delete.png"></a></p>
-                  {{/each}}
-                </div>
+                  <div class="panel-heading"><p><span class="emailTitle" title="{{title}}">{{title}}</span><a class="warning-email" href="#1" data-id="{{id}}" data-title="{{title}}"><i class="fa fa-folder-open-o"></i>管理接收邮箱</a></p></div>
+                  <div class="panel-body" data-planID="{{id}}">
+                    {{#each warnEmails}}
+                    <p><a href="#1" data-emailid="{{id}}">{{email}}<img src="../../img/warning_delete.png"></a></p>
+                    {{/each}}
+                  </div>
                 </script>
-
               </div>
               <div class="panel panel-default hidden cy-panel panel-planwarn">
               </div>
@@ -386,6 +386,7 @@
             <button type="submit" class="btn btn-info" id="submit3">添加</button>
           </form>
           <div class="add-email-list emaillist-all">
+            <p class="dangerText"></p>
             <ul class="clearfix">
 
             </ul>

@@ -7,6 +7,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             }
             var parentD = parents[0].outerHTML;
             parents.after(parentD);
+            parents.next(".input-warp").find("input").removeClass("error");
             $(this).hide();
             $(this).next().next().hide();
             $(this).next().show();
@@ -31,6 +32,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
                 '<span class="operation-box clear"><span class="add-btn box-show glyphicon glyphicon-plus-sign"></span><span class="with-next box-hide">+</span>' +
                 '<span class="close-btn box-show">+</span></span></div></div><button class="add-line-btn">添加关键词组</button></div>';
             $("#key-word-group").append(groupDiv);
+            $("#key-word-group").find("span.must").first().show();
             clickBtnShow();
         })
     }
@@ -51,6 +53,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
                     }
                 }
                 parents.remove();
+                $("#key-word-group").find("span.must").first().show();
             }
             var keyWords = getkeyWords(),
                 warnWords = getwarnWords("warning"),
@@ -110,13 +113,28 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
     }
 
     function getWords() {
-        $("#messages").on("blur", "input:not('#myComplay')", function () {
+        $("#messages").on("blur", "input", function () {
+            var inputValue = $(this).val();
             //关键词
             var keyWords = getkeyWords(),
                 warnWords = getwarnWords("warning"),
                 exWords = getwarnWords("exclude");
             var newKeyWords = getNewKeyWords(keyWords);
             rightPlanShow(newKeyWords, warnWords);
+            if(inputValue.replace(/ /g,"")==""){
+                $(this).removeClass("error");
+                return;
+            }
+            var isSpecial = utils.checkRagular('ifSpecial',inputValue);
+            if(!isSpecial){
+                layer.tips('只能填写数字，字母和中文', $(this), {
+                    tips: [1, '#3595CC'],
+                    time: 2000
+                });
+                $(this).addClass("error");
+            }else{
+                $(this).removeClass("error");
+            }
         });
         $("#messages").on("focus","input",function(){
             $(this).select();
@@ -150,7 +168,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
         return warnWords;
     }
 
-   function rightPlanShow(_newKeyWords, _warnWords) {
+    function rightPlanShow(_newKeyWords, _warnWords) {
         var newKeyWords = utils.trims(_newKeyWords);
         var warnWords =utils.trims(_warnWords);
         if (newKeyWords.length == 0 && warnWords.length == 0) {
@@ -199,6 +217,10 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             var title = $("#myComplay").val();
             var submitData = dataReform(id);
             if(title == "" || submitData.userPlanWords.length==0){
+                $('#alertModal').find("p.cy-model-content").html('带<span class="text-danger">*</span>为必填，请完善后保存');
+                $('#alertModal').modal('show');
+            }else if($(".main").find("input.error").length >0){
+                $('#alertModal').find("p.cy-model-content").html('有非法字符输入,请验证');
                 $('#alertModal').modal('show');
             }else{
 
@@ -310,8 +332,8 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             var groupNumber = userPlanWords[i].groupNumber;
             if(!newArr[groupNumber-1]){
                 newArr[groupNumber-1] = {index:groupNumber,
-                                         groupN:wordLabels[groupNumber],
-                                         groupV:[userPlanWords[i]]};
+                    groupN:wordLabels[groupNumber],
+                    groupV:[userPlanWords[i]]};
             }else{
                 newArr[groupNumber-1].groupV.push(userPlanWords[i]);
             }
@@ -319,6 +341,7 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
         var myTemplate1 = Handlebars.compile($("#userPlanWords").html());
         var html1 = myTemplate1(newArr);
         $("#key-word-group").append(html1);
+        $("#key-word-group").find("span.must").first().show();
         clickBtnShow();
         //显示最后一输入框的按钮
         var groupTar = $("#key-word-group").find(".form-group");

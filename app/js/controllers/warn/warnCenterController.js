@@ -4,7 +4,8 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     var result = [];
     var turnIndex = 0;
     var fullViewInit = {
-        pageSize: 20
+        pageSize: 20,
+        num:0
     };
     var all = "";
     var keyword;
@@ -89,12 +90,12 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
                 } else {
                     $(this).addClass("active");
                 }
-                getMonitorInfoList(0, 20);
+                getMonitorInfoList(fullViewInit.num, 20);
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(0, 20);
+            getMonitorInfoList(fullViewInit.num, 20);
         });
         //未开通的信息来源不可搜索，并给出提示
         $('.conditions-item li a.not-open').mouseover(function(){
@@ -112,10 +113,10 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(0, fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num, fullViewInit.pageSize);
         });
         $dom.find('.conditions-searchbox').find('button').click(function () {
-            getMonitorInfoList(0, 20);
+            getMonitorInfoList(fullViewInit.num, 20);
         });
 // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
@@ -133,7 +134,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         $("#btnFind").click(function () {
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
-            getMonitorInfoList(0, fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num, fullViewInit.pageSize);
         });
 
         //add email
@@ -141,6 +142,20 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         $dom.find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
             setTab2();
         });
+        //点击相似页带入参数
+        var _url;
+        $dom.on("click",".info-similarcount",function(){
+            if(!_url){
+                _url = $(this).attr("href");
+            }
+            var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+            var url = _url;
+            for(var key in param){
+                url+="&"+key+"="+param[key];
+            }
+            $(this).attr("href",url);
+            // return false;
+        })
 
     }
 
@@ -160,7 +175,9 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     }
 
     function pageSelectCallback(pageNum, jq) {
+        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum, fullViewInit.pageSize);
+        $("body").scrollTop(200);
     }
 
     function setTab2() {
@@ -178,6 +195,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
 
     //绑定面板【管理接收邮箱】按钮上绑定弹出框事件
     var emailObj = {};
+    var warningManagementEmail = {};
     var docId;
     function bindPlanWarnClick() {
         //在每个方案面板的【管理接收邮箱】按钮上绑定弹出框事件
@@ -208,7 +226,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         var emailStr = $(this).find("input[type=email]").val();
         if(!emailObj[emailStr]) {
             emailObj[emailStr] = emailStr;
-            $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
+            $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span class="checked"></span></label>' + emailStr + '</li>')
             $(this).find("input[type=email]").val("");
             $(this).next().find(".text-danger").text("您最多可选择5个邮箱");
         }else{
@@ -224,7 +242,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         if(checkedLength <= 5 && checkedLength > 0){
             $("#modal-email-add .add-email-list span.checked").each(function(){
                 var emailStr = $(this).parents("li").text();
-                    shareEmailList.push(emailStr);
+                shareEmailList.push(emailStr);
             });
             _sendEmail(docId,shareEmailList);
         }else if(checkedLength==0){
@@ -266,7 +284,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     }
     //方案邮箱删除
     $('.modal-email-delete').find('.btn-info').click(function(){
-       var id= $('.modal-email-delete').data('emailid');
+        var id= $('.modal-email-delete').data('emailid');
         if(id != undefined && id != ''){
             //调用删除方案预警邮箱的接口
             var param = {
@@ -288,13 +306,17 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         }
     });
     //点击[管理预警邮箱]
-    $('.warning-management').on('shown.bs.modal', function (e) {
+    $('.warning-management').on('show.bs.modal', function (e) {
+        warningManagementEmail = {};
+        $('.warning-management form').find("input[type=email]").val("");
+        $('.warning-management').find("p.dangerText").text("");
         var param = {
             success:function(data){
                 //清除邮箱列表
                 $('.warning-management .emaillist-all').find('.clearfix').children().remove();
                 //绑定邮箱列表
                 for (i = 0; i < data.data.length; i++) {
+                    warningManagementEmail[data.data[i]] = data.data[i];
                     $('.warning-management .emaillist-all').find('.clearfix').append('<li><span>' + data.data[i] + '</span><img src="../../img/warning_delete.png"></li>');
                 }
                 //在上一步绑定的img图标上绑定删除事件
@@ -307,7 +329,13 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     });
 
     $('.warning-management form').on("submit",function(){
-        $(this).parent().find(".clearfix").append('<li><span>' + $(this).find("input[type=email]").val() + '</span><img src="../../img/warning_delete.png"></li>');
+        var inputValue = $(this).find("input[type=email]").val();
+        if(!warningManagementEmail[inputValue]){
+            $(this).parent().find(".clearfix").append('<li><span>' + inputValue + '</span><img src="../../img/warning_delete.png"></li>');
+            $('.warning-management form').find("input[type=text]").val("");
+        }else{
+            $(this).next().find(".dangerText").text(inputValue+"已存在，请勿重复添加");
+        }
         return false;
     });
     $('.warning-management .btn-add-confirm').on("click",function(){
