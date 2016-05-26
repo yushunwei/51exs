@@ -77,10 +77,10 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             if ($(this).hasClass("digest-btn")) {
                 if ($(this).hasClass("active")) {
                     $(this).removeClass("active");
-                    $(".page-fullView tbody p.digest").addClass("hidden");
+                    $(".page-warnCenter tbody p.digest").addClass("hidden");
                 } else {
                     $(this).addClass("active");
-                    $(".page-fullView tbody p.digest").removeClass("hidden");
+                    $(".page-warnCenter tbody p.digest").removeClass("hidden");
                 }
                 return;
             } else if ($(this).hasClass("mergelike-btn")) {
