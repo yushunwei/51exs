@@ -394,6 +394,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 $(".add-email .send-email-btn").removeAttr("disabled");
             }
         };
+        param.beforeSend = function(){
+            layer.msg('加载中...', {icon: 16,time:-1});
+        };
         ajax.load("emailShare",param,"#sendEmailModal");
         $(".add-email .send-email-btn").attr("disabled",true);
     }
