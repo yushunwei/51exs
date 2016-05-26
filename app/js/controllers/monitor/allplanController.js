@@ -114,7 +114,6 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         });
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function(){
-            $('.input-daterange').find('input').val('');
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
