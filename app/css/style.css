@@ -161,6 +161,7 @@ a:focus {
 	float: left; 
 	position: relative;
 	width: 20%;
+	padding-right: 30px;
 }
 .nav-main ul>li>a {
 	display: block;
