@@ -92,7 +92,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             });
         } else {
             warnDom.parent().click(function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             });
         }
     }
@@ -104,10 +104,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var param = {
             type: "post",
             success: function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             },
             error: function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             }
         };
         ajax.load("addwarnfocusrecord", param);
