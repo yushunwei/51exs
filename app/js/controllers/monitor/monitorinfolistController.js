@@ -19,7 +19,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
     function getMonitorInfoList(pageNum,pageSize){
         pageData.pageNum = pageNum + 1;
         pageData.pageSize = pageSize;
-        pageData.keywords = $('.conditions-searchbox').find('input').val();
+        pageData.keywords = $.trim($('.conditions-searchbox').find('input').val());
         var param ={"query" :pageData};
         var loadingLayer;
         param.success = function(d){

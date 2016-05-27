@@ -73,7 +73,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
             startDate:$('#start').val(),
             endDate:$('#end').val(),
             isDedup:$('.main').find('.type-isdedup').find('li').find('.type-isdedup').hasClass('active')?true:false,
-            keywords:$('.conditions-searchbox').find('input').val(),
+            keywords: $.trim($('.conditions-searchbox').find('input').val()),
             timeRanges:$('.main').find('.type-timeranges').find('li').find('.active').data('timeranges')
         };
 
