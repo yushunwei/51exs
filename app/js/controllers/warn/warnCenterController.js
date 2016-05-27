@@ -54,7 +54,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         var condition = {
             pageNum: pageNum,
             pageSize: pageSize,
-            sentiment: $('.main').find('.type-sentiment').find('li').find('.active').data('sentiment') || '',
+            "sentimentArray[]": $('.main').find('.type-sentiment').find('li').find('.active').data('sentiment') || '',
             isWarn: 'yes',
             "sourceArray[]": $('.main').find('.type-source').find('li').find('.active').data('source') || '',
             startTime: $('#start').val() || '',
