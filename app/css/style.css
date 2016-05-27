@@ -158,10 +158,10 @@ a:focus {
 	margin: 0;
 }
 .nav-main>ul>li {
-	float: left; 
+	float: left;
 	position: relative;
 	width: 20%;
-	padding-right: 30px;
+	padding-right: 0px;
 }
 .nav-main ul>li>a {
 	display: block;
@@ -170,8 +170,10 @@ a:focus {
 	padding:9px 0;
 	font-size: 18px;
 	white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding-right: 30px;
+	padding-left: 30px;
 }
 .nav-main>ul>li.active>a {
 	color: #56d4ff;
@@ -312,10 +314,10 @@ a:focus {
 .plan-main-list>ul>li .plan-main-item {
 	display: inline-block;
 	white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 400px;
-    overflow: hidden;
-    margin-right: 10px;
+	text-overflow: ellipsis;
+	width: 400px;
+	overflow: hidden;
+	margin-right: 10px;
 }
 .plan-main-list>ul>li .plan-main-item:hover {
 	color: #3eb3db;
@@ -399,31 +401,31 @@ a:focus {
 	background-color: #fbfbfb;
 }
 .full-view-main-title>ul>li>a.tab-all-view {
-	background-image: url(../img/all_view_01.png); 
+	background-image: url(../img/all_view_01.png);
 	background-repeat: no-repeat;
 	background-position: 152px 19px;
 }
 .full-view-main-title>ul>li>a.tab-all-view:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-all-view {
-	background-image: url(../img/all_view_02.png); 
+	background-image: url(../img/all_view_02.png);
 }
 .full-view-main-title>ul>li>a.tab-chart {
-	background-image: url(../img/all_view_chart_01.png); 
+	background-image: url(../img/all_view_chart_01.png);
 	background-repeat: no-repeat;
 	background-position: 137px 16px;
 }
 .full-view-main-title>ul>li>a.tab-chart:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-chart {
-	background-image: url(../img/all_view_chart_02.png); 
+	background-image: url(../img/all_view_chart_02.png);
 }
 .full-view-main-title>ul>li>a.tab-plan {
-	background-image: url(../img/all_view_pen_01.png); 
+	background-image: url(../img/all_view_pen_01.png);
 	background-repeat: no-repeat;
 	background-position: 137px 16px;
 }
 .full-view-main-title>ul>li>a.tab-plan:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-plan {
-	background-image: url(../img/all_view_pen_02.png); 
+	background-image: url(../img/all_view_pen_02.png);
 }
 .full-view-main-title .nav-tabs>li>a:hover {
 	color: #59c2e6;
@@ -476,7 +478,7 @@ a:focus {
 	font-size: 12px;
 	padding: 2px;
 	top: -21px;
-    left: -36px;
+	left: -36px;
 	width: 120px;
 	text-align: center;
 	z-index: 999;
@@ -534,7 +536,7 @@ a:focus {
 }
 .has-icon-btn img {
 	margin-right: 5px;
-    margin-top: -2px;
+	margin-top: -2px;
 }
 .conditions-searchbox {
 	float: right;
@@ -601,9 +603,9 @@ a:focus {
 	color: #555;
 	font-weight: normal;
 }
-.full-view-table .table>tbody>tr>td, 
-.full-view-table .table>tbody>tr>th,  
-.full-view-table .table>thead>tr>td, 
+.full-view-table .table>tbody>tr>td,
+.full-view-table .table>tbody>tr>th,
+.full-view-table .table>thead>tr>td,
 .full-view-table .table>thead>tr>th {
 	vertical-align: middle;
 }
@@ -721,9 +723,9 @@ a:focus {
 }
 .table-pagination .pagination>.disabled>a {
 	color: #777;
-    cursor: not-allowed;
-    background-color: #fff;
-    border-color: #ddd;
+	cursor: not-allowed;
+	background-color: #fff;
+	border-color: #ddd;
 }
 
 
@@ -999,6 +1001,14 @@ a:focus {
 	margin: 0;
 	font-weight: bold;
 }
+.cy-panel .panel-heading p span.emailTitle {
+	display: inline-block;
+	height: 100%;
+	width: 190px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .cy-panel .panel-body {
 	padding: 30px 30px 20px 30px;
 }
@@ -1108,7 +1118,7 @@ a:focus {
 /*图表分析*/
 .chart-analysis-title .conditions-item {
 	float: left;
-	margin-left: 40px; 
+	margin-left: 40px;
 }
 .chart-analysis-title-other {
 	float: left;
@@ -1141,10 +1151,10 @@ a:focus {
 .order-box {
 	width: 510px;
 	height: 140px;
-    padding: 50px 20px 0 20px;
-    position: absolute;
-    top: 20px;
-    right: -110px;
+	padding: 50px 20px 0 20px;
+	position: absolute;
+	top: 20px;
+	right: -110px;
 	background: url(../img/order_hover_bg.png) no-repeat;
 	background-size: 100% 100%;
 	background-position: bottom;
@@ -1191,9 +1201,9 @@ a:focus {
 }
 .modify-plan-item-title span {
 	color: #ff0000;
-    font-size: 20px;
-    vertical-align: -5px;
-    margin-right: 5px;
+	font-size: 20px;
+	vertical-align: -5px;
+	margin-right: 5px;
 }
 .modify-plan-item-title img {
 	margin-left: 10px;
@@ -1222,9 +1232,10 @@ a:focus {
 }
 .modify-plan-item .form-group .form-group-title span.must {
 	color: #ff0000;
-    font-size: 24px;
-    vertical-align: -8px;
-    margin-right: 5px;
+	font-size: 24px;
+	vertical-align: -8px;
+	margin-right: 5px;
+	display: none;
 }
 .modify-plan-item .form-group .cy-checkbox {
 	font-weight: normal;
@@ -1523,7 +1534,7 @@ a:focus {
 }
 .warning-center .full-view-main-title>ul>li>a.tab-all-view {
 	background-image: url(../img/data_01.png);
-	background-position: 232px 19px; 
+	background-position: 232px 19px;
 }
 .warning-center .full-view-main-title>ul>li>a.tab-all-view:hover,
 .warning-center .full-view-main-title .nav-tabs>li.active a.tab-all-view {
@@ -1531,7 +1542,7 @@ a:focus {
 }
 .warning-center .full-view-main-title>ul>li>a.tab-chart {
 	background-image: url(../img/setting_01.png);
-	background-position: 232px 17px; 
+	background-position: 232px 17px;
 }
 .warning-center .full-view-main-title>ul>li>a.tab-chart:hover,
 .warning-center .full-view-main-title .nav-tabs>li.active a.tab-chart {
@@ -1559,11 +1570,20 @@ a:focus {
 	padding: 6px 25px;
 	margin-left: 20px;
 	vertical-align: top;
-    margin-top: 3px;
+	margin-top: 3px;
 }
 .add-email-list {
 	padding-top: 20px;
 	border-top: 1px solid #f3f3f3;
+	height: 170px;
+	overflow-y: auto;
+}
+.add-email-list p.dangerText {
+	margin: 0;
+	font-size: 12px;
+	height: 20px;
+	color: #ff6d6e;
+	text-align: right;
 }
 .add-email-list-title {
 	font-size: 14px;
@@ -1603,12 +1623,12 @@ a:focus {
 	width: 100%;
 }
 .report .full-view-main-title>ul>li>a.tab-all-view {
-	background-image: url(../img/report.png); 
+	background-image: url(../img/report.png);
 	background-repeat: no-repeat;
 	background-position: 45% 16px;
 }
 .report .full-view-main-title .nav-tabs>li.active a.tab-all-view {
-	background-image: url(../img/report.png); 
+	background-image: url(../img/report.png);
 }
 .report-item {
 	width: 254px;
@@ -1704,7 +1724,7 @@ a:focus {
 }
 .readGuidListWz {
 	width: 130px;
- }
+}
 #reportName {
 	font-size: 20px;
 	color: #59c2e6;
@@ -1805,9 +1825,9 @@ a:focus {
 	position: absolute;
 	display: inline-block;
 	z-index: 999999;
-    background-color: rgba(255,255,255,0.5);
-    top: 0;
-    left: 0;
+	background-color: rgba(255,255,255,0.5);
+	top: 0;
+	left: 0;
 	text-align:center;
 }
 .loadBox .loading img{width:32px;height:32px;display:inline-block;}

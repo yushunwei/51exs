@@ -4,7 +4,8 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
   var titleID = "",
       turnIndex = 0;
  var fullViewInit = {
-     pageSize:20
+     pageSize:20,
+     num:0
  };
     var keyword;
   function init(page) {
@@ -12,7 +13,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       turnIndex = typeof page.query.turnTab =="undefined" ? 0: page.query.turnTab;
       getuserplanlist();
       //加载列表
-      getMonitorInfoList(0,20);
+      getMonitorInfoList(fullViewInit.num,20);
       //绑定事件
       bindEvent();
 
@@ -108,12 +109,12 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
                   }else{
                       $(this).addClass("active");
                   }
-                  getMonitorInfoList(0,20);
+                  getMonitorInfoList(fullViewInit.num,20);
                   return;
               }
               $(this).parent().parent().find("li a.active").removeClass("active");
               $(this).addClass("active");
-              getMonitorInfoList(0,20);
+              getMonitorInfoList(fullViewInit.num,20);
           });
       //未开通的信息来源不可搜索，并给出提示
       $('.conditions-item li a.not-open').mouseover(function(){
@@ -130,10 +131,10 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           $('#customdays').removeClass('active');
           $(this).parent().parent().find("li a.active").removeClass("active");
           $(this).addClass("active");
-          getMonitorInfoList(0,fullViewInit.pageSize);
+          getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
       });
       $dom.find('.conditions-searchbox').find('button').click(function(){
-          getMonitorInfoList(0,20);
+          getMonitorInfoList(fullViewInit.num,20);
       });
       // 自定义日期弹出框
       $('.chart-analysis-title-other-btn').click(function(e){
@@ -149,16 +150,30 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       $("#btnFind").click(function(){
           $('#customdays').addClass('active');
           $('.type-timeranges').find('a').removeClass('active');
-          getMonitorInfoList(0,fullViewInit.pageSize);
+          getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
       });
       $('.page-fullView .main').find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
           chartview.init(titleID);
           $("span#customdays1").removeClass("active");
           $("#profile .tab-timeranges").removeClass("active");
           $("#profile .tab-timeranges:first").addClass("active");
-      })
+      });
       $('.page-fullView .main').find('.nav-tabs').find('.tab-plan').on('shown.bs.tab', function (e) {
           yqview.init(titleID);
+      });
+      //点击相似页带入参数
+      var _url;
+      $('.page-fullView .main').on("click",".info-similarcount",function(){
+          if(!_url){
+              _url = $(this).attr("href");
+          }
+          var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+          var url = _url;
+          for(var key in param){
+              url+="&"+key+"="+param[key];
+          }
+          $(this).attr("href",url);
+          // return false;
       })
   }
     //分页
@@ -176,7 +191,9 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
         });
     }
   function pageSelectCallback(pageNum, jq) {
+        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
+        $("body").scrollTop(200);
     }
   return {
     init: init

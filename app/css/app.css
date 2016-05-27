@@ -104,6 +104,9 @@ ul {
 .nav-bg .nav-main {
   height: 44.44px; }
 
+input::-ms-clear {
+  display: none; }
+
 .page-login .product {
   background-color: #FFFFFF; }
 
@@ -455,7 +458,8 @@ ul {
 
 .page-newYq .modify-plan-main .modify-plan-content .warning .group-input-warp {
   background: #fff;
-  border: solid 1px #b1b1b1; }
+  border: solid 1px #b1b1b1;
+  width: 130px; }
   .page-newYq .modify-plan-main .modify-plan-content .warning .group-input-warp input {
     width: 115px;
     height: 38px;
@@ -621,7 +625,8 @@ ul {
 
 .page-fullView .modify-plan-main .modify-plan-content .warning .group-input-warp {
   background: #fff;
-  border: solid 1px #b1b1b1; }
+  border: solid 1px #b1b1b1;
+  width: 130px; }
   .page-fullView .modify-plan-main .modify-plan-content .warning .group-input-warp input {
     width: 115px;
     height: 38px;

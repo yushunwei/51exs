@@ -1,6 +1,6 @@
 
 define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
-  var curTimeranges = 0,curStartTime="",curEndTime="";
+  var curPlanId='',curTimeranges = 0,curStartTime="",curEndTime="";
   //选择条件事件
   function events(id){
 //在时间段选择上绑定图表刷新事件
@@ -387,8 +387,8 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     var negativeArray = [];
     for(i=0; i<data.data.array.length; i++){
       mediaArray.push(data.data.array[i].media);
-      positiveArray.push(data.data.array[i].positive);
-      negativeArray.push(data.data.array[i].negative);
+      positiveArray.push({"sentiment":"positive","value":data.data.array[i].positive});
+      negativeArray.push({"sentiment":"negative","value":data.data.array[i].negative});
     }
     optionBar1.yAxis[0].data=mediaArray;
     optionBar1.series[0].data=negativeArray;
@@ -399,8 +399,15 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       var myChartBar1 = ec.init(document.getElementById('fullChartBar1'));
       myChartBar1.setOption(optionBar1);
       myChartBar1.on("click", function(param) {
-        var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
+        var subData = {
+          planId :curPlanId?curPlanId:'',
+          sentiment : param.data.sentiment,
+          timeRanges:curTimeranges,
+          startDate:curStartTime,
+          endDate:curEndTime,
+          media:param.name
+        };
+        window.open('/pages/monitor/monitorinfolist.html?'+ $.param(subData));
       })
     }
   }
@@ -489,8 +496,14 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       var myChartBar2 = ec.init(document.getElementById('fullChartBar2'));
       myChartBar2.setOption(optionBar2);
       myChartBar2.on("click", function(param) {
-        var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
+        var subData = {
+          planId :curPlanId?curPlanId:'',
+          timeRanges:curTimeranges,
+          startDate:curStartTime,
+          endDate:curEndTime,
+          media:param.name
+        };
+        window.open('/pages/monitor/monitorinfolist.html?'+ $.param(subData));
       })
     }
   }
@@ -578,8 +591,14 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
       myChartBar3.setOption(optionBar3);
       myChartBar3.on("click", function(param) {
-        var subData = {sentiment : param.data.sentiment,timeRanges:7};
-        window.location.href='/pages/monitor/monitorinfolist.html?'+ $.param(subData);
+        var subData = {
+          planId :curPlanId?curPlanId:'',
+          timeRanges:curTimeranges,
+          startDate:curStartTime,
+          endDate:curEndTime,
+          region:param.name
+        };
+        window.open('/pages/monitor/monitorinfolist.html?'+ $.param(subData));
       })
     }
   }
@@ -684,8 +703,8 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
         planId : planId?planId:"",
         sentiment:$(this).data("sentiment"),
         timeRanges:curTimeranges,
-        startTime:curStartTime,
-        endTime:curEndTime
+        startDate:curStartTime,
+        endDate:curEndTime
       };
       window.open('/pages/monitor/monitorinfolist.html?'+ $.param(obj));
     })
@@ -701,6 +720,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       planId:id
     };
     curTimeranges = timeRanges;
+    curPlanId = id;
     events(id);
     chartSender(query);
     pageTurn(id);

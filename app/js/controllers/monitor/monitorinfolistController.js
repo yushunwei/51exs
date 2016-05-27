@@ -3,7 +3,8 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
     var $tar = $("div.page-allplan");
     var result = [];
     var fullViewInit = {
-        pageSize:20
+        pageSize:20,
+        num:0
     };
     var pageData = {};
     function init(page) {
@@ -16,7 +17,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
     }
 
     function getMonitorInfoList(pageNum,pageSize){
-        pageData.pageNum = pageNum;
+        pageData.pageNum = pageNum + 1;
         pageData.pageSize = pageSize;
         pageData.keywords = $('.conditions-searchbox').find('input').val();
         var param ={"query" :pageData};
@@ -49,16 +50,16 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(0,fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
         });
         $dom.find('.conditions-searchbox').find('button').click(function(){
-            getMonitorInfoList(0,20);
+            getMonitorInfoList(fullViewInit.num,20);
         });
 
         $("#btnFind").click(function(){
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
-            getMonitorInfoList(0,fullViewInit.pageSize);
+            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
         });
         //在批量取消预警页面上绑定事件，弹出对话框并绑定id
         $('.cancel-alldanger-btn').click(function(){
@@ -83,7 +84,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
                 "success":function(d){
                     view.renderAddEmail(d);
                 }
-            }
+            };
             ajax.load("addEmail",param);
         });
         //add email
@@ -91,6 +92,20 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
             $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>'+$(this).find("input[type=email]").val()+'</li>')
             return false;
         });
+        //点击相似页带入参数
+        var _url;
+        $dom.on("click",".info-similarcount",function(){
+            if(!_url){
+                _url = $(this).attr("href");
+            }
+            var param = $.extend({},pageData);
+            var url = _url;
+            for(var key in param){
+                url+="&"+key+"="+param[key];
+            }
+            $(this).attr("href",url);
+            // return false;
+        })
     }
     //分页
     function pagination(data,index){
@@ -107,7 +122,9 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
         });
     }
     function pageSelectCallback(pageNum, jq) {
+        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
+        $("body").scrollTop(200);
     }
     return {
         init: init

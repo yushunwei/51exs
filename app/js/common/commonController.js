@@ -4,24 +4,24 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      * @private
      */
     var ifnewModal = '<div class="modal fade bs-example-modal-sm cy-model new-all-alert modal-ifnew" tabindex="-1" role="dialog"'+
-                        'aria-labelledby="mySmallModalLabel">'+
-                        '<div class="modal-dialog modal-sm">'+
-                        '<div class="modal-content">'+
-                        '<div class="modal-header">'+
-                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"'+
-                            'class="fa fa-times-circle"></span>'+
-                        '</button>'+
-                        '<h4 class="modal-title">温馨提示</h4>'+
-                        '</div>'+
-                        '<div class="modal-body">'+
-                        ' <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>'+
-                        '</div>'+
-                        '<div class="modal-footer">'+
-                        '<button type="button" class="btn btn-info" data-dismiss="modal">确定</button>'+
-                        '</div>'+
-                        '</div>'+
-                        '</div>'+
-                        '</div>';
+        'aria-labelledby="mySmallModalLabel">'+
+        '<div class="modal-dialog modal-sm">'+
+        '<div class="modal-content">'+
+        '<div class="modal-header">'+
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"'+
+        'class="fa fa-times-circle"></span>'+
+        '</button>'+
+        '<h4 class="modal-title">温馨提示</h4>'+
+        '</div>'+
+        '<div class="modal-body">'+
+        ' <p class="cy-model-content">您现在使用的是免版e信使，您的舆情方案数已用完！</p>'+
+        '</div>'+
+        '<div class="modal-footer">'+
+        '<button type="button" class="btn btn-info" data-dismiss="modal">确定</button>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+        '</div>';
     function _init(page) {
         //设置底部信息
         setFooter();
@@ -92,7 +92,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             });
         } else {
             warnDom.parent().click(function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             });
         }
     }
@@ -104,10 +104,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var param = {
             type: "post",
             success: function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             },
             error: function () {
-                window.location.href = "/pages/warnCenter.html";
+                window.location.href = "/pages/warn/warnCenter.html";
             }
         };
         ajax.load("addwarnfocusrecord", param);
@@ -309,10 +309,14 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                         dedupids:arr
                     },
                     success:function(d){
-                        typeof layer !="undefined" && layer.alert(d.msg+'<br/>'+ (d.subMsg||''));
+                        var content = "提交成功！";
+                        if(d.status!=200){
+                            content = "网络异常，取消预警失败！"
+                        }
+                        typeof layer !="undefined" && layer.msg(content);
                     },
                     error:function(d){
-                        typeof layer !="undefined" && layer.alert(d.msg+'<br/>'+ d.subMsg);
+                        typeof layer !="undefined" && layer.msg("网络异常，取消预警失败");
                     }
                 };
                 layer.confirm('确定取消选中文章的相似文章预警？确定后一个月内与选中文章相似的文章不再预警。', {
