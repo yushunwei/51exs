@@ -396,27 +396,25 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     }
     //发送邮件
     function _sendEmail(docId,shareEmailList,otherEmailList){
+        $(".close").trigger("click");
         var param = {
             "data" : {"docId" : docId,"shareEmails":shareEmailList,"otherEmails":otherEmailList},
             "type":'post',
             "success":function(d){
-                $(".add-email .send-email-btn").removeAttr("disabled");
                 if(d.status == 200) {
-                    $(".close").trigger("click");
-                    layer.alert("邮件发送成功，请至收件箱查看，谢谢!",{icon:1});
+                    layer.alert("邮件发送成功！",{icon:1});
                 }else{
-                    layer.alert(d.subMsg, {icon: 2});
+                    layer.alert("发送失败！"+d.subMsg, {icon: 2});
                 }
             },
             error:function(){
-                $(".add-email .send-email-btn").removeAttr("disabled");
+                layer.alert("邮件发送失败，请重试！",{icon:2});
             }
         };
         param.beforeSend = function(){
-            layer.msg('加载中...', {icon: 16,time:-1});
+            layer.msg('发送中，请稍后', {icon: 16,time:-1,shade:[0.4,'#CCC']});
         };
-        ajax.load("emailShare",param,"#sendEmailModal");
-        $(".add-email .send-email-btn").attr("disabled",true);
+        ajax.load("emailShare",param);
     }
 
     function ifNew(){

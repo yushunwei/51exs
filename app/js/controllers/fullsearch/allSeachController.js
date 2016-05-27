@@ -63,7 +63,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         });
     }
     function pageSelectCallback(pageNum, jq) {
-        getMonitorInfoList(0,fullViewInit.pageSize);
+        getMonitorInfoList(pageNum,fullViewInit.pageSize);
         $("body").scrollTop(200);
     }
     function allSearch(){
