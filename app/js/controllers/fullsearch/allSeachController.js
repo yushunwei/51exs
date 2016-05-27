@@ -72,7 +72,7 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         $("body").scrollTop(200);
     }
     function allSearch(){
-        searchKey = $(".type-keywords").val();
+        searchKey = $.trim($(".type-keywords").val());
         if(searchKey) {
             //加载列表
             getMonitorInfoList(fullViewInit.num, 20,searchKey);
