@@ -32,7 +32,7 @@ define(["tool/Utils"], function (utils) {
         var p = {
             token:utils.getToken(),
             // 增加时间戳，解决IE浏览器ajax请求缓存问题
-            _t:new Date().getTime(),
+            _t:new Date().getTime()
         };
 
         if(param.query){
