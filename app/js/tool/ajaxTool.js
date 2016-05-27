@@ -28,14 +28,17 @@ define(["tool/Utils"], function (utils) {
     //设置 请求地址，添加token
     function setUrl(name, param) {
         linkUrl = HX_Ajax_Path[name] || "";
-        var token = utils.getToken();
-        var _query = "?token=" + token;
-        if (param.query) {
-            for (var i in param.query) {
-                _query += ("&" + i + "=" + param.query[i]);
-            }
+        // 地址参数封装
+        var p = {
+            token:utils.getToken(),
+            // 增加时间戳，解决IE浏览器ajax请求缓存问题
+            _t:new Date().getTime(),
+        };
+
+        if(param.query){
+            p = $.extend({},p,param.query);
         }
-        _param.url = linkUrl + _query;
+        _param.url = linkUrl + "?" + $.param(p);
     }
 
     function _load(obj, param, target) {
