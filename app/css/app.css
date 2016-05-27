@@ -469,7 +469,7 @@ input::-ms-clear {
   .page-newYq .modify-plan-main .modify-plan-content .warning .group-input-warp .operation-box {
     width: 10px; }
     .page-newYq .modify-plan-main .modify-plan-content .warning .group-input-warp .operation-box .close-btn {
-      color: red; }
+      color: #666; }
 
 .page-newYq .modify-plan-main .modify-plan-content .warning .form-group-title {
   width: 15px;
