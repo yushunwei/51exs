@@ -9,6 +9,8 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     };
     var all = "";
     var keyword;
+    var lastSearchParam;    //上次查询的参数
+
 
     function init(page) {
         turnIndex = typeof page.query.turnTab == "undefined" ? 0 : page.query.turnTab;
@@ -23,6 +25,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     function getMonitorInfoList(pageNum, pageSize) {
         var param = {"query": getFullViewQueryCondition(pageNum + 1, pageSize)}
         var loadingLayer;
+        lastSearchParam = getFullViewQueryCondition(pageNum + 1, pageSize);
         param.success = function(d){
             layer.close(loadingLayer);
             if(d.status == 200){
@@ -63,8 +66,8 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         if($("#customdays").hasClass("active")){
             condition.timeRanges = 0;
         }else{
-            delete condition.startDate;
-            delete condition.endDate;
+            delete condition.startTime;
+            delete condition.endTime;
         }
         return condition;
     }
@@ -109,7 +112,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         });
         // 时间范围选择时清空日期选择框
         $('.type-timeranges').find('a').click(function () {
-            $('.input-daterange').find('input').val('');
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
@@ -120,8 +122,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         });
 // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
-            $('.chart-analysis-title-other-btn').toggleClass("active");
-            $('.type-timeranges').find('a').removeClass("active");
             $('.order-box').toggle();
             $(document).on('click', function(e){
                 $('.order-box').hide();
@@ -136,7 +136,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             $('.type-timeranges').find('a').removeClass('active');
             getMonitorInfoList(fullViewInit.num, fullViewInit.pageSize);
         });
-
         //add email
         com.handleEmail();
         $dom.find('.nav-tabs').find('.tab-chart').on('shown.bs.tab', function (e) {
@@ -148,11 +147,10 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             if(!_url){
                 _url = $(this).attr("href");
             }
-            var param = getFullViewQueryCondition(fullViewInit.num+1,20);
             var url = _url;
-            for(var key in param){
-                url+="&"+key+"="+param[key];
-            }
+            delete lastSearchParam.pageNum;
+            delete lastSearchParam.pageSize;
+            url += "&" + $.param(lastSearchParam);
             $(this).attr("href",url);
             // return false;
         })

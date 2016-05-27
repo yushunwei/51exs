@@ -7,7 +7,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
      pageSize:20,
      num:0
  };
-    var keyword;
+    var keyword,lastSearchParam;
   function init(page) {
       titleID = page.query.id;
       turnIndex = typeof page.query.turnTab =="undefined" ? 0: page.query.turnTab;
@@ -43,6 +43,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
  function getMonitorInfoList(pageNum,pageSize){
      var loadingLayer;
      var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
+     lastSearchParam = param.query;
      param.success = function(d){
          layer.close(loadingLayer);
          if(d.status == 200){
@@ -138,15 +139,15 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
       });
       // 自定义日期弹出框
       $('.chart-analysis-title-other-btn').click(function(e){
-          $('.chart-analysis-title-other-btn').toggleClass("active");
-          $('.type-timeranges').find('a').removeClass("active");
           $('.order-box').toggle();
           $(document).on('click', function(e){
               $('.order-box').hide();
           });
           e.stopPropagation();
       });
-
+      $('.order-box').click(function(e){
+          e.stopPropagation();
+      });
       $("#btnFind").click(function(){
           $('#customdays').addClass('active');
           $('.type-timeranges').find('a').removeClass('active');
@@ -167,11 +168,10 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           if(!_url){
               _url = $(this).attr("href");
           }
-          var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+          delete lastSearchParam.pageNum;
+          delete lastSearchParam.pageSize;
           var url = _url;
-          for(var key in param){
-              url+="&"+key+"="+param[key];
-          }
+          url += "&" + $.param(lastSearchParam);
           $(this).attr("href",url);
           // return false;
       })
