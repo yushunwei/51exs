@@ -50,16 +50,16 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
+            getMonitorInfoList(0,fullViewInit.pageSize);
         });
         $dom.find('.conditions-searchbox').find('button').click(function(){
-            getMonitorInfoList(fullViewInit.num,20);
+            getMonitorInfoList(0,20);
         });
 
         $("#btnFind").click(function(){
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
-            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
+            getMonitorInfoList(0,fullViewInit.pageSize);
         });
         //在批量取消预警页面上绑定事件，弹出对话框并绑定id
         $('.cancel-alldanger-btn').click(function(){
@@ -122,7 +122,6 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
         });
     }
     function pageSelectCallback(pageNum, jq) {
-        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
         $("body").scrollTop(200);
     }

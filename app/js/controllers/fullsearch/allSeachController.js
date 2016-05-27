@@ -67,15 +67,14 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
         });
     }
     function pageSelectCallback(pageNum, jq) {
-        fullViewInit.num = pageNum;
-        getMonitorInfoList(pageNum,fullViewInit.pageSize);
+        getMonitorInfoList(0,fullViewInit.pageSize);
         $("body").scrollTop(200);
     }
     function allSearch(){
         searchKey = $.trim($(".type-keywords").val());
         if(searchKey) {
             //加载列表
-            getMonitorInfoList(fullViewInit.num, 20,searchKey);
+            getMonitorInfoList(0, 20);
         }else{
             view.renderList([]);
         }

@@ -7,12 +7,30 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
     };
     var pageData = {};
     function init(page) {
-        pageData = page.query;
+        pageData = decode(page.query);
         //加载列表
         getMonitorInfoList(0,20);
         //绑定事件
         bindEvent();
         common.handleEmail();
+    }
+    /**
+     * 参数解码
+     * @param obj
+     * @returns {*}
+     */
+    function decode(obj){
+        if(!obj){
+            return obj;
+        }
+
+        for(var i in obj){
+            if(obj[i]){
+                obj[i] = decodeURIComponent(obj[i]);
+            }
+        }
+
+        return obj;
     }
 
     function getMonitorInfoList(pageNum,pageSize){

@@ -106,12 +106,12 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
                 }else{
                     $(this).addClass("active");
                 }
-                getMonitorInfoList(fullViewInit.num,20);
+                getMonitorInfoList(0,20);
                 return;
             }
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(fullViewInit.num,20);
+            getMonitorInfoList(0,20);
         });
         //未开通的信息来源不可搜索，并给出提示
         $('.conditions-item li a.not-open').mouseover(function(){
@@ -128,10 +128,10 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
             $('#customdays').removeClass('active');
             $(this).parent().parent().find("li a.active").removeClass("active");
             $(this).addClass("active");
-            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
+            getMonitorInfoList(0,fullViewInit.pageSize);
         });
         $dom.find('.conditions-searchbox').find('button').click(function(){
-            getMonitorInfoList(fullViewInit.num,20);
+            getMonitorInfoList(0,20);
         });
         // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
@@ -144,7 +144,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         $("#btnFind").click(function(){
             $('#customdays').addClass('active');
             $('.type-timeranges').find('a').removeClass('active');
-            getMonitorInfoList(fullViewInit.num,fullViewInit.pageSize);
+            getMonitorInfoList(0,fullViewInit.pageSize);
         });
         //在批量取消预警页面上绑定事件，弹出对话框并绑定id
         $('.cancel-alldanger-btn').click(function(){
@@ -193,7 +193,6 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         });
     }
     function pageSelectCallback(pageNum, jq) {
-        fullViewInit.num = pageNum;
         getMonitorInfoList(pageNum,fullViewInit.pageSize);
         $("body").scrollTop(200);
     }
