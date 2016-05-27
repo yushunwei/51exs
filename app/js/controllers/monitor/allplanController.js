@@ -6,8 +6,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
     var titleID = "",
         turnIndex = 0;
     var fullViewInit = {
-        pageSize:20,
-        num:0
+        pageSize:20
     };
     var sentiment,planId;
     var keyword,checkArrary =[];

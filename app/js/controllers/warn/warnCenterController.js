@@ -4,8 +4,7 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     var result = [];
     var turnIndex = 0;
     var fullViewInit = {
-        pageSize: 20,
-        num:0
+        pageSize: 20
     };
     var all = "";
     var keyword;

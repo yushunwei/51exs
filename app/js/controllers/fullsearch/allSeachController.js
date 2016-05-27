@@ -1,7 +1,6 @@
 define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController","common/commonView"], function (view,ajax,common,commonView) {
     var fullViewInit = {
-        pageSize:20,
-        num:0
+        pageSize:20
     };
     var lastSearchParam;
     function getMonitorInfoList(pageNum,pageSize){

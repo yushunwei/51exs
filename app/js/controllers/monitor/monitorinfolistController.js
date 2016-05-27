@@ -3,8 +3,7 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
     var $tar = $("div.page-allplan");
     var result = [];
     var fullViewInit = {
-        pageSize:20,
-        num:0
+        pageSize:20
     };
     var pageData = {};
     function init(page) {

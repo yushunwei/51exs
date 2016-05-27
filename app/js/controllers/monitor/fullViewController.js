@@ -4,8 +4,7 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
   var titleID = "",
       turnIndex = 0;
  var fullViewInit = {
-     pageSize:20,
-     num:0
+     pageSize:20
  };
     var keyword,lastSearchParam;
   function init(page) {
