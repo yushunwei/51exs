@@ -66,3 +66,6 @@
 	overflow-x: hidden;
 	white-space: nowrap;
 }
+.full-view-data-operation .share-box  .cancel-warn-one-tips {
+	left: -43px;
+}

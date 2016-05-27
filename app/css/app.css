@@ -42,7 +42,7 @@ ul {
     color: #FFFFFF; }
 
 .hd-con {
-  width: 1000px;
+  width: 1200px;
   height: 84px;
   margin: 0 auto; }
 
@@ -108,7 +108,8 @@ input::-ms-clear {
   display: none; }
 
 .page-login .product {
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  padding-bottom: 50px; }
 
 .page-login ul.product-list {
   margin: 0;
@@ -176,8 +177,7 @@ input::-ms-clear {
   background: #f1f1f1; }
 
 .page-login .cy-indexprev-panel.free {
-  background: #f1f1f1;
-  margin-bottom: 60px; }
+  background: #f1f1f1; }
 
 .page-login .free-con {
   position: relative;
@@ -199,7 +199,8 @@ input::-ms-clear {
 
 .page-login .product-con {
   width: 1000px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-top: 60px; }
 
 .page-login .product-hd {
   margin-bottom: 50px;
@@ -213,8 +214,8 @@ input::-ms-clear {
 
 .page-login .product-item {
   float: left;
-  width: 331px;
-  padding: 0 20px 36px;
+  width: 250px;
+  padding: 0 15px 5px;
   border-right: 1px solid #efefef; }
 
 .page-login .product-item .item-thumbnail {
@@ -252,6 +253,23 @@ input::-ms-clear {
   position: absolute;
   bottom: 0;
   left: 0; }
+
+.page-login .app-explain-panel img {
+  width: 100%; }
+
+.page-login .product-features-panel {
+  text-align: center; }
+  .page-login .product-features-panel .product-features-title {
+    font-size: 30px;
+    font-family: "Microsoft YaHei";
+    color: #1583b9;
+    width: 320px;
+    margin: 0 auto;
+    padding: 60px 0 15px 0;
+    border-bottom: solid 2px #c5c5c5; }
+  .page-login .product-features-panel img {
+    margin-top: 15px;
+    margin-bottom: 70px; }
 
 .page-help {
   background-color: #FFFFFF; }

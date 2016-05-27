@@ -1,6 +1,7 @@
 .page-login {
   .product {
     background-color: #FFFFFF;
+    padding-bottom: 50px;
   }
   ul.product-list {
     margin: 0;
@@ -72,7 +73,6 @@
 
   .cy-indexprev-panel.free {
     background: #f1f1f1;
-    margin-bottom: 60px;
   }
   .free-con {
     position: relative;
@@ -95,6 +95,7 @@
   .product-con {
     width: 1000px;
     margin: 0 auto;
+    padding-top: 60px;
   }
   .product-hd {
     margin-bottom: 50px;
@@ -108,8 +109,8 @@
   }
   .product-item {
     float: left;
-    width: 331px;
-    padding: 0 20px 36px;
+    width: 250px;
+    padding: 0 15px 5px;
     border-right: 1px solid #efefef;
   }
   .product-item .item-thumbnail {
@@ -147,5 +148,26 @@
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+  .app-explain-panel {
+    img {
+      width: 100%;
+    }
+  }
+  .product-features-panel {
+    text-align: center;
+    .product-features-title {
+      font-size: 30px;
+      font-family: "Microsoft YaHei";
+      color: #1583b9;
+      width: 320px;
+      margin: 0 auto;
+      padding: 60px 0 15px 0;
+      border-bottom: solid 2px #c5c5c5;
+    }
+    img {
+      margin-top: 15px;
+      margin-bottom: 70px;
+    }
   }
 }

@@ -158,6 +158,17 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        {{#ifCond isWarn "==" "yes"}}
+                                        <div class="share-box cancel-warn-one">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <div class="share-for cancel-warn-one-tips">
+                                                <ul>
+                                                    <li><a href="#1" data-toggle="modal" style="width: 110px;">相似文章不再预警</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {{else}}
+                                        {{/ifCond}}
                                     </div>
                                 </div>
                             </td>

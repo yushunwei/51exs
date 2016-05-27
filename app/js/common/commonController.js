@@ -22,6 +22,29 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         '</div>'+
         '</div>'+
         '</div>';
+    /***
+     *
+     * ***/
+    var warnCancelOne = '<div class="modal fade bs-example-modal-sm cy-model new-all-alert warn-cancel-one" tabindex="-1" role="dialog"'+
+        'aria-labelledby="mySmallModalLabel">'+
+        '<div class="modal-dialog modal-sm">'+
+        '<div class="modal-content">'+
+        '<div class="modal-header">'+
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"'+
+        'class="fa fa-times-circle"></span>'+
+        '</button>'+
+        '<h4 class="modal-title">温馨提示</h4>'+
+        '</div>'+
+        '<div class="modal-body">'+
+        ' <p class="cy-model-content">确定取消？一个月内不会显示相似文章的预警。</p>'+
+        '</div>'+
+        '<div class="modal-footer">'+
+        '<button type="button" class="btn btn-info cancel-ok" >确定</button>'+
+        '<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>'+
+        '</div>'+
+        '</div>'+
+        '</div>'+
+        '</div>';
     function _init(page) {
         //设置底部信息
         setFooter();
@@ -43,9 +66,49 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(".conditions-choice").find("a.cancel-alldanger-btn").length!=0 && bindCancel(page);
         //新建舆情判断 大于6个不进入页面
         ifNew();
+        //单独取消预警
+        (page.name=="allplan"||page.name=="fullView"||page.name=="warnCenter"||page.name=="monitorinfolist")&&cancelWarnOne(page);
 
     }
-
+    function cancelWarnOne(page){
+        var dedupid,_data;
+        $(document).on("click",".cancel-warn-one-tips a",function(){
+            _data = {};
+            $(".warn-cancel-one").length==0 && $("body").append(warnCancelOne);
+            dedupid = $(this).parents("li").data("dedupid");
+            if(page.name=="warnCenter"){
+                _data.dedupid = dedupid;
+            }else{
+                _data.dedupId = dedupid;
+            }
+            $(".warn-cancel-one").modal("show");
+        })
+        $(document).on("click",".warn-cancel-one .cancel-ok",function(){
+            var param = {
+                type:"post",
+                data : _data,
+                success:function(d){
+                    var content = "提交成功！";
+                    if(d.status!=200){
+                        content = "网络异常，取消预警失败！"
+                        typeof layer !="undefined" && layer.msg(content);
+                    }else{
+                        if($(".pagination").find(".current").not(".prev").not(".next").html()!=1){
+                            $(".pagination").find("a").not(".prev").eq(0).trigger("click");
+                        }else{
+                            $(".conditions-searchbox button").trigger("click");
+                        }
+                    }
+                   // typeof layer !="undefined" && layer.msg(content);
+                },
+                error:function(d){
+                    typeof layer !="undefined" && layer.msg("网络异常，取消预警失败");
+                }
+            };
+            ajax.load("cancelsimilarwarn",param);
+            $(".warn-cancel-one").modal("hide");
+        });
+    }
     function setFooter(){
         $(".footer").filter(":gt(0)").remove();
         $(".footer").html("浙ICP备：浙B2-20070198");
@@ -282,6 +345,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 });
                 $("form.downLoadForm .download-content").append(inputHtml);
                 $("form.downLoadForm").attr("action",url);
+                if($(this).hasClass("download-all-btn")){
+                    $(".full-view-table").find(".table-bordered tr:first").find("th:first .cy-checkbox").trigger("click");
+                }
                 $("form.downLoadForm").submit();
             }
         })
