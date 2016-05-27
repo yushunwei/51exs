@@ -100,9 +100,9 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
             }
             var param = $.extend({},pageData);
             var url = _url;
-            for(var key in param){
-                url+="&"+key+"="+param[key];
-            }
+            delete param.pageNum;
+            delete param.pageSize;
+            url += "&" + $.param(param);
             $(this).attr("href",url);
             // return false;
         })

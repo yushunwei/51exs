@@ -11,6 +11,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
     };
     var sentiment,planId;
     var keyword,checkArrary =[];
+    var lastSearchParam;    //上次查询的参数
     function init(page) {
         titleID = page.query.id || "";
         sentiment = page.query.sentiment;
@@ -38,6 +39,7 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
     function getMonitorInfoList(pageNum,pageSize){
         var loadingLayer;
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)}
+        lastSearchParam = param.query;
         param.success = function(d){
             layer.close(loadingLayer);
             if(d.status == 200){
@@ -133,8 +135,6 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
         });
         // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
-            $('.chart-analysis-title-other-btn').toggleClass("active");
-            $('.type-timeranges').find('a').removeClass("active");
             $('.order-box').toggle();
             $(document).on('click', function(e){
                 $('.order-box').hide();
@@ -170,11 +170,10 @@ define(["../../tool/ajaxTool","../../view/monitor/allplanView","common/commonCon
             if(!_url){
                 _url = $(this).attr("href");
             }
-            var param = getFullViewQueryCondition(fullViewInit.num+1,20);
+            delete lastSearchParam.pageNum;
+            delete lastSearchParam.pageSize;
             var url = _url;
-            for(var key in param){
-                url+="&"+key+"="+param[key];
-            }
+            url += "&" + $.param(lastSearchParam);
             $(this).attr("href",url);
             // return false;
         })
