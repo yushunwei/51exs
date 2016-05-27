@@ -5,6 +5,9 @@ define(["tool/ajaxTool","tool/Utils"], function (ajax,utils) {
             if (parents.parent().find("input").length > 2) {
                 return false;
             }
+            if (parents.parent().find("input").length == 2) {
+                $(this).hide();
+            }
             var parentD = parents[0].outerHTML;
             parents.after(parentD);
             parents.next(".input-warp").find("input").removeClass("error");
