@@ -4,27 +4,24 @@ define(["view/fullsearch/allSearchView","tool/ajaxTool","common/commonController
     };
     var lastSearchParam;
     function getMonitorInfoList(pageNum,pageSize){
-        var loadingLayer;
         var param ={"query" :getFullViewQueryCondition(pageNum+1,pageSize)};
         lastSearchParam = param.query;
         param.success = function(d){
-            layer.close(loadingLayer);
             if(d.status == 200){
                 view.renderList(d);
                 result = d;
                 pagination(result,pageNum);
-
+                layer.closeAll();
             }else{
                 layer.alert(d.subMsg, {icon: 2});
             }
         };
         param.error = function(d){
-            layer.close(loadingLayer);
             layer.alert("加载失败",{icon:2});
         };
         //增加loading效果
         param.beforeSend = function(){
-            loadingLayer = layer.msg('加载中...', {icon: 16});
+            layer.msg('处理中，请稍后', {icon: 16,time:-1,shade:[0.4,'#CCC']});
         };
         ajax.load("fullwebsearch",param);
     }
