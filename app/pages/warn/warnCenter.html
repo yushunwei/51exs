@@ -135,7 +135,7 @@
                 <div class="chart-analysis-title-other" href="#1">
                   <span id="customdays" class="chart-analysis-title-other-btn">自定义</span>
                   <div class="order-box">
-                    <p>请选择起止时间（仅供3个月内数据搜索）：</p>
+                    <p>请选择起止时间（仅供1个月内数据搜索）：</p>
                     <div class="time-group form-inline">
                       <div class="form-group input-daterange">
                         <input type="text" class="form-control" id="start">
@@ -522,7 +522,7 @@
   var start = {
     elem: '#start',
     format: 'YYYY-MM-DD',
-    min: laydate.now(-90),
+    min: laydate.now(-30),
     max: laydate.now(), //最大日期
     isclear : false,
     choose: function(datas){
