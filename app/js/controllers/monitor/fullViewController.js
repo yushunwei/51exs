@@ -159,14 +159,10 @@ define(["../../tool/ajaxTool","../../view/monitor/fullViewView","../../view/moni
           yqview.init(titleID);
       });
       //点击相似页带入参数
-      var _url;
       $('.page-fullView .main').on("click",".info-similarcount",function(){
-          if(!_url){
-              _url = $(this).attr("href");
-          }
           delete lastSearchParam.pageNum;
           delete lastSearchParam.pageSize;
-          var url = _url;
+          var url = $(this).attr("href");
           url += "&" + $.param(lastSearchParam);
           $(this).attr("href",url);
           // return false;

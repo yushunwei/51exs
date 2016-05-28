@@ -140,19 +140,13 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             setTab2();
         });
         //点击相似页带入参数
-        var _url;
         $dom.on("click",".info-similarcount",function(){
-            if(!_url){
-                _url = $(this).attr("href");
-            }
-            var url = _url;
+            var url = $(this).attr("href");
             delete lastSearchParam.pageNum;
             delete lastSearchParam.pageSize;
             url += "&" + $.param(lastSearchParam);
             $(this).attr("href",url);
-            // return false;
         })
-
     }
 
     //分页

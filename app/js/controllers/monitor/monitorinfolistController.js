@@ -108,18 +108,13 @@ define(["../../tool/ajaxTool","../../view/monitor/monitorinfolistView","common/c
             return false;
         });
         //点击相似页带入参数
-        var _url;
         $dom.on("click",".info-similarcount",function(){
-            if(!_url){
-                _url = $(this).attr("href");
-            }
             var param = $.extend({},pageData);
-            var url = _url;
+            var url = $(this).attr("href");
             delete param.pageNum;
             delete param.pageSize;
             url += "&" + $.param(param);
             $(this).attr("href",url);
-            // return false;
         })
     }
     //分页
