@@ -183,6 +183,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       $("#fullChartLine1").html(HX_config.noDataHtml);
     }else{
       // 为echarts对象加载数据
+      $("#fullChartLine1").empty();
       var myChartLine1 = ec.init(document.getElementById('fullChartLine1'));
       myChartLine1.setOption(optionLine1);
     }
@@ -295,6 +296,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
       return;
     }else{
       // 基于准备好的dom，初始化echarts图表
+      $("#fullChartLine2").empty();
       var myChartLine2 = ec.init(document.getElementById('fullChartLine2'));
       // 为echarts对象加载数据
       myChartLine2.setOption(optionLine2);
@@ -396,6 +398,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     if((negativeArray.length+positiveArray.length) == 0){
       $("#fullChartBar1").html(HX_config.noDataHtml);
     }else{
+      $("#fullChartBar1").empty();
       var myChartBar1 = ec.init(document.getElementById('fullChartBar1'));
       myChartBar1.setOption(optionBar1);
       myChartBar1.on("click", function(param) {
@@ -493,6 +496,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     if(valueArray.length == 0){
       $("#fullChartBar2").html(HX_config.noDataHtml);
     }else {
+      $("#fullChartBar2").empty();
       var myChartBar2 = ec.init(document.getElementById('fullChartBar2'));
       myChartBar2.setOption(optionBar2);
       myChartBar2.on("click", function(param) {
@@ -588,6 +592,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     if(valueArray.length == 0){
       $("#fullChartBar3").html(HX_config.noDataHtml);
     }else{
+      $("#fullChartBar3").empty();
       var myChartBar3 = ec.init(document.getElementById('fullChartBar3'));
       myChartBar3.setOption(optionBar3);
       myChartBar3.on("click", function(param) {
@@ -633,6 +638,7 @@ define(["tool/ajaxTool","echarts/echartsmin"], function (ajax,ec) {
     });
     $.get('../../api/china.json',function(json){
       ec.registerMap('china', json);
+      $("#fullChartMap").empty();
       var chart = ec.init(document.getElementById('fullChartMap'));
       chart.setOption({
         tooltip : {
