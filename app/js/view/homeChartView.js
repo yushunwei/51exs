@@ -71,6 +71,7 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
             $("#chartPie").html(HX_config.noDataHtml);
             return;
         }
+        $("#chartPie").empty();
         var myChartPie = ec.init(document.getElementById('chartPie'));
         myChartPie.setOption(option);
         myChartPie.on("click", function (param) {
@@ -251,6 +252,8 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
         for (var i in xAxis) {
             optionLine.xAxis[0].data.push(i);
         }
+
+        $("#chartLine").empty();
         var myChartLine = ec.init(document.getElementById('chartLine'));
         myChartLine.setOption(optionLine);
     }
@@ -357,6 +360,7 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
             $("#" + chartDom).html(HX_config.noDataHtml);
             return;
         }
+        $("#"+chartDom).empty();
         var myChartBar = ec.init(document.getElementById(chartDom));
         myChartBar.setOption(optionBar);
 
