@@ -48,6 +48,13 @@
 	padding: 20px 40px 20px 40px;
 	height: 280px;
 }
+.page-warnCenter .warning-setting-main .cy-panel .panel-body .addWarnEmail{
+	text-align: center;
+	line-height: 200px;
+	font-size: 18px;
+	color: #ff9966;
+	cursor: pointer;
+}
 .page-warnCenter .full-view-main-content>.tab-pane {
 	padding: 20px;
 	background: #fff;

@@ -1,4 +1,4 @@
-define([], function () {
+define(['common/commonView'], function () {
     //注册对比事件
     var listModel = "",
         emailModel,

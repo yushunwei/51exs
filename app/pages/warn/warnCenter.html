@@ -271,9 +271,13 @@
                 <script id="emailListScript" type="text/x-handlebars-template">
                   <div class="panel-heading"><p><span class="emailTitle" title="{{title}}">{{title}}</span><a class="warning-email" href="#1" data-id="{{id}}" data-title="{{title}}"><i class="fa fa-folder-open-o"></i>管理接收邮箱</a></p></div>
                   <div class="panel-body" data-planID="{{id}}">
+                    {{#ifCond warnEmails "length" 0}}
+                    <p class="addWarnEmail" data-id="{{id}}">+预警接收邮件</p>
+                    {{else}}
                     {{#each warnEmails}}
                     <p><a href="#1" data-emailid="{{id}}">{{email}}<img src="../../img/warning_delete.png"></a></p>
                     {{/each}}
+                    {{/ifCond}}
                   </div>
                 </script>
               </div>

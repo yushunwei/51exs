@@ -115,6 +115,9 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
         $dom.find('.conditions-searchbox').find('button').click(function () {
             getMonitorInfoList(0, 20);
         });
+        $dom.on("click",".addWarnEmail",function(){
+            $(this).parents(".panel-planwarn").find("a[data-id='"+$(this).data("id")+"']").trigger("click");
+        });
 // 自定义日期弹出框
         $('.chart-analysis-title-other-btn').click(function(e){
             $('.order-box').toggle();

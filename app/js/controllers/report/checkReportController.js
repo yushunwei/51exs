@@ -79,7 +79,6 @@ define(['tool/ajaxTool','../../view/report/checkReportView'], function (ajax,vie
       if(!$.isEmptyObject(data.query)){
         view.renderPage(data.query);
           //获取导读列表数据
-          console.log(data)
           getWeeklyReadGuideList(data.query.reportId);
           //获取载体分布统计
           getWeeklyCarrierdisList(data.query.reportId);

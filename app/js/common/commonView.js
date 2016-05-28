@@ -29,6 +29,9 @@ define([], function () {
             case '||':
                 return (v1 || v2) ? options.fn(this) : options.inverse(this);
                 break;
+            case 'length':
+                return v1.length === v2?options.fn(this) : options.inverse(this);
+                break;
             default:
                 return options.inverse(this);
                 break;
