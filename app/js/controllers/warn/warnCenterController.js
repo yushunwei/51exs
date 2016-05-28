@@ -293,7 +293,6 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
                         //重新绑定面板
                         setTab2();
                         $('.modal-email-delete').modal('hide');
-                        alert('删除成功！');
                     }
                 }
             };
