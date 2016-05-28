@@ -524,6 +524,10 @@ a:focus {
 	background: #aac9d4;
 	border-color: #aac9d4;
 }
+a.disabled:hover {
+	cursor: not-allowed;
+}
+
 .cy-has-bg {
 	background-image: url(../img/download-icon.png);
 	background-repeat: no-repeat;

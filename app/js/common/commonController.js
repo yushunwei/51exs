@@ -70,6 +70,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         (page.name=="allplan"||page.name=="fullView"||page.name=="warnCenter"||page.name=="monitorinfolist")&&cancelWarnOne(page);
 
     }
+    //取消列表单个预警
     function cancelWarnOne(page){
         var dedupid,_data;
         $(document).on("click",".cancel-warn-one-tips a",function(){
@@ -105,6 +106,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             $(".warn-cancel-one").modal("hide");
         });
     }
+    //设置页尾信息
     function setFooter(){
         $(".footer").filter(":gt(0)").remove();
         $(".footer").html("浙ICP备：浙B2-20070198");
@@ -203,7 +205,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
      */
     function setCheckbox() {
         var checkbox, span;
-        var i = 0;
         var len = $(".table .list-yq tr").length;
         $(document).on("change", ".cy-checkbox", function () {
             checkbox = $(this).find("input[type=checkbox]");
@@ -212,7 +213,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             if (span.hasClass("checked")) {
                 span.removeClass("checked");
                 if($(this).parents("thead").length==1){
-                    i = 0;
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").removeClass("checked");
                 }else{
                     $(".table thead .checked").removeClass("checked");
@@ -302,6 +302,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var arr = ["title","summary","source","author","sentiment","similarCount","media","url","pubTime"];
         var url = HX_config.serv_path+"/monitor/contentmonitor/downloadmonitorinfolist/v=1.0.0?token="+utils.getToken();
         btn.on("click",function(e){
+            if($(this).hasClass("disabled")){
+                return ;
+            }
             span =$(".full-view-table").find(".table-bordered tbody tr").find("td:first .cy-checkbox span.checked");
             tr = span.parent().parent().parent();
             // 下载全部
@@ -310,6 +313,10 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
             }
             if($(this).hasClass("download-all-btn")){
                 tr = $(".full-view-table").find(".table-bordered tbody tr");
+                if(tr.length==0){
+                    typeof layer !="undefined" && layer.alert("对不起！暂无数据，无法下载!");
+                    return;
+                }
             }
             if(tr.length==0){
                 typeof layer !="undefined" && layer.alert(tipsContent);

@@ -54,7 +54,7 @@ define([], function () {
 
     function _renderList(data,i){
         if(data.length == 0 || data.data.recordTotal == 0){
-            $(".full-view-table table").addClass("hidden");
+            $(".full-view-table table").addClass("hidden").find("tbody tr").remove();
             $(".full-view-table .table-pagination").addClass("hidden");
             $(".full-view-table .index-none").removeClass("hidden");
             return;
