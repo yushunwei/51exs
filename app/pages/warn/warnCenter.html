@@ -362,7 +362,7 @@
           <h4 class="modal-title">邮件发送舆情信息</h4>
         </div>
         <div class="modal-body">
-          <form class="form-inline add-email-input" id="emailForm2" action="">
+          <form class="form-inline add-email-input" id="emailForm2" action="" novalidate="false">
             <div class="form-group">
               <label>添加新邮箱：</label>
               <input type="email" required class="form-control input-add" name="email">
@@ -370,7 +370,7 @@
             <button type="submit" class="btn btn-info" id="submit2">添加</button>
           </form>
           <div class="add-email-list">
-            <p class="add-email-list-title">选择已有邮箱：<span class="text-danger pull-right">您最多选择5个邮箱</span></p>
+            <p class="add-email-list-title">选择已有邮箱：<span class="text-danger pull-right"></span></p>
             <ul class="clearfix add-email-ul">
               <script id="modalemailadd" type="text/x-handlebars-template">
                 {{#each this}}

@@ -1,4 +1,4 @@
-define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/commonController","../../common/commonView"], function (ajax, view,com,commonView) {
+define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/commonController","../../common/commonView","../../tool/Utils"], function (ajax, view,com,commonView,utils) {
     var $tar = $("div.page-warnCenter");
     var indexUserPlans = {showCount: 0};
     var result = [];
@@ -219,13 +219,29 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
     }
     $("#modal-email-add form").on("submit",function(){
         var emailStr = $(this).find("input[type=email]").val();
+        if(emailStr==""){
+            layer.tips('邮箱不能为空，请添加！', '#modal-email-add form input[type=email]', {
+                tips: [1, '#CA1515'],
+                time: 1200
+            });
+            return false;
+        }
+        if(!utils.checkRagular("email",emailStr)){
+            layer.tips('输入的邮箱格式不正确，请验证！', '#modal-email-add form input[type=email]', {
+                tips: [1, '#CA1515'],
+                time: 1200
+            });
+            return false;
+        }
         if(!emailObj[emailStr]) {
             emailObj[emailStr] = emailStr;
             $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span class="checked"></span></label>' + emailStr + '</li>')
             $(this).find("input[type=email]").val("");
-            $(this).next().find(".text-danger").text("您最多可选择5个邮箱");
         }else{
-            $(this).next().find(".text-danger").text(emailStr + "已存在，请勿重复添加");
+            layer.tips(emailStr + "已存在，请勿重复添加", '#modal-email-add form input[type=email]', {
+                tips: [1, '#CA1515'],
+                time: 1200
+            });
         }
         return false;
     });
@@ -241,9 +257,17 @@ define(["../../tool/ajaxTool", "../../view/warn/warnCenterView","../../common/co
             });
             _sendEmail(docId,shareEmailList);
         }else if(checkedLength==0){
-            $("#modal-email-add .text-danger").text("请选择至少一个邮箱");
+            layer.tips( "请选择至少一个邮箱", '#modal-email-add .btn-emails-confirm', {
+                tips: [1, '#CA1515'],
+                offset:["0","100px"],
+                time: 1200
+            });
         }else{
-            $("#modal-email-add .text-danger").text("您最多可选择5个邮箱");
+            layer.tips( "您最多可选择5个邮箱", '#modal-email-add .btn-emails-confirm', {
+                tips: [1, '#CA1515'],
+                offset:["0","100px"],
+                time: 1200
+            });
         }
     });
     //发送邮件

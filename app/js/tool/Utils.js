@@ -76,6 +76,9 @@ define(["jquery.cookie"], function () {
             case 'ifSpecial':
                 rgx = '^[a-zA-Z0-9\u4e00-\u9fa5]+$';
                 break;
+            case 'email':
+                 rgx="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                break;
             default :
                 rgx = "";
                 break;
