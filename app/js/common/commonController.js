@@ -75,12 +75,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         $(document).on("click",".cancel-warn-one-tips a",function(){
             _data = {};
             $(".warn-cancel-one").length==0 && $("body").append(warnCancelOne);
-            dedupid = $(this).parents("li").data("dedupid");
-            if(page.name=="warnCenter"){
-                _data.dedupid = dedupid;
-            }else{
-                _data.dedupId = dedupid;
-            }
+            dedupid = $(this).parents("tr").data("dedupid");
+            _data.dedupids = [dedupid];
             $(".warn-cancel-one").modal("show");
         })
         $(document).on("click",".warn-cancel-one .cancel-ok",function(){
