@@ -214,21 +214,16 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 if($(this).parents("thead").length==1){
                     i = 0;
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").removeClass("checked");
-                }
-                i--;
-                if (i < len) {
+                }else{
                     $(".table thead .checked").removeClass("checked");
                 }
             }else{
                 span.addClass("checked");
                 if($(this).parents("thead").length==1){
-                    i = len;
                     $(this).parents("thead").next("tbody").find("tr").find("td:first .cy-checkbox span").addClass("checked");
                 }else {
-                    i++;
-                    if(i == len) {
-                        $(".table thead .cy-checkbox span").addClass("checked");
-                    }
+                    $(".table tbody .checked").length == $(".table tbody tr").length &&
+                                                    $(".table thead .cy-checkbox span").addClass("checked");
                 }
             }
         })
