@@ -356,6 +356,9 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     function bindCancel(){
         var span,tr,arr=[];
         $(".conditions-choice").find("a.cancel-alldanger-btn").on("click",function(){
+            if($(this).hasClass("disabled")){
+                return ;
+            }
             arr=[];
             span =$(".full-view-table").find(".table-bordered tr").find("td:first .cy-checkbox span.checked");
             tr = span.parent().parent().parent();
@@ -402,7 +405,8 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var html = myTemplate(d);
         $(".add-email .add-email-ul").html(html);
         $("#emailForm input[type=email]").val("");
-        $(".add-email-list").find(".text-danger").text("您最多可选择5个邮箱");
+        $(".add-email-list").find(".text-danger").text("");
+        $("#emailForm").attr("novalidate","false");
     }
     //邮件弹框
     function _handleEmail(){
@@ -423,20 +427,38 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         });
         //add email
         $(".add-email").on('hide.bs.modal',function(){
-            $(".add-email").find(".text-danger").text("您最多可选择5个邮箱");
+            $(".add-email").find(".text-danger").text("");
         });
         $("#emailForm").on("submit",function(){
             var emailStr = $(this).find("input[type=email]").val();
+            if(emailStr==""){
+                layer.tips('邮箱不能为空，请添加！', '#emailForm input[type=email]', {
+                    tips: [1, '#CA1515'],
+                    time: 2000
+                });
+                return false;
+            }
+            if(!utils.checkRagular("email",emailStr)){
+                layer.tips('输入的邮箱格式不正确，请验证！', '#emailForm input[type=email]', {
+                    tips: [1, '#CA1515'],
+                    time: 2000
+                });
+                return false;
+            }
+
             if(!emailObj[emailStr]) {
                 emailObj[emailStr] = emailStr;
                 $(this).parent().find(".add-email-ul").append('<li><label class="cy-checkbox"><input type="checkbox"><span></span></label>' + emailStr + '</li>')
                 $(this).find("input[type=email]").val("");
-                $(this).next().find(".text-danger").text("您最多可选择5个邮箱");
             }else{
-                $(this).next().find(".text-danger").text(emailStr + "已存在，请勿重复添加");
+                layer.tips(emailStr + "已存在，请勿重复添加", '#emailForm input[type=email]', {
+                    tips: [1, '#CA1515'],
+                    time: 2000
+                });
             }
             return false;
         });
+        //send-email-btn
         $(".add-email .send-email-btn").on("click",function(){
             var checkedLength = $(".add-email-list :checked").length;
             var shareEmailList = [];
@@ -452,9 +474,17 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                 });
                 _sendEmail(docId,shareEmailList,otherEmailList);
             }else if(checkedLength==0){
-                $(".add-email .text-danger").text("请选择至少一个邮箱");
+                layer.tips( "请选择至少一个邮箱", '.add-email .send-email-btn', {
+                    tips: [1, '#CA1515'],
+                    offset:["0","100px"],
+                    time: 2000
+                });
             }else{
-                $(".add-email .text-danger").text("您最多可选择5个邮箱");
+                layer.tips( "您最多可选择5个邮箱", '.add-email .send-email-btn', {
+                    tips: [1, '#CA1515'],
+                    offset:["0","100px"],
+                    time: 2000
+                });
             }
         });
     }
