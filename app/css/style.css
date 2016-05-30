@@ -1120,6 +1120,7 @@ a.disabled:hover {
 	color: #666;
 	border-top: 1px solid #f1f1f1;
 	line-height: 26px;
+	word-break: break-all;
 }
 .show-all-btnbox {
 	text-align: center;
