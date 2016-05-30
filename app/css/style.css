@@ -45,9 +45,7 @@ a:focus {
 /*创建检测方案*/
 .header {
 	background: #59c2e6;
-	position: fixed;
 	width: 100%;
-	z-index: 999999;
 }
 .header-content {
 	width: 1200px;
@@ -147,16 +145,7 @@ a:focus {
 .header-user span .fa {
 	margin-left: 10px;
 }
-.page {
-	padding-top: 88px;
-}
-.page.page-login {
-	padding-top: 0;
-}
 .nav-bg {
-	position: fixed;
-	z-index: 10;
-	width: 100%;
 	background: #4f5f6f;
 }
 .nav-main {
