@@ -1035,9 +1035,12 @@ a.disabled:hover {
 	margin-bottom: 0;
 }
 .week-takeaway li span {
-	color: #bbbbbb;
 	display: inline-block;
+	height: 20px;
+	color: #bbbbbb;
 	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .week-takeaway li span a {
 	color: #bbbbbb;
