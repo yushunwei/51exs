@@ -385,11 +385,17 @@ define(['tool/ajaxTool', 'echarts/echartsmin'], function (ajax, ec) {
         ajax.load('getSentimentDistribute', param);
     }
 
+    /**
+     * 渲染单方案情感属性
+     * @param data
+     * @param chartDom
+     */
     function senderSentimentDistribute(data, chartDom) {
         if (data.data) {
             var positiveNum = data.data.positive,
-                negativeNum = data.data.negative;
-            var total = positiveNum + negativeNum;
+                negativeNum = data.data.negative,
+                neutralNum = data.data.neutral;
+            var total = positiveNum + negativeNum + neutralNum;
             var negativePercent = (total === 0 ? 0 : Math.round(negativeNum / total * 10000) / 100.00) + "%";
             parentD = $("#" + chartDom).parent().parent().parent().prev();
             parentD.find(".totalAll").text(total);

@@ -70,8 +70,7 @@ var HX_Ajax_Path = (function () {
         //修改舆情方案
         "modifyuserplan": HX_config.serv_path + '/plan/userplan/modifyuserplan/v=1.0.0',
         //获取方案舆情周报列表
-        //"getweeklyreportlist":HX_config.serv_path+'/monitor/report/getweeklyreportlist/v=1.0.0'
-        //获取方案舆情周报列表
+        //"weeklyReportList":HX_config.serv_path+'/monitor/report/getweeklyreportlist/v=1.0.0',
         "weeklyReportList": '../../api/weeklyReportList.json',
         //舆情周报下载
         "downloadweeklyreport": HX_config.serv_path + '/monitor/report/downloadweeklyreport/v=1.0.0',
