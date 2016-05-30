@@ -88,10 +88,10 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
             });
             obj.gridList.push({
                 name: n.name,
-                similarity: n.similarity,
-                negative: n.negative,
-                positive: n.positive,
-                warn: n.warn
+                similarity: n.similarity - 0,
+                negative: n.negative - 0,
+                positive: n.positive - 0,
+                warn: n.warn - 0
             });
             total.similarity += n.similarity-0;
             total.negative += n.negative-0;
@@ -103,7 +103,7 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
     }
     function _renderWeeklyTop10SentmediadisList(data,isPositive){
         var newData = top10Reform(data);
-        var barDom = isPositive?"reportChartBar1":"reportChartBar2";
+        var barDom = (!isPositive)?"reportChartBar1":"reportChartBar2";
         if(newData.valueList.length == 0){
             $("#"+barDom).html(HX_config.noDataHtml);
             return;
@@ -127,7 +127,7 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
                     saveAsImage : {show: true}
                 }
             },
-            color : isPositive? ['#FF6D6E']:['#59C2E6'],
+            color : isPositive? ['#59C2E6']:['#FF6D6E'],
             grid:{
                 x: 90
             },

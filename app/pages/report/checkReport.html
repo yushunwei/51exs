@@ -110,9 +110,11 @@
                             <ul class="week-takeaway">
                                 {{#each this}}
                                 <li>
-                                    <div class="readGuidListTitle">{{#math @index "+" 1}}{{/math}}. {{titles}}</div>
+                                    <div class="readGuidListTitle">
+                                        <a href="{{url}}" target="_blank">{{#math @index "+" 1}}{{/math}}. {{titles}}</a>
+                                    </div>
                                     <span class="readGuidListLy">来源：
-                                        <a href={{url}} class="week-takeaway-from">{{media}}</a>
+                                        {{media}}
                                     </span>
                                     <span class="readGuidListAuthor">作者：
                                         <a href="javascript:void(0)">{{author}}</a>
@@ -159,8 +161,8 @@
                                         <tr>
                                             <td>{{name}}</td>
                                             <td>{{similarity}}</td>
-                                            <td>{{positive}}</td>
                                             <td>{{negative}}</td>
+                                            <td>{{positive}}</td>
                                             <td>{{warn}}</td>
                                         </tr>
                                         {{/each}}
