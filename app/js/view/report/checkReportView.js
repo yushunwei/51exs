@@ -60,6 +60,8 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
                 }
             ]
         };
+
+        $("#reportChartPie").empty();
         var myChartPie = ec.init(document.getElementById('reportChartPie'));
         myChartPie.setOption(optionPie);//weeklyCarrierdisList
         var weeklyCarrierdisListTemplate = Handlebars.compile($("#weeklyCarrierdisList").html());
@@ -163,6 +165,8 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
                 }
             ]
         };
+
+        $("#"+barDom).empty();
         var myChartBar = ec.init(document.getElementById(barDom));
         myChartBar.setOption(optionBar);
 
