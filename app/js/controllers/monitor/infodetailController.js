@@ -7,7 +7,7 @@ define(["view/monitor/infodetailView","tool/ajaxTool"], function (view,ajax,comm
      * @private
      */
     function _bindEvent(){
-        $(document).on("click",".btn-cancel",function(){
+        $(document).on("click",".trash-box",function(){
             // 相似文章ID赋值
             dedupId = $(this).data("dedupid");
             //弹出对话框
