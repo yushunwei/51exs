@@ -1,4 +1,7 @@
 define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
+    /**
+     * 注册计算helper
+     */
     Handlebars.registerHelper("math", function(v1, operator, v2){
         if(operator == "+"){	return v1+v2;}
         if(operator == "-"){	return v1-v2;}
