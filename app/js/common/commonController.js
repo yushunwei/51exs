@@ -515,7 +515,6 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
         var url = "/pages/newYq.html";
         $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
             url = "/pages/newYq.html";
-            $(this).attr("href","#");
             var param = {
                 success:function(data){
                     if(data.data){
@@ -526,7 +525,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
                     }
                 },
                 error :function(){
-
+                    
                 }
             };
             ajax.load("canaddnewuserplan",param);
