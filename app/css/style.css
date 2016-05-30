@@ -1876,3 +1876,45 @@ a.disabled:hover {
 .turnPageJcfa {
 	cursor: pointer;
 }
+
+p#back-to-top {
+	position: fixed;
+	display: none;
+	bottom: 56px;
+	right: 10px;
+	_position: absolute;
+	_bottom: auto;
+	_top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+}
+
+p#back-to-top a {
+	text-align: center;
+	text-decoration: none;
+	color: #6B6A6A;
+	display: block;
+	width: 56px;
+	-moz-transition: color 1s;
+	-webkit-transition: color 1s;
+	-o-transition: color 1s;
+}
+
+p#back-to-top a:hover {
+	color: #979797;
+}
+
+p#back-to-top a span {
+	background: transparent url(../img/back_to_top.png) no-repeat 0px 0px;
+	border-radius: 6px;
+	display: block;
+	height: 50px;
+	width: 56px;
+	margin-bottom: 5px;
+	-moz-transition: background 1s;
+	-webkit-transition: background 1s;
+	-o-transition: background 1s;
+	cursor: pointer;
+}
+
+#back-to-top a:hover span {
+	background: transparent url(../img/back_to_top.png) no-repeat 0px 0px;
+}
