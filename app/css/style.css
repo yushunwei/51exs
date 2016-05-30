@@ -1729,6 +1729,8 @@ a.disabled:hover {
 	display: inline-block;
 	width: 430px;
 	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .readGuidListLy {
 	width: 180px;
