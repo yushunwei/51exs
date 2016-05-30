@@ -10,6 +10,12 @@ define(['tool/Utils','echarts/echartsmin'], function (util,ec) {
         if(operator == "%"){	return v1%v2;}
     });
     var weeklyReportListHtml;
+
+    /**
+     * 渲染周报的导读列表
+     * @param dataArr
+     * @private
+     */
     function _renderWeeklyReadGuideList(dataArr){
         weeklyReportListHtml = !weeklyReportListHtml?($("#weeklyReadGuidList").html()):weeklyReportListHtml;
         var weeklyReportListTemplate = Handlebars.compile(weeklyReportListHtml);
