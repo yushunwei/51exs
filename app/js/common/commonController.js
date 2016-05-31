@@ -524,13 +524,11 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     }
 
     function ifNew(){
-        var url = "/pages/newYq.html";
         $(document).on("click",".nav-bg .nav-main .nav-new a",function(e){
-            url = "/pages/newYq.html";
             var param = {
                 success:function(data){
                     if(data.data){
-                        window.open(url,"_self");
+                        window.location.href = "/pages/newYq.html";
                     }else{
                         $(".modal-ifnew").length==0 && $("body").append(ifnewModal);
                         $(".modal-ifnew").modal("show");
