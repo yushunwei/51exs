@@ -9,7 +9,7 @@ define(["view/monitor/infodetailView","tool/ajaxTool"], function (view,ajax,comm
     function _bindEvent(){
         $(document).on("click",".trash-box",function(){
             // 相似文章ID赋值
-            dedupId = $(this).data("dedupid");
+            dedupId = $(this).find("a").eq(0).data("dedupid");
             //弹出对话框
             $('.alert-delete').modal('show');
 
