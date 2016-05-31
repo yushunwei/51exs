@@ -5,9 +5,10 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
     var fullViewInit = {
         pageSize:20
     };
-    var pageData = {};
+    // 相似页默认不去重
+    var pageData = {isDedup:false};
     function init(page) {
-        pageData = decode(page.query);
+        pageData = $.extend(decode(page.query),pageData);
         //加载列表
         getMonitorInfoList(0,20);
         //绑定事件
@@ -34,6 +35,7 @@ define(["../../tool/ajaxTool","../../view/monitor/similarView","common/commonCon
     }
 
     function getMonitorInfoList(pageNum,pageSize){
+        $("body").scrollTop(200);
         pageData.pageNum = pageNum + 1;
         pageData.pageSize = pageSize;
         var param ={"query" :pageData};
