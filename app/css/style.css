@@ -71,7 +71,7 @@ a:focus {
 }
 .header-notice {
 	float: left;
-	margin-top: 25px;
+	margin-top: 24px;
 }
 .header-notice>ul {
 	list-style: none;
@@ -101,7 +101,6 @@ a:focus {
 	color: #fff;
 	font-size: 12px;
 	margin-bottom: 0;
-	margin-top: 10px;
 	margin-left: 2px;
 }
 .header-user {
@@ -412,17 +411,17 @@ a:focus {
 	left: -1px;
 	top: -2px;
 	width: 1px;
-	background: #e8e8e8;
 	height: 70px;
+	background: #e8e8e8;
 }
 .full-view-main-title .nav-tabs>li.active>a:after {
 	content: "";
 	position: absolute;
 	right: -1px;
-	width: 1px;
-	background: #e8e8e8;
 	top: -2px;
+	width: 1px;
 	height: 70px;
+	background: #e8e8e8;
 }
 .full-view-main-title>ul>li>a.tab-all-view {
 	background-image: url(../img/all_view_01.png);
