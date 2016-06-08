@@ -56,9 +56,9 @@ a:focus {
 .header-input {
 	float: left;
 	position: relative;
-	margin-top: 13px;
-	width: 210px;
-	margin-right: 56px;
+	margin-top: 18px;
+	width: 246px;
+	margin-right: 18px;
 }
 .header-input .form-control {
 	width: 210px;
@@ -71,7 +71,7 @@ a:focus {
 }
 .header-notice {
 	float: left;
-	margin-top: 4px;
+	margin-top: 25px;
 }
 .header-notice>ul {
 	list-style: none;
@@ -81,7 +81,7 @@ a:focus {
 .header-notice>ul>li {
 	display: inline-block;
 	text-align: center;
-	margin-left: 15px;
+	margin-left: 12px;
 }
 .header-notice>ul>li>a {
 	display: block;
@@ -97,15 +97,17 @@ a:focus {
 	background: url(../img/warning.png) no-repeat;
 }
 .header-notice>ul>li p {
+	display: inline-block;
 	color: #fff;
 	font-size: 12px;
 	margin-bottom: 0;
 	margin-top: 10px;
+	margin-left: 2px;
 }
 .header-user {
 	float: left;
-	margin-top: 7px;
-	margin-left: 30px;
+	margin-top: 15px;
+	margin-left: 25px;
 	position: relative;
 }
 .header-user:before {
@@ -114,7 +116,7 @@ a:focus {
 	width: 1px;
 	background: #fff;
 	position: absolute;
-	left: -15px;
+	left: -12px;
 	top: 13px;
 	opacity: .2;
 }
@@ -140,6 +142,7 @@ a:focus {
 	border-radius: 50%;
 }
 .header-user span {
+	margin-left: 2px;
 	color: #fff;
 }
 .header-user span .fa {
@@ -206,7 +209,7 @@ a:focus {
 .main {
 	width: 1200px;
 	margin: 0 auto;
-	margin-top: 44.44px;
+	margin-top: 28px;
 }
 .plan {
 	background: #fff;
@@ -390,7 +393,7 @@ a:focus {
 	width: 400px;
 	text-align: center;
 	font-size: 18px;
-	padding: 15px 0;
+	padding: 21px 0;
 	font-weight: bold;
 	color: #aaaaaa;
 	border: none;
@@ -398,14 +401,33 @@ a:focus {
 }
 .full-view-main-title .nav-tabs>li.active>a {
 	border: none;
-	border-bottom: 2px solid #59c2e6;
+	border-top: 3px solid #59c2e6;
 	color: #59c2e6;
-	background-color: #fbfbfb;
+	background-color: #fff;
+	border-radius: 0;
+}
+.full-view-main-title .nav-tabs>li.active>a:before {
+	content: "";
+	position: absolute;
+	left: -1px;
+	top: -2px;
+	width: 1px;
+	background: #e8e8e8;
+	height: 70px;
+}
+.full-view-main-title .nav-tabs>li.active>a:after {
+	content: "";
+	position: absolute;
+	right: -1px;
+	width: 1px;
+	background: #e8e8e8;
+	top: -2px;
+	height: 70px;
 }
 .full-view-main-title>ul>li>a.tab-all-view {
 	background-image: url(../img/all_view_01.png);
 	background-repeat: no-repeat;
-	background-position: 152px 19px;
+	background-position: 152px 23px;
 }
 .full-view-main-title>ul>li>a.tab-all-view:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-all-view {
@@ -414,7 +436,7 @@ a:focus {
 .full-view-main-title>ul>li>a.tab-chart {
 	background-image: url(../img/all_view_chart_01.png);
 	background-repeat: no-repeat;
-	background-position: 137px 16px;
+	background-position: 137px 23px;
 }
 .full-view-main-title>ul>li>a.tab-chart:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-chart {
@@ -423,7 +445,7 @@ a:focus {
 .full-view-main-title>ul>li>a.tab-plan {
 	background-image: url(../img/all_view_pen_01.png);
 	background-repeat: no-repeat;
-	background-position: 137px 16px;
+	background-position: 137px 22px;
 }
 .full-view-main-title>ul>li>a.tab-plan:hover,
 .full-view-main-title .nav-tabs>li.active a.tab-plan {
