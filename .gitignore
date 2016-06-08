@@ -17,6 +17,7 @@ npm-debug.log*
 dist
 build
 release
+rev
 
 # project config
 .idea
