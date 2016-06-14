@@ -105,7 +105,7 @@ var HX_Ajax_Path = (function () {
 
 //char楗煎浘棰滆壊
 var pieColor = {
-    "positiveColor": ['#3693B3', '#309BBF', '#29A3CC', '#21ABD9', '#17B2E6', '#0CB9F2', '#05C1FF'],
-    "neutralColor": ['#737980', '#7E858C', '#8A9199', '#959DA6', '#A1AAB2', '#ACB6BF', '#B8C2CC'],
-    "negativeColor": ['#B24747', '#BF4C4C', '#CC5252', '#D95757', '#E55C5C', '#E56767', '#FF7F7F']
+    "positiveColor": ['#0c97c7', '#1da1ce', '#32a9d2', '#3eb1d9', '#49bae1', '#62c1e2', '#7aceeb'],
+    "neutralColor": ['#4f5f6f', '#546677', '#5d7184', '#667c90', '#6e8599', '#778ea2', '#8298ab'],
+    "negativeColor": ['#df3b3d', '#f64a4c', '#f95a5c', '#f76769', '#f77476', '#fc7e80', '#ff8a8b']
 };

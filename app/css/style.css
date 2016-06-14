@@ -304,7 +304,7 @@ a:focus {
 .plan-main-list>ul>li img {
 	position: absolute;
 	left: -15px;
-	top: 5px;
+	top: 3px;
 }
 .plan-main-list>ul>li>p {
 	margin: 0;
@@ -647,6 +647,9 @@ a.disabled:hover {
 .full-view-table .table>tbody>tr>td .title .label {
 	vertical-align: 2px;
 	margin-right: 5px;
+}
+.full-view-table .table>tbody>tr>td .title .label.label-warning {
+	background: #ff9665;
 }
 .full-view-table .table>tbody>tr>td .title a {
 	white-space: nowrap;

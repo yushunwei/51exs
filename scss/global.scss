@@ -90,3 +90,61 @@ ul {
   height: 44.44px;
 }
 input::-ms-clear{display:none;}
+
+$fontSize:      12px;
+body{
+  $fontSize: 14px;
+  font-size:$fontSize;
+}
+p{
+  font-size:$fontSize;
+}
+
+@mixin center-block {
+  margin-left:auto;
+  margin-right:auto;
+}
+.demo{
+  @include center-block;
+  $font: 12px;
+  font-size: $font;
+}
+
+@mixin opacity($opacity:50) {
+  opacity: $opacity / 100;
+  filter: alpha(opacity=$opacity);
+}
+
+.opacity{
+  @include opacity; //参数使用默认值
+}
+.opacity-80{
+  @include opacity(80); //传递参数
+}
+
+@mixin a($border:1px dashed #ccc, $padding:10px){
+  border-bottom:$border;
+  padding-top:$padding;
+  padding-bottom:$padding;
+}
+.imgtext-h li{
+  @include a(1px solid #ccc);
+}
+.imgtext-h--product li{
+  @include a($padding:15px);
+}
+
+@mixin center-block {
+  margin-left:auto;
+  margin-right:auto;
+}
+.demo{
+  @include center-block;
+}
+
+//css style
+//-------------------------------
+.demo{
+  margin-left:auto;
+  margin-right:auto;
+}

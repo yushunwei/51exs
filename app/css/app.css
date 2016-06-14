@@ -110,6 +110,43 @@ ul {
 input::-ms-clear {
   display: none; }
 
+body {
+  font-size: 14px; }
+
+p {
+  font-size: 12px; }
+
+.demo {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 12px; }
+
+.opacity {
+  opacity: 0.5;
+  filter: alpha(opacity=50); }
+
+.opacity-80 {
+  opacity: 0.8;
+  filter: alpha(opacity=80); }
+
+.imgtext-h li {
+  border-bottom: 1px solid #ccc;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.imgtext-h--product li {
+  border-bottom: 1px dashed #ccc;
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+.demo {
+  margin-left: auto;
+  margin-right: auto; }
+
+.demo {
+  margin-left: auto;
+  margin-right: auto; }
+
 .page-login .product {
   background-color: #FFFFFF;
   padding-bottom: 50px; }

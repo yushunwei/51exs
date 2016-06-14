@@ -12,7 +12,7 @@ gulp.task('serve', function () {
     notify: false
   });
 
-  gulp.watch('scss/**/*.scss', ['sass']);
+  gulp.watch('scss/**/*.scss', ['sass']).on('change', browserSync.reload);
   gulp.watch([
     'app/**/*.html',
     'app/js/**/*.js',
