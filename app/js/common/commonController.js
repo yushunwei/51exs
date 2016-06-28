@@ -121,7 +121,7 @@ define(["../tool/ajaxTool","../tool/Utils"], function (ajax,utils) {
     //设置页尾信息
     function setFooter(){
         $(".footer").filter(":gt(0)").remove();
-        $(".footer").html("浙ICP备：浙B2-20070198");
+        $(".footer").html("浙ICP备: 浙ICP备16013644号-1");
     }
     /**
      * 绑定全网搜索
